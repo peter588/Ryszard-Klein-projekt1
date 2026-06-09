@@ -10,9 +10,7 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* LIGHT THEME */
-  :root,
-  [data-theme="light"] {
+  :root, [data-theme="light"] {
     --cream: #F7F3EC;
     --cream-dark: #EDE6D8;
     --ink: #1C1914;
@@ -32,7 +30,7 @@
     --cycle-bg: #1C1914;
     --hero-pattern-color: rgba(160,123,58,0.06);
     --section-pattern-color: rgba(160,123,58,0.07);
-    --cycle-text-color: rgba(247,243,236,0.7);
+    --cycle-text-color: rgba(247,243,236,0.72);
     --cycle-border: rgba(247,243,236,0.1);
     --cycle-book-color: #F7F3EC;
     --cycle-upcoming: rgba(247,243,236,0.35);
@@ -47,16 +45,14 @@
     --portrait-bg: #EDE6D8;
     --stat-num-color: #A07B3A;
     --book-num-color: #D4CDBF;
-    --hero-quote-bg: rgba(247, 243, 236, 0.88);
     --toggle-bg: #3D3830;
     --toggle-color: #F7F3EC;
     --btn-primary-bg: #1C1914;
     --btn-primary-color: #F7F3EC;
-    --hero-col-bg: #EDE6D8;
+    --zapiski-bg: #FDFAF5;
     --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   }
 
-  /* DARK THEME */
   [data-theme="dark"] {
     --cream: #161210;
     --cream-dark: #1E1A16;
@@ -92,17 +88,15 @@
     --portrait-bg: #1E1A16;
     --stat-num-color: #C9A868;
     --book-num-color: #3A332A;
-    --hero-quote-bg: rgba(22, 18, 16, 0.9);
     --toggle-bg: #C9A868;
     --toggle-color: #161210;
     --btn-primary-bg: #C9A868;
     --btn-primary-color: #161210;
-    --hero-col-bg: #1E1A16;
+    --zapiski-bg: #1A1612;
     --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   }
 
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--cream);
     color: var(--ink);
@@ -113,29 +107,19 @@
     transition: var(--theme-transition);
   }
 
-  /* THEME TOGGLE BUTTON */
+  /* THEME TOGGLE */
   .theme-toggle {
-    width: 36px;
-    height: 36px;
+    width: 36px; height: 36px;
     background: var(--toggle-bg);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    flex-shrink: 0;
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s; flex-shrink: 0;
   }
   .theme-toggle:hover { opacity: 0.8; }
   .theme-toggle svg {
-    width: 16px;
-    height: 16px;
-    stroke: var(--toggle-color);
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: opacity 0.3s;
+    width: 16px; height: 16px;
+    stroke: var(--toggle-color); fill: none;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
   }
   .icon-moon { display: block; }
   .icon-sun  { display: none; }
@@ -144,15 +128,9 @@
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    padding: 1.25rem 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--mist);
@@ -160,215 +138,28 @@
   }
   .nav-logo {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    color: var(--ink);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.3s;
+    font-size: 1rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+    transition: color 0.3s; flex-shrink: 0;
   }
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
   .nav-links a {
     font-family: 'Jost', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    text-decoration: none;
-    transition: color 0.3s;
+    font-size: 0.67rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light); text-decoration: none;
+    transition: color 0.3s; white-space: nowrap;
   }
   .nav-links a:hover { color: var(--gold); }
-  .nav-contact-btn {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold-light);
-    padding: 0.45rem 1.25rem;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .nav-contact-btn:hover { background: var(--gold); color: var(--white); }
   .nav-hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 5px;
+    display: none; background: none; border: none;
+    cursor: pointer; flex-direction: column; gap: 5px;
   }
   .nav-hamburger span {
-    display: block;
-    width: 24px;
-    height: 1.5px;
-    background: var(--ink);
-    transition: all 0.3s;
-  }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-    transition: var(--theme-transition);
-  }
-  .hero-text-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 5rem 5rem 6rem;
-    position: relative;
-    z-index: 2;
-    background: var(--cream);
-    transition: var(--theme-transition);
-  }
-  .hero-eyebrow {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2rem;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(3rem, 5vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--ink);
-    margin-bottom: 1rem;
-    transition: color 0.4s;
-  }
-  .hero-title em { font-style: italic; color: var(--gold); }
-  .hero-subtitle {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: var(--ink-light);
-    line-height: 1.8;
-    max-width: 440px;
-    margin-bottom: 3rem;
-    border-left: 2px solid var(--gold-light);
-    padding-left: 1.5rem;
-    transition: color 0.4s, border-color 0.4s;
-  }
-  .hero-ctas {
-    display: flex;
-    gap: 1.25rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .btn-primary {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    background: var(--btn-primary-bg);
-    color: var(--btn-primary-color);
-    padding: 0.85rem 2.25rem;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .btn-primary:hover { opacity: 0.85; }
-  .btn-secondary {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gold-light);
-    padding-bottom: 2px;
-    transition: all 0.3s;
-  }
-  .btn-secondary:hover { color: var(--ink); border-color: var(--ink); }
-
-  .hero-image-col {
-    position: relative;
-    overflow: hidden;
-    background: var(--hero-col-bg);
-    transition: var(--theme-transition);
-  }
-  .hero-image-col::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(160,123,58,0.08) 0%, transparent 60%);
-    z-index: 1;
-  }
-  .hero-bg-pattern {
-    position: absolute;
-    inset: 0;
-    background-color: var(--hero-col-bg);
-    background-image: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 30px,
-      var(--hero-pattern-color) 30px,
-      var(--hero-pattern-color) 31px
-    );
-    transition: var(--theme-transition);
-  }
-  .hero-ornament {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 380px;
-    height: 380px;
-    opacity: 0.18;
-  }
-  .hero-quote-block {
-    position: absolute;
-    bottom: 4rem;
-    left: 3rem;
-    right: 3rem;
-    z-index: 2;
-    background: var(--hero-quote-bg);
-    border: 1px solid var(--gold-light);
-    padding: 2rem 2.5rem;
-    backdrop-filter: blur(6px);
-    transition: var(--theme-transition);
-  }
-  .hero-quote-label {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-  .hero-quote {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.15rem;
-    font-style: italic;
-    font-weight: 300;
-    color: var(--ink-mid);
-    line-height: 1.65;
-    transition: color 0.4s;
-  }
-  .hero-quote-attr {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    color: var(--ink-light);
-    margin-top: 0.75rem;
-    text-transform: uppercase;
-    transition: color 0.4s;
+    display: block; width: 24px; height: 1.5px;
+    background: var(--ink); transition: all 0.3s;
   }
 
   /* SHARED */
@@ -376,539 +167,470 @@
   .container { max-width: 1180px; margin: 0 auto; padding: 0 4rem; }
   .section-label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
   }
   .section-label::after {
-    content: '';
-    display: inline-block;
-    height: 1px;
-    width: 40px;
-    background: var(--gold-light);
+    content: ''; display: inline-block;
+    height: 1px; width: 40px; background: var(--gold-light);
   }
   .section-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: clamp(2rem, 3.5vw, 3.2rem);
-    font-weight: 300;
-    line-height: 1.2;
-    color: var(--ink);
-    transition: color 0.4s;
+    font-weight: 300; line-height: 1.2;
+    color: var(--ink); transition: color 0.4s;
   }
   .section-title em { font-style: italic; color: var(--gold); }
 
-  /* SENTENCJA */
-  .sentencja-bar {
-    background: var(--sentencja-bg);
-    padding: 2.5rem 0;
+  /* ========================
+     STRONA GŁÓWNA
+  ======================== */
+  #home { padding: 0; }
+
+  .home-masthead {
+    min-height: 65vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 8rem 4rem 5rem;
     text-align: center;
+    background: var(--cream);
+    transition: var(--theme-transition);
+  }
+  .home-masthead::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      var(--hero-pattern-color) 40px, var(--hero-pattern-color) 41px
+    );
+    pointer-events: none;
+  }
+  .home-masthead-inner { position: relative; z-index: 1; max-width: 700px; }
+  .home-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .home-author-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(3.5rem, 8vw, 7.5rem);
+    font-weight: 300; line-height: 1.0;
+    color: var(--ink); letter-spacing: 0.02em;
+    transition: color 0.4s;
+  }
+  .home-author-name em { font-style: italic; color: var(--gold); }
+  .home-ornament-line {
+    width: 60px; height: 1px;
+    background: var(--gold-light); margin: 2rem auto;
+  }
+  .home-tagline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem; font-weight: 300; font-style: italic;
+    color: var(--ink-light); transition: color 0.4s;
+  }
+
+  /* SENTENCJA */
+  .sentencja-block {
+    background: var(--sentencja-bg);
+    padding: 3.5rem 4rem; text-align: center;
     transition: var(--theme-transition);
   }
   .sentencja-label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 1rem;
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: 1.25rem;
   }
   .sentencja-text {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.5rem;
-    font-style: italic;
-    font-weight: 300;
-    color: var(--cream);
-    max-width: 680px;
-    margin: 0 auto;
-    line-height: 1.6;
+    font-size: 1.6rem; font-style: italic; font-weight: 300;
+    color: var(--cream); max-width: 720px;
+    margin: 0 auto; line-height: 1.6;
   }
   [data-theme="dark"] .sentencja-text { color: #D5CBBA; }
+  .sentencja-attr {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(201,168,104,0.6); margin-top: 1.25rem;
+  }
 
-  /* O MNIE */
-  .about-section { background: var(--about-bg); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 6rem;
-    align-items: start;
+  /* HOME INVITATION */
+  .home-invitation {
+    background: var(--about-bg);
+    padding: 6rem 0;
+    transition: var(--theme-transition);
   }
-  .about-portrait-frame {
-    position: relative;
-    padding: 1rem;
+  .home-invitation-inner { max-width: 720px; margin: 0 auto; }
+  .home-invitation p {
+    color: var(--ink-mid); font-weight: 300;
+    font-size: 1.05rem; line-height: 1.9;
+    margin-bottom: 1.6rem; transition: color 0.4s;
   }
-  .about-portrait-frame::before {
-    content: '';
-    position: absolute;
-    top: -1rem; left: -1rem;
-    width: 200px; height: 200px;
-    border-top: 2px solid var(--gold-light);
+  .home-invitation-verse {
     border-left: 2px solid var(--gold-light);
+    padding-left: 1.75rem; margin: 2.5rem 0;
+    transition: border-color 0.4s;
+  }
+  .home-invitation-verse p {
+    font-style: italic; font-size: 1.1rem !important;
+    color: var(--ink) !important; margin-bottom: 0.5rem !important;
+  }
+  .home-invitation-verse p:last-child { margin-bottom: 0 !important; }
+  .home-contact-block {
+    margin-top: 2.5rem; padding-top: 2rem;
+    border-top: 1px solid var(--mist);
+    transition: border-color 0.4s;
+  }
+  .home-contact-block p { font-size: 1rem !important; margin-bottom: 0.4rem !important; }
+  .home-contact-block a {
+    color: var(--ink-mid); text-decoration: none;
+    border-bottom: 1px solid var(--mist);
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .home-contact-block a:hover { border-color: var(--gold); color: var(--gold); }
+  .home-signature {
+    margin-top: 1.5rem !important;
+    font-size: 1.2rem !important; font-weight: 400 !important;
+    color: var(--ink) !important;
+  }
+
+  /* ========================
+     O MNIE
+  ======================== */
+  .about-section {
+    background: var(--about-bg);
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  @media (max-width: 900px) {
+    .about-section { min-height: unset; display: block; }
+  }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.6fr;
+    gap: 6rem; align-items: start;
+  }
+  .about-portrait-frame { position: relative; padding: 1rem; }
+  .about-portrait-frame::before {
+    content: ''; position: absolute;
+    top: -1rem; left: -1rem; width: 200px; height: 200px;
+    border-top: 2px solid var(--gold-light); border-left: 2px solid var(--gold-light);
   }
   .about-portrait-frame::after {
-    content: '';
-    position: absolute;
-    bottom: -1rem; right: -1rem;
-    width: 200px; height: 200px;
-    border-bottom: 2px solid var(--gold-light);
-    border-right: 2px solid var(--gold-light);
+    content: ''; position: absolute;
+    bottom: -1rem; right: -1rem; width: 200px; height: 200px;
+    border-bottom: 2px solid var(--gold-light); border-right: 2px solid var(--gold-light);
   }
   .about-portrait-placeholder {
-    width: 100%;
-    aspect-ratio: 3/4;
+    width: 100%; aspect-ratio: 3/4;
     background: var(--portrait-bg);
     background-image: repeating-linear-gradient(
       0deg, transparent, transparent 40px,
-      var(--section-pattern-color) 40px,
-      var(--section-pattern-color) 41px
+      var(--section-pattern-color) 40px, var(--section-pattern-color) 41px
     );
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink-light);
-    font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
-    max-width: 360px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--ink-light); font-family: 'Jost', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    position: relative; z-index: 1; max-width: 360px;
     transition: var(--theme-transition);
   }
   .portrait-icon {
-    width: 60px; height: 60px;
-    border: 1px solid var(--mist);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    color: var(--mist);
-    transition: var(--theme-transition);
+    width: 60px; height: 60px; border: 1px solid var(--mist);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem; color: var(--mist); transition: var(--theme-transition);
   }
   .about-name-block { margin-top: 1.5rem; }
   .about-name {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--ink);
-    transition: color 0.4s;
+    font-size: 1.4rem; font-weight: 400; color: var(--ink); transition: color 0.4s;
   }
   .about-title {
     font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-top: 0.3rem;
-    transition: color 0.4s;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-light); margin-top: 0.3rem; transition: color 0.4s;
   }
   .about-right p {
-    color: var(--ink-mid);
-    font-weight: 300;
-    margin-bottom: 1.5rem;
-    transition: color 0.4s;
+    color: var(--ink-mid); font-weight: 300;
+    margin-bottom: 1.5rem; transition: color 0.4s;
   }
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 3rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--mist);
+  .about-read-more-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); background: none; border: none;
+    border-bottom: 1px solid var(--gold-light);
+    cursor: pointer; padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .about-read-more-btn:hover { color: var(--ink); border-color: var(--ink); }
+  .about-full {
+    display: none; margin-top: 2.5rem;
+    padding-top: 2.5rem; border-top: 1px solid var(--mist);
     transition: border-color 0.4s;
   }
-  .stat-number {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--stat-num-color);
-    line-height: 1;
-    transition: color 0.4s;
+  .about-full.expanded { display: block; }
+  .about-full p {
+    color: var(--ink-mid); font-weight: 300;
+    margin-bottom: 1.5rem; transition: color 0.4s;
   }
-  .stat-label {
+  .about-divider {
+    display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
+  }
+  .about-divider-line { flex: 1; height: 1px; background: var(--mist); }
+  .about-divider-ornament { color: var(--gold-light); font-size: 1rem; }
+  .about-poetic {
+    border-left: 2px solid var(--gold-light);
+    padding-left: 1.5rem; margin: 2rem 0;
+    transition: border-color 0.4s;
+  }
+  .about-poetic p {
+    font-style: italic; color: var(--ink) !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .about-collapse-btn {
     font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-top: 0.3rem;
-    transition: color 0.4s;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light); background: none; border: none;
+    border-bottom: 1px solid var(--mist);
+    cursor: pointer; padding-bottom: 2px;
+    transition: color 0.3s; margin-top: 0.5rem;
   }
+  .about-collapse-btn:hover { color: var(--ink); }
 
-  /* KSIAZKI */
+  /* ========================
+     KSIĄŻKI
+  ======================== */
   .books-section { background: var(--books-bg); }
   .books-intro { max-width: 660px; margin-bottom: 5rem; }
   .books-intro p { color: var(--ink-light); font-weight: 300; margin-top: 1.5rem; transition: color 0.4s; }
   .book-item {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 2.5rem;
-    padding: 2.5rem 0;
-    border-top: 1px solid var(--mist);
-    transition: border-color 0.4s;
-    cursor: default;
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 2.5rem; padding: 2.5rem 0;
+    border-top: 1px solid var(--mist); transition: border-color 0.4s;
   }
   .book-item:last-child { border-bottom: 1px solid var(--mist); }
   .book-item:hover .book-number { color: var(--gold); }
   .book-number {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 4rem;
-    font-weight: 300;
-    color: var(--book-num-color);
-    line-height: 1;
-    transition: color 0.3s;
-    padding-top: 0.2rem;
+    font-size: 4rem; font-weight: 300;
+    color: var(--book-num-color); line-height: 1;
+    transition: color 0.3s; padding-top: 0.2rem;
   }
   .book-cycle-badge {
-    display: inline-block;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold-light);
-    padding: 0.2rem 0.6rem;
-    margin-bottom: 0.75rem;
+    display: inline-block; font-family: 'Jost', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--gold-light);
+    padding: 0.2rem 0.6rem; margin-bottom: 0.75rem;
     transition: var(--theme-transition);
   }
   .book-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.7rem;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.25;
-    margin-bottom: 1rem;
-    transition: color 0.4s;
+    font-size: 1.7rem; font-weight: 400; color: var(--ink);
+    line-height: 1.25; margin-bottom: 1rem; transition: color 0.4s;
   }
   .book-title em { font-style: italic; color: var(--gold); }
-  .book-desc {
-    font-weight: 300;
-    color: var(--ink-mid);
-    max-width: 640px;
-    line-height: 1.7;
-    font-size: 0.95rem;
-    transition: color 0.4s;
-  }
+  .book-desc { font-weight: 300; color: var(--ink-mid); max-width: 680px; line-height: 1.75; font-size: 0.95rem; transition: color 0.4s; }
+  .book-desc p { margin-bottom: 1rem; }
+  .book-desc p:last-child { margin-bottom: 0; }
   .book-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    transition: color 0.4s;
+    display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-light); transition: color 0.4s;
   }
-  .book-status-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--gold-light);
-  }
+  .book-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-light); }
   .book-status-dot.upcoming { background: var(--mist); }
 
-  /* DROGA CISZY */
+  /* ========================
+     DROGA CISZY
+  ======================== */
   .cycle-section {
-    background: var(--cycle-bg);
-    color: var(--cream);
-    padding: 7rem 0;
-    position: relative;
-    overflow: hidden;
+    background: var(--cream-dark);
+    padding: 7rem 0; position: relative; overflow: hidden;
     transition: var(--theme-transition);
   }
   .cycle-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background-image: repeating-linear-gradient(
-      -45deg,
-      transparent, transparent 60px,
-      rgba(160,123,58,0.04) 60px,
-      rgba(160,123,58,0.04) 61px
+      -45deg, transparent, transparent 60px,
+      var(--section-pattern-color) 60px, var(--section-pattern-color) 61px
     );
   }
-  .cycle-section .section-label { color: var(--gold-light); }
-  .cycle-section .section-label::after { background: var(--gold); }
-  .cycle-section .section-title { color: var(--ink); }
-  [data-theme="dark"] .cycle-section .section-title { color: #D5CBBA; }
-  .cycle-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+  .cycle-inner { position: relative; z-index: 1; }
+  .cycle-intro { max-width: 760px; margin-bottom: 4.5rem; }
+  .cycle-intro p {
+    color: var(--ink-mid); font-weight: 300;
+    margin-top: 1.75rem; line-height: 1.85; font-size: 1.05rem;
+    transition: color 0.4s;
   }
-  .cycle-text p {
-    color: var(--cycle-text-color);
-    font-weight: 300;
-    margin-top: 2rem;
-    line-height: 1.8;
+  .cycle-bottom {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
   }
   .cycle-book-row {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.2rem 0;
-    border-bottom: 1px solid var(--cycle-border);
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 1.2rem 0; border-bottom: 1px solid var(--mist);
     transition: border-color 0.4s;
   }
-  .cycle-book-row:first-child { border-top: 1px solid var(--cycle-border); }
+  .cycle-book-row:first-child { border-top: 1px solid var(--mist); }
   .cycle-roman {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: var(--gold);
-    min-width: 36px;
+    font-size: 1.2rem; font-weight: 300; color: var(--gold); min-width: 36px;
   }
   .cycle-book-name {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--cycle-book-color);
-    font-style: italic;
-    transition: color 0.4s;
+    font-size: 1rem; font-weight: 300; color: var(--ink-mid);
+    font-style: italic; transition: color 0.4s;
   }
-  .cycle-book-name.upcoming { color: var(--cycle-upcoming); }
-
-  /* KONTAKT */
-  .contact-section { background: var(--contact-bg); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-  .contact-text p {
-    color: var(--ink-mid);
-    font-weight: 300;
-    margin-top: 1.5rem;
-    line-height: 1.8;
-    transition: color 0.4s;
-  }
-  .contact-details { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
-  .contact-label {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.25rem;
-  }
-  .contact-value {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.1rem;
-    color: var(--ink);
-    transition: color 0.4s;
-  }
-  .contact-value a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--mist);
-    transition: border-color 0.3s, color 0.3s;
-  }
-  .contact-value a:hover { border-color: var(--gold); }
-  .contact-form-area {
-    background: var(--form-bg);
-    padding: 3rem;
-    border: 1px solid var(--mist);
+  .cycle-book-name.upcoming { color: var(--ink-light); }
+  .cycle-quote-block {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-light);
+    padding: 2.5rem 3rem;
     transition: var(--theme-transition);
   }
-  .form-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 2rem;
-    transition: color 0.4s;
-  }
-  .form-group { margin-bottom: 1.5rem; }
-  .form-label {
-    display: block;
+  .cycle-quote-label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 0.5rem;
-    transition: color 0.4s;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.25rem;
   }
-  .form-input, .form-textarea {
-    width: 100%;
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    padding: 0.75rem 1rem;
+  .cycle-quote-text {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.3s, background 0.4s, color 0.4s;
-    resize: vertical;
+    font-size: 1.15rem; font-style: italic; font-weight: 300;
+    color: var(--ink-mid); line-height: 1.75; transition: color 0.4s;
   }
-  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
-  .form-textarea { min-height: 120px; }
-  .form-submit {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    background: var(--btn-primary-bg);
-    color: var(--btn-primary-color);
-    border: none;
-    padding: 0.85rem 2.25rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    width: 100%;
-  }
-  .form-submit:hover { opacity: 0.85; }
 
-  /* MEDIA */
+  /* ========================
+     ZAPISKI Z CISZY
+  ======================== */
+  .zapiski-section { background: var(--zapiski-bg); }
+  .zapiski-placeholder {
+    text-align: center; max-width: 520px;
+    margin: 3rem auto 0; padding: 3rem 0;
+  }
+  .zapiski-ornament {
+    width: 80px; height: 80px; border: 1px solid var(--mist);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 2rem; color: var(--gold-light);
+    transition: var(--theme-transition);
+  }
+  .zapiski-coming {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem; font-style: italic; font-weight: 300;
+    color: var(--ink-light); line-height: 1.65;
+    transition: color 0.4s;
+  }
+  .zapiski-sub {
+    font-family: 'Jost', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mist); margin-top: 1rem; transition: color 0.4s;
+  }
+
+  /* ========================
+     MEDIA
+  ======================== */
   .media-section { background: var(--media-bg); }
   .media-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; margin-top: 3rem;
   }
   .media-card {
-    background: var(--media-card-bg);
-    padding: 2rem;
-    border: 1px solid var(--mist);
-    text-decoration: none;
-    transition: all 0.3s;
-    display: block;
+    background: var(--media-card-bg); padding: 2rem;
+    border: 1px solid var(--mist); text-decoration: none;
+    transition: all 0.3s; display: block;
   }
   .media-card:hover { border-color: var(--gold-light); transform: translateY(-3px); }
   .media-icon {
-    width: 48px; height: 48px;
-    border: 1px solid var(--mist);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-    color: var(--gold);
-    transition: var(--theme-transition);
+    width: 48px; height: 48px; border: 1px solid var(--mist);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem; color: var(--gold); transition: var(--theme-transition);
   }
   .media-card-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.1rem;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-    transition: color 0.4s;
+    font-size: 1.1rem; color: var(--ink); margin-bottom: 0.5rem; transition: color 0.4s;
   }
   .media-card-desc {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    color: var(--ink-light);
-    line-height: 1.6;
-    transition: color 0.4s;
+    font-family: 'Jost', sans-serif; font-size: 0.75rem;
+    letter-spacing: 0.05em; color: var(--ink-light); line-height: 1.6; transition: color 0.4s;
   }
 
-  /* FOOTER */
-  footer {
-    background: var(--footer-bg);
-    color: var(--cream);
-    padding: 4rem 0 2.5rem;
-    transition: var(--theme-transition);
+  /* ========================
+     KONTAKT
+  ======================== */
+  .contact-section { background: var(--contact-bg); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: start;
   }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 4rem;
+  .contact-text p {
+    color: var(--ink-mid); font-weight: 300;
+    margin-top: 1.5rem; line-height: 1.8; transition: color 0.4s;
   }
-  .footer-brand-name {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.4rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    color: var(--cream);
-    margin-bottom: 1rem;
-    transition: color 0.4s;
+  .contact-details { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-label {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.25rem;
   }
-  .footer-brand-desc {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    color: var(--footer-text);
-    line-height: 1.7;
-    max-width: 260px;
-    transition: color 0.4s;
-  }
-  .footer-heading {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 1.25rem;
-  }
+  .contact-value { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.1rem; color: var(--ink); transition: color 0.4s; }
+  .contact-value a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--mist); transition: border-color 0.3s, color 0.3s; }
+  .contact-value a:hover { border-color: var(--gold); }
+  .contact-form-area { background: var(--form-bg); padding: 3rem; border: 1px solid var(--mist); transition: var(--theme-transition); }
+  .form-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 400; color: var(--ink); margin-bottom: 2rem; transition: color 0.4s; }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-label { display: block; font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem; transition: color 0.4s; }
+  .form-input, .form-textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--input-border); padding: 0.75rem 1rem; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1rem; color: var(--ink); outline: none; transition: border-color 0.3s, background 0.4s, color 0.4s; resize: vertical; }
+  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea { min-height: 120px; }
+  .form-submit { font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--btn-primary-bg); color: var(--btn-primary-color); border: none; padding: 0.85rem 2.25rem; cursor: pointer; transition: all 0.3s; width: 100%; }
+  .form-submit:hover { opacity: 0.85; }
+
+  /* ========================
+     FOOTER
+  ======================== */
+  footer { background: var(--footer-bg); color: var(--cream); padding: 4rem 0 2.5rem; transition: var(--theme-transition); }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+  .footer-brand-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.08em; color: var(--cream); margin-bottom: 1rem; transition: color 0.4s; }
+  .footer-brand-desc { font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.05em; color: var(--footer-text); line-height: 1.7; max-width: 260px; transition: color 0.4s; }
+  .footer-heading { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.25rem; }
   .footer-links { list-style: none; }
   .footer-links li { margin-bottom: 0.6rem; }
-  .footer-links a {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    color: var(--footer-link);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
+  .footer-links a { font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.05em; color: var(--footer-link); text-decoration: none; transition: color 0.3s; }
   .footer-links a:hover { color: var(--gold-light); }
-  .footer-bottom {
-    border-top: 1px solid rgba(247,243,236,0.1);
-    padding-top: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-copy {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    letter-spacing: 0.05em;
-    color: var(--footer-copy);
-    transition: color 0.4s;
-  }
+  .footer-bottom { border-top: 1px solid rgba(247,243,236,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.05em; color: var(--footer-copy); transition: color 0.4s; }
   .footer-gold-line { width: 60px; height: 1px; background: var(--gold); opacity: 0.4; }
 
-  /* RESPONSIVE */
+  /* ========================
+     RESPONSIVE
+  ======================== */
+  @media (max-width: 1100px) {
+    nav { padding: 1.1rem 2rem; }
+    .nav-links { gap: 1.1rem; }
+    .nav-links a { font-size: 0.62rem; letter-spacing: 0.07em; }
+  }
   @media (max-width: 900px) {
-    nav { padding: 1.25rem 2rem; }
-    .nav-links, .nav-contact-btn { display: none; }
+    .nav-links { display: none; }
     .nav-hamburger { display: flex; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-text-col { padding: 6rem 2rem 3rem; }
-    .hero-image-col { display: none; }
     .container { padding: 0 2rem; }
     section { padding: 4.5rem 0; }
-    .about-grid, .cycle-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .home-masthead { padding: 7rem 2rem 4rem; }
+    .sentencja-block { padding: 3rem 2rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
     .about-portrait-placeholder { max-width: 100%; }
     .book-item { grid-template-columns: 50px 1fr; gap: 1.5rem; }
     .book-number { font-size: 2.5rem; }
+    .cycle-bottom { grid-template-columns: 1fr; gap: 3rem; }
     .media-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .about-stats { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 580px) {
-    .hero-title { font-size: 2.5rem; }
+    .home-author-name { font-size: 3rem; }
     .media-grid { grid-template-columns: 1fr; }
     .section-title { font-size: 1.8rem; }
-    .hero-ctas { flex-direction: column; align-items: flex-start; }
+    .sentencja-text { font-size: 1.3rem; }
   }
 
   /* FADE IN */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
+  .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
   .fade-in-delay-1 { transition-delay: 0.1s; }
   .fade-in-delay-2 { transition-delay: 0.2s; }
@@ -919,81 +641,73 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Ryszard Klein</a>
+  <a href="#home" class="nav-logo">Ryszard Klein</a>
   <div class="nav-right">
     <ul class="nav-links">
+      <li><a href="#home">Strona główna</a></li>
       <li><a href="#o-mnie">O mnie</a></li>
       <li><a href="#ksiazki">Książki</a></li>
       <li><a href="#droga-ciszy">Droga Ciszy</a></li>
+      <li><a href="#zapiski">Zapiski z Ciszy</a></li>
       <li><a href="#media">Media</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
-    <a href="#kontakt" class="nav-contact-btn">Kontakt</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
-      <!-- Moon icon (visible in light mode) -->
-      <svg class="icon-moon" viewBox="0 0 24 24">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
-      <!-- Sun icon (visible in dark mode) -->
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="5"/>
-        <line x1="12" y1="1" x2="12" y2="3"/>
-        <line x1="12" y1="21" x2="12" y2="23"/>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-        <line x1="1" y1="12" x2="3" y2="12"/>
-        <line x1="21" y1="12" x2="23" y2="12"/>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
       </svg>
     </button>
-    <button class="nav-hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-text-col">
-    <p class="hero-eyebrow fade-in">Pisarz · Muzyk · Refleksja nad człowiekiem</p>
-    <h1 class="hero-title fade-in fade-in-delay-1">Ryszard<br><em>Klein</em></h1>
-    <p class="hero-subtitle fade-in fade-in-delay-2">Od wielu lat fascynuje mnie ludzka droga: to, jak próbujemy zrozumieć siebie, własne decyzje i mechanizmy, które nami kierują.</p>
-    <div class="hero-ctas fade-in fade-in-delay-3">
-      <a href="#ksiazki" class="btn-primary">Poznaj moje książki</a>
-      <a href="#o-mnie" class="btn-secondary">O mnie →</a>
+<!-- STRONA GŁÓWNA -->
+<section id="home">
+  <div class="home-masthead">
+    <div class="home-masthead-inner">
+      <p class="home-eyebrow fade-in">Pisarz · Muzyk · Refleksja nad człowiekiem</p>
+      <h1 class="home-author-name fade-in fade-in-delay-1">Ryszard<br><em>Klein</em></h1>
+      <div class="home-ornament-line fade-in fade-in-delay-2"></div>
+      <p class="home-tagline fade-in fade-in-delay-2">Cykl pięciu książek — Droga Ciszy</p>
     </div>
   </div>
-  <div class="hero-image-col">
-    <div class="hero-bg-pattern"></div>
-    <svg class="hero-ornament" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="200" cy="200" r="180" stroke="#A07B3A" stroke-width="1"/>
-      <circle cx="200" cy="200" r="150" stroke="#A07B3A" stroke-width="0.5"/>
-      <circle cx="200" cy="200" r="120" stroke="#A07B3A" stroke-width="0.5"/>
-      <circle cx="200" cy="200" r="90" stroke="#A07B3A" stroke-width="0.5"/>
-      <circle cx="200" cy="200" r="60" stroke="#A07B3A" stroke-width="1"/>
-      <circle cx="200" cy="200" r="8" fill="#A07B3A" opacity="0.5"/>
-      <line x1="20" y1="200" x2="380" y2="200" stroke="#A07B3A" stroke-width="0.5"/>
-      <line x1="200" y1="20" x2="200" y2="380" stroke="#A07B3A" stroke-width="0.5"/>
-      <line x1="73" y1="73" x2="327" y2="327" stroke="#A07B3A" stroke-width="0.5" opacity="0.5"/>
-      <line x1="327" y1="73" x2="73" y2="327" stroke="#A07B3A" stroke-width="0.5" opacity="0.5"/>
-      <text x="200" y="210" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#A07B3A" opacity="0.6" font-style="italic">Droga Ciszy</text>
-    </svg>
-    <div class="hero-quote-block fade-in fade-in-delay-2">
-      <p class="hero-quote-label">Sentencja na dziś</p>
-      <p class="hero-quote">Gdy doświadczam porażki,<br>jedynie moja reakcja jest pod moją kontrolą.</p>
-      <p class="hero-quote-attr">— Ścieżki spełnionego życia</p>
+
+  <div class="sentencja-block">
+    <div class="container">
+      <p class="sentencja-label">Sentencja na dziś</p>
+      <p class="sentencja-text">Gdy doświadczam porażki,<br>jedynie moja reakcja jest pod moją kontrolą.</p>
+      <p class="sentencja-attr">— Ścieżki spełnionego życia</p>
+    </div>
+  </div>
+
+  <div class="home-invitation">
+    <div class="container">
+      <div class="home-invitation-inner fade-in">
+        <p>Serdecznie zapraszam do czytania moich książek. Są one zapisem moich poszukiwań, pytań i refleksji nad człowiekiem, umysłem, świadomością i wolnością wyboru.</p>
+        <p>Od wielu lat fascynuje mnie ludzka droga: to, jak próbujemy zrozumieć siebie, własne decyzje i mechanizmy, które nami kierują. Szczególnie porusza mnie pytanie, na ile naprawdę potrafimy korzystać z wolnej woli i czym jest zdrowy rozsądek, skoro każdy z nas patrzy na świat z własnej perspektywy.</p>
+        <p>Pisanie jest dla mnie sposobem porządkowania myśli, lepszego rozumienia siebie i innych, a także utrzymywania dystansu do rzeczywistości. Korzystam z doświadczeń mojego długiego życia, ale staram się opierać przede wszystkim na uważności, prostocie i zdrowym rozsądku.</p>
+        <p>Interesuje mnie ludzka kondycja: to, jak łatwo uznajemy własne przekonania za oczywiste i jak trudno czasem zobaczyć coś szerzej.</p>
+        <p>Jeśli te tematy są Ci bliskie, zapraszam do lektury, kontaktu i wspólnych rozmów. Będzie mi bardzo miło, jeśli zechcesz razem ze mną zatrzymać się przy tych pytaniach.</p>
+        <div class="home-invitation-verse">
+          <p>Każdy z nas kroczy swoją drogą.</p>
+          <p>Każdy sam odkrywa własny potencjał, piękno i moc.</p>
+          <p>Czasem jedna rozmowa, wspólna refleksja albo dobrze postawione pytanie potrafią otworzyć w nas nową przestrzeń.</p>
+        </div>
+        <p>Zapraszam do lektury, refleksji i kontaktu.</p>
+        <div class="home-contact-block">
+          <p>Telefon: <a href="tel:+48531615121">+48 531 615 121</a></p>
+          <p>Email: <a href="mailto:cisza.umyslu@gmail.com">cisza.umyslu@gmail.com</a></p>
+          <p class="home-signature">Ryszard Klein</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
-<!-- SENTENCJA BAR -->
-<div class="sentencja-bar">
-  <div class="container">
-    <p class="sentencja-label">Zaproszenie</p>
-    <p class="sentencja-text">Każdy z nas kroczy swoją drogą. Każdy sam odkrywa własny potencjał, piękno i moc.</p>
-  </div>
-</div>
 
 <!-- O MNIE -->
 <section class="about-section" id="o-mnie">
@@ -1018,34 +732,37 @@
       <div class="about-right">
         <p class="section-label fade-in">O mnie</p>
         <h2 class="section-title fade-in" style="margin-bottom: 2rem;">Piszę o człowieku,<br>bo sam wciąż próbuję<br><em>go zrozumieć</em></h2>
-        <p class="fade-in fade-in-delay-1">Odkąd pamiętam, zadawałem pytania o sens życia, naturę istnienia i tajemnicę ludzkiego umysłu. Z czasem zrozumiałem, że umiejętne zadawanie pytań jest często bardziej konstruktywne niż próba udzielania odpowiedzi.</p>
-        <p class="fade-in fade-in-delay-2">Z zawodu jestem muzykiem, ale najbardziej fascynuje mnie ludzki umysł, świadomość i droga człowieka ku większej wolności wewnętrznej.</p>
-        <p class="fade-in fade-in-delay-2">Moje doświadczenie budowało się w bardzo różnych miejscach: kopalni, Marynarce Wojennej, szkolnictwie, muzyce i kulturze. Przez ponad czterdzieści lat towarzyszyłem muzyką ludziom w chwilach modlitwy, skupienia, radości i pożegnania.</p>
-        <p class="fade-in fade-in-delay-3">Jestem ojcem czworga dzieci i dziadkiem siedmiorga wnuków. Dziś, bliżej gór, mogę pełniej poświęcić się pisaniu i prostemu życiu.</p>
-        <div class="about-stats fade-in">
-          <div class="stat-item">
-            <p class="stat-number">5</p>
-            <p class="stat-label">Książek w cyklu</p>
+        <p class="fade-in">Odkąd pamiętam, zadawałem pytania o sens życia, naturę istnienia i tajemnicę ludzkiego umysłu. Z czasem zrozumiałem, że umiejętne zadawanie pytań jest często bardziej konstruktywne niż próba udzielania odpowiedzi.</p>
+        <p class="fade-in fade-in-delay-1">Moje doświadczenie życiowe zrodziło we mnie potrzebę pisania. Z zawodu jestem muzykiem, ale najbardziej fascynuje mnie ludzki umysł, świadomość i droga człowieka ku większej wolności wewnętrznej. Patrząc szerzej na historię i współczesny świat, widać, jak mocno naszymi wyborami kierują uwarunkowania, lęki, pragnienia i zbiorowe scenariusze. Właśnie dlatego tak bardzo interesuje mnie droga od nieświadomego działania ku bardziej świadomemu wyborowi.</p>
+        <p class="fade-in fade-in-delay-2">Moje książki są zapisem tych poszukiwań. Powstały z życia, z doświadczeń, z pracy z ludźmi, z muzyki, z ciszy i z pytań, które przez wiele lat nie dawały mi spokoju.</p>
+        <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Czytaj więcej →</button>
+        <div class="about-full" id="aboutFull">
+          <div class="about-divider">
+            <div class="about-divider-line"></div>
+            <span class="about-divider-ornament">◆</span>
+            <div class="about-divider-line"></div>
           </div>
-          <div class="stat-item">
-            <p class="stat-number">40+</p>
-            <p class="stat-label">Lat przy muzyce</p>
+          <p>Miałem w życiu to szczęście, że przeszedłem przez wiele różnych doświadczeń. Pracowałem w różnych miejscach, spotykałem wielu ludzi, nauczałem, grałem, prowadziłem zespoły, kierowałem instytucjami, zakładałem rodzinę, przeżywałem trudne decyzje i zaczynałem od nowa.</p>
+          <p>Dziś widzę, że ta różnorodność stała się źródłem refleksji. Dzięki niej mogłem lepiej zobaczyć siebie w różnych sytuacjach życiowych: własne reakcje, wybory i decyzje, które na poszczególnych etapach wydawały się jedyne i słuszne. Z czasem zrozumiałem, jak wiele potrafią zmienić dystans, dojrzewanie i spokojna refleksja.</p>
+          <p>Moje doświadczenie budowało się w bardzo różnych miejscach. Pracowałem w kopalni, służyłem w Marynarce Wojennej i przeżyłem czas stanu wojennego. Przez wiele lat byłem związany ze szkolnictwem, muzyką i kulturą. Uczyłem, prowadziłem zespoły, kierowałem instytucjami kultury, organizowałem koncerty, festiwale i wernisaże. Ważnym rozdziałem mojego życia była również gra na organach kościelnych. Przez ponad czterdzieści lat towarzyszyłem muzyką ludziom w chwilach modlitwy, skupienia, radości i pożegnania.</p>
+          <p>Szczególne miejsce w moim życiu zajmuje rodzina. Jestem ojcem czworga dzieci i dziadkiem siedmiorga wnuków. Życie rodzinne, ze wszystkimi swoimi radościami, trudnościami, pytaniami i lekcjami, stało się jednym z najważniejszych źródeł mojego rozumienia człowieka. To właśnie bliskie relacje najczęściej pokazują nam, kim naprawdę jesteśmy, czego nie rozumiemy i czego wciąż musimy się uczyć.</p>
+          <p>W dojrzałym wieku odważyłem się rozpocząć nowy rozdział życia. Zrezygnowałem z części zawodowych obowiązków, zamieszkałem bliżej gór i mogłem pełniej poświęcić się pisaniu, pracy wewnętrznej, turystyce i prostemu życiu. Tatry i góry od lat były dla mnie miejscem oddechu, ciszy i powrotu do siebie.</p>
+          <p>Z czasem wszystkie te doświadczenia zaczęły układać się w jedną całość. Wszystko to stało się fundamentem moich książek.</p>
+          <div class="about-poetic">
+            <p>Piszę o człowieku, bo sam wciąż próbuję człowieka zrozumieć.</p>
+            <p>Piszę o umyśle, bo widzę, jak mocno potrafi nami kierować.</p>
+            <p>Piszę o wolności, bo wierzę, że można dojrzewać do bardziej świadomego wyboru.</p>
           </div>
-          <div class="stat-item">
-            <p class="stat-number">7</p>
-            <p class="stat-label">Wnuków</p>
-          </div>
-          <div class="stat-item">
-            <p class="stat-number">∞</p>
-            <p class="stat-label">Pytań bez gotowych odpowiedzi</p>
-          </div>
+          <p>Napisałem pięć książek. Część z nich doczekała się kolejnych wydań, tłumaczeń na języki obce i ważnych dla mnie wyróżnień. Szczegółowe informacje o książkach zamieszczam w osobnej zakładce.</p>
+          <p>Pisanie jest dla mnie przede wszystkim osobistą drogą refleksji. Piszę, bo sam tego potrzebuję. W pisaniu porządkuję myśli, pogłębiam świadomość, odzyskuję wewnętrzną równowagę i lepiej rozumiem siebie. Jest to dla mnie forma medytacji, uważności i cichej rozmowy z samym sobą.</p>
+          <button class="about-collapse-btn" onclick="toggleAbout()">↑ Zwiń</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- KSIAZKI -->
+<!-- KSIĄŻKI -->
 <section class="books-section" id="ksiazki">
   <div class="container">
     <div class="books-intro fade-in">
@@ -1053,48 +770,82 @@
       <h2 class="section-title">Zapiski<br><em>poszukiwań</em></h2>
       <p>Pięć książek, które wyrastają z jednej potrzeby: lepiej zrozumieć człowieka, jego umysł, świadomość i drogę do wewnętrznej wolności.</p>
     </div>
+
     <div class="book-item fade-in">
       <div class="book-number">01</div>
       <div class="book-content">
         <span class="book-cycle-badge">Część I cyklu</span>
         <h3 class="book-title">Cisza.<br><em>Esencja naszego umysłu</em></h3>
-        <p class="book-desc">Zaproszenie do spokojnej pracy nad sobą, do obserwacji własnych reakcji, myśli i schematów, które wpływają na nasze decyzje. Łączy refleksję nad człowiekiem z konkretnymi ćwiczeniami uważności i obserwacji.</p>
+        <div class="book-desc">
+          <p>To książka o potrzebie zatrzymania się i uważniejszego spojrzenia na własny umysł. Powstała z pytania, jak odnaleźć spokój pośród natłoku myśli, przyzwyczajeń, lęków i wyobrażeń, które często bierzemy za prawdę o sobie i świecie.</p>
+          <p>Nie jest to zbiór łatwych recept ani gotowych odpowiedzi. Raczej zaproszenie do spokojnej pracy nad sobą, do obserwacji własnych reakcji, myśli i schematów, które wpływają na nasze decyzje.</p>
+          <p>Książka łączy refleksję nad człowiekiem z konkretnymi ćwiczeniami uważności, obserwacji świata, siebie oraz własnych myśli. Może być pomocą dla tych, którzy chcą lepiej poznać siebie, odzyskać większy wewnętrzny porządek i uczyć się twardo stąpać po ziemi, kierując się prostym, zdrowym rozsądkiem.</p>
+          <p><em>Cisza. Esencja naszego umysłu</em> jest pierwszą częścią cyklu <em>Droga Ciszy</em>.</p>
+        </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępna</p>
       </div>
     </div>
+
     <div class="book-item fade-in">
       <div class="book-number">02</div>
       <div class="book-content">
         <span class="book-cycle-badge">Część II cyklu</span>
         <h3 class="book-title"><em>Jam Jest</em></h3>
-        <p class="book-desc">Autor prowadzi czytelnika przez siedem poziomów energetyczno-psychologicznych: ciało, emocje, wolę, serce, wyrażanie siebie, intuicję i duchową świadomość. Książka ma charakter refleksyjny i poetycki.</p>
+        <div class="book-desc">
+          <p>Książka przeznaczona jest dla osób, które chcą wzmocnić wiarę w siebie, lepiej rozpoznać własną wartość i ugruntować poczucie wewnętrznej mocy.</p>
+          <p>Autor prowadzi czytelnika przez siedem poziomów energetyczno-psychologicznych, ukazując różne sfery życia człowieka: jego ciało, emocje, wolę, serce, wyrażanie siebie, intuicję i duchową świadomość. Każdy z tych poziomów staje się zaproszeniem do spokojnego zatrzymania się przy sobie i do zobaczenia, co nas ogranicza, a co może stać się źródłem większej równowagi.</p>
+          <p>Książka ma charakter refleksyjny i poetycki. Warto czytać ją powoli, zdanie po zdaniu, pozwalając, by zawarte w niej treści i afirmacje pracowały w nas stopniowo. Dodatkowym elementem książki są znaki runiczne, które otwierają wybrane słowa i nadają im głębszy, symboliczny wymiar.</p>
+          <p><em>Jam jest</em> jest drugą częścią cyklu <em>Droga Ciszy</em>.</p>
+        </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępna</p>
       </div>
     </div>
+
     <div class="book-item fade-in">
       <div class="book-number">03</div>
       <div class="book-content">
         <span class="book-cycle-badge">Część III cyklu</span>
         <h3 class="book-title">Spojrzenie Boga.<br><em>Bliźniacze Dusze</em></h3>
-        <p class="book-desc">Książka o wewnętrznym dialogu człowieka z Bogiem, ale także z samym sobą — z własnymi wątpliwościami, tęsknotą, lękiem, potrzebą miłości i pragnieniem zrozumienia. Pojawia się cichy głos miłości i Bożego spojrzenia.</p>
+        <div class="book-desc">
+          <p>To książka o wewnętrznym dialogu człowieka z Bogiem, ale także z samym sobą — z własnymi wątpliwościami, tęsknotą, lękiem, potrzebą miłości i pragnieniem zrozumienia, kim naprawdę jest.</p>
+          <p>Z jednej strony pojawia się w niej ludzkie rozdarcie, samotność i niepewność. Z drugiej — cichy głos Najwyższej Jaźni, głos miłości, który przypomina o wartości życia, godności człowieka i cieple Bożego spojrzenia obecnego w nas samych.</p>
+          <p>Książka pomaga przyjrzeć się poczuciu samotności, odróżnić miłość własną od egoizmu i łagodniej spojrzeć na siebie. Choć napisana jest językiem poetyckim i pełnym ciepła, zawiera również odniesienia psychologiczne oraz refleksje porządkujące nasze myślenie o sobie, relacjach i duchowości.</p>
+          <p>Ważnym motywem książki jest pytanie: Kim jestem? Nie jako gotowa odpowiedź, lecz jako droga do głębszego rozpoznania siebie, miłości i sensu. Całość wzbogacają grafiki ukazujące ludzkie pytania, wątpliwości i wewnętrzne poszukiwania.</p>
+          <p><em>Spojrzenie Boga. Bliźniacze Dusze</em> jest trzecią częścią cyklu <em>Droga Ciszy</em>.</p>
+
+        </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępna</p>
       </div>
     </div>
+
     <div class="book-item fade-in">
       <div class="book-number">04</div>
       <div class="book-content">
         <span class="book-cycle-badge">Część IV cyklu</span>
         <h3 class="book-title">Ścieżki spełnionego życia.<br><em>Współczesność a starożytna mądrość duchowa</em></h3>
-        <p class="book-desc">Książka o szczęściu, spełnieniu i ludzkim potencjale. Nawiązuje do starożytnej mądrości Tao Te Ching oraz tekstów biblijnych. Składa się z osiemdziesięciu jeden krótkich rozważań — każde zawiera poetycki wstęp, komentarz i myśl podsumowującą.</p>
+        <div class="book-desc">
+          <p>To książka o szczęściu, spełnieniu i ludzkim potencjale, pisana z perspektywy osobistego doświadczenia, duchowej refleksji, psychologii i zdrowego rozsądku.</p>
+          <p>Autor podejmuje pytania o to, jak żyć w świecie pełnym sprzeczności, co pomaga człowiekowi rozkwitać, a co oddala go od wewnętrznej równowagi. Nie szuka prostej recepty na szczęście, lecz pokazuje drogę uważności, wdzięczności, świadomej obecności i coraz głębszego rozumienia siebie.</p>
+          <p>Książka nawiązuje do starożytnej mądrości Tao Te Ching oraz do tekstów biblijnych, zestawiając je ze współczesnym spojrzeniem na człowieka, jego umysł, duchowość i codzienne wybory. Składa się z osiemdziesięciu jeden krótkich rozważań, nazwanych Księgami, z których każde zawiera poetycki wstęp, komentarz oraz myśl podsumowującą.</p>
+          <p>To zaproszenie do spokojnej lektury, refleksji nad własnym życiem i odkrywania szczęścia, które wyrasta nie tyle z zewnętrznych okoliczności, ile z kontaktu z samym sobą, Ciszą i Źródłem.</p>
+          <p><em>Ścieżki spełnionego życia</em> są czwartą częscią cyklu <em>Droga Ciszy</em>.</p>
+        </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępna</p>
       </div>
     </div>
+
     <div class="book-item fade-in">
       <div class="book-number">05</div>
       <div class="book-content">
         <span class="book-cycle-badge">Część V cyklu</span>
         <h3 class="book-title">Szczelina decyzji.<br><em>Dojrzewanie umysłu do wolności</em></h3>
-        <p class="book-desc">Książka o człowieku, który pragnie wolności, ale odkrywa, jak wiele jego decyzji rodzi się z ukrytych schematów i nieświadomych impulsów. Tytułowa szczelina to przestrzeń pomiędzy impulsem a reakcją — tam właśnie zaczyna się wolność.</p>
+        <div class="book-desc">
+          <p>To książka o człowieku, który pragnie wolności, ale coraz wyraźniej odkrywa, jak wiele jego decyzji rodzi się z ukrytych schematów, lęków, przyzwyczajeń i nieświadomych impulsów.</p>
+          <p>Autor przygląda się mechanizmom ludzkiego umysłu, ego, cieniom działającym z ukrycia oraz scenariuszom, które często przejmują ster naszego życia. Prowadzi czytelnika ku samoobserwacji, uważności i większemu samostanowieniu.</p>
+          <p>Tytułowa szczelina decyzji oznacza tę krótką przestrzeń pomiędzy impulsem a reakcją, w której może pojawić się świadomy wybór. To właśnie tam zaczyna się dojrzewanie do wolności — nie jako jednorazowe przebudzenie, lecz jako codzienna praktyka rozpoznawania siebie.</p>
+          <p>Książka łączy refleksję psychologiczną, duchową i egzystencjalną. Jest zaproszeniem do spokojnego spojrzenia na własny umysł, własne wybory i drogę, na której człowiek stopniowo uczy się żyć bardziej świadomie.</p>
+          <p><em>Szczelina decyzji. Dojrzewanie umysłu do wolności</em> jest piątą częścią cyklu <em>Droga Ciszy</em>.</p>
+        </div>
         <p class="book-status"><span class="book-status-dot upcoming"></span>W przygotowaniu</p>
       </div>
     </div>
@@ -1104,35 +855,46 @@
 <!-- DROGA CISZY -->
 <section class="cycle-section" id="droga-ciszy">
   <div class="container">
-    <div class="cycle-grid">
-      <div class="cycle-text">
+    <div class="cycle-inner">
+      <div class="cycle-intro">
         <p class="section-label">Cykl autorski</p>
         <h2 class="section-title">Droga<br><em>Ciszy</em></h2>
-        <p>Pięć książek, które wyrastają z jednej potrzeby: lepiej zrozumieć człowieka, jego umysł, świadomość i drogę do wewnętrznej wolności. Każda ma własną formę, własny rytm i osobny sposób prowadzenia czytelnika.</p>
-        <p>Razem tworzą jednak jedną drogę poszukiwań — od chaosu myśli ku większej uważności, od iluzji ku prostszemu, bardziej trzeźwemu widzeniu siebie.</p>
+        <p>„Droga Ciszy" to autorski cykl pięciu książek, które wyrastają z jednej potrzeby: lepiej zrozumieć człowieka, jego umysł, świadomość i drogę do wewnętrznej wolności.</p>
+        <p>Każda z nich ma własną formę, własny rytm i osobny sposób prowadzenia czytelnika. Jedna bardziej przypomina pracę z umysłem, inna poetycką afirmację, kolejna wewnętrzny dialog, jeszcze inna duchowo-psychologiczną refleksję nad szczęściem, spełnieniem i sensem życia. Razem tworzą jednak jedną drogę poszukiwań.</p>
+        <p>Wszystkie wyrastają z tych samych pytań: kim jestem, czym jest świadomość, jak działa ludzki umysł, ile w naszych wyborach jest wolności, a ile ukrytych uwarunkowań, lęków, przyzwyczajeń i przekonań. To pytania, które od lat prowadzą mnie przez życie i które w każdej książce wracają w innej postaci.</p>
+        <p>„Droga Ciszy" jest zapisem tych poszukiwań. Drogą od chaosu myśli ku większej uważności. Od iluzji i nieświadomych schematów ku prostszemu, bardziej trzeźwemu widzeniu siebie. Od potrzeby kontroli ku zaufaniu. Od zagubienia w świecie zewnętrznym ku spokojniejszemu kontaktowi z własnym wnętrzem.</p>
       </div>
-      <div class="cycle-books-visual fade-in">
-        <div class="cycle-book-row">
-          <span class="cycle-roman">I</span>
-          <span class="cycle-book-name">Cisza. Esencja naszego umysłu</span>
+      <div class="cycle-bottom">
+        <div class="fade-in">
+          <div class="cycle-book-row"><span class="cycle-roman">I</span><span class="cycle-book-name">Cisza. Esencja naszego umysłu</span></div>
+          <div class="cycle-book-row"><span class="cycle-roman">II</span><span class="cycle-book-name">Jam Jest</span></div>
+          <div class="cycle-book-row"><span class="cycle-roman">III</span><span class="cycle-book-name">Spojrzenie Boga. Bliźniacze Dusze</span></div>
+          <div class="cycle-book-row"><span class="cycle-roman">IV</span><span class="cycle-book-name">Ścieżki spełnionego życia</span></div>
+          <div class="cycle-book-row"><span class="cycle-roman">V</span><span class="cycle-book-name upcoming">Szczelina decyzji ↗ wkrótce</span></div>
         </div>
-        <div class="cycle-book-row">
-          <span class="cycle-roman">II</span>
-          <span class="cycle-book-name">Jam Jest</span>
-        </div>
-        <div class="cycle-book-row">
-          <span class="cycle-roman">III</span>
-          <span class="cycle-book-name">Spojrzenie Boga. Bliźniacze Dusze</span>
-        </div>
-        <div class="cycle-book-row">
-          <span class="cycle-roman">IV</span>
-          <span class="cycle-book-name">Ścieżki spełnionego życia</span>
-        </div>
-        <div class="cycle-book-row">
-          <span class="cycle-roman">V</span>
-          <span class="cycle-book-name upcoming">Szczelina decyzji ↗ wkrótce</span>
+        <div class="cycle-quote-block fade-in">
+          <p class="cycle-quote-label">Z cyklu</p>
+          <p class="cycle-quote-text">Droga od chaosu myśli ku większej uważności.<br><br>Od iluzji i nieświadomych schematów ku prostszemu, bardziej trzeźwemu widzeniu siebie.<br><br>Od potrzeby kontroli ku zaufaniu.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ZAPISKI Z CISZY -->
+<section class="zapiski-section" id="zapiski">
+  <div class="container">
+    <p class="section-label fade-in">Zapiski z Ciszy</p>
+    <h2 class="section-title fade-in">Sentencje<br>i <em>refleksje</em></h2>
+    <div class="zapiski-placeholder fade-in">
+      <div class="zapiski-ornament">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <p class="zapiski-coming">Ta przestrzeń wypełni się wkrótce sentencjami i krótkimi refleksjami z ksiąg Ryszarda Kleina.</p>
+      <p class="zapiski-sub">Treść w przygotowaniu</p>
     </div>
   </div>
 </section>
@@ -1224,9 +986,11 @@
       <div>
         <p class="footer-heading">Nawigacja</p>
         <ul class="footer-links">
+          <li><a href="#home">Strona główna</a></li>
           <li><a href="#o-mnie">O mnie</a></li>
           <li><a href="#ksiazki">Książki</a></li>
           <li><a href="#droga-ciszy">Droga Ciszy</a></li>
+          <li><a href="#zapiski">Zapiski z Ciszy</a></li>
           <li><a href="#media">Media</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
@@ -1248,50 +1012,55 @@
 </footer>
 
 <script>
-  // THEME TOGGLE
+  // THEME
   const html = document.documentElement;
   const toggleBtn = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('rk-theme') || 'light';
-  html.setAttribute('data-theme', savedTheme);
-
+  html.setAttribute('data-theme', localStorage.getItem('rk-theme') || 'light');
   toggleBtn.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const next = current === 'light' ? 'dark' : 'light';
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     html.setAttribute('data-theme', next);
     localStorage.setItem('rk-theme', next);
   });
 
-  // FADE IN ON SCROLL
+  // FADE IN
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // NAV SCROLL SHADOW
+  // NAV SHADOW
   const navEl = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     navEl.style.boxShadow = window.scrollY > 60 ? '0 2px 24px rgba(28,25,20,0.1)' : 'none';
   });
 
-  // MOBILE HAMBURGER
+  // HAMBURGER
   const hamburger = document.querySelector('.nav-hamburger');
   const navLinks = document.querySelector('.nav-links');
   let mobileOpen = false;
   hamburger.addEventListener('click', () => {
     mobileOpen = !mobileOpen;
-    if (mobileOpen) {
-      navLinks.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:var(--nav-bg);padding:1.5rem 2rem;border-bottom:1px solid var(--mist);gap:1.25rem;';
-    } else {
-      navLinks.style.display = 'none';
-    }
+    navLinks.style.cssText = mobileOpen
+      ? 'display:flex;flex-direction:column;position:absolute;top:62px;left:0;right:0;background:var(--nav-bg);padding:1.5rem 2rem;border-bottom:1px solid var(--mist);gap:1.25rem;z-index:99;'
+      : 'display:none;';
   });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    if (mobileOpen) { mobileOpen = false; navLinks.style.display = 'none'; }
+  }));
 
-  // FORM SUBMIT
+  // O MNIE TOGGLE
+  function toggleAbout() {
+    const full = document.getElementById('aboutFull');
+    const btn = document.getElementById('readMoreBtn');
+    const wasExpanded = full.classList.contains('expanded');
+    full.classList.toggle('expanded');
+    btn.style.display = full.classList.contains('expanded') ? 'none' : 'inline-flex';
+    if (wasExpanded) {
+      document.getElementById('o-mnie').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  // FORM
   function handleFormSubmit() {
     const name = document.getElementById('fname').value.trim();
     const email = document.getElementById('femail').value.trim();
