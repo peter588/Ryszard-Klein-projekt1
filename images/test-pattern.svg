@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="120" viewBox="0 0 80 120">
+  <!--
+    Owen Jones fish-scale (scallop) pattern with trefoil clovers.
+    Tile: 80 × 120px. Contains:
+      - 1 full arch  (center x=40, peak y=0,  base y=60)
+      - 2 half-arches (centers x=0 and x=80, peak y=60, base y=120)
+    background-size: 80px 120px produces seamless offset-row repeat.
+  -->
+
+  <!-- ═══ MAIN ARCH — peak (40,0), base y=60 ═══ -->
+  <path d="M 0,60 A 40,60 0 0 0 80,60"
+        fill="none" stroke="#2b221a" stroke-width="1.4"/>
+
+  <!-- Trefoil inside main arch: r=7.5, equilateral triangle spacing -->
+  <!-- top-left circle -->
+  <circle cx="32.5" cy="27" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <!-- top-right circle -->
+  <circle cx="47.5" cy="27" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <!-- bottom circle -->
+  <circle cx="40" cy="40" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <!-- stem -->
+  <line x1="40" y1="47.5" x2="40" y2="56"
+        stroke="#2b221a" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- ═══ OFFSET LEFT ARCH — center x=0, peak (0,60), base y=120 ═══ -->
+  <path d="M -40,120 A 40,60 0 0 0 40,120"
+        fill="none" stroke="#2b221a" stroke-width="1.4"/>
+
+  <!-- Trefoil (centered at x=0 — halved by left tile edge, mirrored in adjacent tile) -->
+  <circle cx="-7.5" cy="87" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <circle cx="7.5"  cy="87" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <circle cx="0"    cy="100" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <line x1="0" y1="107.5" x2="0" y2="116"
+        stroke="#2b221a" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- ═══ OFFSET RIGHT ARCH — center x=80, peak (80,60), base y=120 ═══ -->
+  <path d="M 40,120 A 40,60 0 0 0 120,120"
+        fill="none" stroke="#2b221a" stroke-width="1.4"/>
+
+  <!-- Trefoil (centered at x=80 — halved by right tile edge, mirrored in adjacent tile) -->
+  <circle cx="72.5" cy="87" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <circle cx="87.5" cy="87" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <circle cx="80"   cy="100" r="7.5" fill="none" stroke="#2b221a" stroke-width="1"/>
+  <line x1="80" y1="107.5" x2="80" y2="116"
+        stroke="#2b221a" stroke-width="2" stroke-linecap="round"/>
+</svg>
