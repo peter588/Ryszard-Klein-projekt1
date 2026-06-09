@@ -233,6 +233,33 @@
     color: var(--ink-light); transition: color 0.4s;
   }
 
+  /* HERO PORTRAIT */
+  .hero-portrait-desktop {
+    position: absolute;
+    right: clamp(60px, 5vw, 120px);
+    top: calc(50% + 40px);
+    transform: translateY(-50%);
+    z-index: 1; pointer-events: none;
+  }
+  .hero-portrait-desktop img {
+    height: clamp(360px, 22vw, 550px);
+    width: auto; display: block;
+  }
+  /* Light mode: show b&w, hide gold */
+  .hero-portrait-desktop .portrait-dark  { display: none; }
+  /* Dark mode: hide b&w, show gold */
+  [data-theme="dark"] .hero-portrait-desktop .portrait-light { display: none; }
+  [data-theme="dark"] .hero-portrait-desktop .portrait-dark  { display: block; }
+  @media (max-width: 1024px) {
+    .hero-portrait-desktop { display: none !important; }
+  }
+  @media (min-width: 1025px) {
+    .home-masthead { justify-content: flex-start; text-align: left; }
+    .home-masthead-inner { max-width: 52%; text-align: left; }
+    .home-ornament-line { margin: 2rem 0; }
+    .home-masthead-inner { z-index: 2; }
+  }
+
   /* SENTENCJA */
   .sentencja-block {
     background: var(--sentencja-bg);
@@ -733,6 +760,10 @@
       <h1 class="home-author-name fade-in fade-in-delay-1">Ryszard<br><em>Klein</em></h1>
       <div class="home-ornament-line fade-in fade-in-delay-2"></div>
       <p class="home-tagline fade-in fade-in-delay-2">Cykl pięciu książek — Droga Ciszy</p>
+    </div>
+    <div class="hero-portrait-desktop">
+      <img class="portrait-light" src="images/author/black_white_author.png" alt="Ryszard Klein">
+      <img class="portrait-dark"  src="images/author/gold_author.png"        alt="Ryszard Klein">
     </div>
   </div>
 
