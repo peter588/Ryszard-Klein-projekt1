@@ -398,16 +398,49 @@
   /* ========================
      KSIĄŻKI
   ======================== */
-  .books-section { background: var(--books-bg); }
+  .books-section { background: var(--about-bg); isolation: isolate; }
   .books-intro { max-width: 660px; margin-bottom: 5rem; }
   .books-intro p { color: var(--ink-light); font-weight: 300; margin-top: 1.5rem; transition: color 0.4s; }
   .book-item {
-    display: grid; grid-template-columns: 80px 1fr;
+    display: grid; grid-template-columns: 80px 160px 1fr;
     gap: 2.5rem; padding: 2.5rem 0;
     border-top: 1px solid var(--mist); transition: border-color 0.4s;
   }
   .book-item:last-child { border-bottom: 1px solid var(--mist); }
   .book-item:hover .book-number { color: var(--gold); }
+  .book-cover { align-self: start; position: relative; }
+  .book-cover img {
+    width: 100%; display: block;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(-12px 8px 18px rgba(28,25,20,0.13));
+    transition: transform 0.35s ease, filter 0.35s ease;
+  }
+  .book-item:hover .book-cover img {
+    transform: translateY(-8px) scale(1.03);
+    filter: drop-shadow(-14px 12px 22px rgba(28,25,20,0.17));
+  }
+  [data-theme="dark"] .book-cover img {
+    mix-blend-mode: normal;
+    filter: drop-shadow(-8px 6px 18px rgba(0,0,0,0.5)) drop-shadow(4px 6px 14px rgba(0,0,0,0.4));
+    transition: transform 0.35s ease, filter 0.35s ease;
+  }
+  [data-theme="dark"] .book-item:hover .book-cover img {
+    filter: drop-shadow(-10px 10px 24px rgba(0,0,0,0.65)) drop-shadow(5px 10px 20px rgba(0,0,0,0.5));
+  }
+  .book-cover-placeholder {
+    width: 100%; aspect-ratio: 2/3;
+    background: var(--portrait-bg);
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 20px,
+      var(--section-pattern-color) 20px, var(--section-pattern-color) 21px
+    );
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--ink-light); font-family: 'Jost', sans-serif;
+    font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-align: center; padding: 1rem; gap: 0.75rem;
+    transition: var(--theme-transition);
+  }
   .book-number {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 4rem; font-weight: 300;
@@ -443,7 +476,7 @@
      DROGA CISZY
   ======================== */
   .cycle-section {
-    background: var(--cream-dark);
+    background: var(--about-bg);
     padding: 7rem 0; position: relative; overflow: hidden;
     transition: var(--theme-transition);
   }
@@ -461,10 +494,7 @@
     margin-top: 1.75rem; line-height: 1.85; font-size: 1.05rem;
     transition: color 0.4s;
   }
-  .cycle-bottom {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 4rem; align-items: start;
-  }
+  .cycle-bottom { max-width: 560px; }
   .cycle-book-row {
     display: flex; align-items: center; gap: 1.5rem;
     padding: 1.2rem 0; border-bottom: 1px solid var(--mist);
@@ -481,22 +511,6 @@
     font-style: italic; transition: color 0.4s;
   }
   .cycle-book-name.upcoming { color: var(--ink-light); }
-  .cycle-quote-block {
-    background: var(--gold-pale);
-    border: 1px solid var(--gold-light);
-    padding: 2.5rem 3rem;
-    transition: var(--theme-transition);
-  }
-  .cycle-quote-label {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.25rem;
-  }
-  .cycle-quote-text {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.15rem; font-style: italic; font-weight: 300;
-    color: var(--ink-mid); line-height: 1.75; transition: color 0.4s;
-  }
 
   /* ========================
      ZAPISKI Z CISZY
@@ -616,9 +630,9 @@
     .sentencja-block { padding: 3rem 2rem; }
     .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
     .about-portrait-placeholder { max-width: 100%; }
-    .book-item { grid-template-columns: 50px 1fr; gap: 1.5rem; }
+    .book-item { grid-template-columns: 50px 110px 1fr; gap: 1.5rem; }
     .book-number { font-size: 2.5rem; }
-    .cycle-bottom { grid-template-columns: 1fr; gap: 3rem; }
+
     .media-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   }
@@ -627,6 +641,8 @@
     .media-grid { grid-template-columns: 1fr; }
     .section-title { font-size: 1.8rem; }
     .sentencja-text { font-size: 1.3rem; }
+    .book-item { grid-template-columns: 40px 80px 1fr; gap: 1rem; }
+    .book-number { font-size: 2rem; }
   }
 
   /* FADE IN */
@@ -773,6 +789,9 @@
 
     <div class="book-item fade-in">
       <div class="book-number">01</div>
+      <div class="book-cover">
+        <img src="images/books/cisza.webp" alt="Cisza. Esencja naszego umysłu">
+      </div>
       <div class="book-content">
         <span class="book-cycle-badge">Część I cyklu</span>
         <h3 class="book-title">Cisza.<br><em>Esencja naszego umysłu</em></h3>
@@ -788,6 +807,9 @@
 
     <div class="book-item fade-in">
       <div class="book-number">02</div>
+      <div class="book-cover">
+        <img src="images/books/jam_jest.webp" alt="Jam Jest">
+      </div>
       <div class="book-content">
         <span class="book-cycle-badge">Część II cyklu</span>
         <h3 class="book-title"><em>Jam Jest</em></h3>
@@ -803,6 +825,9 @@
 
     <div class="book-item fade-in">
       <div class="book-number">03</div>
+      <div class="book-cover">
+        <img src="images/books/spojrzenie_boga.webp" alt="Spojrzenie Boga. Bliźniacze Dusze">
+      </div>
       <div class="book-content">
         <span class="book-cycle-badge">Część III cyklu</span>
         <h3 class="book-title">Spojrzenie Boga.<br><em>Bliźniacze Dusze</em></h3>
@@ -820,6 +845,9 @@
 
     <div class="book-item fade-in">
       <div class="book-number">04</div>
+      <div class="book-cover">
+        <img src="images/books/sciezki_spelnionego_zycia.webp" alt="Ścieżki spełnionego życia">
+      </div>
       <div class="book-content">
         <span class="book-cycle-badge">Część IV cyklu</span>
         <h3 class="book-title">Ścieżki spełnionego życia.<br><em>Współczesność a starożytna mądrość duchowa</em></h3>
@@ -836,6 +864,14 @@
 
     <div class="book-item fade-in">
       <div class="book-number">05</div>
+      <div class="book-cover">
+        <div class="book-cover-placeholder">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+          <span>Okładka w&nbsp;przygotowaniu</span>
+        </div>
+      </div>
       <div class="book-content">
         <span class="book-cycle-badge">Część V cyklu</span>
         <h3 class="book-title">Szczelina decyzji.<br><em>Dojrzewanie umysłu do wolności</em></h3>
@@ -864,18 +900,12 @@
         <p>Wszystkie wyrastają z tych samych pytań: kim jestem, czym jest świadomość, jak działa ludzki umysł, ile w naszych wyborach jest wolności, a ile ukrytych uwarunkowań, lęków, przyzwyczajeń i przekonań. To pytania, które od lat prowadzą mnie przez życie i które w każdej książce wracają w innej postaci.</p>
         <p>„Droga Ciszy" jest zapisem tych poszukiwań. Drogą od chaosu myśli ku większej uważności. Od iluzji i nieświadomych schematów ku prostszemu, bardziej trzeźwemu widzeniu siebie. Od potrzeby kontroli ku zaufaniu. Od zagubienia w świecie zewnętrznym ku spokojniejszemu kontaktowi z własnym wnętrzem.</p>
       </div>
-      <div class="cycle-bottom">
-        <div class="fade-in">
-          <div class="cycle-book-row"><span class="cycle-roman">I</span><span class="cycle-book-name">Cisza. Esencja naszego umysłu</span></div>
-          <div class="cycle-book-row"><span class="cycle-roman">II</span><span class="cycle-book-name">Jam Jest</span></div>
-          <div class="cycle-book-row"><span class="cycle-roman">III</span><span class="cycle-book-name">Spojrzenie Boga. Bliźniacze Dusze</span></div>
-          <div class="cycle-book-row"><span class="cycle-roman">IV</span><span class="cycle-book-name">Ścieżki spełnionego życia</span></div>
-          <div class="cycle-book-row"><span class="cycle-roman">V</span><span class="cycle-book-name upcoming">Szczelina decyzji ↗ wkrótce</span></div>
-        </div>
-        <div class="cycle-quote-block fade-in">
-          <p class="cycle-quote-label">Z cyklu</p>
-          <p class="cycle-quote-text">Droga od chaosu myśli ku większej uważności.<br><br>Od iluzji i nieświadomych schematów ku prostszemu, bardziej trzeźwemu widzeniu siebie.<br><br>Od potrzeby kontroli ku zaufaniu.</p>
-        </div>
+      <div class="cycle-bottom fade-in">
+        <div class="cycle-book-row"><span class="cycle-roman">I</span><span class="cycle-book-name">Cisza. Esencja naszego umysłu</span></div>
+        <div class="cycle-book-row"><span class="cycle-roman">II</span><span class="cycle-book-name">Jam Jest</span></div>
+        <div class="cycle-book-row"><span class="cycle-roman">III</span><span class="cycle-book-name">Spojrzenie Boga. Bliźniacze Dusze</span></div>
+        <div class="cycle-book-row"><span class="cycle-roman">IV</span><span class="cycle-book-name">Ścieżki spełnionego życia</span></div>
+        <div class="cycle-book-row"><span class="cycle-roman">V</span><span class="cycle-book-name upcoming">Szczelina decyzji ↗ wkrótce</span></div>
       </div>
     </div>
   </div>
@@ -1005,7 +1035,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 Ryszard Klein. Wszelkie prawa zastrzeżone.</p>
+      <p class="footer-copy">© 2026 Ryszard Klein. Wszelkie prawa zastrzeżone.</p>
       <div class="footer-gold-line"></div>
     </div>
   </div>
