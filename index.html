@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl" data-theme="light">
 <head>
+<script>(function(){var t=localStorage.getItem('rk-theme');if(t)document.documentElement.setAttribute('data-theme',t);}());</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ryszard Klein — Droga Ciszy</title>
@@ -715,6 +716,43 @@
     .book-number { font-size: 2rem; }
   }
 
+  /* PARTNERZY */
+  .partners-section { background: var(--about-bg); transition: var(--theme-transition); }
+  .partners-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 2rem; margin-top: 3rem;
+  }
+  .partner-card {
+    display: block; text-decoration: none;
+    padding: 2rem 2.5rem;
+    border: 1px solid var(--mist);
+    transition: border-color 0.35s, box-shadow 0.35s;
+  }
+  .partner-card:hover {
+    border-color: var(--gold-light);
+    box-shadow: 0 4px 24px rgba(28,25,20,0.07);
+  }
+  .partner-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem; font-weight: 400;
+    color: var(--ink); margin-bottom: 0.4rem;
+    transition: color 0.3s;
+  }
+  .partner-desc {
+    font-family: 'Jost', sans-serif; font-size: 0.78rem;
+    color: var(--ink-light); letter-spacing: 0.03em;
+    margin-bottom: 1.25rem; transition: color 0.3s;
+  }
+  .partner-url {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); transition: color 0.3s;
+  }
+  .partner-card:hover .partner-url { color: var(--ink); }
+  @media (max-width: 580px) {
+    .partners-grid { grid-template-columns: 1fr; }
+  }
+
   /* FADE IN */
   .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -736,6 +774,7 @@
       <li><a href="#droga-ciszy">Droga Ciszy</a></li>
       <li><a href="#zapiski">Zapiski z Ciszy</a></li>
       <li><a href="#media">Media</a></li>
+      <li><a href="zakup_ksiazek.html">Zakup książek</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
@@ -756,7 +795,7 @@
 <section id="home">
   <div class="home-masthead">
     <div class="home-masthead-inner">
-      <p class="home-eyebrow fade-in">Pisarz · Muzyk · Refleksja nad człowiekiem</p>
+      <p class="home-eyebrow fade-in">Cisza · Samopoznanie · Wolność</p>
       <h1 class="home-author-name fade-in fade-in-delay-1">Ryszard<br><em>Klein</em></h1>
       <div class="home-ornament-line fade-in fade-in-delay-2"></div>
       <p class="home-tagline fade-in fade-in-delay-2">Cykl pięciu książek — Droga Ciszy</p>
@@ -817,7 +856,7 @@
         <h2 class="section-title fade-in" style="margin-bottom: 2rem;">Piszę o człowieku,<br>bo sam wciąż próbuję<br><em>go zrozumieć</em></h2>
         <p class="fade-in">Odkąd pamiętam, zadawałem pytania o sens życia, naturę istnienia i tajemnicę ludzkiego umysłu. Z czasem zrozumiałem, że umiejętne zadawanie pytań jest często bardziej konstruktywne niż próba udzielania odpowiedzi.</p>
         <p class="fade-in fade-in-delay-1">Moje doświadczenie życiowe zrodziło we mnie potrzebę pisania. Z zawodu jestem muzykiem, ale najbardziej fascynuje mnie ludzki umysł, świadomość i droga człowieka ku większej wolności wewnętrznej. Patrząc szerzej na historię i współczesny świat, widać, jak mocno naszymi wyborami kierują uwarunkowania, lęki, pragnienia i zbiorowe scenariusze. Właśnie dlatego tak bardzo interesuje mnie droga od nieświadomego działania ku bardziej świadomemu wyborowi.</p>
-        <p class="fade-in fade-in-delay-2">Moje książki są zapisem tych poszukiwań. Powstały z życia, z doświadczeń, z pracy z ludźmi, z muzyki, z ciszy i z pytań, które przez wiele lat nie dawały mi spokoju.</p>
+        <p class="fade-in fade-in-delay-2">Moje książki są zapisem tych poszukiwań. Powstały z życia, z doświadczeń, z pracy z ludźmi, z muzyki, z ciszy i z pytań, które przez wiele lat prowadziły mnie w głąb siebie.</p>
         <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Czytaj więcej →</button>
         <div class="about-full" id="aboutFull">
           <div class="about-divider">
@@ -1072,6 +1111,26 @@
   </div>
 </section>
 
+<!-- PARTNERZY -->
+<section class="partners-section" id="partnerzy">
+  <div class="container">
+    <p class="section-label fade-in">Partnerzy</p>
+    <h2 class="section-title fade-in" style="margin-bottom: 0;">Polecane <em>miejsca</em></h2>
+    <div class="partners-grid">
+      <a href="https://muzykoterapia.slask.pl/blog/" target="_blank" rel="noopener" class="partner-card fade-in">
+        <p class="partner-name">Grażyna Klein</p>
+        <p class="partner-desc">Muzykoterapia duszy i ciała</p>
+        <span class="partner-url">muzykoterapia.slask.pl →</span>
+      </a>
+      <a href="https://szkolamuzyki-zywiec.pl/" target="_blank" rel="noopener" class="partner-card fade-in fade-in-delay-1">
+        <p class="partner-name">Szkoła Muzyki Rozrywkowej w Żywcu</p>
+        <p class="partner-desc">Żywiec</p>
+        <span class="partner-url">szkolamuzyki-zywiec.pl →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="container">
@@ -1089,6 +1148,7 @@
           <li><a href="#droga-ciszy">Droga Ciszy</a></li>
           <li><a href="#zapiski">Zapiski z Ciszy</a></li>
           <li><a href="#media">Media</a></li>
+          <li><a href="zakup_ksiazek.html">Zakup książek</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
       </div>
