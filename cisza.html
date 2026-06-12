@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+<script>(function(){var t=localStorage.getItem('rk-theme');if(t)document.documentElement.setAttribute('data-theme',t);}());</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cisza w obrazach — Ryszard Klein</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root, [data-theme="light"] {
+    --ink: #1C1914; --ink-light: #6B6356;
+    --gold: #A07B3A; --gold-light: #C9A868;
+    --mist: #D4CDBF;
+    --nav-bg: rgba(247,243,236,0.9);
+    --toggle-bg: #3D3830; --toggle-color: #F7F3EC;
+    --theme-transition: background 0.4s ease, color 0.4s ease;
+  }
+  [data-theme="dark"] {
+    --ink: #F0EAE0; --ink-light: #9A8E7E;
+    --gold: #C9A868; --gold-light: #A07B3A;
+    --mist: #3A332A;
+    --nav-bg: rgba(22,18,16,0.93);
+    --toggle-bg: #C9A868; --toggle-color: #161210;
+    --theme-transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    /* dark background shows in the 3px gaps between cells */
+    background: #1a1713;
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV (fixed) ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    padding: 1rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: var(--nav-bg); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,205,191,0.3);
+    transition: var(--theme-transition);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-logo:hover { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+  .nav-back {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-back:hover { color: var(--gold); }
+  .theme-toggle {
+    width: 34px; height: 34px; background: var(--toggle-bg);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.3s; flex-shrink: 0;
+  }
+  .theme-toggle:hover { opacity: 0.8; }
+  .theme-toggle svg {
+    width: 15px; height: 15px; stroke: var(--toggle-color);
+    fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .icon-moon { display: block; }
+  .icon-sun  { display: none; }
+  [data-theme="dark"] .icon-moon { display: none; }
+  [data-theme="dark"] .icon-sun  { display: block; }
+
+  /* ── GALLERY WRAPPER ── */
+  .gallery-wrap {
+    padding-top: 62px; /* clear fixed nav */
+  }
+
+  /* ── BENTO GRID ──
+     3 kolumny równej szerokości.
+     7 wierszy z naprzemienną wysokością:
+       duże (z wide-celami): clamp(280px, 32vw, 440px)
+       normalne:              clamp(240px, 27vw, 380px)
+     Każdy wiersz sumuje się do 3 kolumn.
+  */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows:
+      clamp(280px, 32vw, 440px)   /* W1 – featured (wide) */
+      clamp(240px, 27vw, 380px)   /* W2 – normal */
+      clamp(280px, 32vw, 440px)   /* W3 – featured (wide) */
+      clamp(240px, 27vw, 380px)   /* W4 – normal */
+      clamp(280px, 32vw, 440px)   /* W5 – featured (wide) */
+      clamp(240px, 27vw, 380px);  /* W6 – normal */
+    gap: 3px;
+  }
+
+  .gallery-cell {
+    overflow: hidden; position: relative; display: block;
+    /* force cell to respect grid row height */
+    min-height: 0;
+  }
+  .gallery-cell.wide { grid-column: span 2; }
+
+  .gallery-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+    transition: transform 0.65s ease;
+  }
+  .gallery-cell:hover img { transform: scale(1.04); }
+
+  .gallery-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 3rem 1.1rem 0.9rem;
+    background: linear-gradient(to top, rgba(20,16,12,0.65), transparent);
+    font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(247,243,236,0.8);
+    opacity: 0; transition: opacity 0.35s; pointer-events: none;
+  }
+  .gallery-cell:hover .gallery-caption { opacity: 1; }
+
+  /* ── SCROLL INDICATOR (first viewport, fades on scroll) ── */
+  .scroll-indicator {
+    position: fixed;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .scroll-indicator span {
+    font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(247,243,236,0.45);
+  }
+  .scroll-indicator svg {
+    width: 22px; height: 22px;
+    stroke: rgba(247,243,236,0.35); fill: none;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    animation: chevronBounce 2s ease-in-out infinite;
+  }
+  @keyframes chevronBounce {
+    0%, 100% { transform: translateY(0);   opacity: 0.6; }
+    50%       { transform: translateY(6px); opacity: 1;   }
+  }
+  .scroll-indicator.hidden { opacity: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0.9rem 1.5rem; }
+    .gallery-wrap { padding-top: 56px; }
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows:
+        clamp(220px, 38vw, 340px)
+        clamp(190px, 33vw, 290px)
+        clamp(220px, 38vw, 340px)
+        clamp(190px, 33vw, 290px)
+        clamp(220px, 38vw, 340px)
+        clamp(190px, 33vw, 290px);
+    }
+    /* wide cells fill both columns in 2-col grid */
+    .gallery-cell.wide { grid-column: span 2; }
+  }
+  @media (max-width: 520px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows:
+        clamp(180px, 48vw, 280px)
+        clamp(150px, 40vw, 230px)
+        clamp(180px, 48vw, 280px)
+        clamp(150px, 40vw, 230px)
+        clamp(180px, 48vw, 280px)
+        clamp(150px, 40vw, 230px);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Ryszard Klein</a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">← Strona główna</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div class="gallery-wrap">
+  <!--
+    BENTO GRID — 3 kol. × 6 wierszy, 15 zdjęć
+    Wzór (suma = 3 kol./wiersz):
+      W1: [WIDE 2] + [1]   → Iguazu (2802×1925) + pf353
+      W2: [1] + [1] + [1]  → Mont Blanc 2 + Silencjo na Iguazu + DSC_0043
+      W3: [1] + [WIDE 2]   → Silencjo + 21981898 (2048×1152)
+      W4: [1] + [1] + [1]  → pf463 + Togo + przy kawie
+      W5: [WIDE 2] + [1]   → Cisza w zabawie (2500×1768) + pf558
+      W6: [1] + [1] + [1]  → Time Square + Mont Blanc 1 + Meru Tanzania
+  -->
+  <div class="gallery-grid">
+
+    <!-- W1 -->
+    <div class="gallery-cell wide">
+      <img src="images/cisza/Iguazu%20Argentyna.JPG" alt="Iguazu, Argentyna" loading="eager" style="object-position: center top;">
+      <span class="gallery-caption">Iguazu, Argentyna</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="images/cisza/pf_1414114353.jpg" alt="Cisza" loading="eager" style="object-position: center center;">
+    </div>
+
+    <!-- W2 -->
+    <div class="gallery-cell">
+      <img src="images/cisza/Cisza%20na%20Mont%20Blanc%20(2).jpg" alt="Mont Blanc" loading="lazy" style="object-position: center top;">
+      <span class="gallery-caption">Mont Blanc</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="images/cisza/Silencjo%20na%20Iguazu%20Argentyna.jpg" alt="Iguazu" loading="lazy" style="object-position: center top;">
+      <span class="gallery-caption">Iguazu</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="images/cisza/DSC_0043aa.jpg" alt="Cisza" loading="lazy" style="object-position: center center;">
+    </div>
+
+    <!-- W3 -->
+    <div class="gallery-cell">
+      <img src="images/cisza/Silencjo.jpg" alt="Silencio" loading="lazy" style="object-position: center center;">
+    </div>
+    <div class="gallery-cell wide">
+      <img src="images/cisza/21981898_219521405247281_1785104530_o.jpg" alt="Cisza" loading="lazy" style="object-position: center top;">
+    </div>
+
+    <!-- W4 -->
+    <div class="gallery-cell">
+      <img src="images/cisza/pf_1414114463.jpg" alt="Cisza" loading="lazy" style="object-position: center center;">
+    </div>
+    <div class="gallery-cell">
+      <img src="images/cisza/Cisza%20w%20Togo.jpg" alt="Togo" loading="lazy" style="object-position: center top;">
+      <span class="gallery-caption">Togo</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="images/cisza/Cisza%20przy%20kawie.jpg" alt="Cisza przy kawie" loading="lazy" style="object-position: center center;">
+      <span class="gallery-caption">Cisza przy kawie</span>
+    </div>
+
+    <!-- W5 -->
+    <div class="gallery-cell wide">
+      <img src="images/cisza/Cisza%20w%20zabawie.jpg" alt="Cisza w zabawie" loading="lazy" style="object-position: center center;">
+      <span class="gallery-caption">Cisza w zabawie</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="images/cisza/pf_1414114558.jpg" alt="Cisza" loading="lazy" style="object-position: center center;">
+    </div>
+
+    <!-- W6 -->
+    <div class="gallery-cell">
+      <img src="images/cisza/Cisza%20na%20Time%20Square%20w%20New%20York.jpeg" alt="Times Square, Nowy Jork" loading="lazy" style="object-position: center center;">
+      <span class="gallery-caption">Times Square, Nowy Jork</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="images/cisza/Cisza%20na%20Mont%20Blanc%20(1).jpg" alt="Mont Blanc" loading="lazy" style="object-position: center top;">
+      <span class="gallery-caption">Mont Blanc</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="images/cisza/Cisza%20w%20Afryce%20Mont%20Meru%204566m%20Tanzania.jpg" alt="Mont Meru, Tanzania" loading="lazy" style="object-position: center top;">
+      <span class="gallery-caption">Mont Meru, Tanzania</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCROLL INDICATOR — fades on scroll -->
+<div class="scroll-indicator" id="scrollIndicator" aria-hidden="true">
+  <span>scroll</span>
+  <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+</div>
+
+<script>
+  // THEME
+  const html = document.documentElement;
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('rk-theme', next);
+  });
+
+  // SCROLL INDICATOR — hide after user scrolls
+  const indicator = document.getElementById('scrollIndicator');
+  window.addEventListener('scroll', () => {
+    indicator.classList.toggle('hidden', window.scrollY > 80);
+  }, { passive: true });
+</script>
+</body>
+</html>

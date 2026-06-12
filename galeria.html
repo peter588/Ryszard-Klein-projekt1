@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+<script>(function(){var t=localStorage.getItem('rk-theme');if(t)document.documentElement.setAttribute('data-theme',t);}());</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeria — Ryszard Klein</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root, [data-theme="light"] {
+    --ink: #1C1914; --ink-light: #6B6356;
+    --gold: #A07B3A; --gold-light: #C9A868;
+    --mist: #D4CDBF;
+    --nav-bg: rgba(247,243,236,0.9);
+    --toggle-bg: #3D3830; --toggle-color: #F7F3EC;
+    --theme-transition: background 0.4s ease, color 0.4s ease;
+  }
+  [data-theme="dark"] {
+    --ink: #F0EAE0; --ink-light: #9A8E7E;
+    --gold: #C9A868; --gold-light: #A07B3A;
+    --mist: #3A332A;
+    --nav-bg: rgba(22,18,16,0.93);
+    --toggle-bg: #C9A868; --toggle-color: #161210;
+    --theme-transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: #1a1713;
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV (fixed) ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    padding: 1rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: var(--nav-bg); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,205,191,0.3);
+    transition: var(--theme-transition);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-logo:hover { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+  .nav-back {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-back:hover { color: var(--gold); }
+  .theme-toggle {
+    width: 34px; height: 34px; background: var(--toggle-bg);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.3s; flex-shrink: 0;
+  }
+  .theme-toggle:hover { opacity: 0.8; }
+  .theme-toggle svg {
+    width: 15px; height: 15px; stroke: var(--toggle-color);
+    fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .icon-moon { display: block; }
+  .icon-sun  { display: none; }
+  [data-theme="dark"] .icon-moon { display: none; }
+  [data-theme="dark"] .icon-sun  { display: block; }
+
+  /* ── GALLERY WRAPPER ── */
+  .gallery-wrap { padding-top: 62px; }
+
+  /* ── BENTO GRID ── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: clamp(240px, 27vw, 380px);
+    gap: 3px;
+  }
+
+  .gallery-cell {
+    overflow: hidden; position: relative; display: block;
+    min-height: 0;
+  }
+
+  .gallery-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+    transition: transform 0.65s ease;
+  }
+  .gallery-cell:hover img { transform: scale(1.04); }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-indicator {
+    position: fixed;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .scroll-indicator span {
+    font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(247,243,236,0.45);
+  }
+  .scroll-indicator svg {
+    width: 22px; height: 22px;
+    stroke: rgba(247,243,236,0.35); fill: none;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    animation: chevronBounce 2s ease-in-out infinite;
+  }
+  @keyframes chevronBounce {
+    0%, 100% { transform: translateY(0);   opacity: 0.6; }
+    50%       { transform: translateY(6px); opacity: 1;   }
+  }
+  .scroll-indicator.hidden { opacity: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0.9rem 1.5rem; }
+    .gallery-wrap { padding-top: 56px; }
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: clamp(190px, 33vw, 290px);
+    }
+  }
+  @media (max-width: 520px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: clamp(150px, 40vw, 230px);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Ryszard Klein</a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">← Strona główna</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div class="gallery-wrap">
+  <div class="gallery-grid">
+    <div class="gallery-cell"><img src="images/gallery/%202017-06-30%20TVZ%20Zabrze.jpg" alt="Galeria" loading="eager" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2012-09-27%20Promocja%20Biblioteka%20%2812%29.JPG" alt="Galeria" loading="eager" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2012-11%20Siemianowice%20%2810%29.JPG" alt="Galeria" loading="eager" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2012-11%20Siemianowice%20%283%29.JPG" alt="Galeria" loading="eager" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2013-09-21%20Targo%20Ksia%CC%A8z%CC%87ki%20Katowice%20Spodek%20%281%29.jpg" alt="Galeria" loading="eager" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2013-09-22%20Bliz%CC%87ej%20Zdrowia%20Bliz%CC%87ej%20Natury%20%285%29.JPG" alt="Galeria" loading="eager" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2013-09-22%20Bliz%CC%87ej%20Zdrowia%20Bliz%CC%87ej%20Natury%20%286%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2811%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2814%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2817%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2823.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2828%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%283%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2830%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2832%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2833%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2834%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%2835%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%286%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-01-31%20Galeria%20Zabrze%2C%20Ksie%CC%A8garnia%20Victoria%20%287%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-05%20Kino%20Roma%20%281%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-05%20Kino%20Roma%20%2819%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-05%20Kino%20Roma%20%2822%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-05%20Kino%20Roma%20%2824%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-05%20Kino%20Roma%20%2826%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-05%20Kino%20Roma%20Zabrze.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-18%20S%CC%81roda%20Szman%CC%81ska%20%2811%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-18%20S%CC%81roda%20Szman%CC%81ska%20%2813%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-18%20S%CC%81roda%20Szman%CC%81ska%20%2815%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-06-18%20S%CC%81roda%20Szman%CC%81ska%20%284%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%281%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%2819%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%2828%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%2829%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%283%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%2832%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%2844%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%2854%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%2859%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-07-14%20Buenoe%20Aires%20%2862%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-09-14%20Bliz%CC%87ej%20Zdrowia%20%281%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-09-14%20Bliz%CC%87ej%20Zdrowia%20%2811%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-09-14%20Bliz%CC%87ej%20Zdrowia%20%283%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-11-18%20Go%CC%81rnos%CC%81la%CC%A8ski%20UTW%20w%20Chorzowie%20%286%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-11-18%20Go%CC%81rnos%CC%81la%CC%A8ski%20UTW%20w%20Chorzowie%20%288%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-11-20%20%C5%81azy%20%281%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-11-20%20%C5%81azy%20%285%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-11-26%20I%20KONGRES%20ZDROWIA%20ZAWIERCIE%20%283%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2014-12-23%20Galeria%20Zabrze%20%281%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-01-15%20%C5%81azy%20%281%29-kopia.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-01-15%20%C5%81azy%20%283%29-kopia.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-01-15%20%C5%81azy%20%285%29-kopia.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-01-29%20Kino%20Roma%20Dialog%20Sukcesu%20%20%284%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-03-29%20Targi%20Bliz%CC%87ej%20Zdrowia%20%281%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-03-29%20Targi%20Bliz%CC%87ej%20Zdrowia%20%282%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-18%20Przywitanie%20w%20Zabrzu%20%2818%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-23%20Krako%CC%81w%20%281%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-23%20Krako%CC%81w%20%2810%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-23%20Krako%CC%81w%20%2815%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-24%20Wroc%C5%82aw%20%2822%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-24%20Wroc%C5%82aw%20%2826%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-24%20Wroc%C5%82aw%20%2829%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-24%20Wroc%C5%82aw%20%2832%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-24%20Wroc%C5%82aw%20%285%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-24%20Wroc%C5%82aw%20%286%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-24%20Wroc%C5%82aw%20%287%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-24%20Wroc%C5%82aw%20%288%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-30%20Warszawa%20%28120%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-30%20Warszawa%20%283%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-30%20Warszawa%20%2835%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-30%20Warszawa%20%2898%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-31%20Targi%20Krako%CC%81w%20%2811%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-31%20Targi%20Krako%CC%81w%20%2813%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-31%20Targi%20Krako%CC%81w%20%2815%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-31%20Targi%20Krako%CC%81w%20%2817%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-05-31%20Targi%20Krako%CC%81w%20%287%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-06-10%20z%20M.%20Rose%20S%CC%81roda%20Szman%CC%81ska.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-10-27%20Katowice.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-11-04%20S%CC%81roda%20Szman%CC%81ska%20%284%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-11-05%20Zamek%20Z%CC%87ywiec%20%283%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-11-05%20Zamek%20Z%CC%87ywiec%20%286%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-11-05%20Zamek%20w%20Z%CC%87ywcu%20%281%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2015-11-05%20Zamek%20w%20Z%CC%87ywcu%20%282%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2016-04-09%20S%CC%81le%CC%A8z%CC%87a%20%282%29.jpeg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2016-04-09%20S%CC%81le%CC%A8z%CC%87a%20%283%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2016-04-09%20S%CC%81le%CC%A8z%CC%87a%20%285%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-02-18%20Ars%20LIbra%20Warszawa%20%2810%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-02-18%20Ars%20LIbra%20Warszawa%20%2815%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-02-18%20Ars%20LIbra%20Warszawa%20%2819%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-02-18%20Ars%20LIbra%20Warszawa%20%2823%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-02-18%20Ars%20LIbra%20Warszawa%20%2837%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-02-18%20Ars%20LIbra%20Warszawa%20%286%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-03-31%20Powitanie%20Wiosny%20%281%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-03-31%20Powitanie%20Wiosny%20%282%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-03-31%20Powitanie%20Wiosny%20%283%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-03-31%20Powitanie%20Wiosny%20%285%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-03-31%20Powitanie%20Wiosny%20%287%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-03-31%20Powitanie%20Wiosny%20%288%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-03-31%20Powitanie%20Wiosny%20%289%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-04-22%20Wielka%20Puszcza.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-06-02%20Konwent%20w%20Poznaniu%20%283%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-06-02%20Konwent%20w%20Poznaniu%20%284%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-06-06%20Harmonia%20Kosmosu%20%281%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-06-06%20Harmonia%20Kosmosu%20%2811%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-06-06%20Harmonia%20Kosmosu%20%282%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-06-06%20Harmonia%20Kosmosu%20%285%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-06-06%20Harmonia%20Kosmosu%20%287%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-06-06%20Harmonia%20Kosmosu%20%288%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%281%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2810%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2811%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2813%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2814%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2815%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2816%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2817%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2818%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2819%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%282%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2820%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2821%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2822%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2823%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2824%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2825%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2826%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2827%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%2828%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%283%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%284%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%285%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%286%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%287%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%288%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-08-11%20Harmonia%20Serc%20%289%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-09-29%20S%CC%81le%CC%A8z%CC%87a%CC%A8%20Powitanie%20Jesieni%20%281%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2017-09-29%20S%CC%81le%CC%A8z%CC%87a%CC%A8%20Powitanie%20Jesieni.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-01-27%20%20Karnawa%C5%82%20Zdrowia%20Stare%20Olesno%20%281%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-01-27%20%20Karnawa%C5%82%20Zdrowia%20Stare%20Olesno%20%282%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-01-27%20%20Karnawa%C5%82%20Zdrowia%20Stare%20Olesno%20%283%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-01-27%20%20Karnawa%C5%82%20Zdrowia%20Stare%20Olesno%20%284%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-09-15%20Czakram%20Wawelski%20Anpol%20Olesno%20%282%29.jpeg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-09-15%20Czakram%20Wawelski%20Anpol%20Olesno.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-09-28%20Powitanie%20Jesieni%20S%CC%81le%CC%A8z%CC%87a%20%281%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-09-28%20Powitanie%20Jesieni%20S%CC%81le%CC%A8z%CC%87a%20%282%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-09-28%20Powitanie%20Jesieni%20S%CC%81le%CC%A8z%CC%87a%20%283%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-09-28%20Powitanie%20Jesieni%20S%CC%81le%CC%A8z%CC%87a%20%284%29.JPG" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-09-28%20Powitanie%20Jesieni%20S%CC%81le%CC%A8z%CC%87a%20%285%29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-09-28%20Powitanie%20Jesieni%20S%CC%81le%CC%A8z%CC%87a.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-10-16%20%20Katowice%20Kawiarnia%20Pozytywna%20Kawka.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><img src="images/gallery/2018-11-21%20Katowice%20Szman%CC%81ska%20S%CC%81roda.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+  </div>
+</div>
+
+<!-- SCROLL INDICATOR -->
+<div class="scroll-indicator" id="scrollIndicator" aria-hidden="true">
+  <span>scroll</span>
+  <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+</div>
+
+<script>
+  const html = document.documentElement;
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('rk-theme', next);
+  });
+
+  const indicator = document.getElementById('scrollIndicator');
+  window.addEventListener('scroll', () => {
+    indicator.classList.toggle('hidden', window.scrollY > 80);
+  }, { passive: true });
+</script>
+</body>
+</html>
