@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -139,88 +140,6 @@
     }
   }
 
-  /* ── LIGHTBOX MODAL ── */
-  .lightbox-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: rgba(8, 8, 8, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1.5rem;
-  }
-  .lightbox-overlay.active { display: flex; }
-  .lightbox-frame {
-    position: relative;
-    max-width: 100%;
-    max-height: 100%;
-    width: min(100%, 1240px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .lightbox-frame img {
-    max-width: 100%;
-    max-height: 92vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 0.35rem;
-    box-shadow: 0 20px 75px rgba(0,0,0,.42);
-    opacity: 0;
-    transition: opacity 0.35s ease;
-  }
-  .lightbox-frame img.visible {
-    opacity: 1;
-  }
-  .lightbox-caption {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #f7f3ec;
-    font-size: 0.9rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.85;
-    pointer-events: none;
-  }
-  .lightbox-control {
-    position: absolute;
-    border: none;
-    background: rgba(255,255,255,0.08);
-    color: #f7f3ec;
-    width: 48px; height: 48px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform .2s ease, background .2s ease;
-  }
-  .lightbox-control:hover {
-    transform: scale(1.05);
-    background: rgba(255,255,255,0.16);
-  }
-  .lightbox-close {
-    top: 1.25rem;
-    right: 1.25rem;
-  }
-  .lightbox-prev,
-  .lightbox-next {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .lightbox-prev { left: 1.25rem; }
-  .lightbox-next { right: 1.25rem; }
-  .lightbox-control svg {
-    width: 18px;
-    height: 18px;
-    stroke-width: 2.2;
-    stroke: currentColor;
-    fill: none;
-  }
 </style>
 </head>
 <body>
@@ -245,157 +164,157 @@
 
 <div class="gallery-wrap">
   <div class="gallery-grid">
-    <div class="gallery-cell"><img src="images/gallery/photo1.jpg" alt="Galeria" loading="eager" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo2.jpg" alt="Galeria" loading="eager" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo3.jpg" alt="Galeria" loading="eager" style="object-position: center top;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo4.jpg" alt="Galeria" loading="eager" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo5.jpg" alt="Galeria" loading="eager" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo6.jpg" alt="Galeria" loading="eager" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo7.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo8.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo9.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo10.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo11.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo12.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo13.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo14.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo15.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo16.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo17.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo18.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo19.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo20.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo21.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo22.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo23.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo24.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo25.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo26.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo27.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo28.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo29.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo30.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo31.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo32.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo33.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo34.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo35.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo36.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo37.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo38.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo39.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo40.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo41.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo42.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo43.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo44.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo45.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo46.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo47.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo48.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo49.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo50.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo51.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo52.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo53.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo54.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo55.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo56.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo57.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo58.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo59.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo60.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo61.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo62.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo63.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo64.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo65.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo66.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo67.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo68.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo69.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo70.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo71.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo72.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo73.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo74.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo75.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo76.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo77.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo78.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo79.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo80.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo81.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo82.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo83.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo84.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo85.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo86.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo87.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo88.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo89.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo90.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo91.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo92.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo93.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo94.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo95.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo96.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo97.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo98.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo99.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo100.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo101.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo102.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo103.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo104.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo105.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo106.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo107.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo108.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo109.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo110.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo111.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo112.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo113.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo114.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo115.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo116.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo117.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo118.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo119.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo120.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo121.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo122.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo123.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo124.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo125.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo126.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo127.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo128.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo129.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo130.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo131.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo132.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo133.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo134.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo135.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo136.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo137.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo138.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo139.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo140.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo141.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo142.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo143.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo144.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo145.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo146.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo147.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo148.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo149.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo150.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
-    <div class="gallery-cell"><img src="images/gallery/photo151.jpg" alt="Galeria" loading="lazy" style="object-position: center center;"></div>
+    <div class="gallery-cell"><a href="images/gallery/photo1.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo1.jpg" alt="Zdjęcie z wydarzenia" loading="eager" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo2.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo2.jpg" alt="Zdjęcie z wydarzenia" loading="eager" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo3.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo3.jpg" alt="Zdjęcie z wydarzenia" loading="eager" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo4.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo4.jpg" alt="Zdjęcie z wydarzenia" loading="eager" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo5.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo5.jpg" alt="Zdjęcie z wydarzenia" loading="eager" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo6.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo6.jpg" alt="Zdjęcie z wydarzenia" loading="eager" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo7.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo7.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo8.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo8.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo9.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo9.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo10.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo10.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo11.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo11.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo12.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo12.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo13.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo13.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo14.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo14.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo15.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo15.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo16.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo16.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo17.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo17.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo18.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo18.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo19.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo19.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo20.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo20.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo21.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo21.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo22.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo22.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo23.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo23.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo24.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo24.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo25.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo25.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo26.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo26.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo27.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo27.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo28.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo28.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo29.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo29.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo30.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo30.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo31.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo31.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo32.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo32.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo33.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo33.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo34.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo34.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo35.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo35.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo36.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo36.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo37.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo37.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo38.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo38.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo39.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo39.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo40.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo40.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo41.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo41.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo42.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo42.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo43.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo43.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo44.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo44.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo45.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo45.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo46.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo46.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo47.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo47.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo48.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo48.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo49.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo49.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo50.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo50.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo51.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo51.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo52.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo52.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo53.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo53.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo54.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo54.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo55.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo55.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo56.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo56.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo57.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo57.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo58.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo58.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo59.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo59.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo60.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo60.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo61.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo61.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo62.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo62.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo63.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo63.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo64.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo64.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo65.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo65.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo66.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo66.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo67.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo67.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo68.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo68.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo69.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo69.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo70.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo70.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo71.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo71.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo72.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo72.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo73.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo73.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo74.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo74.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo75.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo75.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo76.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo76.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo77.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo77.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo78.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo78.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo79.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo79.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo80.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo80.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo81.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo81.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo82.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo82.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo83.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo83.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo84.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo84.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo85.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo85.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo86.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo86.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo87.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo87.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo88.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo88.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo89.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo89.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo90.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo90.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo91.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo91.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo92.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo92.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo93.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo93.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo94.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo94.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo95.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo95.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo96.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo96.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo97.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo97.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo98.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo98.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo99.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo99.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo100.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo100.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo101.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo101.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo102.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo102.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo103.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo103.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo104.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo104.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo105.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo105.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo106.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo106.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo107.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo107.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo108.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo108.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo109.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo109.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo110.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo110.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo111.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo111.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo112.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo112.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo113.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo113.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo114.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo114.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo115.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo115.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo116.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo116.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo117.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo117.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo118.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo118.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo119.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo119.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo120.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo120.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo121.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo121.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo122.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo122.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo123.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo123.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo124.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo124.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo125.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo125.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo126.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo126.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo127.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo127.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo128.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo128.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo129.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo129.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo130.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo130.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo131.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo131.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo132.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo132.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo133.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo133.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo134.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo134.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo135.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo135.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo136.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo136.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo137.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo137.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo138.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo138.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo139.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo139.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo140.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo140.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo141.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo141.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo142.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo142.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo143.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo143.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo144.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo144.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo145.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo145.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo146.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo146.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo147.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo147.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo148.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo148.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo149.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo149.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo150.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo150.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
+    <div class="gallery-cell"><a href="images/gallery/photo151.jpg" data-lightbox="wydarzenia"><img src="images/gallery/photo151.jpg" alt="Zdjęcie z wydarzenia" loading="lazy" style="object-position: center top;"></a></div>
   </div>
 </div>
 
@@ -417,84 +336,18 @@
   window.addEventListener('scroll', () => {
     indicator.classList.toggle('hidden', window.scrollY > 80);
   }, { passive: true });
+</script>
 
-  // ── LIGHTBOX GALLERY ──
-  const galleryImages = Array.from(document.querySelectorAll('.gallery-grid img'));
-  let currentIndex = 0;
-
-  const lightbox = document.createElement('div');
-  lightbox.className = 'lightbox-overlay';
-  lightbox.innerHTML = `
-    <button class="lightbox-control lightbox-close" aria-label="Zamknij">
-      <svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
-    </button>
-    <button class="lightbox-control lightbox-prev" aria-label="Poprzednie">
-      <svg viewBox="0 0 24 24"><polyline points="15 6 8 12 15 18"/></svg>
-    </button>
-    <div class="lightbox-frame">
-      <img src="" alt="Galeria" />
-    </div>
-    <div class="lightbox-caption"></div>
-    <button class="lightbox-control lightbox-next" aria-label="Następne">
-      <svg viewBox="0 0 24 24"><polyline points="9 6 16 12 9 18"/></svg>
-    </button>
-  `;
-  document.body.appendChild(lightbox);
-
-  const lightboxImage = lightbox.querySelector('img');
-  const lightboxCaption = lightbox.querySelector('.lightbox-caption');
-  const closeButton = lightbox.querySelector('.lightbox-close');
-  const prevButton = lightbox.querySelector('.lightbox-prev');
-  const nextButton = lightbox.querySelector('.lightbox-next');
-
-  const updateLightbox = (index) => {
-    currentIndex = (index + galleryImages.length) % galleryImages.length;
-    const sourceImage = galleryImages[currentIndex];
-    lightboxImage.classList.remove('visible');
-    lightboxCaption.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    lightboxImage.src = sourceImage.src;
-    lightboxImage.alt = sourceImage.alt || 'Galeria';
-    if (lightboxImage.complete) {
-      lightboxImage.classList.add('visible');
-    } else {
-      lightboxImage.onload = () => lightboxImage.classList.add('visible');
-    }
-  };
-
-  const closeLightbox = () => {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  };
-
-  galleryImages.forEach((img, index) => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', () => updateLightbox(index));
-  });
-
-  closeButton.addEventListener('click', closeLightbox);
-  prevButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    updateLightbox(currentIndex - 1);
-  });
-  nextButton.addEventListener('click', (event) => {
-    event.stopPropagation();
-    updateLightbox(currentIndex + 1);
-  });
-
-  lightbox.addEventListener('click', (event) => {
-    if (event.target === lightbox) {
-      closeLightbox();
-    }
-  });
-
-  window.addEventListener('keydown', (event) => {
-    if (!lightbox.classList.contains('active')) return;
-    if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') updateLightbox(currentIndex - 1);
-    if (event.key === 'ArrowRight') updateLightbox(currentIndex + 1);
-  });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+<script>
+  lightbox.option({
+    'albumLabel': "Zdjęcie %1 z %2",
+    'fadeDuration': 300,
+    'imageFadeDuration': 300,
+    'resizeDuration': 200,
+    'wrapAround': true
+  })
 </script>
 </body>
 </html>
