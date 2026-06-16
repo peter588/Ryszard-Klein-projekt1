@@ -454,9 +454,13 @@
     lightboxCaption.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
-    lightboxImage.onload = () => lightboxImage.classList.add('visible');
     lightboxImage.src = sourceImage.src;
     lightboxImage.alt = sourceImage.alt || 'Galeria';
+    if (lightboxImage.complete) {
+      lightboxImage.classList.add('visible');
+    } else {
+      lightboxImage.onload = () => lightboxImage.classList.add('visible');
+    }
   };
 
   const closeLightbox = () => {
