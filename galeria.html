@@ -169,6 +169,11 @@
     object-fit: contain;
     border-radius: 0.35rem;
     box-shadow: 0 20px 75px rgba(0,0,0,.42);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .lightbox-frame img.visible {
+    opacity: 1;
   }
   .lightbox-caption {
     position: absolute;
@@ -445,11 +450,13 @@
   const updateLightbox = (index) => {
     currentIndex = (index + galleryImages.length) % galleryImages.length;
     const sourceImage = galleryImages[currentIndex];
-    lightboxImage.src = sourceImage.src;
-    lightboxImage.alt = sourceImage.alt || 'Galeria';
+    lightboxImage.classList.remove('visible');
     lightboxCaption.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
+    lightboxImage.onload = () => lightboxImage.classList.add('visible');
+    lightboxImage.src = sourceImage.src;
+    lightboxImage.alt = sourceImage.alt || 'Galeria';
   };
 
   const closeLightbox = () => {
