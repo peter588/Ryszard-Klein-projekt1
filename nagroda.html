@@ -26,13 +26,22 @@
   .nav-logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:none}
   .nav-right{display:flex;align-items:center;gap:1.25rem}
   .nav-back{font-family:'Jost',sans-serif;font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none}
+  .theme-toggle{width:36px;height:36px;background:var(--toggle-bg);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .theme-toggle svg{width:15px;height:15px;stroke:var(--toggle-color);fill:none}
+  .icon-moon{display:block}
+  .icon-sun{display:none}
+  [data-theme="dark"] .icon-moon{display:none}
+  [data-theme="dark"] .icon-sun{display:block}
   .page-masthead{min-height:30vh;display:flex;align-items:flex-end;padding:8rem 3rem 3rem}
   .page-eyebrow{font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
   .page-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:300;color:var(--ink)}
   .container{max-width:980px;margin:0 auto;padding:0 1.5rem}
   .page-shell{padding:2.5rem 0 4rem}
   .page-subtitle{display:inline-block;margin-bottom:1rem;font-family:'Jost',sans-serif;letter-spacing:0.18em;text-transform:uppercase;font-size:0.8rem;color:var(--gold)}
-  .award-image{width:100%;max-width:720px;display:block;margin:1rem auto 2.25rem;border-radius:0.5rem;box-shadow:0 18px 40px rgba(0,0,0,0.08)}
+  .award-figure{display:block;max-width:980px;margin:1rem auto 2.25rem;}
+  .award-image{width:100%;max-width:420px;display:block;border-radius:6px;box-shadow:0 22px 60px rgba(16,14,12,0.18);border:4px solid rgba(160,123,58,0.06);}
+  .award-figure .figure-wrap{display:flex;gap:2rem;align-items:flex-start;}
+  @media (max-width:900px){.award-figure .figure-wrap{flex-direction:column;align-items:center}.award-image{max-width:82%}}
   .content p{margin-bottom:1.2rem;color:var(--ink-mid)}
   .content h2{margin:1.6rem 0 0.8rem;color:var(--ink)}
   footer{background-color:#1b1612;background-image:url('images/footer-bg.svg');background-size:cover;padding:3rem 0 2rem}
@@ -44,11 +53,14 @@
 </style>
 </head>
 <body>
-<nav>
+  <nav>
   <a href="index.html" class="nav-logo">Ryszard Klein</a>
   <div class="nav-right">
     <a href="index.html" class="nav-back">← Strona główna</a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw"><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -59,25 +71,63 @@
   </div>
 </div>
 
-<main class="container page-shell">
+  <main class="container page-shell">
   <p class="page-subtitle">Laureaci konkursu</p>
-  <img class="award-image" src="images/cisza_dyplom.webp" alt="Dyplom nagrody książkowej Cisza">
+  <figure class="award-figure">
+    <div class="figure-wrap">
+      <img class="award-image" src="images/cisza_dyplom.webp" alt="Dyplom nagrody książkowej Cisza">
+      <figcaption style="max-width:520px;color:var(--ink-mid);font-size:0.95rem;line-height:1.6">Najlepsze książki psychologiczne i poradniki roku 2012 — Laureaci konkursu
+
+      <br><a href="https://www.ksiazkapsychologiczna.pl" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">www.ksiazkapsychologiczna.pl</a>
+      </figcaption>
+    </div>
+  </figure>
   <div class="content">
-    <p>www.ksiazkapsychologiczna.pl</p>
     <p>Podczas Targów Książki w Krakowie poznaliśmy laureatów konkursu i plebiscytu na „Najlepsze książki psychologiczne i poradniki”. Na nagrodzone tytuły oddano ponad 30 tysięcy głosów.</p>
+
     <p>W dzisiejszych czasach, kiedy życie z każdym dniem toczy się szybciej, kiedy – wtłoczeni w mechanizmy społeczne, napędzani oczekiwaniami i własnymi ambicjami – pędzimy przed siebie, warto choć na moment zatrzymać się i zastanowić nad sensem życia, spróbować być „tu i teraz”. Niebagatelną rolę w tym procesie odgrywają książki psychologiczne i poradniki. Na stronie www.ksiazkapsychologiczna.pl można znaleźć wskazówki, do jakich książek sięgnąć warto, które uleczą troski, bóle, które rozweselą albo dadzą narzędzie do samodoskonalenia.</p>
-    <h2>Psychologiczne kategorie konkursowe</h2>
-    <ul>
+
+    <p>- Jeśli sądzisz, że potrafisz, to masz rację. Jeśli sądzisz, że nie potrafisz - również masz rację – twierdził Henry Ford, w tych prostych słowach ukazując fenomen ludzkiego umysłu. Psychologia zna wiele teorii nie tylko na temat motywacji. To w niej poszukujemy rozwiązań naszych problemów czy wskazówek dotyczących sposobów postępowania. Dlatego też książki z dziedziny szeroko pojętej psychologii są tak popularne, a dziś mieliśmy możliwość zwrócić uwagę na te najlepsze – podkreśla Sławomir Krempa, redaktor naczelny wortalu literackiego Granice.pl.</p>
+
+    <h2>Psychologiczne kategorie konkursowe (czyli – co na to Freud)</h2>
+
+    <p>Zgodnie z tradycją, celem konkursu było wyłonienie i nagrodzenie najlepszych z najlepszych, czyli laureatów w następujących kategoriach:</p>
+
+    <ol>
       <li>Kariera, rozwój osobisty (czyli dążenie do samorozwoju).</li>
-      <li>Życie małżeńskie.</li>
-      <li>Życie codzienne.</li>
-      <li>Zdrowie, uroda.</li>
-      <li>Styl życia.</li>
-      <li>Rodzina, wychowanie.</li>
-      <li>Poradniki.</li>
-      <li>Publikacje popularnonaukowe.</li>
-    </ul>
-    <p>W kategorii kariera, rozwój osobisty zarówno członkowie jury, jak i internauci wskazali na wyjątkową pozycję: „Cisza. Esencja naszego umysłu” Ryszarda Kleina (Wydawnictwo KOS).</p>
+      <li>Życie małżeńskie (bo człowiek to „zwierzę” stadne).</li>
+      <li>Życie codzienne (nie tylko proza, ale i poezja codzienności).</li>
+      <li>Zdrowie, uroda (bo to warunki spełnienia w innych dziedzinach).</li>
+      <li>Styl życia (bo każdy z nas jest inny).</li>
+      <li>Rodzina, wychowanie (bo ta podstawowa jednostka społeczna jest źródłem szczęścia, podobnie jak posiadanie dzieci).</li>
+      <li>Poradniki (jak komunikować się ze sobą i z otoczeniem).</li>
+      <li>Publikacje popularnonaukowe (nie tylko dla naukowców).</li>
+    </ol>
+
+    <p>Najlepsi z najlepszych. Na miano tych najlepszych, które mają szansę zostać prawdziwymi drogowskazami i zagościć w naszym życiu na dłużej, zasługują dwie pozycje. Zdaniem internautów jest to książka „Życie we dwoje” Katarzyny Jurkowskiej i Małgorzaty Liszyk-Kozłowskiej (Wydawnictwo G+J Gruner+Jahr PL), omawiająca relację między kobietą i mężczyzną.</p>
+
+    <p>Jury natomiast za najlepszą uznało książkę „Pochwała powolności” Carla Honore (Wydawnictwo Drzewo Babel). Pozycja ta jest znakiem naszych czasów, a porusza ona najbardziej palący problem współczesności, czyli permanentny brak czasu. Autor przedstawia czytelnikom również metody wyzwolenia się od tego, co Baudelaire nazywał „straszliwym ciężarem czasu”.</p>
+
+    <p>Pozostali laureaci w swoich kategoriach: w kategorii kariera, rozwój osobisty zarówno członkowie jury, jak i internauci wskazali na wyjątkową pozycję, przywracającą spokój i równowagę duszy. „Cisza. Esencja naszego umysłu” Ryszarda Kleina (Wydawnictwo KOS) to nieoceniona pomoc w wyzwoleniu się z własnych ograniczeń, wyobrażeń, iluzji i lęków.</p>
+
+    <p>W kategorii życie małżeńskie internauci wskazali na wspomnianą już pozycję „Życie we dwoje” Katarzyny Jurkowskiej i Małgorzaty Liszyk-Kozłowskiej (Wydawnictwo G+J Gruner+Jahr PL) jako na książkę zwycięską. Jury zaś zainteresowała pozycja „Jaką żoną jestem?” Lindy Dillow (Wydawnictwo KOINONIA), w której autorka dzieli się z czytelnikami doświadczeniami z wieloletniego stażu małżeńskiego.</p>
+
+    <p>Kategoria życie codzienne przyniosła zdaniem internautów laur zwycięstwa pozycji „Balsam dla duszy” Isabel Mauro (Wydawnictwo Semen), czyli miksturze szczęścia z udziałem takich składników, jak: orzeźwiacze i odprężacze umysłu, poprawiacze samopoczucia oraz nastrojowe obrazki. Jury przekonuje wszystkich, że zasada carpe diem jest wciąż aktualna, dlatego też wybór padł na poradnik „Ciesz się życiem” Anselma Grüna (Wydawnictwo Święty Wojciech).</p>
+
+    <p>Kategoria zdrowie, uroda to wiele wspaniałych tytułów, w tym te najlepsze: wyrażająca tęsknotę internautów za wiosną pozycja „Wiosna. Żyj w zgodzie z porami roku” Ewy Grupińskiej (Wydawnictwo MG) oraz „Uzdrawianie duszy i ciała. Schudnij z Doreen” Doreen Virtue (Wydawnictwo Illuminatio), wybrane przez jury.</p>
+
+    <p>Styl życia to kategoria odpowiadająca nie tylko na pytanie o sedno trwania, ale też o jego jakość. Tu internauci postanowili wyruszyć drogą marzeń, czyli wybrali poradnik „Warto podążać za marzeniami. Moja podróż przez życie” Marka Kamińskiego (Wydawnictwo G+J Gruner+Jahr PL). Jury zaś postanowiło wyruszyć w kierunku czwartej co do wielkości wyspy na świecie, wybierając „Przez Madagaskar na rowerach... pieszo i taxi-brousse” Pawła i Magdaleny Opasków (Wydawnictwo Feeria).</p>
+
+    <p>Kategoria rodzina, wychowanie przyniosła – zdaniem internautów – zwycięstwo pozycji „10 największych błędów wychowawczych” Ralpha Dawirsa i Gunthera Molla (Wydawnictwo WAM). Jury wskazało natomiast na pozycję „Tato, jakiego potrzebują twoje dzieci” Carey Casey (Wydawnictwo KOINONIA).</p>
+
+    <p>Kategoria poradniki: zarówno internauci, jak i członkowie jury za najlepszą uznali książkę „Komunikacja niewerbalna, czyli mowa ciała od A do Z” Jean-Claude'a Martiny (Wydawnictwo JEDNOŚĆ). Pozycja ta zwraca uwagę na to, jak istotny jest proces komunikacji i pokazuje, jak bardzo skomplikowane są ludzkie zachowania, a – przede wszystkim – nasza mowa.</p>
+
+    <p>Kategoria książek popularnonaukowych to bezsprzeczne zwycięstwo pozycji „Doktor klaun! Terapia śmiechem, wolontariat, edukacja międzykulturowa” Przemysława Pawła Grzybowskiego (Oficyna Wydawnicza IMPULS). To jedyna w Polsce tak bogato ilustrowana monografia na temat terapii śmiechem i działalności doktorów klaunów, skierowana do wszystkich, którzy przyłączają się do czynienia dobra i pomocy tym, którzy jej tak bardzo potrzebują.</p>
+
+    <h2>Patroni najlepszych</h2>
+    <p>Konkurs nie mógł się obyć bez patronów. Zmagania wspierała Legimi.com – księgarnia oferująca e-booki na smartfony, czytniki, tablety, a także Książnica Polska, za sprawą której nagrodzone książki promowane będą w sieci księgarskiej w całej Polsce, w księgarni Czytay.pl i na stronie Ksiaznica.pl. Przedsięwzięciu patronują serwis DlaStudenta.pl, portal dlaLejdis.pl, portal rynku wydawniczego Wydawca.com.pl, portal Anime-Games-World, Polski Związek Bibliotek, serwis MiastoDzieci.pl, redakcja magazynu QFant, miesięcznik ODRA, serwisy DuzeKa.pl, FantasyBook, Granice.pl, Przykominku.com, Obliczakultury.pl, Salonkulturalny.pl, Bookznami.pl, Unreal-fantasy.pl, student.pl, polscy-pisarze.com, Internetowy Dom Handlowy SA, Stowarzyszenie Sztukater, Radio Niepokalanów oraz radio PRYZMAT.</p>
+
+    <p>Świetne historie są <strong>dla każdego</strong>, nawet jeśli są pisane <strong>tylko dla jednej osoby</strong>. Jeśli próbujesz pisać z myślą o szerokiej, ogólnej publiczności, twoja historia będzie brzmieć sztucznie i będzie pozbawiona emocji. Pisz dla jednej osoby. Jeśli jest autentyczna dla jednej osoby, będzie autentyczna dla reszty.</p>
   </div>
   <a href="index.html" class="back-link">← Powrót do strony głównej</a>
 </main>
