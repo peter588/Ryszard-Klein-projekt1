@@ -15,15 +15,17 @@
     --gold: #A07B3A; --gold-light: #C9A868;
     --mist: #D4CDBF; --nav-bg: rgba(247,243,236,0.9);
     --toggle-bg: #3D3830; --toggle-color: #F7F3EC;
+    --page-bg: #1a1713;
   }
   [data-theme="dark"] {
     --ink: #F0EAE0; --ink-light: #9A8E7E;
     --gold: #C9A868; --gold-light: #A07B3A;
     --mist: #3A332A; --nav-bg: rgba(22,18,16,0.93);
     --toggle-bg: #C9A868; --toggle-color: #161210;
+    --page-bg: #1a1713;
   }
-  html { scroll-behavior: smooth; }
-  body { background: #1a1713; font-family: 'Jost', sans-serif; overflow-x: hidden; }
+  html, body { height: 100%; scroll-behavior: smooth; }
+  body { background: var(--page-bg); font-family: 'Jost', sans-serif; overflow: hidden; }
   nav {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
     padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between;
@@ -41,30 +43,17 @@
   .icon-sun  { display: none; }
   [data-theme="dark"] .icon-moon { display: none; }
   [data-theme="dark"] .icon-sun  { display: block; }
-  .page-masthead { min-height: 35vh; display: flex; align-items: flex-end; padding: 6.5rem 2.5rem 3rem; background: linear-gradient(180deg, rgba(247,243,236,0.4), rgba(247,243,236,0.02)); }
-  [data-theme="dark"] .page-masthead { background: linear-gradient(180deg, rgba(22,18,16,0.84), rgba(22,18,16,0.24)); }
-  .page-eyebrow { font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem; }
-  .page-title { font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.4rem,5vw,3.2rem);font-weight:300;color:var(--ink);line-height:1.05; }
-  .page-intro { margin-top:1rem; max-width:760px; color: var(--ink-light); line-height:1.8; }
-  .container { max-width:1180px; margin:0 auto; padding:0 2.5rem; }
-  .content { padding: 2.5rem 0 4rem; }
-  .gallery-wrap { padding-top: 62px; }
-  .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:clamp(240px,27vw,380px); gap:3px; }
-  .gallery-cell { overflow:hidden; position:relative; min-height:0; }
+  main { position: absolute; top: 62px; bottom: 0; left: 0; right: 0; overflow: auto; }
+  .gallery-wrap { height: 100%; }
+  .gallery-grid { display: grid; height: 100%; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(180px, 1fr); gap: 3px; }
+  .gallery-cell { overflow: hidden; position: relative; min-height: 0; }
   .gallery-cell.wide { grid-column: span 2; }
-  .gallery-cell img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; transition:transform 0.65s ease; }
-  .gallery-cell:hover img { transform:scale(1.04); }
-  .gallery-caption { position:absolute; bottom:0; left:0; right:0; padding:3rem 1.1rem 0.9rem; background:linear-gradient(to top, rgba(20,16,12,0.65), transparent); font-size:0.56rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(247,243,236,0.8); opacity:0; transition:opacity 0.35s; }
-  .gallery-cell:hover .gallery-caption { opacity:1; }
-  .scroll-indicator { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); z-index:50; display:flex; flex-direction:column; align-items:center; gap:5px; pointer-events:none; transition:opacity 0.5s ease; }
-  .scroll-indicator span { font-size:0.52rem; letter-spacing:0.28em; text-transform:uppercase; color:rgba(247,243,236,0.45); }
-  .scroll-indicator svg { width:22px; height:22px; stroke:rgba(247,243,236,0.35); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; animation:chevronBounce 2s ease-in-out infinite; }
-  @keyframes chevronBounce { 0%,100%{transform:translateY(0);opacity:0.6;}50%{transform:translateY(6px);opacity:1;} }
-  footer { padding: 2rem 0 3rem; }
-  .footer-link { font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);text-decoration:none; }
-  .footer-link:hover { color:var(--gold-light); }
-  @media(max-width:900px) { nav{padding:0.9rem 1.5rem;} .container{padding:0 1.5rem;} .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(190px,33vw,290px);} .gallery-cell.wide{grid-column:span 2;} }
-  @media(max-width:520px) { .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(150px,40vw,230px);} }
+  .gallery-cell img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.65s ease; }
+  .gallery-cell:hover img { transform: scale(1.04); }
+  .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1rem 0.9rem; background: linear-gradient(to top, rgba(20,16,12,0.65), transparent); font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,243,236,0.8); opacity: 0; transition: opacity 0.35s; pointer-events: none; }
+  .gallery-cell:hover .gallery-caption { opacity: 1; }
+  @media(max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } .gallery-cell.wide { grid-column: span 2; } }
+  @media(max-width: 520px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 </head>
 <body>
@@ -89,15 +78,7 @@
     </div>
   </nav>
 
-  <section class="page-masthead">
-    <div class="container">
-      <p class="page-eyebrow">Galeria</p>
-      <h1 class="page-title">Cisza w obrazach</h1>
-      <p class="page-intro">Przenieś się do fotograficznej galerii Ciszy — miejsca, które łączy podróże, naturę i wewnętrzny spokój.</p>
-    </div>
-  </section>
-
-  <main class="container content">
+  <main>
     <div class="gallery-wrap">
       <div class="gallery-grid">
         <div class="gallery-cell wide">
@@ -158,10 +139,6 @@
     </div>
   </main>
 
-  <footer class="container">
-    <a class="footer-link" href="cisza.html">← Powrót do Cisza</a>
-  </footer>
-
 <script>
   const html = document.documentElement;
   const toggleBtn = document.getElementById('themeToggle');
@@ -169,55 +146,6 @@
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('rk-theme', next);
-  });
-
-  const galleryImages = Array.from(document.querySelectorAll('.gallery-grid img'));
-  let currentIndex = 0;
-  const lightbox = document.createElement('div');
-  lightbox.style.cssText = 'position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;background:rgba(8,8,8,0.95);backdrop-filter:blur(10px);padding:1.5rem;';
-  lightbox.innerHTML = `
-    <button id="ciszaLightboxClose" style="position:absolute;top:1.25rem;right:1.25rem;border:none;background:rgba(255,255,255,0.1);color:#f7f3ec;width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center;">
-      <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
-    </button>
-    <button id="ciszaLightboxPrev" style="position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);border:none;background:rgba(255,255,255,0.1);color:#f7f3ec;width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center;">
-      <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><polyline points="15 6 8 12 15 18"/></svg>
-    </button>
-    <img src="" alt="" style="max-width:100%;max-height:92vh;width:auto;height:auto;object-fit:contain;border-radius:0.35rem;box-shadow:0 20px 75px rgba(0,0,0,0.42);" />
-    <button id="ciszaLightboxNext" style="position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);border:none;background:rgba(255,255,255,0.1);color:#f7f3ec;width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center;">
-      <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><polyline points="9 6 16 12 9 18"/></svg>
-    </button>
-  `;
-  document.body.appendChild(lightbox);
-  const lightboxImg = lightbox.querySelector('img');
-  const closeBtn = document.getElementById('ciszaLightboxClose');
-  const prevBtn = document.getElementById('ciszaLightboxPrev');
-  const nextBtn = document.getElementById('ciszaLightboxNext');
-
-  const openLightbox = (index) => {
-    currentIndex = (index + galleryImages.length) % galleryImages.length;
-    const sourceImage = galleryImages[currentIndex];
-    lightboxImg.src = sourceImage.src;
-    lightboxImg.alt = sourceImage.alt || 'Zdjęcie z galerii ciszy';
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  };
-  const closeLightbox = () => {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = '';
-  };
-  galleryImages.forEach((img, index) => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', () => openLightbox(index));
-  });
-  closeBtn.addEventListener('click', closeLightbox);
-  prevBtn.addEventListener('click', (event) => { event.stopPropagation(); openLightbox(currentIndex - 1); });
-  nextBtn.addEventListener('click', (event) => { event.stopPropagation(); openLightbox(currentIndex + 1); });
-  lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
-  window.addEventListener('keydown', (event) => {
-    if (lightbox.style.display !== 'flex') return;
-    if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') openLightbox(currentIndex - 1);
-    if (event.key === 'ArrowRight') openLightbox(currentIndex + 1);
   });
 </script>
 </body>

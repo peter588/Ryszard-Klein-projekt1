@@ -4,7 +4,7 @@
 <script>(function(){var t=localStorage.getItem('rk-theme');if(t)document.documentElement.setAttribute('data-theme',t);}());</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cisza — Ryszard Klein</title>
+<title>Cisza — wywiady i recenzje | Ryszard Klein</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
@@ -14,22 +14,20 @@
     --ink: #1C1914; --ink-mid: #3D3830; --ink-light: #6B6356;
     --gold: #A07B3A; --gold-light: #C9A868; --mist: #D4CDBF;
     --nav-bg: rgba(247,243,236,0.93); --toggle-bg: #3D3830; --toggle-color: #F7F3EC;
-    --card-bg: rgba(247,243,236,0.95); --card-border: rgba(160,123,58,0.16);
-    --page-bg: #F7F3EC;
+    --page-bg: #F7F3EC; --card-bg: rgba(247,243,236,0.95); --card-border: rgba(160,123,58,0.16);
   }
   [data-theme="dark"] {
     --ink: #F0EAE0; --ink-mid: #D5CBBA; --ink-light: #9A8E7E;
     --gold: #C9A868; --gold-light: #A07B3A; --mist: #3A332A;
     --nav-bg: rgba(22,18,16,0.95); --toggle-bg: #C9A868; --toggle-color: #161210;
-    --card-bg: rgba(25,21,17,0.92); --card-border: rgba(201,168,104,0.2);
-    --page-bg: #161210;
+    --page-bg: #161210; --card-bg: rgba(25,21,17,0.92); --card-border: rgba(201,168,104,0.2);
   }
   html { scroll-behavior: smooth; }
   body {
+    min-height: 100vh;
     background: var(--page-bg);
     color: var(--ink);
     font-family: 'Jost', sans-serif;
-    min-height: 100vh;
     overflow-x: hidden;
   }
   nav {
@@ -38,7 +36,6 @@
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     background: var(--nav-bg); backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(212,205,191,0.3);
-    transition: background 0.4s ease, color 0.4s ease;
   }
   .nav-logo {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -69,10 +66,14 @@
   [data-theme="dark"] .icon-moon { display: none; }
   [data-theme="dark"] .icon-sun  { display: block; }
   .page-masthead {
-    min-height: 44vh; display: flex; align-items: flex-end;
-    padding: 7rem 2.5rem 3.5rem; background: linear-gradient(180deg, rgba(247,243,236,0.5), rgba(247,243,236,0.02));
+    min-height: 45vh;
+    display: flex; align-items: flex-end;
+    padding: 7rem 2.5rem 3.5rem;
+    background: linear-gradient(180deg, rgba(247,243,236,0.5), rgba(247,243,236,0.02));
   }
-  [data-theme="dark"] .page-masthead { background: linear-gradient(180deg, rgba(22,18,16,0.86), rgba(22,18,16,0.28)); }
+  [data-theme="dark"] .page-masthead {
+    background: linear-gradient(180deg, rgba(22,18,16,0.86), rgba(22,18,16,0.28));
+  }
   .page-eyebrow {
     font-family: 'Jost', sans-serif; font-size: 0.65rem;
     letter-spacing: 0.3em; text-transform: uppercase;
@@ -80,26 +81,29 @@
   }
   .page-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(2.6rem, 5vw, 3.6rem);
+    font-size: clamp(2.8rem, 5vw, 3.8rem);
     font-weight: 300; line-height: 1.05;
     color: var(--ink);
   }
   .page-intro {
     margin-top: 1rem; max-width: 760px;
-    font-size: 1rem; line-height: 1.85; color: var(--ink-mid);
+    color: var(--ink-mid); line-height: 1.8;
   }
   .container { max-width: 1180px; margin: 0 auto; padding: 0 2.5rem; }
   .page-shell { padding: 2.5rem 0 5rem; }
   .cards-grid {
-    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem;
   }
   .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 24px;
+    border-radius: 28px;
     padding: 2rem;
     box-shadow: 0 28px 70px rgba(16,14,12,0.08);
-    display: flex; flex-direction: column;
+    display: flex;
+    flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .card:hover { transform: translateY(-4px); box-shadow: 0 34px 90px rgba(16,14,12,0.12); }
@@ -111,10 +115,11 @@
   }
   .card-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(1.6rem, 2.2vw, 2rem);
+    font-size: clamp(1.6rem, 2.2vw, 2.1rem);
     margin-bottom: 1rem; color: var(--ink);
   }
-  .card-copy { color: var(--ink-mid); line-height: 1.8; flex: 1; }
+  .card-copy { color: var(--ink-mid); line-height: 1.85; flex: 1; }
+  .card-copy strong { color: var(--ink); }
   .card-list { margin: 1.25rem 0 0; padding-left: 1.2rem; color: var(--ink-mid); }
   .card-list li { margin-bottom: 0.9rem; }
   .card-link {
@@ -126,12 +131,10 @@
   }
   .card-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   .award-highlight { background: linear-gradient(180deg, rgba(160,123,58,0.12), rgba(247,243,236,0.35)); }
+  .quote { margin: 1.4rem 0; padding-left: 1rem; border-left: 3px solid var(--gold); color: var(--ink); font-style: italic; line-height: 1.9; }
+  .review-meta { margin-top: 1rem; font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); }
   footer { padding: 2rem 0 3rem; }
-  .footer-link {
-    font-family: 'Jost', sans-serif; font-size: 0.75rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold); text-decoration: none;
-  }
+  .footer-link { font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
   .footer-link:hover { color: var(--gold-light); }
   @media (max-width: 900px) {
     .page-masthead { padding: 6rem 1.5rem 2.5rem; }
@@ -165,38 +168,48 @@
   <section class="page-masthead">
     <div class="container">
       <p class="page-eyebrow">Cisza</p>
-      <h1 class="page-title">Cisza — wywiady, recenzje i inspiracje</h1>
-      <p class="page-intro">Zajrzyj do materiałów poświęconych książce „Cisza. Esencja naszego umysłu”. Znajdziesz tu wywiady z redaktorami, opinie czytelników, nagrodzoną historię oraz galerię, która pokazuje ciszę jako doświadczenie.</p>
+      <h1 class="page-title">Wywiady i recenzje książki</h1>
+      <p class="page-intro">Zobacz materiały poświęcone „Cisza. Esencja naszego umysłu” — rozmowy z dziennikarzami oraz opinie czytelników, które pokazują, jak książka trafia do serc i umysłów.</p>
     </div>
   </section>
 
   <main class="container page-shell">
     <div class="cards-grid">
       <article class="card">
-        <span class="card-accent">Wywiady</span>
-        <h2 class="card-title">Wywiady o ciszy</h2>
-        <p class="card-copy">Telewizja Porozmawiajmy TV rozmawia z redaktorem Aleksem Berdowiczem. Radio Katowice w programie „Skacząc po półkach” gości Macieja Szczawińskiego. Dziennik Kijowski publikuje rozmowę z Eugeniuszem Gołybardzem.</p>
-        <a class="card-link" href="https://www.ryszardklein.pl/cisza" target="_blank" rel="noopener">Zobacz szczegóły<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        <span class="card-accent">Wywiady o ciszy</span>
+        <h2 class="card-title">Rozmowy z redaktorami i mediami</h2>
+        <p class="card-copy">Wywiady na temat książki „Cisza. Esencja naszego umysłu” pojawiły się w telewizji, radiu i prasie. Zobacz materiały, w których książka staje się rozmową o wewnętrznym spokoju, samoświadomości i sile zatrzymania.</p>
+        <ul class="card-list">
+          <li><strong>Telewizja Porozmawiajmy TV</strong> — rozmowa z redaktorem Aleksem Berdowiczem.</li>
+          <li><strong>Radio Katowice</strong> — program „Skacząc po półkach” z Maciejem Szczawińskim.</li>
+          <li><strong>Dziennik Kijowski</strong> — wywiad z redaktorem Eugeniuszem Gołybardzem.</li>
+        </ul>
+        <a class="card-link" href="https://www.youtube.com/watch?v=Nt3dn_Xa8GI" target="_blank" rel="noopener">Obejrzyj wywiad TV<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        <a class="card-link" href="https://www.youtube.com/watch?v=36OA0M_G7Gg" target="_blank" rel="noopener">Obejrzyj Radiowe nagranie<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        <a class="card-link" href="https://www.youtube.com/watch?v=ej12ykNzjQM" target="_blank" rel="noopener">Obejrzyj wywiad prasowy<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
       </article>
 
       <article class="card">
         <span class="card-accent">Opinie czytelników</span>
-        <h2 class="card-title">Recenzje o książce</h2>
-        <p class="card-copy">„Nie trzeba być wnikliwym obserwatorem, by zauważyć, że każdy człowiek koncentruje się głównie na samym sobie...” – to głos autora. Psycholog Urszula Koszutska pisze: „Dlaczego polecam tę książkę? Jest to książka znakomita pod każdym względem.”</p>
-        <a class="card-link" href="https://www.ryszardklein.pl/cisza" target="_blank" rel="noopener">Przeczytaj opinie<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        <h2 class="card-title">Recenzje, które mówią wiele</h2>
+        <p class="card-copy">W opinii czytelników i ekspertów książka „Cisza” otwiera przestrzeń do refleksji, pokory i wewnętrznej przemiany. Oto fragmenty, które najlepiej pokazują siłę tej publikacji.</p>
+        <div class="quote">„Nie trzeba być wnikliwym obserwatorem, by zauważyć, że każdy człowiek koncentruje się głównie na samym sobie. Głębię tego uwarunkowania można zaobserwować, gdy ktoś próbuje wkraczać w nasz osobisty obszar.”</div>
+        <p class="review-meta">Opinia z dokumentacji książki „Cisza”</p>
+        <div class="quote">„Dlaczego polecam tę książkę? Jest to książka znakomita pod każdym względem. Jej zawartość jest starannie i rzetelnie przemyślana.”</div>
+        <p class="review-meta">Głos psychologa i recenzenta</p>
       </article>
 
       <article class="card">
         <span class="card-accent">Galeria</span>
         <h2 class="card-title">Cisza w obrazach</h2>
-        <p class="card-copy">Przenieś się do przestrzeni, gdzie cisza spotyka się z fotografią. Ta galeria pokazuje podróże, miejsca i chwile, które inspirują do zatrzymania się i spojrzenia w głąb siebie.</p>
-        <a class="card-link" href="cisza_gallery.html">Otwórz galerię<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        <p class="card-copy">Przestrzeń ciszy może być również obrazem. Otwórz galerię zdjęć, która pokazuje miejsca i chwile sprzyjające wyciszeniu oraz temu, co dzieje się w głębi umysłu.</p>
+        <a class="card-link" href="cisza_gallery.html">Przejdź do galerii<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
       </article>
 
       <article class="card award-highlight">
         <span class="card-accent">Nagroda</span>
         <h2 class="card-title">Najlepsza książka psychologiczna 2012</h2>
-        <p class="card-copy">Książka „Cisza. Esencja naszego umysłu” została wybrana najlepszą książką psychologiczną roku 2012 w kategorii rozwój osobisty – wybór jury i internautów podczas Targów Książki w Krakowie.</p>
+        <p class="card-copy">Książka „Cisza. Esencja naszego umysłu” została wyróżniona jako najlepsza książka psychologiczna roku 2012 w kategorii rozwój osobisty – wybór jury i internautów podczas Targów Książki w Krakowie.</p>
         <a class="card-link" href="nagroda.html">Zobacz nagrodę<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
       </article>
     </div>
