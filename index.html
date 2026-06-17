@@ -488,7 +488,8 @@
     padding: 0.2rem 0.6rem; margin-bottom: 0.75rem;
     transition: var(--theme-transition);
   }
-  .book-award-text {
+  .book-award-link {
+    display: inline-block;
     margin: 0.35rem 0 1rem;
     font-family: 'Jost', sans-serif;
     font-size: 0.8rem;
@@ -496,6 +497,14 @@
     text-transform: uppercase;
     color: var(--gold);
     line-height: 1.2;
+    text-decoration: none;
+    transition: opacity 0.25s ease, text-decoration-color 0.25s ease;
+  }
+  .book-award-link:hover {
+    opacity: 0.9;
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 0.15em;
   }
   .book-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -921,7 +930,7 @@
       </div>
       <div class="book-content">
         <span class="book-cycle-badge">Część I cyklu</span>
-        <p class="book-award-text">Laureat nagrody jury i internautów: najlepsza książka psychologiczna</p>
+        <a href="nagroda.html" class="book-award-link">LAUREAT NAGRODY JURY I INTERNAUTÓW: NAJLEPSZA KSIĄŻKA PSYCHOLOGICZNA →</a>
         <h3 class="book-title">Cisza.<br><em>Esencja naszego umysłu</em></h3>
         <div class="book-desc">
           <p>To książka o potrzebie zatrzymania się i uważniejszego spojrzenia na własny umysł. Powstała z pytania, jak odnaleźć spokój pośród natłoku myśli, przyzwyczajeń, lęków i wyobrażeń, które często bierzemy za prawdę o sobie i świecie.</p>
