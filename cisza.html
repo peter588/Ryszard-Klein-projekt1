@@ -303,6 +303,65 @@
   window.addEventListener('scroll', () => {
     indicator.classList.toggle('hidden', window.scrollY > 80);
   }, { passive: true });
+
+  // SIMPLE LIGHTBOX FOR CISZA GALLERY
+  const galleryImages = Array.from(document.querySelectorAll('.gallery-grid img'));
+  let currentIndex = 0;
+
+  const lightbox = document.createElement('div');
+  lightbox.style.cssText = 'position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;background:rgba(8,8,8,0.95);backdrop-filter:blur(10px);padding:1.5rem;';
+  lightbox.innerHTML = `
+    <button id="ciszaLightboxClose" style="position:absolute;top:1.25rem;right:1.25rem;border:none;background:rgba(255,255,255,0.1);color:#f7f3ec;width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center;">
+      <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+    <button id="ciszaLightboxPrev" style="position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);border:none;background:rgba(255,255,255,0.1);color:#f7f3ec;width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center;">
+      <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><polyline points="15 6 8 12 15 18"/></svg>
+    </button>
+    <img src="" alt="" style="max-width:100%;max-height:92vh;width:auto;height:auto;object-fit:contain;border-radius:0.35rem;box-shadow:0 20px 75px rgba(0,0,0,0.42);" />
+    <button id="ciszaLightboxNext" style="position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);border:none;background:rgba(255,255,255,0.1);color:#f7f3ec;width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center;">
+      <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><polyline points="9 6 16 12 9 18"/></svg>
+    </button>
+  `;
+  document.body.appendChild(lightbox);
+
+  const lightboxImg = lightbox.querySelector('img');
+  const closeBtn = document.getElementById('ciszaLightboxClose');
+  const prevBtn = document.getElementById('ciszaLightboxPrev');
+  const nextBtn = document.getElementById('ciszaLightboxNext');
+
+  const openLightbox = (index) => {
+    currentIndex = (index + galleryImages.length) % galleryImages.length;
+    const sourceImage = galleryImages[currentIndex];
+    lightboxImg.src = sourceImage.src;
+    lightboxImg.alt = sourceImage.alt || 'Zdjęcie';
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  galleryImages.forEach((img, index) => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => openLightbox(index));
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+  prevBtn.addEventListener('click', (event) => { event.stopPropagation(); openLightbox(currentIndex - 1); });
+  nextBtn.addEventListener('click', (event) => { event.stopPropagation(); openLightbox(currentIndex + 1); });
+
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (lightbox.style.display !== 'flex') return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') openLightbox(currentIndex - 1);
+    if (event.key === 'ArrowRight') openLightbox(currentIndex + 1);
+  });
 </script>
 </body>
 </html>
