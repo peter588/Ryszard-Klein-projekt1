@@ -4,7 +4,7 @@
 <script>(function(){var t=localStorage.getItem('rk-theme');if(t)document.documentElement.setAttribute('data-theme',t);}());</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galeria Ciszy — Ryszard Klein</title>
+<title>Cisza — obrazy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
@@ -50,8 +50,6 @@
   .gallery-cell.wide { grid-column: span 2; }
   .gallery-cell img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.65s ease; }
   .gallery-cell:hover img { transform: scale(1.04); }
-  .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1rem 0.9rem; background: linear-gradient(to top, rgba(20,16,12,0.65), transparent); font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,243,236,0.8); opacity: 0; transition: opacity 0.35s; pointer-events: none; }
-  .gallery-cell:hover .gallery-caption { opacity: 1; }
   @media(max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } .gallery-cell.wide { grid-column: span 2; } }
   @media(max-width: 520px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
@@ -83,19 +81,16 @@
       <div class="gallery-grid">
         <div class="gallery-cell wide">
           <img src="images/cisza/Iguazu%20Argentyna.JPG" alt="Iguazu, Argentyna" loading="eager" style="object-position: center top;">
-          <span class="gallery-caption">Iguazu, Argentyna</span>
-        </div>
+          </div>
         <div class="gallery-cell">
           <img src="images/cisza/pf_1414114353.jpg" alt="Cisza" loading="eager" style="object-position: center center;">
         </div>
         <div class="gallery-cell">
           <img src="images/cisza/Cisza%20na%20Mont%20Blanc%20(2).jpg" alt="Mont Blanc" loading="lazy" style="object-position: center top;">
-          <span class="gallery-caption">Mont Blanc</span>
-        </div>
+          </div>
         <div class="gallery-cell">
           <img src="images/cisza/Silencjo%20na%20Iguazu%20Argentyna.jpg" alt="Iguazu" loading="lazy" style="object-position: center top;">
-          <span class="gallery-caption">Iguazu</span>
-        </div>
+          </div>
         <div class="gallery-cell">
           <img src="images/cisza/DSC_0043aa.jpg" alt="Cisza" loading="lazy" style="object-position: center center;">
         </div>
@@ -110,31 +105,25 @@
         </div>
         <div class="gallery-cell">
           <img src="images/cisza/Cisza%20w%20Togo.jpg" alt="Togo" loading="lazy" style="object-position: center top;">
-          <span class="gallery-caption">Togo</span>
-        </div>
+          </div>
         <div class="gallery-cell">
           <img src="images/cisza/Cisza%20przy%20kawie.jpg" alt="Cisza przy kawie" loading="lazy" style="object-position: center center;">
-          <span class="gallery-caption">Cisza przy kawie</span>
-        </div>
+          </div>
         <div class="gallery-cell wide">
           <img src="images/cisza/Cisza%20w%20zabawie.jpg" alt="Cisza w zabawie" loading="lazy" style="object-position: center center;">
-          <span class="gallery-caption">Cisza w zabawie</span>
-        </div>
+          </div>
         <div class="gallery-cell">
           <img src="images/cisza/pf_1414114558.jpg" alt="Cisza" loading="lazy" style="object-position: center center;">
         </div>
         <div class="gallery-cell">
           <img src="images/cisza/Cisza%20na%20Time%20Square%20w%20New%20York.jpeg" alt="Times Square, Nowy Jork" loading="lazy" style="object-position: center center;">
-          <span class="gallery-caption">Times Square, Nowy Jork</span>
-        </div>
+          </div>
         <div class="gallery-cell">
           <img src="images/cisza/Cisza%20na%20Mont%20Blanc%20(1).jpg" alt="Mont Blanc" loading="lazy" style="object-position: center top;">
-          <span class="gallery-caption">Mont Blanc</span>
-        </div>
+          </div>
         <div class="gallery-cell">
           <img src="images/cisza/Cisza%20w%20Afryce%20Mont%20Meru%204566m%20Tanzania.jpg" alt="Mont Meru, Tanzania" loading="lazy" style="object-position: center top;">
-          <span class="gallery-caption">Mont Meru, Tanzania</span>
-        </div>
+          </div>
       </div>
     </div>
   </main>
