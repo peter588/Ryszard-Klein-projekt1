@@ -133,9 +133,30 @@
   .award-highlight { background: linear-gradient(180deg, rgba(160,123,58,0.12), rgba(247,243,236,0.35)); }
   .quote { margin: 1.4rem 0; padding-left: 1rem; border-left: 3px solid var(--gold); color: var(--ink); font-style: italic; line-height: 1.9; }
   .review-meta { margin-top: 1rem; font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); }
-  footer { padding: 2rem 0 3rem; }
-  .footer-link { font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
-  .footer-link:hover { color: var(--gold-light); }
+  /* FOOTER */
+  footer {
+    background-color: #1b1612;
+    background-image: url('images/footer-bg.svg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    padding: 3rem 0 2rem;
+  }
+  [data-theme="dark"] footer { background-color: #211c16; }
+  .footer-bottom {
+    border-top: 1px solid rgba(247,243,236,0.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.05em; color: rgba(247,243,236,0.3);
+  }
+  .footer-back-link {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(201,168,104,0.65); text-decoration: none; transition: color 0.3s;
+  }
+  .footer-back-link:hover { color: #C9A868; }
   @media (max-width: 900px) {
     .page-masthead { padding: 6rem 1.5rem 2.5rem; }
     .container { padding: 0 1.5rem; }
@@ -215,8 +236,13 @@
     </div>
   </main>
 
-  <footer class="container">
-    <a class="footer-link" href="index.html">← Powrót do strony głównej</a>
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Ryszard Klein. Wszelkie prawa zastrzeżone.</p>
+        <a href="index.html" class="footer-back-link">← Powrót do strony głównej</a>
+      </div>
+    </div>
   </footer>
 
 <script>
