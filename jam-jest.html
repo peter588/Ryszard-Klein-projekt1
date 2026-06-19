@@ -452,6 +452,13 @@
         <div class="video-iframe-grid" id="videoGrid"></div>
       </article>
 
+      <!-- EKSPRESJA W IMPRESJI -->
+      <article class="card">
+        <span class="card-accent">Ekspresja w impresji</span>
+        <h2 class="card-title">Fragmenty książki na scenie</h2>
+        <div class="video-iframe-grid" id="videoGridEkspresja"></div>
+      </article>
+
     </div>
   </main>
 
@@ -484,70 +491,90 @@
   }
 
   // Miniatury YouTube → kliknięcie otwiera film w nowej karcie
-  // Po zmianie domeny na ryszardklein.pl: odkomentuj blok IFRAME MODE poniżej
-  // i zastąp href w każdym obiekcie na: embedBase + '?autoplay=1&rel=0'
+  // Po zmianie domeny na ryszardklein.pl: zastąp watchUrl przez embedUrl
+  // i odkomentuj blok IFRAME MODE w funkcji buildVideoGrid poniżej
   (function () {
     var PLAY_ICON = '<div class=”video-play-overlay”><div class=”video-play-btn”><svg viewBox=”0 0 24 24”><polygon points=”5,3 19,12 5,21”/></svg></div></div>';
     var PLAYLIST = 'PLVPGj9p2vxclANJYY7l4BRSgkAp2PzKA1';
 
-    var videos = [
-      { id: 'g2g-8_bA1Sg', title: 'TVS Express Silesia',                    index: 5 },
-      { id: 'z64q_87fR_s', title: 'Radio Katowice — „Skacząc po półkach”',  index: 6 },
-      { id: '5N37mBvH8O8', title: 'Psychologia czakr',                       index: 7 },
-      { id: 'WbWfIOnA6D8', title: 'Medytacja stworzenia',                    index: 8 }
-    ];
+    function buildVideoGrid(gridId, videos) {
+      var grid = document.getElementById(gridId);
+      if (!grid) return;
 
-    var grid = document.getElementById('videoGrid');
-    if (!grid) return;
+      videos.forEach(function (v) {
+        var watchUrl = v.href || ('https://www.youtube.com/watch?v=' + v.id);
+        /* IFRAME MODE (przywrócić po zmianie domeny):
+        var embedUrl = 'https://www.youtube.com/embed/' + v.id + '?autoplay=1&rel=0';
+        */
 
-    videos.forEach(function (v) {
-      var watchUrl = 'https://www.youtube.com/watch?v=' + v.id
-                   + '&list=' + PLAYLIST + '&index=' + v.index;
-      /* IFRAME MODE (przywrócić po zmianie domeny):
-      var embedUrl = 'https://www.youtube.com/embed/' + v.id + '?autoplay=1&rel=0';
-      */
+        var item = document.createElement('div');
+        item.className = 'video-iframe-item';
 
-      var item = document.createElement('div');
-      item.className = 'video-iframe-item';
+        var link = document.createElement('a');
+        link.href = watchUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'video-iframe-ratio';
 
-      var link = document.createElement('a');
-      link.href = watchUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.className = 'video-iframe-ratio';
+        var img = document.createElement('img');
+        img.src = 'https://img.youtube.com/vi/' + v.id + '/hqdefault.jpg';
+        img.alt = v.title;
+        img.loading = 'lazy';
 
-      var img = document.createElement('img');
-      img.src = 'https://img.youtube.com/vi/' + v.id + '/hqdefault.jpg';
-      img.alt = v.title;
-      img.loading = 'lazy';
+        link.appendChild(img);
+        link.insertAdjacentHTML('beforeend', PLAY_ICON);
 
-      link.appendChild(img);
-      link.insertAdjacentHTML('beforeend', PLAY_ICON);
+        /* IFRAME MODE (przywrócić po zmianie domeny):
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var iframe = document.createElement('iframe');
+          iframe.src = embedUrl;
+          iframe.title = v.title;
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.allowFullscreen = true;
+          iframe.loading = 'lazy';
+          var ratio = document.createElement('div');
+          ratio.className = 'video-iframe-ratio';
+          ratio.appendChild(iframe);
+          this.parentNode.replaceChild(ratio, this);
+        });
+        */
 
-      /* IFRAME MODE (przywrócić po zmianie domeny):
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        var iframe = document.createElement('iframe');
-        iframe.src = embedUrl;
-        iframe.title = v.title;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        iframe.loading = 'lazy';
-        var ratio = document.createElement('div');
-        ratio.className = 'video-iframe-ratio';
-        ratio.appendChild(iframe);
-        this.parentNode.replaceChild(ratio, this);
+        var label = document.createElement('p');
+        label.className = 'video-iframe-label';
+        label.textContent = v.title;
+
+        item.appendChild(link);
+        item.appendChild(label);
+        grid.appendChild(item);
       });
-      */
+    }
 
-      var label = document.createElement('p');
-      label.className = 'video-iframe-label';
-      label.textContent = v.title;
+    buildVideoGrid('videoGrid', [
+      {
+        id: 'g2g-8_bA1Sg', title: 'TVS Express Silesia',
+        href: 'https://www.youtube.com/watch?v=g2g-8_bA1Sg&list=' + PLAYLIST + '&index=5'
+      },
+      {
+        id: 'z64q_87fR_s', title: 'Radio Katowice — „Skacząc po półkach”',
+        href: 'https://www.youtube.com/watch?v=z64q_87fR_s&list=' + PLAYLIST + '&index=6'
+      },
+      {
+        id: '5N37mBvH8O8', title: 'Psychologia czakr',
+        href: 'https://www.youtube.com/watch?v=5N37mBvH8O8&list=' + PLAYLIST + '&index=7'
+      },
+      {
+        id: 'WbWfIOnA6D8', title: 'Medytacja stworzenia',
+        href: 'https://www.youtube.com/watch?v=WbWfIOnA6D8&list=' + PLAYLIST + '&index=8'
+      }
+    ]);
 
-      item.appendChild(link);
-      item.appendChild(label);
-      grid.appendChild(item);
-    });
+    buildVideoGrid('videoGridEkspresja', [
+      { id: 'Uq5p53a8b9g', title: 'Fragmenty książki „JAM JEST” — Wstęp' },
+      { id: 'WEjCeAHo-kA', title: 'Czakra IV — Serce' },
+      { id: 'fgw1G0lKlA8', title: 'Czakra podstawy' },
+      { id: '_YtscFLs22c', title: 'Czakra VII — Korona głowy' }
+    ]);
   }());
 </script>
 </body>
