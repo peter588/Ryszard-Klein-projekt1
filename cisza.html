@@ -136,6 +136,45 @@
   .quote { margin: 1.4rem 0; padding-left: 1.25rem; border-left: 3px solid var(--gold); color: var(--ink); font-style: italic; line-height: 1.9; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.1rem; }
   .review-meta { margin-top: 0.6rem; font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); }
 
+  /* OD AUTORA — collapsible */
+  .author-body {
+    position: relative;
+    color: var(--ink-mid); line-height: 1.85;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem;
+  }
+  .author-body p { margin-bottom: 1.1rem; }
+  .author-body p:last-child { margin-bottom: 0; }
+  .author-body h4 {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin: 1.5rem 0 0.75rem;
+  }
+  .author-body .author-sig {
+    margin-top: 1.5rem; font-style: italic;
+    color: var(--ink); font-size: 1.05rem;
+  }
+  .author-collapsed { max-height: 8rem; overflow: hidden; }
+  .author-fade {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 5rem;
+    background: linear-gradient(transparent, var(--card-bg));
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .author-body:not(.author-collapsed) .author-fade { opacity: 0; pointer-events: none; }
+  .author-toggle {
+    margin-top: 1.25rem; align-self: flex-start;
+    font-family: 'Jost', sans-serif; font-size: 0.82rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); background: none; border: none;
+    border-bottom: 1px solid var(--gold-light);
+    cursor: pointer; padding-bottom: 2px;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .author-toggle:hover { color: var(--ink); border-color: var(--ink); }
+
   /* VIDEO THUMBNAILS */
   .video-grid {
     display: grid;
@@ -262,6 +301,29 @@
   <main class="container page-shell">
     <div class="cards-stack">
 
+      <!-- OD AUTORA -->
+      <article class="card">
+        <span class="card-accent">Od autora</span>
+        <h2 class="card-title">Słowo wstępne</h2>
+        <div class="author-body author-collapsed" id="authorBody">
+          <p>Nie trzeba być wnikliwym obserwatorem, by zauważyć, że każdy człowiek koncentruje się głównie na samym sobie. Głębię tego uwarunkowania można zaobserwować, gdy ktoś próbuje wkraczać w nasz osobisty obszar. Im bardziej jesteśmy w nim pogrążeni, z tym większą determinacją go bronimy. Tak silnie tkwimy we własnym ego, że utożsamiamy z nim całość swojego człowieczeństwa. Krąg naszego ja wydaje się wszystkim, podczas gdy w rzeczywistości jest tym, co nam świat przysłania. Może zabrzmi to paradoksalnie, ale z taką samą determinacją, z jaką bronimy własnego ego, chcąc utwierdzić się, że „racje życia" leżą po naszej stronie, z taką samą siłą oddalamy się od możliwości obiektywnego sądu. Wszelkie pojawiające się zewnętrzne sygnały, sugerujące konieczność dokonania jakiejś życiowej przemiany – czy to stylu życia, czy rewizji poglądów – przyjmujemy jako osobiste zagrożenie lub atak na system wartości, którym często jedynie się osłaniamy. Na takim to właśnie podłożu, podłożu uwikłania się człowieka w świat osobistych i zbiorowych iluzji, powstają małe i wielkie dramaty ludzkości.</p>
+          <p>Trzeba nie lada odwagi, by podjąć się weryfikacji własnego ja. Trudność jednak nie leży tyle w zagadnieniach merytorycznych, co w ukrytym wewnątrz nas lęku przed zmianami, lęku przed utratą misternie budowanej własnej, aczkolwiek sztucznej tożsamości. Trudność stwarza również sama tematyka wymykająca się poniekąd intelektualnemu rozumowaniu. Na domiar wszystkiego umysł, który stworzył naszą sztuczną rzeczywistość, sam dokonuje jej weryfikacji.</p>
+          <p>Czym zatem jest umysł? Odpowiedź jest pozornie prosta, gdyż sam umysł zadaje to pytanie. Wbrew jednak tym uproszczeniom, umysł to coś znacznie bardziej złożonego i skomplikowanego: głęboko ukryty, subtelny wymiar naszego istnienia. Jego funkcjonowanie można stwierdzić na bazie własnych myśli. Umysł to nieprzerwany strumień powstających i zanikających myśli. Wiąże się z nim zdolność rozumowania, sądu i wyobraźni. Oprócz wymienionych aspektów umysłu, istnieje również płaszczyzna ukazująca jego prawdziwą naturę, a będąca poza jakimikolwiek programami ograniczającymi człowieka. O istnieniu takiej sfery mówią tysiącletnie doświadczenia mistyczne wielu religii i kierunków filozoficznych. W naszych rozważaniach zastosujemy więc podział na „umysł zwykły" – czyli obracający się w kręgu własnych myśli – i jego „prawdziwą naturę", czyli umysł wolny od iluzji. Wolnym od iluzji można być jedynie wówczas, gdy zna się mechanizmy funkcjonowania umysłu i rozwija umiejętność panowania nad myślami i emocjami. Niekoniecznie musi to być znajomość naukowa, wystarczy praktyczna. Ludzki umysł jest bardzo elastyczny i działa na zasadzie wcześniej wypracowanych nawyków. Wszystko jest zatem kwestią odpowiedniego „treningu" wyrabiającego te nawyki. Wiemy z doświadczenia, że im dłużej poddajemy się negatywnym myślom, tym bardziej pogłębia się w nas niepokój, smutek, rozpacz, chciwość, gniew i inne tego typu emocje. Gdy zaś oddamy się systematycznemu treningowi samoobserwacji i medytacji, wówczas nasza wytrwałość, dyscyplina i inteligencja zostaną nagrodzone osiągnięciem szczęścia, wynikającego z rozpoznania prawdziwej natury umysłu. Celowo użyto określenia „rozpoznanie", gdyż połączenie z samym sobą, czyli prawdziwą naturą umysłu, następuje dopiero po długotrwałym procesie samopoznania. Celem naszych rozważań jest zachęta do podjęcia się tego trudnego zadania.</p>
+          <p>Uzyskana w wyniku pracy nad sobą harmonia życia, wyostrza również świadomość. Świadomość z kolei rodzi pokorę. Z takiej zaś perspektywy, perspektywy oświecenia, łatwiej postrzegać Prawdę, gdyż świadomość i pokora są fundamentami poznania.</p>
+          <p>Pytanie o wolny umysł jest również pytaniem o Prawdę. Jak wykażą dalsze rozważania, Prawda rzeczywistości bardziej wiąże się z wolnym umysłem niż z poglądami czy wiedzą. Postrzeganie intelektualne może być względne i wycinkowe. Warunkiem poznania jest wolny umysł, gdyż umysł zwykły zamyka się jedynie w kręgu iluzji, ukazując głównie to, na co pozwalają sterowane przez ego osądy i wizje. Czy jednak istnieje obiektywna Prawda, jednolity punkt odniesienia? Czy może istnieć jakaś wspólna płaszczyzna dla człowieka współczesnego i pierwotnego, wspólny mianownik dla Żyda i Greka, chrześcijanina i muzułmanina, kobiety, mężczyzny czy dziecka? Takim punktem odniesienia rzeczy jest właśnie wolny umysł, czyli jego prawdziwa natura, esencja, oaza wewnętrznego pokoju, lub jeszcze inaczej – Cisza. Cisza wolnego umysłu to pojęcie trudne do zdefiniowania, gdyż bardziej mówimy o jej doświadczaniu niż intelektualnym poznaniu. Doświadczenie Ciszy jest zanurzeniem się w chwili obecnej. Cisza jest pełną obecnością. Człowiek trwający w Ciszy jest wolny, a poprzez tę wolność szczęśliwy i nie obawia się o nic, nawet o własne życie.</p>
+          <p>Książka odsłania wielobarwność ludzkiej natury. Jest to podręcznik dla człowieka poszukującego. Przedstawione wartości wskazują na uniwersalną Prawdę opartą na zwykłym zdrowym rozsądku. Teksty ujęte są w duchu kultury chrześcijańskiej, jednak nie preferują żadnej religii. Systematyczna praca nad sobą, do której zaprasza, nie zmienia poglądów, lecz jedynie nastawienia. Proponowaną drogę rozwoju można określić jako duchowość psychologiczną.</p>
+          <p>Książka składa się z trzech części, każda część z trzech rozdziałów, z kolei każdy rozdział z trzech podrozdziałów, te zaś z licznych podtytułów. Tematyka jest w nich różna, jednak ciągle obraca się wokół tej samej, stale pogłębianej myśli. Będziemy zmierzać do celu metodą spiralną, stale poszerzając znaczenie pojęć pod różnym kątem. Metoda spiralna jest też sposobem systematycznego „odkażania" zaśniedziałego codziennością umysłu, co wymaga czasu i stopniowego dawkowania „wiedzy". Czy zatem można tę książkę jedynie prze-czytać? Nade wszystko Cisza to pozycja, którą należy czytać. Trwać w jej rozważaniach. Dać sobie czas, otwierając się na przesłanie, ukryte pomiędzy wierszami. Wskazane jest nawet zatrzymywanie się w miejscach wymagających dłuższej refleksji.</p>
+          <p><strong>Część I – egzystencjalna</strong> stanowi rodzaj ogólnego wstępu, którego celem jest ukazanie złożoności fenomenu życia, niewytłumaczalności zjawisk i miejsca człowieka w świecie. Kosmologiczne ujęcie tematu obnaża nasze stereotypowe poglądy, pozwalając dostrzec ogólną spójność rzeczywistości.</p>
+          <p><strong>Część II – psychologiczna</strong> ukazuje prawdziwe oblicze systemu obronnego, jakim jest ludzkie ego. Omówimy, jak ono powstaje i spróbujemy odróżnić je od samych siebie. Wiąże się to z trudnym zagadnieniem, które rozpatrywać będziemy do końca książki – czym jest to, co nazywamy samym sobą? W tej części zapoznamy się również z typologią osobowości według Helen Palmer i koncepcją nieświadomej motywacji Sigmunda Freuda. Na zakończenie pojawią się refleksje nad życiem, śmiercią i przemijalnością.</p>
+          <p><strong>Część III – transcendentalna</strong> zawiera propozycje ćwiczeń medytacyjnych, prowadzących poprzez samoobserwację do wewnętrznej przemiany. Droga samoobserwacji pogłębia też świadomość, co otwiera na przestrzenie poznania i widzenia. W tym wydaniu, na końcu niektórych rozdziałów umieszczono krótkie uwagi końcowe, zatytułowane „postscriptum".</p>
+          <h4>Postscriptum</h4>
+          <p>Przygotowując książkę <em>Cisza. Esencja naszego umysłu</em> sądziłem, że w tematyce iluzji większość już powiedziano. Obecnie wiem, że to wierzchołek góry lodowej. Zasięg matrixa, w którym żyjemy jest tak szeroki, że trudno w tym wymiarze mówić o posiadaniu wolnej woli. Węzłów tych nie sposób rozwiązać w całości. Można jedynie rozluźniać je nieustannie pogłębiając świadomość. Fundamentem świadomości jest przeświadczenie, że nasze ludzkie ciało, to jedynie tymczasowo przybrana forma wielowymiarowej istoty, jaką jest człowiek. Gdy miejsce lęku, analizy i podziału zajmie miłość, pewność i moc wówczas staniemy w Ciszy obok własnych iluzji.</p>
+          <p class="author-sig">Zapraszam do lektury.<br>Ryszard Klein</p>
+          <div class="author-fade" id="authorFade"></div>
+        </div>
+        <button class="author-toggle" id="authorToggle" onclick="toggleAuthor()">Czytaj całość ↓</button>
+      </article>
+
       <!-- WYWIADY -->
       <article class="card">
         <span class="card-accent">Wywiady o ciszy</span>
@@ -358,6 +420,14 @@
     html.setAttribute('data-theme', next);
     localStorage.setItem('rk-theme', next);
   });
+
+  function toggleAuthor() {
+    const body = document.getElementById('authorBody');
+    const btn  = document.getElementById('authorToggle');
+    const isCollapsed = body.classList.contains('author-collapsed');
+    body.classList.toggle('author-collapsed', !isCollapsed);
+    btn.textContent = isCollapsed ? 'Zwiń ↑' : 'Czytaj całość ↓';
+  }
 </script>
 </body>
 </html>
