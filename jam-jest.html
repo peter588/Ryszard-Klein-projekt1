@@ -267,12 +267,14 @@
   }
   .video-iframe-item { display: flex; flex-direction: column; gap: 0.65rem; }
   .video-iframe-ratio {
+    display: block;
     position: relative;
     aspect-ratio: 16 / 9;
     border-radius: 10px;
     overflow: hidden;
     background: var(--mist);
     cursor: pointer;
+    text-decoration: none;
   }
   /* thumbnail */
   .video-iframe-ratio img {
@@ -481,54 +483,68 @@
     }
   }
 
-  // Dynamiczne ładowanie filmów: thumbnail → iframe po kliknięciu
+  // Miniatury YouTube → kliknięcie otwiera film w nowej karcie
+  // Po zmianie domeny na ryszardklein.pl: odkomentuj blok IFRAME MODE poniżej
+  // i zastąp href w każdym obiekcie na: embedBase + '?autoplay=1&rel=0'
   (function () {
-    var PLAY_ICON = '<div class="video-play-overlay"><div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>';
+    var PLAY_ICON = '<div class=”video-play-overlay”><div class=”video-play-btn”><svg viewBox=”0 0 24 24”><polygon points=”5,3 19,12 5,21”/></svg></div></div>';
+    var PLAYLIST = 'PLVPGj9p2vxclANJYY7l4BRSgkAp2PzKA1';
 
     var videos = [
-      { id: 'g2g-8_bA1Sg',  title: 'TVS Express Silesia' },
-      { id: 'z64q_87fR_s',  title: 'Radio Katowice — „Skacząc po półkach”' },
-      { id: '5N37mBvH8O8',  title: 'Psychologia czakr' },
-      { id: 'WbWfIOnA6D8',  title: 'Medytacja stworzenia' }
+      { id: 'g2g-8_bA1Sg', title: 'TVS Express Silesia',                    index: 5 },
+      { id: 'z64q_87fR_s', title: 'Radio Katowice — „Skacząc po półkach”',  index: 6 },
+      { id: '5N37mBvH8O8', title: 'Psychologia czakr',                       index: 7 },
+      { id: 'WbWfIOnA6D8', title: 'Medytacja stworzenia',                    index: 8 }
     ];
 
     var grid = document.getElementById('videoGrid');
     if (!grid) return;
 
     videos.forEach(function (v) {
-      var embedBase = 'https://www.youtube.com/embed/' + v.id;
+      var watchUrl = 'https://www.youtube.com/watch?v=' + v.id
+                   + '&list=' + PLAYLIST + '&index=' + v.index;
+      /* IFRAME MODE (przywrócić po zmianie domeny):
+      var embedUrl = 'https://www.youtube.com/embed/' + v.id + '?autoplay=1&rel=0';
+      */
 
       var item = document.createElement('div');
       item.className = 'video-iframe-item';
 
-      var ratio = document.createElement('div');
-      ratio.className = 'video-iframe-ratio';
+      var link = document.createElement('a');
+      link.href = watchUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'video-iframe-ratio';
 
       var img = document.createElement('img');
       img.src = 'https://img.youtube.com/vi/' + v.id + '/hqdefault.jpg';
       img.alt = v.title;
       img.loading = 'lazy';
 
-      ratio.appendChild(img);
-      ratio.insertAdjacentHTML('beforeend', PLAY_ICON);
+      link.appendChild(img);
+      link.insertAdjacentHTML('beforeend', PLAY_ICON);
 
-      ratio.addEventListener('click', function () {
+      /* IFRAME MODE (przywrócić po zmianie domeny):
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
         var iframe = document.createElement('iframe');
-        iframe.src = embedBase + '?autoplay=1&rel=0';
+        iframe.src = embedUrl;
         iframe.title = v.title;
         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         iframe.allowFullscreen = true;
         iframe.loading = 'lazy';
-        this.innerHTML = '';
-        this.appendChild(iframe);
-        this.style.cursor = 'default';
+        var ratio = document.createElement('div');
+        ratio.className = 'video-iframe-ratio';
+        ratio.appendChild(iframe);
+        this.parentNode.replaceChild(ratio, this);
       });
+      */
 
       var label = document.createElement('p');
       label.className = 'video-iframe-label';
       label.textContent = v.title;
 
-      item.appendChild(ratio);
+      item.appendChild(link);
       item.appendChild(label);
       grid.appendChild(item);
     });
