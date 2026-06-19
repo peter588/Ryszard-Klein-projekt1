@@ -424,9 +424,13 @@
   function toggleAuthor() {
     const body = document.getElementById('authorBody');
     const btn  = document.getElementById('authorToggle');
+    const card = btn.closest('article');
     const isCollapsed = body.classList.contains('author-collapsed');
     body.classList.toggle('author-collapsed', !isCollapsed);
     btn.textContent = isCollapsed ? 'Zwiń ↑' : 'Czytaj całość ↓';
+    if (isCollapsed === false) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 </script>
 </body>
