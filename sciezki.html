@@ -144,6 +144,39 @@
   .pdf-link:hover { color: var(--ink); border-color: var(--ink); }
   .pdf-link svg { width: 22px; height: 22px; flex-shrink: 0; }
 
+  /* SENTENCJA */
+  .sentencja-num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3.2rem; font-weight: 300; line-height: 1;
+    color: var(--gold-light); margin-bottom: 0.6rem;
+  }
+  .sentencja-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; font-style: italic; font-weight: 300;
+    color: var(--ink-light); line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  .sentencja-divider {
+    width: 36px; height: 1px;
+    background: var(--gold-light); margin-bottom: 1.5rem;
+  }
+  .sentencja-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.18rem; font-weight: 400;
+    letter-spacing: 0.05em; color: var(--ink); line-height: 1.85;
+  }
+  .sentencja-text .sline { display: block; }
+  .sentencja-btn {
+    margin-top: 2rem; align-self: flex-start;
+    font-family: 'Jost', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); background: none; border: none;
+    border-bottom: 1px solid var(--gold-light);
+    cursor: pointer; padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .sentencja-btn:hover { color: var(--ink); border-color: var(--ink); }
+
   /* FOOTER */
   footer {
     background-color: #1b1612;
@@ -247,6 +280,13 @@
         </a>
       </article>
 
+      <!-- SENTENCJA -->
+      <article class="card">
+        <span class="card-accent">Sentencje</span>
+        <div id="sentencjaDisplay"></div>
+        <button class="sentencja-btn" onclick="drawSentencja()">Losuj inną →</button>
+      </article>
+
     </div>
   </main>
 
@@ -267,6 +307,106 @@
     html.setAttribute('data-theme', next);
     localStorage.setItem('rk-theme', next);
   });
+
+  var sentencje = [
+    { num: 'I',       title: 'Znaczenie słowa',                                        lines: ['SŁOWO MOŻE BYĆ ODBICIEM PRAWDY,', 'GDY KWESTIONUJEMY JEGO ZNACZENIE.', 'PRAWDA ZNAJDUJE SIĘ POMIĘDZY WIERSZAMI SŁÓW.'] },
+    { num: 'II',      title: 'Równowaga przeciwieństw ścieżką spełnionego życia',      lines: ['MAŁY OSĄD JEST ZALĄŻKIEM WIELKIEGO PODZIAŁU.', 'RÓWNOWAŻENIE PRZECIWIEŃSTW', 'TO ZROZUMIENIE WŁASNYCH EMOCJI.'] },
+    { num: 'III',     title: 'Społeczny ład, a wolna wola',                            lines: ['„NIE MA WOLNEJ WOLI,', 'JEST WOLA I JEJ NIE-WOLA', 'I JEST WOLNOŚĆ" NIE-DZIAŁANIA.'] },
+    { num: 'IV',      title: 'Natura Pustki',                                          lines: ['PUSTKA TO OTWARTOŚĆ NA PRAWDĘ.'] },
+    { num: 'V',       title: 'Bezstronne doświadczanie istnienia',                     lines: ['BĄDŹ BEZSTRONNY JAK NATURA,', 'A JAKO WZROK NATURY', 'STAŃ SIĘ EMPATYCZNIE LUDZKI.'] },
+    { num: 'VI',      title: 'Potencjał subtelnej energii żeńskiej',                   lines: ['ENERGIA ŻEŃSKA DAJE ŻYCIE.', 'ENERGIA MĘSKA BUDUJE PRZESTRZEŃ DLA ŻYCIA.', 'NA NAJGŁĘBSZYM POZIOMIE OBYDWIE STAJĄ SIĘ JEDNOŚCIĄ.'] },
+    { num: 'VII',     title: 'Niczego nie pragnie, wszystko otrzymuje',                lines: ['BOGACTWO NATURY WYNIKA Z JEJ OTWARTOŚCI NA ZMIANĘ.', 'OTWARTOŚĆ UMYSŁU NA ZMIANĘ', 'OTWIERA DROGĘ SPEŁNIENIA.'] },
+    { num: 'VIII',    title: 'Płynie nurtem bez-celowości',                            lines: ['KRYSZTAŁOWO CZYSTY UMYSŁ', 'PŁYNIE NURTEM BEZ-CELOWOŚCI.'] },
+    { num: 'IX',      title: 'Umiarkowanie',                                           lines: ['ZACHOWANIE UMIARU', 'JEST LEKKOŚCIĄ ZAUFANIA DO ŻYCIA.'] },
+    { num: 'X',       title: 'Kompletność na poziomie Ciała, Umysłu i Duszy',         lines: ['KOMPLETNOŚĆ W ŻYCIU CODZIENNYM', 'TO NIEUSTANNE SKUPIANIE UWAGO-ENERGII', 'NA TU I TERAZ.'] },
+    { num: 'XI',      title: 'Ukryta Istota rzeczy',                                   lines: ['ISTOTA CZŁOWIECZEŃSTWA UKRYTA JEST', 'W PUSTEJ PRZESTRZENI JEGO UMYSŁU.'] },
+    { num: 'XII',     title: 'Nadmiar pragnień',                                       lines: ['POŚRÓD NADMIARU WSZYSTKIEGO.', 'TRUDNO ODNALEŹĆ SIEBIE'] },
+    { num: 'XIII',    title: 'Pokochać siebie to zbliżyć się do świata',              lines: ['WARTOŚĆ MIŁOŚCI KIEROWANEJ NA ZEWNĄTRZ', 'MIERZY SIĘ GŁĘBIĄ MIŁOŚCI KIEROWANEJ WEWNĄTRZ', 'KU SOBIE.'] },
+    { num: 'XIV',     title: 'Ukryte Misterium',                                       lines: ['W PRZESTRZENI SERCA', 'JEST ISKRA TRWANIA RZECZYWISTOŚCI.'] },
+    { num: 'XV',      title: 'Droga życia',                                            lines: ['SUBTELNOŚĆ OSOBOWOŚCI', 'KSZTAŁTUJE ZAUFANIE I SPOKÓJ,', 'BUDOWANY Z CHWILI NA CHWILĘ.'] },
+    { num: 'XVI',     title: 'Prawo cykliczności',                                     lines: ['GDY SPOCZNĘ W PUSTEJ PRZESTRZENI UMYSŁU,', 'ZNIKNIE NIEPOKÓJ ODDZIELENIA.'] },
+    { num: 'XVII',    title: 'Autorytety',                                             lines: ['BĄDŹ AUTORYTETEM DLA SIEBIE,', 'A ŻYCIE OBJAWI CI PRAWDĘ.'] },
+    { num: 'XVIII',   title: 'Zasady, normy moralne i religie',                        lines: ['COKOLWIEK POSZUKUJESZ NA ZEWNĄTRZ,', 'NOSISZ W SOBIE.'] },
+    { num: 'XIX',     title: 'Powrót do naturalności',                                 lines: ['JEŻELI MASZ ŁĄCZNOŚĆ Z SAMYM SOBĄ,', 'O NIC WIĘCEJ NIE MUSISZ ZABIEGAĆ.'] },
+    { num: 'XX',      title: 'Postawa mistrza a psychologia tłumu',                    lines: ['GDY USŁYSZYSZ W SERCU DŹWIĘK WOLNOŚCI,', 'NIE BĘDZIESZ JUŻ NIGDY W ZGODZIE Z TŁUMEM.'] },
+    { num: 'XXI',     title: 'Pomiędzy materią a energią — Duch, Jest',               lines: ['JAKO W TWOIM SERCU,', 'TAK I NA ZIEMI TWOICH OCZEKIWAŃ.'] },
+    { num: 'XXII',    title: 'Istota jedności',                                        lines: ['ZACHOWUJĄC ODRĘBNOŚĆ, MOGĘ JEDNOCZEŚNIE', 'ŁĄCZYĆ SIĘ Z CAŁOŚCIĄ,', 'STAWAĆ SIĘ CAŁOŚCIĄ', 'I BYĆ CAŁOŚCIĄ.'] },
+    { num: 'XXIII',   title: 'Stajemy się tym, czym żyjemy',                          lines: ['JEŻELI NA CODZIEŃ SŁUCHAM GŁOSU SERCA', 'TO POMIMO PRZEJŚCIOWYCH TRUDNOŚCI', 'STAJĘ SIĘ MOCĄ KREACJI.'] },
+    { num: 'XXIV',    title: 'Postawa i pewny krok',                                   lines: ['POSTAWA DUCHOWA KSZTAŁTUJE POSTAWĘ FIZYCZNĄ.', 'POSTAWA FIZYCZNA WPŁYWA NA POSTAWĘ DUCHOWĄ.'] },
+    { num: 'XXV',     title: 'Absolut ciszy — Przed początkiem',                      lines: ['JESTEM…', 'DZIĘKUJĘ…'] },
+    { num: 'XXVI',    title: 'Spokój i wyważenie',                                     lines: ['CIĘŻAR MOŻE STAĆ SIĘ LEKKOŚCIĄ.', 'BEZRUCH RÓWNOWAGI OBFITOŚCIĄ RUCHU.'] },
+    { num: 'XXVII',   title: 'Nauczyciel',                                             lines: ['ISTOTA LUDZKA SAMA W SOBIE', 'JEST', 'WIEDZĄ I POZNANIEM.'] },
+    { num: 'XXVIII',  title: 'Zjednoczenie w prostocie',                               lines: ['GDY POZNAM NATURĘ PRZECIWIEŃSTW,', 'GDY ZJEDNOCZĘ WEWNĘTRZNE ROZDARCIE,', 'OBJAWI SIĘ ZROZUMIENIE PRZYNOSZĄCE MIŁOŚĆ.'] },
+    { num: 'XXIX',    title: 'Świętość świata',                                        lines: ['NIE ZMIENIAM ŚWIATA.', 'JESTEM JEGO ZMIANĄ.'] },
+    { num: 'XXX',     title: 'Porażka przemocy',                                       lines: ['NIE POSZUKUJ WROGA NA ZEWNĄTRZ.', 'GŁÓWNYM WROGIEM JEST TWÓJ OPÓR I UŚPIONY UMYSŁ'] },
+    { num: 'XXXI',    title: 'Broń i zwycięstwo',                                      lines: ['CZŁOWIEK ŚWIATŁY TRZYMA SIĘ OD BRONI Z DALEKA.'] },
+    { num: 'XXXII',   title: 'Nowy świat',                                             lines: ['NIESZCZĘŚCIA ŚWIATA', 'TO NIEMOC OCZU NA UWIĘZI PRZYZWYCZAJENIA.'] },
+    { num: 'XXXIII',  title: 'Rozumieć siebie to rozumieć świat',                     lines: ['ROZUMIEJĄC SIEBIE', 'OTWIERAMY SIĘ NA INNYCH', 'I ŁATWIEJ NAM ROZUMIEĆ ŚWIAT.'] },
+    { num: 'XXXIV',   title: 'Nie-świadomy swojej wielkości',                          lines: ['CZŁOWIEK ŚWIADOMY BOGA W SOBIE', 'JEST HARMONIĄ RZECZYWISTOŚCI.'] },
+    { num: 'XXXV',    title: 'Kontemplacja',                                           lines: ['INTEGRACJA MATERII ZE ŚRODOWISKIEM DUCHA', 'STANOWI PEŁNIĘ ŻYCIA.'] },
+    { num: 'XXXVI',   title: 'Pokorna duma',                                           lines: ['DUCHOWE BOGACTWO, WIELKOŚĆ I MOC', 'KRYJE SIĘ W BALANSOWANIU ICH PRZECIWIEŃSTW.'] },
+    { num: 'XXXVII',  title: 'Prostota naturalności',                                  lines: ['SZUKAJCIE JEDYNIE DROGI,', 'A WSZYSTKO INNE BĘDZIE NA WŁAŚCIWYM MIEJSCU.'] },
+    { num: 'XXXVIII', title: 'Moc niezłomnej postawy',                                 lines: ['PRAWDZIWA MOC LUDZKICH POSTAW', 'MIEŚCI SIĘ W CISZY SERCA.'] },
+    { num: 'XXXIX',   title: 'Bieguny Jedności',                                       lines: ['MOC W SŁABOŚCI SIĘ DOSKONALI,', 'A SŁABI PRZEPASUJĄ SIĘ MOCĄ.'] },
+    { num: 'XL',      title: 'Biegunowość — Tao i Te',                                lines: ['UNIKANIE SKRAJNOŚCI', 'BUDUJE STABILIZACJĘ I MOC'] },
+    { num: 'XLI',     title: 'Świadomość refleksyjna',                                 lines: ['PRAWDA NIE JEST KWESTIĄ INFORMACJI,', 'PRAWDA JEST KWESTIĄ JEJ DOŚWIADCZENIA.'] },
+    { num: 'XLII',    title: 'Zasada życia',                                           lines: ['HARMONIA BIEGUNOWOŚCI', 'PRZYNOSI UKOJENIE.'] },
+    { num: 'XLIII',   title: 'Doskonałość prostoty',                                   lines: ['BĄDŹ LEKKI W MYŚLACH, MOWIE I UCZYNKACH.', 'BEZ SŁÓW.', 'BEZ DZIAŁANIA.'] },
+    { num: 'XLIV',    title: 'Gdzie skarb mój, tam i moje serce',                     lines: ['NAJWIĘKSZYM NASZYM SKARBEM', 'JEST FAKT ISTNIENIA.'] },
+    { num: 'XLV',     title: 'Poczucie Pustki',                                        lines: ['NATURĄ DOSKONAŁOŚCI', 'JEST PASJA ŻYCIA I MILCZENIA.'] },
+    { num: 'XLVI',    title: 'Lęk, chciwość i ambicja',                               lines: ['JEŻELI WIESZ KIM JESTEŚ,', 'WSZELKIE NIEDOMAGANIA', 'STAJĄ SIĘ TWOIM SPRZYMIERZEŃCEM.'] },
+    { num: 'XLVII',   title: 'Wejdź w siebie, a ujrzysz najodleglejsze',              lines: ['WEWNĄTRZ KAŻDEGO Z NAS', 'ZAPISANA JEST ISTOTA ŻYCIA.'] },
+    { num: 'XLVIII',  title: 'Nie-Działanie, a Zrozumienie i wiedza',                 lines: ['MINIMALIZM NIE-DZIAŁANIA', 'PROWADZI DO POGŁĘBIONEGO ZROZUMIENIA ŚWIATA.'] },
+    { num: 'XLIX',    title: 'Stań się jako dziecko',                                  lines: ['MISTRZ WPŁYWA NA ŚWIAT', 'NIE NARUSZAJĄC JEGO RÓWNOWAGI.'] },
+    { num: 'L',       title: 'Klucz do Życia',                                         lines: ['BRAK PRZYWIĄZAŃ POGŁĘBIA WIĘŹ ZE STWÓRCĄ', 'DAJĄC KLUCZ DO UDANEGO ŻYCIA.'] },
+    { num: 'LI',      title: 'Bezstronność i zaopiekowanie',                           lines: ['KAŻDY SAM TWORZY OTACZAJĄCĄ GO RZECZYWISTOŚĆ.', 'SZCZĘŚCIE JEST WYNIKIEM NASZYCH WYBORÓW.'] },
+    { num: 'LII',     title: 'Droga światła',                                          lines: ['REALIZUJ SIĘ W CZASIE', 'TRZYMAJĄC UMYSŁ W BEZ-CZASIE.'] },
+    { num: 'LIII',    title: 'Mądrość',                                                lines: ['MĄDROŚĆ JEST WIDZENIEM ISTOTY RZECZY', 'POD PODSZEWKĄ RZECZYWISTOŚCI.'] },
+    { num: 'LIV',     title: 'Obietnica Mądrości',                                     lines: ['SZCZĘŚCIE I SPEŁNIENIE', 'JEST KONSEKWENCJĄ ŻYCIA W MĄDROŚCI.'] },
+    { num: 'LV',      title: 'Misterium Harmonii',                                     lines: ['HARMONIA DUSZY JEST PONAD ŚMIERCIĄ I UNICESTWIENIEM.', 'HARMONIA DUSZY', 'JEST.'] },
+    { num: 'LVI',     title: 'Harmonia Doskonałości',                                  lines: ['MĘDRZEC UŻYWA JEDYNIE SŁÓW: „TAK, TAK; NIE, NIE', 'GDYŻ CAŁA RESZTA OD EGO POCHODZI".'] },
+    { num: 'LVII',    title: 'Wolni od prawa i rządności',                             lines: ['OBDAROWANIE LUDZI ZAUFANIEM I SWOBODĄ', 'ROZBUDZA KREATYWNOŚĆ I ODPOWIEDZIALNOŚĆ.'] },
+    { num: 'LVIII',   title: 'Kontrolowanie życia?',                                   lines: ['PRZYJMUJ SWÓJ LOS', 'Z OTWARTYMI RAMIONAMI ZAUFANIA.'] },
+    { num: 'LIX',     title: 'Permanentna samokontrola',                               lines: ['JEDYNE CO MOGĘ OFIAROWAĆ SAMEMU SOBIE', 'TO ZEŚRODKOWANIE W MOCY ŹRÓDŁA.'] },
+    { num: 'LX',      title: 'Rządy Naturalności',                                     lines: ['ZŁO MILKNIE,', 'GDY NIE JEST PODSYCANE.'] },
+    { num: 'LXI',     title: 'Skromność',                                              lines: ['SKROMNOŚĆ JEST PROSTOTĄ NATURALNOŚCI.'] },
+    { num: 'LXII',    title: 'Prawdziwy dar',                                          lines: ['NAJWIĘKSZE KOSZTOWNOŚCI', 'ZNAJDUJĄ SIĘ W LUDZKIM SERCU.'] },
+    { num: 'LXIII',   title: 'Rozwiązywanie problemów',                                lines: ['BĘDĄC JAKBY PONAD ŚWIATEM,', 'BĘDĄC TAM,', 'ZMIENIA SIĘ PERSPEKTYWA ŻYCIA TU.'] },
+    { num: 'LXIV',    title: 'Naturalny bieg wydarzeń',                                lines: ['MAŁYMI KROKAMI DO WIELKICH RZECZY'] },
+    { num: 'LXV',     title: 'Znaczenie prostoty',                                     lines: ['SKROMNOŚĆ I PROSTOTA', 'PRZYNOSI HARMONIĘ W ŻYCIU I OTOCZENIU.'] },
+    { num: 'LXVI',    title: 'Siła pokory',                                            lines: ['MĄDROŚĆ JEST POKORNA,', 'POZWALA INNYM STAWAĆ SIĘ MĄDRYMI.'] },
+    { num: 'LXVII',   title: 'Trzy skarby — Umiar, Pokora, Współodczuwanie',          lines: ['UMIAR, POKORA I WSPÓŁODCZUWANIE', 'TO UKORONOWANIE ROZWOJU DUCHOWEGO.'] },
+    { num: 'LXVIII',  title: 'Brak sprzeciwu',                                         lines: ['JEŻELI PRZYJMUJĘ ŻYCIE', 'PRZYJMUJĘ RÓWNIEŻ POJAWIAJĄCE SIĘ ZMIANY.'] },
+    { num: 'LXIX',    title: 'Sztuka refleksji i wycofania',                           lines: ['„JEŻELI POKORA DOMU NIE ZBUDUJE,', 'DAREMNIE NAD NIM RZEMIEŚLNIK PRACUJE".'] },
+    { num: 'LXX',     title: 'Wiedzieć, a Rozumieć',                                   lines: ['OTWÓRZ OCZY,', 'ABYŚ ZROZUMIAŁ MĄDROŚĆ SERCA.'] },
+    { num: 'LXXI',    title: 'Przywiązanie do wiedzy',                                 lines: ['IM MNIEJSZE PRZYWIĄZANIE DO WIEDZY,', 'TYM BARDZIEJ GŁĘBOKI SZEPT INTUICJI.'] },
+    { num: 'LXXII',   title: 'Odnalezienie siebie',                                    lines: ['ODNALEZIENIE SIEBIE', 'TO POWRÓT TWÓRCZOŚCI I PASJI.'] },
+    { num: 'LXXIII',  title: 'Buta',                                                   lines: ['NIKT NIE MOŻE BYĆ PEWNYM SWOJEGO LOSU.', 'BĄDŹ ZATEM ROZWAŻNY', 'TERAZ.'] },
+    { num: 'LXXIV',   title: 'Lęk przed śmiercią',                                    lines: ['KULTURA UMIERANIA,', 'JEST OBRAZEM KULTURY ŻYCIA.'] },
+    { num: 'LXXV',    title: 'Liczyć na siebie',                                       lines: ['KAŻDY SAM DOKONUJE WYBORÓW', 'I ODPOWIADA ZA SWOJE ŻYCIE.'] },
+    { num: 'LXXVI',   title: 'Elastyczność',                                           lines: ['NAJCENNIEJSZYM ŹRÓDŁEM POZNANIA', 'JEST OTWARTOŚĆ I ZADZIWIENIE.'] },
+    { num: 'LXXVII',  title: 'Ścieżka spełnionego życia',                              lines: ['TO, CO POSIADAM,', 'JEST TYM, CO POTRZEBUJĘ.'] },
+    { num: 'LXXVIII', title: 'Brak pomocy jest pomocą',                                lines: ['TYLKO WSŁUCHUJĄC SIĘ W INNYCH,', 'MOŻNA WZBUDZIĆ ZAUFANIE.'] },
+    { num: 'LXXIX',   title: 'Przewaga zobowiązuje',                                   lines: ['MĄDROŚĆ DAJE PRZEWAGĘ,', 'KTÓRA WYRAŻA SIĘ ODPOWIEDZIALNOŚCIĄ.'] },
+    { num: 'LXXX',    title: 'Dobrobyt',                                               lines: ['DOŚWIADCZAJĄC POKOJU I DOBROBYTU,', 'ZACHOWUJMY WDZIĘCZNOŚĆ OBECNOŚCI.'] },
+    { num: 'LXXXI',   title: 'Prostolinijność',                                        lines: ['PROSTOLINIJNOŚĆ DIALOGU Z WŁASNYM SERCEM TO', 'CISZA UMYSŁU.'] }
+  ];
+
+  var lastIdx = -1;
+  function drawSentencja() {
+    var idx;
+    do { idx = Math.floor(Math.random() * sentencje.length); } while (idx === lastIdx);
+    lastIdx = idx;
+    var s = sentencje[idx];
+    document.getElementById('sentencjaDisplay').innerHTML =
+      '<p class="sentencja-num">' + s.num + '</p>' +
+      '<p class="sentencja-title">' + s.title + '</p>' +
+      '<div class="sentencja-divider"></div>' +
+      '<div class="sentencja-text">' +
+        s.lines.map(function(l){ return '<span class="sline">' + l + '</span>'; }).join('') +
+      '</div>';
+  }
+  drawSentencja();
 </script>
 </body>
 </html>
