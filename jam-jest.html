@@ -206,6 +206,58 @@
     color: var(--ink-light); text-align: right;
   }
 
+  /* CARD IMAGE */
+  .card-photo {
+    width: calc(100% + 5rem);
+    margin: -2.5rem -2.5rem 2rem -2.5rem;
+    display: block;
+    border-radius: 28px 28px 0 0;
+    object-fit: cover;
+    max-height: 420px;
+  }
+  @media (max-width: 700px) {
+    .card-photo {
+      width: calc(100% + 3.5rem);
+      margin: -1.75rem -1.75rem 1.75rem -1.75rem;
+      border-radius: 20px 20px 0 0;
+    }
+  }
+
+  /* COLLAPSIBLE TEXT */
+  .collapsible-body {
+    position: relative;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem; color: var(--ink-mid);
+    line-height: 1.85;
+  }
+  .collapsible-body p { margin-bottom: 1.1rem; }
+  .collapsible-body p:last-child { margin-bottom: 0; }
+  .collapsible-body .review-sig {
+    margin-top: 1.5rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--mist);
+    font-family: 'Jost', sans-serif; font-size: 0.75rem;
+    letter-spacing: 0.08em; color: var(--ink-light); text-align: right;
+  }
+  .collapsible-collapsed { max-height: 8rem; overflow: hidden; }
+  .collapsible-fade {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 5rem;
+    background: linear-gradient(transparent, var(--card-bg));
+    pointer-events: none; transition: opacity 0.4s;
+  }
+  .collapsible-body:not(.collapsible-collapsed) .collapsible-fade { opacity: 0; }
+  .collapsible-toggle {
+    margin-top: 1.25rem; align-self: flex-start;
+    font-family: 'Jost', sans-serif; font-size: 0.82rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); background: none; border: none;
+    border-bottom: 1px solid var(--gold-light);
+    cursor: pointer; padding-bottom: 2px;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .collapsible-toggle:hover { color: var(--ink); border-color: var(--ink); }
+
   /* FOOTER */
   footer {
     background-color: #1b1612;
@@ -321,6 +373,23 @@
         </div>
       </article>
 
+      <!-- WPROWADZENIE -->
+      <article class="card">
+        <img src="images/jam_jest/glasses.webp" alt="Jam Jest — ilustracja" class="card-photo">
+        <span class="card-accent">Wprowadzenie</span>
+        <div class="collapsible-body collapsible-collapsed" id="wprowadzenie">
+          <p>Propozycja, którą trzymacie Państwo w rękach jest absolutnie wyjątkowa. W przeciwieństwie do poprzedniej swojej książki, Autor nie podaje teoretycznych opisów, nie wyjaśnia zjawisk, które są jej treścią, nie stosuje naukowych określeń, lecz pokazuje jak poprzez budowanie wiary we własne możliwości i odkrywanie w sobie ogromnych pokładów siły – można wpłynąć na ludzki umysł.</p>
+          <p>Książkę czyta się lekko, niemal jednym tchem, niczym świetnie napisaną poezję, jednak jej treść jest kwintesencją tak obszernych w swej tematyce zjawisk, że każde zdanie można analizować wiele razy, odkrywając wciąż nowe, pełniejsze znaczenie.</p>
+          <p>Istnieje mnóstwo publikacji, podejmujących próby zintegrowania Duszy, Umysłu i Ciała w jedno – pełne JA. Ryszard Klein wyłuskał to, co wydaje się być sednem tego zjawiska – a jest nim Człowiek. Każdy z nas szuka drogi do szczęścia, jednak będąc więźniem umysłu nie pozwala sobie na to. Człowiek jest często sam dla siebie największym wrogiem. Autor wychodzi temu zjawisku naprzeciw zachęcając do wsłuchiwania się we własny wewnętrzny głos. Powtarzane jak mantra treści dają ukojenie wewnętrznemu dziecku, tkwiącemu bezustannie w lęku, obawie przed stratą, odrzuceniem i samotnością.</p>
+          <p>Informacje zawarte w książce posiadają niezwykle terapeutyczny charakter. Docierając do najgłębszych zakamarków Umysłu, integrują go z Ciałem i Duszą. Odkrywają nieograniczone możliwości człowieka oraz ukazują drogę do osiągnięcia wewnętrznego pokoju i szczęścia. Przedstawiony przez Autora mistyczny stan medytacji daje uczucie bliskości Boga, wręcz zjednoczenia z Nim, kimkolwiek On jest dla czytelnika.</p>
+          <p>Dołączony do książki audiobook fantastycznie przygotowuje do rozpoczęcia tej, poniekąd trudnej, lektury. Poprzez muzykę, która towarzyszy słowu, wprowadza nastrój i niepowtarzalny klimat, co pogłębia przyswojenie treści. Aby lektura przyniosła odpowiedni skutek dla umysłu, a jej treść została w pełni przyjęta, także w wymiarze praktycznym — dobrze jest czytać ją powoli, dając sobie czas na odczucie działania i funkcjonowania każdej z opisanych sfer.</p>
+          <p>„Jam Jest", jak chyba żadna inna książka, pobudza nie tylko świadomość, ale również nieświadomość i podświadomość, pozwalając na uruchomienie emocji, mogących doprowadzić do katharsis, a także do pogłębienia wiedzy o sobie.</p>
+          <p class="review-sig">Marta Kaczmarczyk<br>psycholog i psychoterapeuta</p>
+          <div class="collapsible-fade"></div>
+        </div>
+        <button class="collapsible-toggle" onclick="toggleCollapsible('wprowadzenie', this)">Czytaj całość ↓</button>
+      </article>
+
     </div>
   </main>
 
@@ -341,6 +410,16 @@
     html.setAttribute('data-theme', next);
     localStorage.setItem('rk-theme', next);
   });
+
+  function toggleCollapsible(id, btn) {
+    const body = document.getElementById(id);
+    const isCollapsed = body.classList.contains('collapsible-collapsed');
+    body.classList.toggle('collapsible-collapsed', !isCollapsed);
+    btn.textContent = isCollapsed ? 'Zwiń ↑' : 'Czytaj całość ↓';
+    if (!isCollapsed) {
+      btn.closest('article').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 </script>
 </body>
 </html>
