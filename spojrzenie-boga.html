@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+<script>(function(){var t=localStorage.getItem('rk-theme');if(t)document.documentElement.setAttribute('data-theme',t);}());</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spojrzenie Boga | Ryszard Klein</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root, [data-theme="light"] {
+    --ink: #1C1914; --ink-mid: #3D3830; --ink-light: #6B6356;
+    --gold: #A07B3A; --gold-light: #C9A868; --mist: #D4CDBF;
+    --nav-bg: rgba(247,243,236,0.93); --toggle-bg: #3D3830; --toggle-color: #F7F3EC;
+    --page-bg: #F7F3EC; --card-bg: rgba(247,243,236,0.95); --card-border: rgba(160,123,58,0.16);
+  }
+  [data-theme="dark"] {
+    --ink: #F0EAE0; --ink-mid: #D5CBBA; --ink-light: #9A8E7E;
+    --gold: #C9A868; --gold-light: #A07B3A; --mist: #3A332A;
+    --nav-bg: rgba(22,18,16,0.95); --toggle-bg: #C9A868; --toggle-color: #161210;
+    --page-bg: #161210; --card-bg: rgba(25,21,17,0.92); --card-border: rgba(201,168,104,0.2);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100vh;
+    background: var(--page-bg);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    padding: 1rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: var(--nav-bg); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,205,191,0.3);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+  .nav-back {
+    font-family: 'Jost', sans-serif; font-size: 0.67rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light); text-decoration: none;
+  }
+  .nav-back:hover { color: var(--gold); }
+  .theme-toggle {
+    width: 34px; height: 34px; background: var(--toggle-bg);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.3s;
+  }
+  .theme-toggle:hover { opacity: 0.8; }
+  .theme-toggle svg {
+    width: 15px; height: 15px;
+    stroke: var(--toggle-color); fill: none;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .icon-moon { display: block; }
+  .icon-sun  { display: none; }
+  [data-theme="dark"] .icon-moon { display: none; }
+  [data-theme="dark"] .icon-sun  { display: block; }
+
+  /* MASTHEAD */
+  .page-masthead {
+    min-height: 40vh;
+    display: flex; align-items: flex-end;
+    padding: 7rem 2.5rem 3.5rem;
+    background: linear-gradient(180deg, rgba(247,243,236,0.5), rgba(247,243,236,0.02));
+  }
+  [data-theme="dark"] .page-masthead {
+    background: linear-gradient(180deg, rgba(22,18,16,0.86), rgba(22,18,16,0.28));
+  }
+  .page-eyebrow {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.8rem, 5vw, 3.8rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--ink);
+  }
+  .page-title em { font-style: italic; color: var(--gold); }
+  .page-intro {
+    margin-top: 1rem; max-width: 760px;
+    color: var(--ink-mid); line-height: 1.8;
+  }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2.5rem; }
+  .page-shell { padding: 2.5rem 0 5rem; }
+  .cards-stack { display: flex; flex-direction: column; gap: 1.75rem; }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    padding: 2.5rem;
+    box-shadow: 0 28px 70px rgba(16,14,12,0.08);
+    display: flex; flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-accent {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+    margin-bottom: 1.5rem; color: var(--ink);
+  }
+
+  /* OPIS KSIĄŻKI */
+  .book-desc-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem; font-weight: 300;
+    color: var(--ink-mid); line-height: 1.9;
+  }
+  .book-desc-text p { margin-bottom: 1.1rem; }
+  .book-desc-text p:last-child { margin-bottom: 0; }
+
+  /* SŁOWO WSTĘPNE — POEM */
+  .poem-block {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.12rem; font-weight: 300; font-style: italic;
+    line-height: 2; color: var(--ink-mid);
+  }
+  .poem-block .poem-line  { display: block; }
+  .poem-block .poem-break { display: block; height: 1.1rem; }
+  .poem-block .poem-stars {
+    display: block; margin-top: 1.5rem; margin-bottom: 0.5rem;
+    font-style: normal; letter-spacing: 0.4em;
+    color: var(--gold-light); text-align: center;
+  }
+  .poem-block strong {
+    font-style: normal; font-weight: 400;
+    color: var(--ink); letter-spacing: 0.04em;
+  }
+
+  /* COLLAPSIBLE */
+  .collapsible-body {
+    position: relative;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem; color: var(--ink-mid);
+    line-height: 1.85;
+  }
+  .collapsible-collapsed { max-height: 10rem; overflow: hidden; }
+  .collapsible-fade {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 5rem;
+    background: linear-gradient(transparent, var(--card-bg));
+    pointer-events: none; transition: opacity 0.4s;
+  }
+  .collapsible-body:not(.collapsible-collapsed) .collapsible-fade { opacity: 0; }
+  .collapsible-toggle {
+    margin-top: 1.25rem; align-self: flex-start;
+    font-family: 'Jost', sans-serif; font-size: 0.82rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); background: none; border: none;
+    border-bottom: 1px solid var(--gold-light);
+    cursor: pointer; padding-bottom: 2px;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .collapsible-toggle:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    background-color: #1b1612;
+    background-image: url('images/footer-bg.svg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    padding: 3rem 0 2rem;
+  }
+  [data-theme="dark"] footer { background-color: #211c16; }
+  .footer-bottom {
+    border-top: 1px solid rgba(247,243,236,0.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.05em; color: rgba(247,243,236,0.3);
+  }
+  .footer-back-link {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(201,168,104,0.65); text-decoration: none; transition: color 0.3s;
+  }
+  .footer-back-link:hover { color: #C9A868; }
+
+  @media (max-width: 700px) {
+    .page-masthead { padding: 6rem 1.5rem 2.5rem; }
+    .container { padding: 0 1.5rem; }
+    .card { padding: 1.75rem; border-radius: 20px; }
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">Ryszard Klein</a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-back">← Strona główna</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="page-masthead">
+    <div class="container">
+      <p class="page-eyebrow">Droga Ciszy — część III</p>
+      <h1 class="page-title">Spojrzenie Boga.<br><em>Bliźniacze Dusze</em></h1>
+      <p class="page-intro">Poetycka opowieść o miłości absolutnej i ciepłym spojrzeniu Boga, które zamyka cierpienie rozdwojenia i ugruntowuje człowieka w zachwycie nad własnym Istnieniem.</p>
+    </div>
+  </section>
+
+  <main class="container page-shell">
+    <div class="cards-stack">
+
+      <!-- OPIS -->
+      <article class="card">
+        <span class="card-accent">O książce</span>
+        <h2 class="card-title">Spojrzenie Boga. Bliźniacze Dusze</h2>
+        <div class="book-desc-text">
+          <p>„Spojrzenie Boga" prowadzi do poznania czym jest miłość absolutna. Daje czytelnikowi poczucie bezpieczeństwa pod czułym spojrzeniem Boga, zamykając cierpienie rozdwojenia. Powtarzająca się refleksja nad pytaniem <em>Kim Jestem</em> ugruntowuje czytelnika w zachwycie nad własnym Istnieniem i ukochaniu siebie.</p>
+        </div>
+      </article>
+
+      <!-- SŁOWO WSTĘPNE -->
+      <article class="card">
+        <span class="card-accent">Słowo wstępne</span>
+        <div class="collapsible-body collapsible-collapsed" id="slowoWstepne">
+          <div class="poem-block">
+            <span class="poem-line">Kluczem do życia,</span>
+            <span class="poem-line">Istotą życia,</span>
+            <span class="poem-line">Świętym Graalem obfitości i spełnienia,</span>
+            <span class="poem-line">jest odpowiedź na pytanie:</span>
+            <span class="poem-break"></span>
+            <span class="poem-line"><strong>Kim Jestem?</strong></span>
+            <span class="poem-line">Zadziwienie tym:</span>
+            <span class="poem-line"><strong>Kim Jestem.</strong></span>
+            <span class="poem-break"></span>
+            <span class="poem-line">Nieustanne zadawanie tego pytania</span>
+            <span class="poem-line">otwiera wrota</span>
+            <span class="poem-line">Uniwersalnej Siły Miłości,</span>
+            <span class="poem-line">– Tajemnicy Istnienia –</span>
+            <span class="poem-break"></span>
+            <span class="poem-line">To czego naprawdę pragniesz</span>
+            <span class="poem-line">otrzymasz,</span>
+            <span class="poem-line">łącząc się ze Źródłem Istnienia w sobie,</span>
+            <span class="poem-line">do którego kluczem jest pytanie:</span>
+            <span class="poem-line"><strong>Kim Jestem?</strong></span>
+            <span class="poem-break"></span>
+            <span class="poem-line">Na to pytanie nie ma odpowiedzi.</span>
+            <span class="poem-line">Odpowiedź objawia się jedynie w Ciszy Obecności.</span>
+            <span class="poem-line">W niej znajduje się Zrozumienie i przystęp do Prawdy.</span>
+            <span class="poem-break"></span>
+            <span class="poem-line">Gdy doświadczysz tego, Kim Jesteś</span>
+            <span class="poem-line">– zadziwisz się –</span>
+            <span class="poem-line">Zadziwić się, to</span>
+            <span class="poem-line">kierować nieoceniającą uwagę,</span>
+            <span class="poem-line">wpatrywać się,</span>
+            <span class="poem-line">zachwycać,</span>
+            <span class="poem-line">uwielbiać,</span>
+            <span class="poem-line">lub inaczej</span>
+            <span class="poem-line">– Kochać –</span>
+            <span class="poem-break"></span>
+            <span class="poem-line">Zachwycony tym, że Jesteś,</span>
+            <span class="poem-line">Zadziwiony tym,</span>
+            <span class="poem-line"><strong>Kim Jesteś,</strong></span>
+            <span class="poem-line">pokochasz siebie jakim Jesteś</span>
+            <span class="poem-line">i otworzysz się na</span>
+            <span class="poem-line">– Miłość –</span>
+            <span class="poem-break"></span>
+            <span class="poem-line">Miłość we wszystkich odsłonach:</span>
+            <span class="poem-line">Mądrość, Radość i Obfitość Spełnienia</span>
+            <span class="poem-stars">* * *</span>
+            <span class="poem-line">Gdyby tak ISTOTA twojego bytu,</span>
+            <span class="poem-line">ISTOTA tego Kim Jesteś</span>
+            <span class="poem-line">spojrzała na ciebie.</span>
+            <span class="poem-line">Spojrzała nieoceniającym wzrokiem pełnym Miłości</span>
+            <span class="poem-line">i przemówiła</span>
+            <span class="poem-line">– co by ci powiedziała?</span>
+            <span class="poem-break"></span>
+            <span class="poem-line">Co powiedziałoby ci</span>
+            <span class="poem-line">Serce</span>
+            <span class="poem-line">Tego Kim Jesteś?</span>
+            <span class="poem-break"></span>
+            <span class="poem-line">Co powiedziałby ci Bóg?</span>
+            <span class="poem-break"></span>
+            <span class="poem-line">Posłuchaj…</span>
+          </div>
+          <div class="collapsible-fade"></div>
+        </div>
+        <button class="collapsible-toggle" onclick="toggleCollapsible('slowoWstepne', this)">Czytaj całość ↓</button>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Ryszard Klein. Wszelkie prawa zastrzeżone.</p>
+        <a href="index.html" class="footer-back-link">← Powrót do strony głównej</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  const html = document.documentElement;
+  const toggleBtn = document.getElementById('themeToggle');
+  if (toggleBtn) toggleBtn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('rk-theme', next);
+  });
+
+  function toggleCollapsible(id, btn) {
+    const body = document.getElementById(id);
+    const isCollapsed = body.classList.contains('collapsible-collapsed');
+    body.classList.toggle('collapsible-collapsed', !isCollapsed);
+    btn.textContent = isCollapsed ? 'Zwiń ↑' : 'Czytaj całość ↓';
+    if (!isCollapsed) {
+      btn.closest('article').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+</script>
+</body>
+</html>
