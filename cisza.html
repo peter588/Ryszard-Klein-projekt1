@@ -30,6 +30,8 @@
     font-family: 'Jost', sans-serif;
     overflow-x: hidden;
   }
+
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
     padding: 1rem 2.5rem;
@@ -65,8 +67,10 @@
   .icon-sun  { display: none; }
   [data-theme="dark"] .icon-moon { display: none; }
   [data-theme="dark"] .icon-sun  { display: block; }
+
+  /* MASTHEAD */
   .page-masthead {
-    min-height: 45vh;
+    min-height: 40vh;
     display: flex; align-items: flex-end;
     padding: 7rem 2.5rem 3.5rem;
     background: linear-gradient(180deg, rgba(247,243,236,0.5), rgba(247,243,236,0.02));
@@ -89,24 +93,24 @@
     margin-top: 1rem; max-width: 760px;
     color: var(--ink-mid); line-height: 1.8;
   }
-  .container { max-width: 1180px; margin: 0 auto; padding: 0 2.5rem; }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2.5rem; }
   .page-shell { padding: 2.5rem 0 5rem; }
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.75rem;
-  }
+
+  /* CARDS — single column */
+  .cards-stack { display: flex; flex-direction: column; gap: 1.75rem; }
   .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 28px;
-    padding: 2rem;
+    padding: 2.5rem;
     box-shadow: 0 28px 70px rgba(16,14,12,0.08);
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 34px 90px rgba(16,14,12,0.12); }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 34px 90px rgba(16,14,12,0.12); }
   .card-accent {
     display: inline-flex; align-items: center; gap: 0.6rem;
     font-family: 'Jost', sans-serif; font-size: 0.72rem;
@@ -120,8 +124,6 @@
   }
   .card-copy { color: var(--ink-mid); line-height: 1.85; flex: 1; }
   .card-copy strong { color: var(--ink); }
-  .card-list { margin: 1.25rem 0 0; padding-left: 1.2rem; color: var(--ink-mid); }
-  .card-list li { margin-bottom: 0.9rem; }
   .card-link {
     margin-top: 1.5rem; align-self: flex-start;
     font-family: 'Jost', sans-serif; font-size: 0.85rem;
@@ -130,9 +132,67 @@
     display: inline-flex; align-items: center; gap: 0.55rem;
   }
   .card-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .award-highlight { background: linear-gradient(180deg, rgba(160,123,58,0.12), rgba(247,243,236,0.35)); }
-  .quote { margin: 1.4rem 0; padding-left: 1rem; border-left: 3px solid var(--gold); color: var(--ink); font-style: italic; line-height: 1.9; }
-  .review-meta { margin-top: 1rem; font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); }
+  .award-highlight { background: linear-gradient(160deg, rgba(160,123,58,0.1), var(--card-bg) 60%); }
+  .quote { margin: 1.4rem 0; padding-left: 1.25rem; border-left: 3px solid var(--gold); color: var(--ink); font-style: italic; line-height: 1.9; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.1rem; }
+  .review-meta { margin-top: 0.6rem; font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); }
+
+  /* VIDEO THUMBNAILS */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+  }
+  .video-thumb {
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  .video-thumb-img {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--mist);
+  }
+  .video-thumb-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+  .video-thumb:hover .video-thumb-img img { transform: scale(1.06); }
+  .video-play {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(28,25,20,0.28);
+    transition: background 0.3s;
+  }
+  .video-thumb:hover .video-play { background: rgba(160,123,58,0.48); }
+  .video-play-icon {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s, background 0.3s;
+  }
+  .video-thumb:hover .video-play-icon { transform: scale(1.1); background: #fff; }
+  .video-play-icon svg {
+    width: 18px; height: 18px;
+    fill: var(--gold); margin-left: 3px;
+  }
+  .video-label {
+    margin-top: 0.75rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; font-weight: 400;
+    color: var(--ink); line-height: 1.35;
+  }
+  .video-sublabel {
+    font-family: 'Jost', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-light); margin-top: 0.25rem;
+  }
+
   /* FOOTER */
   footer {
     background-color: #1b1612;
@@ -157,10 +217,15 @@
     color: rgba(201,168,104,0.65); text-decoration: none; transition: color 0.3s;
   }
   .footer-back-link:hover { color: #C9A868; }
-  @media (max-width: 900px) {
+
+  @media (max-width: 700px) {
     .page-masthead { padding: 6rem 1.5rem 2.5rem; }
     .container { padding: 0 1.5rem; }
-    .cards-grid { grid-template-columns: 1fr; }
+    .card { padding: 1.75rem; border-radius: 20px; }
+    .video-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 701px) and (max-width: 900px) {
+    .video-grid { grid-template-columns: repeat(3, 1fr); }
   }
 </style>
 </head>
@@ -188,38 +253,76 @@
 
   <section class="page-masthead">
     <div class="container">
-      <p class="page-eyebrow">Cisza</p>
+      <p class="page-eyebrow">Cisza. Esencja naszego umysłu</p>
       <h1 class="page-title">Wywiady i recenzje książki</h1>
-      <p class="page-intro">Zobacz materiały poświęcone „Cisza. Esencja naszego umysłu” — rozmowy z dziennikarzami oraz opinie czytelników, które pokazują, jak książka trafia do serc i umysłów.</p>
+      <p class="page-intro">Zobacz materiały poświęcone „Cisza. Esencja naszego umysłu" — rozmowy z dziennikarzami oraz opinie czytelników, które pokazują, jak książka trafia do serc i umysłów.</p>
     </div>
   </section>
 
   <main class="container page-shell">
-    <div class="cards-grid">
+    <div class="cards-stack">
+
+      <!-- WYWIADY -->
       <article class="card">
         <span class="card-accent">Wywiady o ciszy</span>
         <h2 class="card-title">Rozmowy z redaktorami i mediami</h2>
-        <p class="card-copy">Wywiady na temat książki „Cisza. Esencja naszego umysłu” pojawiły się w telewizji, radiu i prasie. Zobacz materiały, w których książka staje się rozmową o wewnętrznym spokoju, samoświadomości i sile zatrzymania.</p>
-        <ul class="card-list">
-          <li><strong>Telewizja Porozmawiajmy TV</strong> — rozmowa z redaktorem Aleksem Berdowiczem.</li>
-          <li><strong>Radio Katowice</strong> — program „Skacząc po półkach” z Maciejem Szczawińskim.</li>
-          <li><strong>Dziennik Kijowski</strong> — wywiad z redaktorem Eugeniuszem Gołybardzem.</li>
-        </ul>
-        <a class="card-link" href="https://www.youtube.com/watch?v=Nt3dn_Xa8GI" target="_blank" rel="noopener">Obejrzyj wywiad TV<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
-        <a class="card-link" href="https://www.youtube.com/watch?v=36OA0M_G7Gg" target="_blank" rel="noopener">Obejrzyj Radiowe nagranie<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
-        <a class="card-link" href="https://www.youtube.com/watch?v=ej12ykNzjQM" target="_blank" rel="noopener">Obejrzyj wywiad prasowy<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
+        <p class="card-copy">Wywiady na temat książki „Cisza. Esencja naszego umysłu" pojawiły się w telewizji, radiu i prasie. Kliknij miniaturkę, by obejrzeć nagranie.</p>
+        <div class="video-grid">
+
+          <a href="https://www.youtube.com/watch?v=Nt3dn_Xa8GI" target="_blank" rel="noopener" class="video-thumb">
+            <div class="video-thumb-img">
+              <img src="https://img.youtube.com/vi/Nt3dn_Xa8GI/hqdefault.jpg" alt="Wywiad w Telewizji Porozmawiajmy TV">
+              <div class="video-play">
+                <div class="video-play-icon">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+              </div>
+            </div>
+            <p class="video-label">Telewizja Porozmawiajmy TV</p>
+            <p class="video-sublabel">Rozmowa z red. Aleksem Berdowiczem</p>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=36OA0M_G7Gg" target="_blank" rel="noopener" class="video-thumb">
+            <div class="video-thumb-img">
+              <img src="https://img.youtube.com/vi/36OA0M_G7Gg/hqdefault.jpg" alt="Wywiad w Radio Katowice">
+              <div class="video-play">
+                <div class="video-play-icon">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+              </div>
+            </div>
+            <p class="video-label">Radio Katowice</p>
+            <p class="video-sublabel">„Skacząc po półkach" — Maciej Szczawiński</p>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=ej12ykNzjQM" target="_blank" rel="noopener" class="video-thumb">
+            <div class="video-thumb-img">
+              <img src="https://img.youtube.com/vi/ej12ykNzjQM/hqdefault.jpg" alt="Wywiad w Dzienniku Kijowskim">
+              <div class="video-play">
+                <div class="video-play-icon">
+                  <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+              </div>
+            </div>
+            <p class="video-label">Dziennik Kijowski</p>
+            <p class="video-sublabel">Rozmowa z red. Eugeniuszem Gołybardzem</p>
+          </a>
+
+        </div>
       </article>
 
+      <!-- OPINIE -->
       <article class="card">
         <span class="card-accent">Opinie czytelników</span>
         <h2 class="card-title">Recenzje, które mówią wiele</h2>
-        <p class="card-copy">W opinii czytelników i ekspertów książka „Cisza” otwiera przestrzeń do refleksji, pokory i wewnętrznej przemiany. Oto fragmenty, które najlepiej pokazują siłę tej publikacji.</p>
-        <div class="quote">„Nie trzeba być wnikliwym obserwatorem, by zauważyć, że każdy człowiek koncentruje się głównie na samym sobie. Głębię tego uwarunkowania można zaobserwować, gdy ktoś próbuje wkraczać w nasz osobisty obszar.”</div>
-        <p class="review-meta">Opinia z dokumentacji książki „Cisza”</p>
-        <div class="quote">„Dlaczego polecam tę książkę? Jest to książka znakomita pod każdym względem. Jej zawartość jest starannie i rzetelnie przemyślana.”</div>
+        <p class="card-copy">W opinii czytelników i ekspertów książka „Cisza" otwiera przestrzeń do refleksji, pokory i wewnętrznej przemiany. Oto fragmenty, które najlepiej pokazują siłę tej publikacji.</p>
+        <div class="quote">„Nie trzeba być wnikliwym obserwatorem, by zauważyć, że każdy człowiek koncentruje się głównie na samym sobie. Głębię tego uwarunkowania można zaobserwować, gdy ktoś próbuje wkraczać w nasz osobisty obszar."</div>
+        <p class="review-meta">Opinia z dokumentacji książki „Cisza"</p>
+        <div class="quote">„Dlaczego polecam tę książkę? Jest to książka znakomita pod każdym względem. Jej zawartość jest starannie i rzetelnie przemyślana."</div>
         <p class="review-meta">Głos psychologa i recenzenta</p>
       </article>
 
+      <!-- GALERIA -->
       <article class="card">
         <span class="card-accent">Galeria</span>
         <h2 class="card-title">Cisza w obrazach</h2>
@@ -227,12 +330,14 @@
         <a class="card-link" href="cisza_gallery.html">Przejdź do galerii<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
       </article>
 
+      <!-- NAGRODA -->
       <article class="card award-highlight">
         <span class="card-accent">Nagroda</span>
         <h2 class="card-title">Najlepsza książka psychologiczna 2012</h2>
-        <p class="card-copy">Książka „Cisza. Esencja naszego umysłu” została wyróżniona jako najlepsza książka psychologiczna roku 2012 w kategorii rozwój osobisty – wybór jury i internautów podczas Targów Książki w Krakowie.</p>
+        <p class="card-copy">Książka „Cisza. Esencja naszego umysłu" została wyróżniona jako najlepsza książka psychologiczna roku 2012 w kategorii rozwój osobisty — wybór jury i internautów podczas Targów Książki w Krakowie.</p>
         <a class="card-link" href="nagroda.html">Zobacz nagrodę<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></a>
       </article>
+
     </div>
   </main>
 
