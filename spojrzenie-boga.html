@@ -176,6 +176,73 @@
   }
   .collapsible-toggle:hover { color: var(--ink); border-color: var(--ink); }
 
+  /* OPINIA */
+  .review-body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem; font-weight: 300;
+    color: var(--ink-mid); line-height: 1.9;
+  }
+  .review-body p { margin-bottom: 1.1rem; }
+  .review-body p:last-child { margin-bottom: 0; }
+  .review-sig {
+    margin-top: 1.75rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--mist);
+    font-family: 'Jost', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.08em; color: var(--ink-light); text-align: right;
+  }
+
+  /* VIDEO GRID */
+  .video-iframe-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+  }
+  .video-iframe-item { display: flex; flex-direction: column; gap: 0.65rem; }
+  .video-iframe-ratio {
+    display: block;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--mist);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .video-iframe-ratio img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.35s ease;
+  }
+  .video-iframe-ratio:hover img { transform: scale(1.05); }
+  .video-play-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(28,25,20,0.28);
+    transition: background 0.3s;
+  }
+  .video-iframe-ratio:hover .video-play-overlay { background: rgba(160,123,58,0.45); }
+  .video-play-btn {
+    width: 50px; height: 50px;
+    background: rgba(255,255,255,0.92); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s;
+  }
+  .video-iframe-ratio:hover .video-play-btn { transform: scale(1.1); }
+  .video-play-btn svg { width: 18px; height: 18px; fill: var(--gold); margin-left: 3px; }
+  .video-iframe-ratio iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: none; cursor: default;
+  }
+  .video-iframe-label {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; font-weight: 400;
+    color: var(--ink); line-height: 1.3;
+  }
+  @media (max-width: 600px) {
+    .video-iframe-grid { grid-template-columns: 1fr; }
+  }
+
   /* FOOTER */
   footer {
     background-color: #1b1612;
@@ -319,6 +386,23 @@
         <button class="collapsible-toggle" onclick="toggleCollapsible('slowoWstepne', this)">Czytaj całość ↓</button>
       </article>
 
+      <!-- OPINIA -->
+      <article class="card">
+        <span class="card-accent">Opinia</span>
+        <div class="review-body">
+          <p>Książka przedstawia człowieka prowadzącego wewnętrzny dialog. Z jednej strony rozdarcie i typowo ludzkie wątpliwości, z drugiej zaś cichy głos będący głosem jego Najwyższej Jaźni – głosem Boga. Książka jest pełna ciepła i zrozumienia. Przypomina jak wielką wartością jest życie. Daje konkretne narzędzie, jakim jest nieustanna próba zrozumienia — Kim Jestem?</p>
+          <p>Kiedy zrozumiesz Kim Jesteś znikną problemy, choć niekoniecznie będą rozwiązane. Pomimo górnolotnych i poetyckich słów, książka jest pełna psychologicznych, a nawet naukowych odniesień. Porządkuje wiedzę i oczyszcza umysł z iluzji. Kwintesencją tematyki jest przedstawienie wizji miłości absolutnej. Pojawia się również wątek bliźniaczych dusz. Książka zaopatrzona jest w liczne grafiki dające obraz ludzkich wątpliwości.</p>
+          <div class="review-sig">Maria Mikulska</div>
+        </div>
+      </article>
+
+      <!-- FRAGMENTY KSIĄŻKI -->
+      <article class="card">
+        <span class="card-accent">Wywiady i nagrania</span>
+        <h2 class="card-title">Fragmenty książki na filmie</h2>
+        <div class="video-iframe-grid" id="videoGrid"></div>
+      </article>
+
     </div>
   </main>
 
@@ -349,6 +433,49 @@
       btn.closest('article').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+
+  // Miniatury YouTube → kliknięcie otwiera film w nowej karcie
+  (function () {
+    var PLAY_ICON = '<div class="video-play-overlay"><div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>';
+
+    var videos = [
+      { id: '-NrYgz0MSAo', title: 'część 1 — Spotkanie' },
+      { id: 'K2Z8cVbzde8', title: 'część 2 — Odwieczna Świadomość' },
+      { id: 'gJLlL28dZgo', title: 'część 3 — Tęsknota za dostatkiem' },
+      { id: 'X45z1ax6zes', title: 'część 4 — Dlaczego Ty Jesteś Bogiem' },
+      { id: 'ijKHjXQI7bE', title: 'część 5 — Czym jest miłość?' }
+    ];
+
+    var grid = document.getElementById('videoGrid');
+    if (!grid) return;
+
+    videos.forEach(function (v) {
+      var item = document.createElement('div');
+      item.className = 'video-iframe-item';
+
+      var link = document.createElement('a');
+      link.href = 'https://www.youtube.com/watch?v=' + v.id;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'video-iframe-ratio';
+
+      var img = document.createElement('img');
+      img.src = 'https://img.youtube.com/vi/' + v.id + '/hqdefault.jpg';
+      img.alt = v.title;
+      img.loading = 'lazy';
+
+      link.appendChild(img);
+      link.insertAdjacentHTML('beforeend', PLAY_ICON);
+
+      var label = document.createElement('p');
+      label.className = 'video-iframe-label';
+      label.textContent = v.title;
+
+      item.appendChild(link);
+      item.appendChild(label);
+      grid.appendChild(item);
+    });
+  }());
 </script>
 </body>
 </html>
