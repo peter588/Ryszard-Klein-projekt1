@@ -258,6 +258,36 @@
   }
   .collapsible-toggle:hover { color: var(--ink); border-color: var(--ink); }
 
+  /* VIDEO IFRAMES GRID */
+  .video-iframe-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+  }
+  .video-iframe-item { display: flex; flex-direction: column; gap: 0.65rem; }
+  .video-iframe-ratio {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--mist);
+  }
+  .video-iframe-ratio iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .video-iframe-label {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; font-weight: 400;
+    color: var(--ink); line-height: 1.3;
+  }
+  @media (max-width: 600px) {
+    .video-iframe-grid { grid-template-columns: 1fr; }
+  }
+
   /* FOOTER */
   footer {
     background-color: #1b1612;
@@ -388,6 +418,43 @@
           <div class="collapsible-fade"></div>
         </div>
         <button class="collapsible-toggle" onclick="toggleCollapsible('wprowadzenie', this)">Czytaj całość ↓</button>
+      </article>
+
+      <!-- WYWIADY I NAGRANIA -->
+      <article class="card">
+        <span class="card-accent">Wywiady i nagrania</span>
+        <h2 class="card-title">Rozmowy z mediami i produkcje</h2>
+        <div class="video-iframe-grid">
+
+          <div class="video-iframe-item">
+            <div class="video-iframe-ratio">
+              <iframe src="https://www.youtube.com/embed/g2g-8_bA1Sg?rel=0" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="video-iframe-label">TVS Express Silesia</p>
+          </div>
+
+          <div class="video-iframe-item">
+            <div class="video-iframe-ratio">
+              <iframe src="https://www.youtube.com/embed/z64q_87fR_s?rel=0" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="video-iframe-label">Radio Katowice — „Skacząc po półkach"</p>
+          </div>
+
+          <div class="video-iframe-item">
+            <div class="video-iframe-ratio">
+              <iframe src="https://www.youtube.com/embed/5N37mBvH8O8?rel=0" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="video-iframe-label">Psychologia czakr</p>
+          </div>
+
+          <div class="video-iframe-item">
+            <div class="video-iframe-ratio">
+              <iframe src="https://www.youtube.com/embed/WbWfIOnA6D8?rel=0" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="video-iframe-label">Medytacja stworzenia</p>
+          </div>
+
+        </div>
       </article>
 
     </div>
