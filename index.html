@@ -562,12 +562,33 @@
   .cycle-book-row {
     display: flex; align-items: center; gap: 1.5rem;
     padding: 1.2rem 0; border-bottom: 1px solid var(--mist);
-    transition: border-color 0.4s;
+    transition: border-color 0.4s, opacity 0.3s;
+    text-decoration: none;
   }
   .cycle-book-row:first-child { border-top: 1px solid var(--mist); }
+  .cycle-book-row:hover { opacity: 0.75; }
   .cycle-roman {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.2rem; font-weight: 300; color: var(--gold); min-width: 36px;
+  }
+  .cycle-book-thumb {
+    width: 38px; flex-shrink: 0;
+  }
+  .cycle-book-thumb img {
+    width: 100%; display: block;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(-4px 4px 8px rgba(28,25,20,0.15));
+    transition: transform 0.3s;
+  }
+  [data-theme="dark"] .cycle-book-thumb img {
+    mix-blend-mode: normal;
+    filter: drop-shadow(-3px 3px 8px rgba(0,0,0,0.5));
+  }
+  .cycle-book-row:hover .cycle-book-thumb img { transform: translateY(-2px) scale(1.04); }
+  .cycle-book-thumb-placeholder {
+    width: 38px; aspect-ratio: 2/3;
+    background: var(--mist); opacity: 0.4;
+    flex-shrink: 0;
   }
   .cycle-book-name {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -927,11 +948,31 @@
         <!-- <p>„Droga Ciszy" jest zapisem tych poszukiwań. Drogą od chaosu myśli ku większej uważności. Od iluzji i nieświadomych schematów ku prostszemu, bardziej trzeźwemu widzeniu siebie. Od potrzeby kontroli ku zaufaniu. Od zagubienia w świecie zewnętrznym ku spokojniejszemu kontaktowi z własnym wnętrzem.</p> -->
       </div>
       <div class="cycle-bottom fade-in">
-        <div class="cycle-book-row"><span class="cycle-roman">I</span><span class="cycle-book-name">Cisza. Esencja naszego umysłu</span></div>
-        <div class="cycle-book-row"><span class="cycle-roman">II</span><span class="cycle-book-name">Jam Jest</span></div>
-        <div class="cycle-book-row"><span class="cycle-roman">III</span><span class="cycle-book-name">Spojrzenie Boga. Bliźniacze Dusze</span></div>
-        <div class="cycle-book-row"><span class="cycle-roman">IV</span><span class="cycle-book-name">Ścieżki spełnionego życia</span></div>
-        <div class="cycle-book-row"><span class="cycle-roman">V</span><span class="cycle-book-name upcoming">Szczelina decyzji ↗ wkrótce</span></div>
+        <a href="#book-cisza" class="cycle-book-row">
+          <span class="cycle-roman">I</span>
+          <div class="cycle-book-thumb"><img src="images/books/cisza.webp" alt="Cisza. Esencja naszego umysłu"></div>
+          <span class="cycle-book-name">Cisza. Esencja naszego umysłu</span>
+        </a>
+        <a href="#book-jam-jest" class="cycle-book-row">
+          <span class="cycle-roman">II</span>
+          <div class="cycle-book-thumb"><img src="images/books/jam_jest.webp" alt="Jam Jest"></div>
+          <span class="cycle-book-name">Jam Jest</span>
+        </a>
+        <a href="#book-spojrzenie" class="cycle-book-row">
+          <span class="cycle-roman">III</span>
+          <div class="cycle-book-thumb"><img src="images/books/spojrzenie_boga.webp" alt="Spojrzenie Boga. Bliźniacze Dusze"></div>
+          <span class="cycle-book-name">Spojrzenie Boga. Bliźniacze Dusze</span>
+        </a>
+        <a href="#book-sciezki" class="cycle-book-row">
+          <span class="cycle-roman">IV</span>
+          <div class="cycle-book-thumb"><img src="images/books/sciezki_spelnionego_zycia.webp" alt="Ścieżki spełnionego życia"></div>
+          <span class="cycle-book-name">Ścieżki spełnionego życia</span>
+        </a>
+        <a href="#book-szczelina" class="cycle-book-row">
+          <span class="cycle-roman">V</span>
+          <div class="cycle-book-thumb-placeholder"></div>
+          <span class="cycle-book-name upcoming">Szczelina decyzji ↗ wkrótce</span>
+        </a>
       </div>
     </div>
   </div>
@@ -946,7 +987,7 @@
       <!-- <p>Pięć książek, które wyrastają z jednej potrzeby: lepiej zrozumieć człowieka, jego umysł, świadomość i drogę do wewnętrznej wolności.</p> -->
     </div>
 
-    <div class="book-item fade-in">
+    <div class="book-item fade-in" id="book-cisza">
       <div class="book-number">01</div>
       <div class="book-cover">
         <img src="images/books/cisza.webp" alt="Cisza. Esencja naszego umysłu">
@@ -969,7 +1010,7 @@
       </div>
     </div>
 
-    <div class="book-item fade-in">
+    <div class="book-item fade-in" id="book-jam-jest">
       <div class="book-number">02</div>
       <div class="book-cover">
         <img src="images/books/jam_jest.webp" alt="Jam Jest">
@@ -987,7 +1028,7 @@
       </div>
     </div>
 
-    <div class="book-item fade-in">
+    <div class="book-item fade-in" id="book-spojrzenie">
       <div class="book-number">03</div>
       <div class="book-cover">
         <img src="images/books/spojrzenie_boga.webp" alt="Spojrzenie Boga. Bliźniacze Dusze">
@@ -1007,7 +1048,7 @@
       </div>
     </div>
 
-    <div class="book-item fade-in">
+    <div class="book-item fade-in" id="book-sciezki">
       <div class="book-number">04</div>
       <div class="book-cover">
         <img src="images/books/sciezki_spelnionego_zycia.webp" alt="Ścieżki spełnionego życia">
@@ -1026,7 +1067,7 @@
       </div>
     </div>
 
-    <div class="book-item fade-in">
+    <div class="book-item fade-in" id="book-szczelina">
       <div class="book-number">05</div>
       <div class="book-cover">
         <div class="book-cover-placeholder">
