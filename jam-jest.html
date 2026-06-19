@@ -258,14 +258,17 @@
   }
   .collapsible-toggle:hover { color: var(--ink); border-color: var(--ink); }
 
-  /* VIDEO IFRAMES GRID */
+  /* VIDEO GRID (thumbnail mode + iframe mode) */
   .video-iframe-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     margin-top: 1.75rem;
   }
-  .video-iframe-item { display: flex; flex-direction: column; gap: 0.65rem; }
+  .video-iframe-item {
+    display: flex; flex-direction: column; gap: 0.65rem;
+    text-decoration: none; color: inherit;
+  }
   .video-iframe-ratio {
     position: relative;
     aspect-ratio: 16 / 9;
@@ -273,12 +276,37 @@
     overflow: hidden;
     background: var(--mist);
   }
-  .video-iframe-ratio iframe {
-    position: absolute;
-    top: 0; left: 0;
+
+  /* -- THUMBNAIL MODE (aktywny do czasu zmiany domeny) -- */
+  .video-iframe-ratio img {
     width: 100%; height: 100%;
-    border: none;
+    object-fit: cover; display: block;
+    transition: transform 0.35s ease;
   }
+  .video-iframe-item:hover .video-iframe-ratio img { transform: scale(1.05); }
+  .video-play-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(28,25,20,0.28);
+    transition: background 0.3s;
+  }
+  .video-iframe-item:hover .video-play-overlay { background: rgba(160,123,58,0.45); }
+  .video-play-btn {
+    width: 50px; height: 50px;
+    background: rgba(255,255,255,0.92); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s;
+  }
+  .video-iframe-item:hover .video-play-btn { transform: scale(1.1); }
+  .video-play-btn svg { width: 18px; height: 18px; fill: var(--gold); margin-left: 3px; }
+
+  /* -- IFRAME MODE (przywrócić po zmianie domeny na ryszardklein.pl) --
+  .video-iframe-ratio iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: none;
+  }
+  -- koniec iframe mode -- */
+
   .video-iframe-label {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1rem; font-weight: 400;
@@ -426,33 +454,37 @@
         <h2 class="card-title">Rozmowy z mediami i produkcje</h2>
         <div class="video-iframe-grid">
 
-          <div class="video-iframe-item">
+          <a href="https://youtube.com/playlist?list=PLVPGj9p2vxcmdwfYOhBqI3xlk98qFmxX_&si=gBsMmcKS4q41RBMz" target="_blank" rel="noopener" class="video-iframe-item">
             <div class="video-iframe-ratio">
-              <iframe src="https://www.youtube.com/embed/g2g-8_bA1Sg?rel=0" allowfullscreen loading="lazy"></iframe>
+              <img src="https://img.youtube.com/vi/g2g-8_bA1Sg/hqdefault.jpg" alt="TVS Express Silesia">
+              <div class="video-play-overlay"><div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
             </div>
             <p class="video-iframe-label">TVS Express Silesia</p>
-          </div>
+          </a>
 
-          <div class="video-iframe-item">
+          <a href="https://youtube.com/playlist?list=PLVPGj9p2vxcmdwfYOhBqI3xlk98qFmxX_&si=gBsMmcKS4q41RBMz" target="_blank" rel="noopener" class="video-iframe-item">
             <div class="video-iframe-ratio">
-              <iframe src="https://www.youtube.com/embed/z64q_87fR_s?rel=0" allowfullscreen loading="lazy"></iframe>
+              <img src="https://img.youtube.com/vi/z64q_87fR_s/hqdefault.jpg" alt="Radio Katowice">
+              <div class="video-play-overlay"><div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
             </div>
             <p class="video-iframe-label">Radio Katowice — „Skacząc po półkach"</p>
-          </div>
+          </a>
 
-          <div class="video-iframe-item">
+          <a href="https://youtube.com/playlist?list=PLVPGj9p2vxcmdwfYOhBqI3xlk98qFmxX_&si=gBsMmcKS4q41RBMz" target="_blank" rel="noopener" class="video-iframe-item">
             <div class="video-iframe-ratio">
-              <iframe src="https://www.youtube.com/embed/5N37mBvH8O8?rel=0" allowfullscreen loading="lazy"></iframe>
+              <img src="https://img.youtube.com/vi/5N37mBvH8O8/hqdefault.jpg" alt="Psychologia czakr">
+              <div class="video-play-overlay"><div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
             </div>
             <p class="video-iframe-label">Psychologia czakr</p>
-          </div>
+          </a>
 
-          <div class="video-iframe-item">
+          <a href="https://www.youtube.com/playlist?list=PLVPGj9p2vxclANJYY7l4BRSgkAp2PzKA1" target="_blank" rel="noopener" class="video-iframe-item">
             <div class="video-iframe-ratio">
-              <iframe src="https://www.youtube.com/embed/WbWfIOnA6D8?rel=0" allowfullscreen loading="lazy"></iframe>
+              <img src="https://img.youtube.com/vi/WbWfIOnA6D8/hqdefault.jpg" alt="Medytacja stworzenia">
+              <div class="video-play-overlay"><div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
             </div>
             <p class="video-iframe-label">Medytacja stworzenia</p>
-          </div>
+          </a>
 
         </div>
       </article>
