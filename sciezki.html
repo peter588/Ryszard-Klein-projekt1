@@ -177,6 +177,45 @@
   }
   .sentencja-btn:hover { color: var(--ink); border-color: var(--ink); }
 
+  /* COLLAPSIBLE */
+  .collapsible-body {
+    position: relative;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.08rem; font-weight: 300; font-style: italic;
+    color: var(--ink-mid); line-height: 1.95;
+  }
+  .collapsible-body p { margin-bottom: 1rem; }
+  .collapsible-body p:last-child { margin-bottom: 0; }
+  .collapsible-collapsed { max-height: 10rem; overflow: hidden; }
+  .collapsible-fade {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 5rem;
+    background: linear-gradient(transparent, var(--card-bg));
+    pointer-events: none; transition: opacity 0.4s;
+  }
+  .collapsible-body:not(.collapsible-collapsed) .collapsible-fade { opacity: 0; }
+  .collapsible-toggle {
+    margin-top: 1.25rem; align-self: flex-start;
+    font-family: 'Jost', sans-serif; font-size: 0.82rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); background: none; border: none;
+    border-bottom: 1px solid var(--gold-light);
+    cursor: pointer; padding-bottom: 2px;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .collapsible-toggle:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* FRAGMENTY */
+  .fragment-stars {
+    display: block; text-align: center;
+    font-style: normal; letter-spacing: 0.5em;
+    color: var(--gold-light); font-size: 1rem;
+    margin: 1.4rem 0;
+  }
+  .fragment-block p { font-style: italic; }
+  .fragment-block .plain { font-style: normal; }
+
   /* FOOTER */
   footer {
     background-color: #1b1612;
@@ -280,6 +319,127 @@
         </a>
       </article>
 
+      <!-- FRAGMENTY -->
+      <article class="card">
+        <span class="card-accent">Fragmenty książki</span>
+        <div class="collapsible-body collapsible-collapsed fragment-block" id="fragmenty">
+
+          <p>Opór przed tym co jest<br>
+          to opór wobec samego sobie,<br>
+          to opór wobec własnych tworów,<br>
+          to wybór cierpienia.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p>Prawdziwe szczęście nie ma swojej przyczyny,<br>
+          jest ponad bólem i przyjemnością.<br>
+          Prawdziwe szczęście wynika z faktu istnienia.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p>Jako w twoim sercu,<br>
+          tak i na ziemi twoich oczekiwań.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p>Stan Obecności, stan Medytacji jest życiem.<br>
+          Jeżeli tkwisz w niepokojach własnego umysłu,<br>
+          nie żyjesz.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p>Lepiej zatonąć,<br>
+          niż zwinąć żagle<br>
+          i zostać niewolnikiem własnych lęków.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p>Ludzkość zmierza tam,<br>
+          dokąd TY się kierujesz.<br>
+          TY jesteś przyszłością.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p>Mocą przyszłości<br>
+          jest Cisza Twojego umysłu.<br>
+          Mocą przyszłości jest<br>
+          Twoja Radość,<br>
+          Twoja Kreatywność,<br>
+          Optymizm<br>
+          i Wdzięczność.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p class="plain">Jesteśmy świadkami dwóch równoległych rzeczywistości;</p>
+          <p class="plain">Z jednej strony fascynujący postęp techniczny, naukowy i edukacyjny, niewyobrażalne, wszechobecne udogodnienia, codzienna radość z dostępu do wszystkiego i wszędzie;</p>
+          <p class="plain">Z drugiej, osamotniony człowiek, który od tysięcy lat poszukuje własnej tożsamości. Siedzi i rozmyśla Kim Jest i dokąd iść.</p>
+          <p class="plain">Na szali przyszłości znajduje się z jednej strony sztuczna inteligencja, z drugiej człowiek, który albo odkryje Kim Jest, albo pozwoli się jej pochłonąć. Po raz pierwszy w historii naszej cywilizacji sami siebie ustawiliśmy w szachu. Kolejny ruch należy jednak do nas.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p>Ludzkość trwa w błogim śnie<br>
+          o własnym przebudzeniu.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p class="plain">Całym sobą odczuwam, że jestem istotą wieczną, że jestem Duchem w ciele, że moje szanse poznawania i dokonywania wyborów nie kończą się wraz ze śmiercią. Chcę dalej doświadczać, żyć i odczuwać, chociaż niekoniecznie w świecie, w którym trzeba stawiać ogrodzenie i zamykać mieszkanie. Możliwości jest nieskończenie wiele. Pragnienie życia i doświadczania jest prawem mojej wolnej woli.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p class="plain">Porzućmy opisy życia i zacznijmy żyć. Porzućmy zewnętrzną formę savoir-vivre'u i przywróćmy do naturalności. Niech nasze zachowania nie będą ucywilizowane, lecz niech wynikają z wnętrza. Moralności, uczciwości, Mądrości nie sposób się nauczyć. To wszystko jest w nas, trzeba jedynie rozpoznać własne bogactwo, moc i piękno.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p class="plain">Podlegamy prawu cykliczności, gdyż decyduje za nas energia nieuświadomionych uczuć. Dusza uwikłana w niepokoje, pragnienia i lęki, w emocje, których nie rozpoznała za życia, dąży do ich zrównoważenia i samoistnie powraca. Powraca, bo taka jest decyzja jej energii. Każdy z nas jest w innym miejscu na prostej nieskończonej Poznania. Mamy więc czas, a ostateczny cel to powrót do Źródła.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p class="plain">Hollywoodzka reżyseria naszego życia utrzymuje nas w przekonaniu, że mamy ok. 90 lat czasu na poznanie nieskończonego Boga, na odnalezienie i poznanie siebie, na stworzenie koncepcji swojego istnienia, korzystając przy tym z nieskończenie zaplątanego umysłu. Dalsza narracja utrzymuje nas w przeświadczeniu, że wszystko, co się wydarza, uzależnione jest od czegoś zewnętrznego, np. od szczęścia, genów czy łaski Bożej, która w tej koncepcji nie wiadomo jakimi kieruje się zasadami. Taki obraz świata budzi jedynie lęk i niepewność, a w konsekwencji pośpiech, zachłanność i bezkarność.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p class="plain">Zachowujemy się często, jak dzieci na placu zabaw. Trwonimy energię w walce o utraconą zabawkę. Obrażamy się i złościmy, tupiąc nogami. Zamartwiamy się o innych. Zajmujemy się wszystkim tylko nie samym sobą. Emocjonujemy się rywalizacją hipnotycznego świata polityki, bądź snem hollywoodzkich opowieści filmowych. Przeżywajmy telenowele innych biorąc na siebie ich cierpienia. Tymczasem energia Źródła uchodzi z nas jak z dziurawego garnka, a my tracimy zdrowie, ściągając na siebie niechciane okoliczności. Czy rozsądnym jest niekontrolowane szastanie energią życiową, brak umiaru i zachłanność?</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p class="plain">W większości jesteśmy ofiarami wyklutego przez samych siebie losu. Utraciliśmy suwerenność i decyzyjność. Nasza wolność jest ograniczona i przejęta przez tych, którym oddaliśmy nad sobą kontrolę. Stosujemy się do różnych: jurysdykcji, zaleceń, obostrzeń, zakazów i nakazów, oraz przepisów bankowych. Uwarunkowani jesteśmy ideami, które przejęliśmy od innych. Ograniczamy nasze postępowanie do zasłyszanych narracji, filozofii, religii, polityki, świata mody, stylu życia i wszechobecnego zegara. Praca zawodowa to najczęściej oddanie wolności na usługi systemu. Rzadko kiedy wykonujemy czynności, jakie sami chcemy. Droga wyjścia jest prosta, jednak trudno ją dostrzec.</p>
+
+          <span class="fragment-stars">✦ ✦ ✦</span>
+
+          <p>Podstawową ścieżką spełnionego życia<br>
+          jest naturalność, prostota,<br>
+          unikanie napięć, sprzeciwu, ocen<br>
+          i wszelkiej biegunowości.<br><br>
+          Wypracowanie takich postaw<br>
+          jest efektem trwałego przebywania w stanie Obecności<br>
+          w stanie Ciszy serca.</p>
+
+          <p>Podstawową ścieżką spełnionego życia<br>
+          jest nie-Działanie.<br>
+          Sposób aktywności, w której wszystko dokonuje się bez napięcia,<br>
+          jakby samo, jakby przeze mnie.<br>
+          Tego rodzaju pokój Duszy wypracowuje trwały stan Medytacji<br>
+          stan z Ciszy serca.</p>
+
+          <p>Podstawową ścieżką spełnionego życia<br>
+          jest trwała świadomość swojej najgłębszej istoty,<br>
+          świadomość tego Kim Jestem,<br>
+          gdzie Jestem<br>
+          i dokąd zmierzam.<br>
+          Utrzymanie tak trwałego przebudzenia, to innymi słowy<br>
+          ciągła Obecność, to Cisza serca.</p>
+
+          <p>Podstawową ścieżką spełnionego życia<br>
+          jest umiar, pokora i współodczuwająca Miłość.<br>
+          Te trzy skarby, z których największa jest Miłość,<br>
+          rodzą się z trwałego przebywania w stanie Medytacji,<br>
+          w Ciszy serca.</p>
+
+          <div class="collapsible-fade"></div>
+        </div>
+        <button class="collapsible-toggle" onclick="toggleCollapsible('fragmenty', this)">Czytaj całość ↓</button>
+      </article>
+
       <!-- SENTENCJA -->
       <article class="card">
         <span class="card-accent">Sentencje</span>
@@ -320,6 +480,16 @@
     html.setAttribute('data-theme', next);
     localStorage.setItem('rk-theme', next);
   });
+
+  function toggleCollapsible(id, btn) {
+    const body = document.getElementById(id);
+    const isCollapsed = body.classList.contains('collapsible-collapsed');
+    body.classList.toggle('collapsible-collapsed', !isCollapsed);
+    btn.textContent = isCollapsed ? 'Zwiń ↑' : 'Czytaj całość ↓';
+    if (!isCollapsed) {
+      btn.closest('article').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 
   var sentencje = [
     { num: 'I',       title: 'Znaczenie słowa',                                        lines: ['SŁOWO MOŻE BYĆ ODBICIEM PRAWDY,', 'GDY KWESTIONUJEMY JEGO ZNACZENIE.', 'PRAWDA ZNAJDUJE SIĘ POMIĘDZY WIERSZAMI SŁÓW.'] },
