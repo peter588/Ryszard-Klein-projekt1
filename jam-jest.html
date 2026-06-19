@@ -161,9 +161,8 @@
   .intro-svg {
     position: sticky; top: 100px;
   }
-  .intro-svg object {
+  .intro-svg img {
     width: 100%; height: auto;
-    aspect-ratio: 690 / 731;
     display: block;
     animation: blobGlow 7s ease-in-out infinite alternate;
   }
@@ -171,7 +170,7 @@
     from { filter: drop-shadow(-4px 6px 14px rgba(160,123,58,0.18)) drop-shadow(4px 8px 20px rgba(160,123,58,0.10)); }
     to   { filter: drop-shadow(-8px 12px 32px rgba(160,123,58,0.40)) drop-shadow(6px 10px 28px rgba(160,123,58,0.25)); }
   }
-  [data-theme="dark"] .intro-svg object {
+  [data-theme="dark"] .intro-svg img {
     animation: blobGlowDark 7s ease-in-out infinite alternate;
   }
   @keyframes blobGlowDark {
@@ -303,7 +302,7 @@
         <span class="card-accent">O książce</span>
         <div class="intro-grid">
           <div class="intro-svg">
-            <object type="image/svg+xml" data="images/jam_jest/render.svg" aria-label="Jam Jest"></object>
+            <img src="images/jam_jest/render.svg" alt="Jam Jest">
           </div>
           <div class="intro-text">
             <p>Drogi Czytelniku! Książka, którą trzymasz w ręku, nie trafiła do Ciebie przypadkowo.</p>
