@@ -881,23 +881,24 @@
     .section-title { font-size: 1.8rem; }
     .sentencja-text { font-size: 1.3rem; }
 
-    /* Książki — układ pionowy: cyfra → okładka → treść */
+    /* Książki — cyfra po lewej okładki, treść pełna szerokość pod spodem */
     .book-item {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 0;
-      padding: 2.5rem 0;
+      display: flex; flex-wrap: wrap;
+      align-items: flex-start; gap: 0.75rem 1rem;
+      padding: 2rem 0;
     }
     .book-number {
-      width: 100%; text-align: center;
-      font-size: 3rem; padding-top: 0;
-      margin-bottom: 0.5rem;
+      width: 36px; font-size: 2rem;
+      padding-top: 0.3rem; flex-shrink: 0;
     }
     .book-cover {
-      width: 130px; margin-bottom: 1.5rem;
-      align-self: center;
+      width: 95px; flex-shrink: 0;
     }
     .book-content {
-      width: 100%;
+      width: 100%; flex-basis: 100%;
+    }
+    .book-cta-link {
+      margin-left: auto; margin-right: auto;
     }
   }
 
