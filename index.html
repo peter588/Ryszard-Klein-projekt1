@@ -868,6 +868,10 @@
     .book-item { grid-template-columns: 50px 110px 1fr; gap: 1.5rem; }
     .book-number { font-size: 2.5rem; }
 
+    /* Droga Ciszy — pełna szerokość na mobilnych */
+    .cycle-bottom,
+    .cycle-desc { max-width: 100%; }
+
     .media-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   }
@@ -876,8 +880,25 @@
     .media-grid { grid-template-columns: 1fr; }
     .section-title { font-size: 1.8rem; }
     .sentencja-text { font-size: 1.3rem; }
-    .book-item { grid-template-columns: 40px 80px 1fr; gap: 1rem; }
-    .book-number { font-size: 2rem; }
+
+    /* Książki — układ pionowy: cyfra → okładka → treść */
+    .book-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0;
+      padding: 2.5rem 0;
+    }
+    .book-number {
+      width: 100%; text-align: center;
+      font-size: 3rem; padding-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .book-cover {
+      width: 130px; margin-bottom: 1.5rem;
+      align-self: center;
+    }
+    .book-content {
+      width: 100%;
+    }
   }
 
   /* PARTNERZY */
