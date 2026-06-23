@@ -412,6 +412,10 @@
     display: inline-flex; align-items: center; gap: 0.5rem;
   }
   .about-read-more-btn:hover { color: var(--ink); border-color: var(--ink); }
+  .about-btns-row {
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .about-btns-row a.about-read-more-btn { text-decoration: none; }
   .about-full {
     display: none; margin-top: 2.5rem;
     padding-top: 2.5rem; border-top: 1px solid var(--mist);
@@ -958,7 +962,10 @@
         <p class="fade-in">Odkąd pamiętam, zadawałem pytania o sens życia, naturę istnienia i tajemnicę ludzkiego umysłu. Z czasem zrozumiałem, że umiejętne zadawanie pytań jest często bardziej konstruktywne niż próba udzielania odpowiedzi.</p>
         <p class="fade-in fade-in-delay-1">Moje doświadczenie życiowe zrodziło we mnie potrzebę pisania. Z zawodu jestem muzykiem, ale najbardziej fascynuje mnie ludzki umysł, świadomość i droga człowieka ku większej wolności wewnętrznej. Patrząc szerzej na historię i współczesny świat, widać, jak mocno naszymi wyborami kierują uwarunkowania, lęki, pragnienia i zbiorowe scenariusze. Właśnie dlatego tak bardzo interesuje mnie droga od nieświadomego działania ku bardziej świadomemu wyborowi.</p>
         <p class="fade-in fade-in-delay-2">Moje książki są zapisem tych poszukiwań. Powstały z życia, z doświadczeń, z pracy z ludźmi, z muzyki, z ciszy i z pytań, które przez wiele lat prowadziły mnie w głąb siebie.</p>
-        <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Czytaj więcej →</button>
+        <div class="about-btns-row">
+          <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Czytaj więcej →</button>
+          <a href="pasje.html" class="about-read-more-btn">Moje pasje →</a>
+        </div>
         <div class="about-full" id="aboutFull">
           <div class="about-divider">
             <div class="about-divider-line"></div>

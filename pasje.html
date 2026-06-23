@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+<script>(function(){var t=localStorage.getItem('rk-theme');if(t)document.documentElement.setAttribute('data-theme',t);}());</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moje pasje — Ryszard Klein</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root, [data-theme="light"] {
+    --cream: #F7F3EC; --cream-dark: #EDE6D8;
+    --ink: #1C1914; --ink-mid: #3D3830; --ink-light: #6B6356;
+    --gold: #A07B3A; --gold-light: #C9A868; --gold-pale: #F0E4C8;
+    --mist: #D4CDBF; --white: #FDFAF5;
+    --nav-bg: rgba(247,243,236,0.93);
+    --about-bg: #FDFAF5;
+    --toggle-bg: #3D3830; --toggle-color: #F7F3EC;
+    --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  }
+  [data-theme="dark"] {
+    --cream: #161210; --cream-dark: #1E1A16;
+    --ink: #F0EAE0; --ink-mid: #D5CBBA; --ink-light: #9A8E7E;
+    --gold: #C9A868; --gold-light: #A07B3A; --gold-pale: #2A2218;
+    --mist: #3A332A; --white: #1A1612;
+    --nav-bg: rgba(22,18,16,0.95);
+    --about-bg: #1A1612;
+    --toggle-bg: #C9A868; --toggle-color: #161210;
+    --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream); color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px; line-height: 1.75; overflow-x: hidden;
+    transition: var(--theme-transition);
+  }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    width: 36px; height: 36px; background: var(--toggle-bg);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s; flex-shrink: 0;
+  }
+  .theme-toggle:hover { opacity: 0.8; }
+  .theme-toggle svg {
+    width: 16px; height: 16px; stroke: var(--toggle-color);
+    fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .icon-moon { display: block; }
+  .icon-sun  { display: none; }
+  [data-theme="dark"] .icon-moon { display: none; }
+  [data-theme="dark"] .icon-sun  { display: block; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: var(--nav-bg); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--mist);
+    transition: var(--theme-transition);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-logo:hover { color: var(--gold); }
+  .nav-back {
+    font-family: 'Jost', sans-serif; font-size: 0.67rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light); text-decoration: none; transition: color 0.3s;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-back:hover { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+
+  /* PAGE MASTHEAD */
+  .page-masthead {
+    min-height: 38vh; display: flex; align-items: flex-end;
+    padding: 9rem 4rem 4rem; position: relative; overflow: hidden;
+    background: var(--cream); transition: var(--theme-transition);
+  }
+  .page-masthead::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url('images/premium-line-pattern.svg');
+    background-repeat: repeat; background-size: 80px 80px;
+    opacity: 0.038; pointer-events: none;
+  }
+  [data-theme="dark"] .page-masthead::before {
+    background-image: url('images/premium-line-pattern-dark.svg'); opacity: 0.04;
+  }
+  .page-masthead-inner { position: relative; z-index: 1; }
+  .page-eyebrow {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .page-eyebrow::after {
+    content: ''; display: inline-block;
+    height: 1px; width: 40px; background: var(--gold-light);
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 300; line-height: 1.1; color: var(--ink);
+    transition: color 0.4s;
+  }
+  .page-title em { font-style: italic; color: var(--gold); }
+
+  /* CONTENT SECTION */
+  .content-section {
+    background: var(--about-bg); padding: 6rem 0;
+    transition: var(--theme-transition);
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
+
+  /* PLACEHOLDER */
+  .pasje-placeholder {
+    text-align: center; max-width: 520px;
+    margin: 0 auto; padding: 4rem 0;
+  }
+  .pasje-ornament {
+    width: 80px; height: 80px; border: 1px solid var(--mist);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 2rem; color: var(--gold-light);
+    transition: var(--theme-transition);
+  }
+  .pasje-coming {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem; font-style: italic; font-weight: 300;
+    color: var(--ink-light); line-height: 1.65;
+    transition: color 0.4s;
+  }
+  .pasje-sub {
+    font-family: 'Jost', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mist); margin-top: 1rem; transition: color 0.4s;
+  }
+
+  /* FOOTER */
+  footer {
+    background-color: #1b1612;
+    background-image: url('images/footer-bg.svg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    padding: 3rem 0 2rem;
+  }
+  [data-theme="dark"] footer { background-color: #211c16; }
+  .footer-bottom {
+    border-top: 1px solid rgba(247,243,236,0.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.05em; color: rgba(247,243,236,0.3);
+  }
+  .footer-back-link {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(201,168,104,0.65); text-decoration: none; transition: color 0.3s;
+  }
+  .footer-back-link:hover { color: #C9A868; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .page-masthead { padding: 7rem 2rem 3rem; }
+    .container { padding: 0 1.5rem; }
+    .content-section { padding: 4rem 0; }
+  }
+  @media (max-width: 480px) {
+    .page-title { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ryszard Klein</a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">← Strona główna</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div class="page-masthead">
+  <div class="page-masthead-inner">
+    <p class="page-eyebrow">O mnie</p>
+    <h1 class="page-title">Moje <em>pasje</em></h1>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="container">
+    <div class="pasje-placeholder">
+      <div class="pasje-ornament">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <p class="pasje-coming">Ta przestrzeń wypełni się wkrótce galerią obrazów i opowieściami o tym, co bliskie sercu.</p>
+      <p class="pasje-sub">Treść w przygotowaniu</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Ryszard Klein. Wszelkie prawa zastrzeżone.</p>
+      <a href="index.html" class="footer-back-link">← Powrót do strony głównej</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const html = document.documentElement;
+  const toggleBtn = document.getElementById('themeToggle');
+  toggleBtn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('rk-theme', next);
+  });
+</script>
+</body>
+</html>
