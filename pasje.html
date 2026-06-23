@@ -116,35 +116,94 @@
   }
   .page-title em { font-style: italic; color: var(--gold); }
 
-  /* CONTENT SECTION */
-  .content-section {
-    background: var(--about-bg); padding: 6rem 0;
-    transition: var(--theme-transition);
-  }
   .container { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
 
-  /* PLACEHOLDER */
-  .pasje-placeholder {
-    text-align: center; max-width: 520px;
-    margin: 0 auto; padding: 4rem 0;
-  }
-  .pasje-ornament {
-    width: 80px; height: 80px; border: 1px solid var(--mist);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 2rem; color: var(--gold-light);
+  /* BIO SECTION */
+  .bio-section {
+    background: var(--about-bg);
+    padding: 5.5rem 0;
     transition: var(--theme-transition);
   }
-  .pasje-coming {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.3rem; font-style: italic; font-weight: 300;
-    color: var(--ink-light); line-height: 1.65;
+  .bio-prose {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .bio-prose p {
+    color: var(--ink-mid); font-weight: 300;
+    line-height: 1.9; margin-bottom: 1.6rem;
     transition: color 0.4s;
   }
-  .pasje-sub {
-    font-family: 'Jost', sans-serif; font-size: 0.7rem;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--mist); margin-top: 1rem; transition: color 0.4s;
+  .bio-prose p:last-child { margin-bottom: 0; }
+
+  /* SECTION ORNAMENT DIVIDER */
+  .ornament-divider {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 2rem 0; max-width: 760px; margin: 0 auto;
   }
+  .ornament-divider-line { flex: 1; height: 1px; background: var(--mist); transition: background 0.4s; }
+  .ornament-divider-symbol { color: var(--gold-light); font-size: 0.9rem; letter-spacing: 0.4em; }
+
+  /* PASSION SECTIONS */
+  .passion-section {
+    padding: 5rem 0;
+    transition: var(--theme-transition);
+  }
+  .passion-bg-1 { background: var(--cream); }
+  .passion-bg-2 { background: var(--about-bg); }
+  .passion-bg-3 { background: var(--cream); }
+  .passion-bg-4 { background: var(--cream-dark); }
+
+  /* PASSION HEADER */
+  .passion-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .passion-label::after {
+    content: ''; display: inline-block;
+    height: 1px; width: 40px; background: var(--gold-light);
+  }
+  .passion-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; color: var(--ink);
+    margin-bottom: 2.5rem; line-height: 1.2;
+    transition: color 0.4s;
+  }
+  .passion-title em { font-style: italic; color: var(--gold); }
+
+  /* VIDEOS GRID */
+  .videos-grid {
+    display: grid; gap: 2rem;
+  }
+  .videos-grid-2 { grid-template-columns: 1fr 1fr; }
+  .videos-grid-4 { grid-template-columns: 1fr 1fr; }
+  .video-embed {
+    aspect-ratio: 16 / 9; width: 100%;
+  }
+  .video-embed iframe {
+    width: 100%; height: 100%;
+    border: none; display: block;
+  }
+
+  /* PHOTOS GRID */
+  .photos-grid {
+    display: grid; gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .photos-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .photos-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .photos-grid figure {
+    overflow: hidden; margin: 0;
+    position: relative;
+  }
+  .photos-grid figure img {
+    width: 100%; aspect-ratio: 4/3;
+    object-fit: cover; display: block;
+    transition: transform 0.45s ease;
+  }
+  .photos-grid figure:hover img { transform: scale(1.04); }
 
   /* FOOTER */
   footer {
@@ -176,10 +235,15 @@
     nav { padding: 1rem 1.5rem; }
     .page-masthead { padding: 7rem 2rem 3rem; }
     .container { padding: 0 1.5rem; }
-    .content-section { padding: 4rem 0; }
+    .bio-section, .passion-section { padding: 3.5rem 0; }
+    .videos-grid-2,
+    .videos-grid-4 { grid-template-columns: 1fr; }
+    .photos-grid-3 { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 480px) {
     .page-title { font-size: 2.4rem; }
+    .photos-grid-2,
+    .photos-grid-3 { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -209,16 +273,132 @@
   </div>
 </div>
 
-<section class="content-section">
+<!-- BIOGRAFIA -->
+<section class="bio-section" id="bio">
   <div class="container">
-    <div class="pasje-placeholder">
-      <div class="pasje-ornament">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+    <div class="bio-prose">
+      <p>Po burzliwej młodości i zamknięciu marzeń o posłudze kapłańskiej, wstąpiłem w związek małżeński. W tym czasie ukończyłem Akademię Muzyczną w Katowicach, a później — już w dojrzałym wieku — Śląską Wyższą Szkołę Zarządzania w Oświacie. Moje życie osobiste, to głównie liczna rodzina; Pierwsza żona Maria i czwórka dzieci; Grażyna, Dawid, Mateusz i Marek, był też martwo urodzony syn Mariusz. Wokół rodziny toczyło się całe moje zabiegane życie. Dzieci uczestniczyły w zasadzie we wszystkich przedsięwzięciach. Prowadziłem zespoły muzyczne, działalność charytatywną, organizowałem koncerty, festiwale. Uczyłem w szkole, kierowałem instytucjami kultury, grałem w kościele na organach i dawałem prywatne lekcje gry na fortepianie i gitarze. Te, pozornie różne sfery łączyła jedna — w zasadzie towarzysząca mi od dzieciństwa — pasja poszukiwania Prawdy Życia. Pomiędzy zmaganiami codzienności i ciągłym pośpiechem tliła się we mnie nutka duchowych poszukiwań. Pracując w kilku miejscach jednocześnie (a wcześniej było jeszcze dziesięć lat pracy w Kopalni Zabrze i służba w Marynarce Wojennej) myślałem sobie, żartując: Gdybym tak dodał wszystkie lata, jako oddzielne miejsca pracy, wraz ze studiami, kursami i stopniami zawodowymi nauczyciela — przekroczyłbym znacznie 100 lat życia. Chyba to właśnie docenił Prezydent Rzeczypospolitej Polskiej honorując w 2013 r. całokształt mojej działalności Złotym Medalem za Długoletnią Służbę, a wcześniej Brązowym Krzyżem Zasługi.</p>
+
+      <p>W końcu zrezygnowałem z kariery zawodowej, by całkowicie oddać się swoim pasjom. Moja pierwsza książka <em>Cisza. Esencja naszego umysłu</em> została uznana za najlepszą książkę psychologiczną roku 2012. Pozycję tę przetłumaczyła na język hiszpański moja siostra Irena i wspólnie wydaliśmy ją w Argentynie. W roku 2013 wydałem książkę z audiobookiem zatytułowaną <em>Jam Jest</em>. Ta z kolei publikacja przełożona została na język angielski przez polską poetkę Marylę Rose mieszkającą na stałe w Australii. W roku 2016 książka doczekała się drugiego wydania, a rok później <em>Cisza…</em> trzeciego wydania w formie drukowanej i elektronicznej. W roku 2018 wydałem trzecią książkę <em>Spojrzenie Boga. Bliźniacze Dusze</em>. Tematyka tych trzech książek — choć różna stylistycznie — spójna jest pod kątem rozwoju osobistego, dlatego objąłem ją ogólną nazwą: Tryptyk Pokory, Spełnienia i Szczęścia. Ukoronowaniem mojej pracy pisarskiej jest wydana w 2023 roku książka <em>Ścieżki spełnionego życia. Współczesność a starożytna mądrość duchowa</em>.</p>
+
+      <p>Od czasu wydania pierwszej książki, moje życie uległo całkowitej przemianie. W tej części życia również owocnie uczestniczyły moje dzieci. Najwięcej satysfakcji przynosiły mi te przedsięwzięcia, w których uczestniczyły wszystkie; Grażyna jako wokalistka i kompozytorka (trzy fakultety); Dawid artysta fotograf i filmowiec; Mateusz pisarz, reżyser dźwięku, filmowiec, gitarzysta oraz założyciel i dyrektor Prywatnej Szkoły Muzyki Rozrywkowej w Żywcu; Marek pianista i kompozytor, oraz założyciel Zabrzańskiego Bractwa Rycerskiego; no i moje śpiewające wnuki: Marysia, Magdalena, Oliwia, Szymon i zaczynający dopiero śpiewać Jakub. Z takim bogatym zapleczem rozpocząłem działalność medialną: wywiady, spotkania autorskie, wykłady, artykuły do prasy oraz nagrania zamieszczane w YouTube (do 2019 r. obejrzało mnie ponad 400 000 osób). Prowadzone przeze mnie sesje indywidualne i warsztaty, stały się dla mnie bezcenną skarbnicą wiedzy o sobie i życiu. Największy udział w tych przedsięwzięciach miała Grażyna, która występowała wraz ze mną, oraz komponowała muzykę do audiobooka książki <em>Jam Jest</em>; Dawid, który filmował nasze występy, projektował okładki i uczył mnie obsługi różnych programów graficznych; Mateusz, który nagrywał materiały w swoim studio, a wcześniej Marek organizując pokazy walk rycerskich. Obecnie dzieci współpracują ze sobą organizując już własne, samodzielne projekty.</p>
+
+      <p>Oddzielny, bardzo istotny rozdział życia, to moje małżeństwo. Żona Maria, to moja miłość i mój największy nauczyciel. Cała moja uwaga koncentrowała się na związku, którego też nie potrafiłem zrozumieć. Właśnie ta trudna dla mnie relacja była motorem poszukiwań. Rozterki wynikające z braku porozumienia rzucały mnie w wir pracy. Zacząłem pisać książki, układać wiersze, malować obrazy. Organizowałem koncerty, spektakle słowno-muzyczne. Nagrywałem płyty CD. Wraz z młodzieżą zdobywałem laury na szczeblu krajowym i międzynarodowym. Chodziłem namiętnie po górach z moim ukochanym kuzynem Andrzejem (co zaowocowało legitymacją przodownika górskiego). Przede wszystkim zaś ciągle się uczyłem. Zgłębiałem Pismo Święte, Klucz do Biblii, historię filozofii, buddyzm, religioznawstwo, psychologię i moją miłość — astronomię. Tłem wszystkich moich zmagań było małżeństwo i zapytanie: Jak to możliwe, że dwoje ludzi z gruntu pozytywnych, pragnących szeroko pojętego dobra, zupełnie inaczej postrzega życie i siebie nawzajem? Nie sposób odnaleźć odpowiedzi na tak trudne dylematy bez głębokiego poznania samego siebie. Ostatecznie wspólnie z żoną postanowiliśmy się rozstać.</p>
+
+      <p>W wieku 62 lat rozpocząłem nowe, samodzielne życie. Były to kolejne dynamiczne i burzliwe doświadczenia. Kupiłem mieszkanie. Założyłem Centrum Rozwoju Osobistego Cisza. Zrezygnowałem z funkcji dyrektora Miejskiego Ośrodka Kultury oraz zwolniłem się z funkcji organisty w kościele. Podjąłem pracę nauczyciela gry na fortepianie w Prywatnej Szkole Muzycznej prowadzonej przez syna Mateusza. W roku 2020 przeprowadziłem się na stałe do domku w górach, gdzie mogłem całkowicie oddać się swoim pasjom — pisaniu, turystyce i pracom ogrodowym. W wieku 71 lat wszedłem po raz drugi w związek małżeński z moją Bliźniaczą Duszą Marią, z którą odnalazłem spełnienie.</p>
+
+      <p>Całokształt moich doświadczeń osobistych, zdrowotnych (czerniak i różne stany nerwicowe), doświadczenia zawodowe i społeczne (m.in. aktywna działalność w NSZZ Solidarność i jedna z pierwszych legitymacji członkowskich w Zabrzu) — wszystko to pozwoliło mi zbudować solidny fundament, na którym wspieram się do dzisiaj. Naturalność, spontaniczność i pogoda ducha zawsze były dla mnie probierzem właściwie przyjętej drogi życiowej. Nie chcę być własnym sędzią, dlatego z wielką pokorą i ostrożnością stwierdzam: Jestem szczęśliwy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MALARSTWO -->
+<section class="passion-section passion-bg-1" id="malarstwo">
+  <div class="container">
+    <p class="passion-label">Pasja</p>
+    <h2 class="passion-title">Malarstwo</h2>
+    <div class="videos-grid videos-grid-2">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/8g50Tgd_IjE"
+          title="Malarstwo — film 1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
       </div>
-      <p class="pasje-coming">Ta przestrzeń wypełni się wkrótce galerią obrazów i opowieściami o tym, co bliskie sercu.</p>
-      <p class="pasje-sub">Treść w przygotowaniu</p>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/nNJpERwfics"
+          title="Malarstwo — film 2"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MUZYKA -->
+<section class="passion-section passion-bg-2" id="muzyka">
+  <div class="container">
+    <p class="passion-label">Pasja</p>
+    <h2 class="passion-title">Muzyka</h2>
+    <div class="videos-grid videos-grid-4">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/QMvWk9hQFHg"
+          title="Muzyka — film 1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/t8Asgq_ajrA"
+          title="Muzyka — film 2"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/cDKOpiChGPY"
+          title="Muzyka — film 3"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/p6-0kn8ukCM"
+          title="Muzyka — film 4"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TURYSTYKA I SPORT -->
+<section class="passion-section passion-bg-3" id="turystyka">
+  <div class="container">
+    <p class="passion-label">Pasja</p>
+    <h2 class="passion-title">Turystyka i sport</h2>
+    <div class="videos-grid videos-grid-2">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/roWZDF20rdU"
+          title="Turystyka i sport — film 1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/m618vk6hJng"
+          title="Turystyka i sport — film 2"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="photos-grid photos-grid-2">
+      <figure>
+        <img src="images/turystyka/IMG_1093.jpeg" alt="Turystyka górska">
+      </figure>
+      <figure>
+        <img src="images/turystyka/Porąbka%20072.jpg" alt="Porąbka">
+      </figure>
+      <figure>
+        <img src="images/turystyka/a-kopia.jpg" alt="Turystyka">
+      </figure>
+      <figure>
+        <img src="images/turystyka/img047%20%E2%80%94%20kopia.jpg" alt="W górach">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- MÓJ OGRÓD -->
+<section class="passion-section passion-bg-4" id="ogrod">
+  <div class="container">
+    <p class="passion-label">Pasja</p>
+    <h2 class="passion-title">Mój ogród</h2>
+    <div class="photos-grid photos-grid-3">
+      <figure>
+        <img src="images/garden/IMG_0576.webp" alt="Ogród">
+      </figure>
+      <figure>
+        <img src="images/garden/IMG_0585.webp" alt="Ogród">
+      </figure>
+      <figure>
+        <img src="images/garden/IMG_3115.webp" alt="Ogród">
+      </figure>
     </div>
   </div>
 </section>
