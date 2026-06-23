@@ -295,6 +295,23 @@
     font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
     color: rgba(201,168,104,0.6); margin-top: 1.25rem;
   }
+  #sentencjaText {
+    transition: opacity 0.3s ease;
+  }
+  #sentencjaText.fading { opacity: 0; }
+  .sentencja-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(201,168,104,0.75); background: transparent;
+    border: 1px solid rgba(160,123,58,0.38);
+    padding: 0.6rem 1.9rem; cursor: pointer;
+    margin-top: 1.75rem; display: inline-block;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .sentencja-btn:hover {
+    border-color: var(--gold-light);
+    color: #F7F3EC;
+  }
 
   /* HOME INVITATION */
   .home-invitation {
@@ -859,9 +876,10 @@
 
   <div class="sentencja-block">
     <div class="container">
-      <p class="sentencja-label">Sentencja na dziś</p>
-      <p class="sentencja-text">Gdy doświadczam porażki,<br>jedynie moja reakcja jest pod moją kontrolą.</p>
-      <p class="sentencja-attr">— Ścieżki spełnionego życia</p>
+      <p class="sentencja-label">Sentencje</p>
+      <p class="sentencja-text" id="sentencjaText"></p>
+      <p class="sentencja-attr">— Szczelina decyzji. Dojrzewanie umysłu do wolności</p>
+      <button class="sentencja-btn" onclick="losujSentencje()">Losuj</button>
     </div>
   </div>
 
@@ -1267,6 +1285,66 @@
 </footer>
 
 <script>
+  // SENTENCJE
+  const sentencje = [
+    "Nie wybieramy źle.\nPo prostu często nie wiemy, co w nas wybiera.",
+    "Decyzje rodzą się szybciej\nniż zastanowienie.",
+    "Dopóki nie dostrzeżemy, że odgrywamy role,\ntrudno będzie zejść ze sceny.",
+    "Widzieć naprawdę\nznaczny brać odpowiedzialność za to, co się widzi.",
+    "Sądzimy, że mamy poglądy,\na tymczasem to poglądy mają nas.",
+    "Najbardziej zwodnicze jest to,\nże śnimy, nie wiedząc o tym.",
+    "To, co oswojone,\nbywa najczęściej najmniej rozpoznane.",
+    "Umysł przypomina system, który można aktualizować.\nTrzeba tylko odinstalować cudze wersje siebie.",
+    "Rywalizacja to gra,\nw której wszyscy przegrywają.",
+    "Los nie musi być ślepy.\nTo my często zamykamy oczy.",
+    "Można rozumieć mechanizm,\na nadal pozostawać jego więźniem.",
+    "Światło nie walczy z ciemnością.\nPo prostu ją rozprasza.",
+    "W rzeczywistości ludzie rzadko spotykają się naprawdę.\nCzęściej spotykają się ich cienie.",
+    "Ludzie nie ranią nas bezpośrednio.\nDotykają miejsc, które bolały już wcześniej.",
+    "Wolna wola nie zaczyna się od decyzji,\nlecz od zauważenia, że większość naszych decyzji zapada bez nas.",
+    "Wolna wola nie jest przywilejem.\nJest dojrzewaniem.",
+    "W człowieku świat spojrzał sam na siebie\nbez nieustannej Uważności\nrozwój osobisty pozostaje jedynie piękną opowieścią.",
+    "Im uważniej patrzę,\ntym bardziej milknie moja pewność\ni tym pełniej ogarnia mnie zachwyt.",
+    "Kto budzi się do Obecności, ten budzi się do życia.",
+    "Uważność jest jak małe światełko —\nodsłania przestrzeń, w której rodzi się wolność.",
+    "Samoobserwacja polega na zauważaniu,\na nie na interpretowaniu.",
+    "Dystans zbliża nas do prawdy.\nTo on ją odsłania.",
+    "Oddech zawsze wydarza się teraz.\nDlatego jest tak dobrym nauczycielem obecności.",
+    "Życie wciąż mówi językiem tajemnicy\nZajmij umysł oddechem, aż pojawi się Cisza.\nNiech Cisza prowadzi, aż ustanie oddech.",
+    "Miłość do siebie nie rodzi się z zachwytu nad wizerunkiem,\nlecz ze zdumienia, że jestem.",
+    "Wolność nie polega na tym, że ego znika.\nPolega na tym, że przestaje dyrygować całym życiem.",
+    "Człowiek rzadko przyjmuje prawdę,\nna którą nie jest jeszcze gotowy.",
+    "Wolność zaczyna się tam,\ngdzie człowiek przestaje zdradzać siebie.",
+    "Po przebudzeniu życie nie staje się łatwiejsze.\nStaje się prawdziwe.",
+    "Prawdy nie sposób głosić.\nPrawdy nie sposób opowiedzieć.\nPrawdę można jedynie rozpoznać,\nbo od zawsze nosiła nas w sobie.",
+    "Dojrzały wybór rodzi się wtedy,\ngdy wola człowieka\nspotyka się z wolą Istnienia.",
+    "Świadome działanie ma swój oddech:\nwdech skupienia i wydech zaufania.",
+    "Przy wyborze zgodnym z Duszą\nżycie zaczyna płynąć jak rzeka\nbez wewnętrznego oporu.",
+    "Najwyższa forma wyboru\npojawia się wtedy,\ngdy nie trzeba już wybierać.",
+    "Patrząc na świat, uczestniczymy w fascynującej tajemnicy:\nświat patrzy naszym.",
+    "Uwaga to coś znacznie więcej niż zwykłe skupienie.\nJest potężną siłą twórczą.",
+    "Jako w sercu,\ntak i na ziemi naszych oczekiwań.\nŻycie wydarza się we mnie.\nI to wystarcza.",
+    "Wolność wyboru\njest Uwagą Obecności.",
+    "Milczenie Boga\njest ciszą orkiestry\ntuż przed wejściem kolejnego dźwięku.",
+    "Milczenie Boga\njest Jego cichą obecnością\nwspółdziałania i zaufania."
+  ];
+
+  let ostatniIndeks = -1;
+
+  function losujSentencje() {
+    const el = document.getElementById('sentencjaText');
+    el.classList.add('fading');
+    setTimeout(() => {
+      let idx;
+      do { idx = Math.floor(Math.random() * sentencje.length); } while (idx === ostatniIndeks && sentencje.length > 1);
+      ostatniIndeks = idx;
+      el.innerHTML = sentencje[idx].replace(/\n/g, '<br>');
+      el.classList.remove('fading');
+    }, 300);
+  }
+
+  losujSentencje();
+
   // THEME
   const html = document.documentElement;
   const toggleBtn = document.getElementById('themeToggle');
