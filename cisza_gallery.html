@@ -34,8 +34,23 @@
   }
   .nav-logo { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
   .nav-right { display: flex; align-items: center; gap: 1.25rem; }
-  .nav-back { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; }
-  .nav-back:hover { color: var(--gold); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.67rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light); text-decoration: none;
+    transition: color 0.3s; white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-hamburger {
+    display: none; background: none; border: none;
+    cursor: pointer; flex-direction: column; gap: 5px;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 1.5px;
+    background: var(--ink); transition: all 0.3s;
+  }
   .theme-toggle { width: 34px; height: 34px; background: var(--toggle-bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
   .theme-toggle:hover { opacity: 0.8; }
   .theme-toggle svg { width: 15px; height: 15px; stroke: var(--toggle-color); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
@@ -69,7 +84,21 @@
     user-select: none;
   }
   .gallery-cell:hover img { transform: scale(1.04); }
-  @media(max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } .gallery-cell.wide { grid-column: span 2; } }
+  @media(max-width: 900px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-cell.wide { grid-column: span 2; }
+    .nav-links { display: none !important; }
+    .nav-links.is-open {
+      display: flex !important;
+      flex-direction: column; position: absolute;
+      top: 62px; left: 0; right: 0;
+      background: var(--nav-bg);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--mist);
+      gap: 1.25rem; z-index: 99;
+    }
+    .nav-hamburger { display: flex !important; }
+  }
   @media(max-width: 520px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 </head>
@@ -77,7 +106,15 @@
   <nav>
     <a href="index.html" class="nav-logo">Ryszard Klein</a>
     <div class="nav-right">
-      <a href="cisza.html" class="nav-back">← Cisza</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Strona główna</a></li>
+        <li><a href="index.html#o-mnie">O mnie</a></li>
+        <li><a href="index.html#droga-ciszy">Książki</a></li>
+        <li><a href="index.html#zapiski">Zapiski z Ciszy</a></li>
+        <li><a href="index.html#media">Media</a></li>
+        <li><a href="zakup_ksiazek.html">Zakup książek</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
+      </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
         <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24">
@@ -92,6 +129,7 @@
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
         </svg>
       </button>
+      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -205,6 +243,19 @@
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
     if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
+  });
+
+  // HAMBURGER
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('is-open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('is-open');
+  }));
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) navLinks.classList.remove('is-open');
   });
 </script>
 </body>

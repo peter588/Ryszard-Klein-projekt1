@@ -25,7 +25,11 @@
   nav{position:fixed;top:0;width:100%;z-index:100;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--mist)}
   .nav-logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:none}
   .nav-right{display:flex;align-items:center;gap:1.25rem}
-  .nav-back{font-family:'Jost',sans-serif;font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none}
+  .nav-links{display:flex;gap:1.5rem;list-style:none}
+  .nav-links a{font-family:'Jost',sans-serif;font-size:0.67rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);text-decoration:none;transition:color 0.3s;white-space:nowrap}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px}
+  .nav-hamburger span{display:block;width:24px;height:1.5px;background:var(--ink);transition:all 0.3s}
   .theme-toggle {
     width: 36px; height: 36px; background: var(--toggle-bg);
     border: none; cursor: pointer;
@@ -60,14 +64,22 @@
   .footer-copy{font-family:'Jost',sans-serif;font-size:0.68rem;letter-spacing:0.05em;color:rgba(247,243,236,0.3)}
   .footer-back-link{font-family:'Jost',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:none}
   .footer-back-link:hover{color:var(--gold-light)}
-  @media(max-width:900px){nav{padding:0.9rem 1.5rem}.page-masthead{padding:6.5rem 1.5rem 2rem}}
+  @media(max-width:900px){nav{padding:0.9rem 1.5rem}.page-masthead{padding:6.5rem 1.5rem 2rem}.nav-links{display:none !important}.nav-links.is-open{display:flex !important;flex-direction:column;position:absolute;top:62px;left:0;right:0;background:var(--nav-bg);padding:1.5rem 2rem;border-bottom:1px solid var(--mist);gap:1.25rem;z-index:99}.nav-hamburger{display:flex !important}}
 </style>
 </head>
 <body>
   <nav>
   <a href="index.html" class="nav-logo">Ryszard Klein</a>
   <div class="nav-right">
-    <a href="index.html" class="nav-back">← Strona główna</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Strona główna</a></li>
+      <li><a href="index.html#o-mnie">O mnie</a></li>
+      <li><a href="index.html#droga-ciszy">Książki</a></li>
+      <li><a href="index.html#zapiski">Zapiski z Ciszy</a></li>
+      <li><a href="index.html#media">Media</a></li>
+      <li><a href="zakup_ksiazek.html">Zakup książek</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+    </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
       <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24">
@@ -82,6 +94,7 @@
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
       </svg>
     </button>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -169,6 +182,19 @@
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('rk-theme', next);
+  });
+
+  // HAMBURGER
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('is-open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('is-open');
+  }));
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) navLinks.classList.remove('is-open');
   });
 </script>
 </body>
