@@ -1603,10 +1603,18 @@
     document.getElementById('esPanelCisza').classList.toggle('is-open');
   }
   function toggleJamJestEN() {
-    document.getElementById('esPanelJamJestEN').classList.toggle('is-open');
+    const en = document.getElementById('esPanelJamJestEN');
+    const audio = document.getElementById('esPanelJamJestAudio');
+    const opening = !en.classList.contains('is-open');
+    en.classList.toggle('is-open');
+    if (opening) audio.classList.remove('is-open');
   }
   function toggleJamJestAudio() {
-    document.getElementById('esPanelJamJestAudio').classList.toggle('is-open');
+    const audio = document.getElementById('esPanelJamJestAudio');
+    const en = document.getElementById('esPanelJamJestEN');
+    const opening = !audio.classList.contains('is-open');
+    audio.classList.toggle('is-open');
+    if (opening) en.classList.remove('is-open');
   }
 
   // OPINIE CZYTELNIKÓW — sekwencyjne przy każdym wejściu/odświeżeniu
