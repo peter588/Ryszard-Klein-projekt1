@@ -646,8 +646,9 @@
   }
   .book-cta-link:hover { background: var(--gold); color: #1C1914; }
   .book-cta-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
-  .book-cta-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .book-es-btn { font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; background: none; border: 1px solid var(--mist); color: var(--ink-light); padding: 0.5rem 1rem; cursor: pointer; transition: border-color 0.3s, color 0.3s; }
+  .book-cta-row { display: flex; align-items: stretch; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; }
+  .book-cta-row .book-cta-link { margin-top: 0; }
+  .book-es-btn { display: flex; align-items: center; font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--mist); color: var(--ink-light); padding: 0 1.25rem; cursor: pointer; transition: border-color 0.3s, color 0.3s; }
   .book-es-btn:hover { border-color: var(--gold); color: var(--gold); }
   .book-es-panel { display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--mist); }
   .book-es-panel.is-open { display: block; }
