@@ -646,6 +646,18 @@
   }
   .book-cta-link:hover { background: var(--gold); color: #1C1914; }
   .book-cta-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+  .book-cta-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .book-es-btn { font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; background: none; border: 1px solid var(--mist); color: var(--ink-light); padding: 0.5rem 1rem; cursor: pointer; transition: border-color 0.3s, color 0.3s; }
+  .book-es-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .book-es-panel { display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--mist); }
+  .book-es-panel.is-open { display: block; }
+  .book-es-heading { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 400; color: var(--ink); line-height: 1.45; margin-bottom: 1.5rem; transition: color 0.4s; }
+  .book-es-covers { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: flex-end; }
+  .book-es-covers img { max-width: 130px; height: auto; display: block; box-shadow: 0 4px 16px rgba(28,25,20,0.12); }
+  .book-es-text p { font-family: 'Jost', sans-serif; font-size: 0.87rem; line-height: 1.78; color: var(--ink-light); margin-bottom: 0.9rem; transition: color 0.4s; }
+  .book-es-text p:last-child { margin-bottom: 0; }
+  .book-es-video { margin-top: 1.75rem; aspect-ratio: 16/9; }
+  .book-es-video iframe { width: 100%; height: 100%; border: none; }
 
   /* ========================
      DROGA CISZY
@@ -1179,10 +1191,30 @@
           <p><em>Cisza. Esencja naszego umysłu</em> jest pierwszą częścią cyklu <em>Droga Ciszy</em>.</p>
         </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępność: u autora: druk PL/ES, oraz e-booki PL/ES.</p>
-        <a href="cisza.html" class="book-cta-link">
-          Więcej
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <div class="book-cta-row">
+          <a href="cisza.html" class="book-cta-link">
+            Więcej
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button class="book-es-btn" onclick="toggleEsPanel()">Przekład hiszpański</button>
+        </div>
+        <div class="book-es-panel" id="esPanelCisza">
+          <h4 class="book-es-heading">Irena Klein i Hiszpański przekład książki „Cisza. Esencja naszego umysłu"</h4>
+          <div class="book-es-covers">
+            <img src="images/silencio/El%20Silencio%20lo%20esencial%20de%20nuestra%20mente%20-%20druk-kopia.jpg" alt="Silencio — wydanie drukowane">
+            <img src="images/silencio/El%20Silencio%20lo%20esencial%20de%20nuestra%20mente%20epuap.-kopia.png" alt="Silencio — e-book">
+          </div>
+          <div class="book-es-text">
+            <p>Książka „Cisza. Esencja naszego umysłu" została przełożona na język hiszpański przez Irenę Klein — pisarkę, autorkę wielu książek, psychoterapeutkę mieszkającą na stałe w Argentynie, a prywatnie moją siostrę.</p>
+            <p>Praca nad przekładem trwała ponad rok i wymagała nie tylko biegłości językowej, lecz także wyjątkowej wrażliwości na duchowy, psychologiczny i refleksyjny charakter książki. Dzięki zaangażowaniu Ireny Klein argentyńskie wydanie ukazało się w roku 2014 pod tytułem „Silencio. Lo esencial de nuestra mente".</p>
+            <p>Po drugim polskim wydaniu książki, opublikowanym nakładem Wydawnictwa KOS, Irena Klein podjęła się ponownie pracy nad hiszpańską wersją tekstu. Również tym razem był to proces wymagający dużej pracy, za którą z tego miejsca serdecznie dziękuję.</p>
+            <p>Drugie wydanie hiszpańskie ukazało się w Argentynie w roku 2024 nakładem Editorial Guadalupe. Dzięki tej pracy „Cisza. Esencja naszego umysłu" doczekała się dwóch wydań w Polsce oraz dwóch wydań w Argentynie.</p>
+            <p>Osoby zainteresowane lekturą mogą nabyć książkę bezpośrednio u autora — w wersji drukowanej lub jako e-book. Polskie i hiszpańskie wydanie tworzą także wyjątkowo ciekawą propozycję dla lingwistów, tłumaczy oraz osób uczących się języka hiszpańskiego, pozwalając na równoległą lekturę oryginału i przekładu.</p>
+          </div>
+          <div class="book-es-video">
+            <iframe src="https://www.youtube.com/embed/VQC9zo89OXE" title="Silencio — przekład hiszpański" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1530,6 +1562,12 @@
     const msg = document.getElementById('fmsg').value.trim();
     if (!name || !email || !msg) { alert('Proszę wypełnić wszystkie pola formularza.'); return; }
     window.location.href = `mailto:cisza.umyslu@gmail.com?subject=Wiadomość od ${encodeURIComponent(name)}&body=${encodeURIComponent(msg + '\n\nOdpowiedź na: ' + email)}`;
+  }
+
+  // PRZEKŁAD HISZPAŃSKI — panel rozwijany
+  function toggleEsPanel() {
+    const panel = document.getElementById('esPanelCisza');
+    panel.classList.toggle('is-open');
   }
 
   // OPINIE CZYTELNIKÓW — sekwencyjne przy każdym wejściu/odświeżeniu
