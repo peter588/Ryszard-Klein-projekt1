@@ -529,6 +529,19 @@
   .about-collapse-btn:hover { color: var(--ink); }
 
   /* ========================
+     OPINIE CZYTELNIKÓW
+  ======================== */
+  .reviews-section { background: var(--cream); transition: var(--theme-transition); }
+  .reviews-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+  .reviews-eyebrow { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; transition: color 0.4s; }
+  .review-quote-mark { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 5rem; line-height: 0.5; color: var(--gold); opacity: 0.45; margin-bottom: 1.5rem; display: block; }
+  .review-quote-text { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.35rem; font-style: italic; line-height: 1.85; color: var(--ink); margin-bottom: 1.75rem; transition: color 0.4s; }
+  .review-quote-name { display: block; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-style: normal; margin-bottom: 0.25rem; transition: color 0.4s; }
+  .review-quote-role { display: block; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.04em; color: var(--ink-light); transition: color 0.4s; }
+  .reviews-more-link { display: inline-block; margin-top: 2.25rem; font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; border-bottom: 1px solid var(--mist); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
+  .reviews-more-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ========================
      KSIĄŻKI
   ======================== */
   .books-section { background: var(--about-bg); isolation: isolate; }
@@ -1102,6 +1115,24 @@
   </div>
 </section>
 
+<!-- OPINIE CZYTELNIKÓW -->
+<section class="reviews-section">
+  <div class="container">
+    <div class="reviews-inner fade-in">
+      <p class="reviews-eyebrow">Opinie czytelników</p>
+      <blockquote>
+        <span class="review-quote-mark">&ldquo;</span>
+        <p class="review-quote-text" id="reviewQuoteText"></p>
+        <footer>
+          <cite class="review-quote-name" id="reviewQuoteName"></cite>
+          <span class="review-quote-role" id="reviewQuoteRole"></span>
+        </footer>
+      </blockquote>
+      <a href="cisza.html" class="reviews-more-link">Czytaj wszystkie opinie →</a>
+    </div>
+  </div>
+</section>
+
 <!-- DROGA CISZY -->
 <section class="cycle-section" id="droga-ciszy">
   <div class="container">
@@ -1545,6 +1576,40 @@
     if (!name || !email || !msg) { alert('Proszę wypełnić wszystkie pola formularza.'); return; }
     window.location.href = `mailto:cisza.umyslu@gmail.com?subject=Wiadomość od ${encodeURIComponent(name)}&body=${encodeURIComponent(msg + '\n\nOdpowiedź na: ' + email)}`;
   }
+
+  // OPINIE CZYTELNIKÓW — sekwencyjne przy każdym wejściu/odświeżeniu
+  const opinie = [
+    {
+      text: "Trzymam w dłoniach nie poradnik pełen trywialnych porad czy sentencji nadających się wyłącznie do wpisania do pamiętnika. To raczej mapa naszego wewnętrznego świata oraz zbiór wskazówek, jak się poruszać po tej krainie, pełnej niespodzianek i przeszkód.",
+      name: "Justyna Gul",
+      role: "Dziennikarka, recenzent, nauczyciel akademicki"
+    },
+    {
+      text: "Tytułowa cisza prowokuje do stawiania pytań o sens własnego istnienia, o możliwość przyjęcia postawy kontemplacyjnej i rozwoju w przestrzeni duchowej.",
+      name: "dr Mariusz Wojewoda",
+      role: "Instytut Filozofii Uniwersytetu Śląskiego w Katowicach"
+    },
+    {
+      text: "Jestem przekonana, że powstała książka wartościowa merytorycznie, dająca czytelnikowi wiele przeżyć i poruszeń emocjonalnych. Pokazująca, że jedną z najistotniejszych wartości życia człowieka jest umiejętność bycia ze sobą, dar wyciszenia się, posłuchania samego siebie.",
+      name: "Urszula Koszutska",
+      role: "Psycholog"
+    },
+    {
+      text: "Po przeczytaniu książki mogę powiedzieć, że wszystko gra: nie można było tego napisać lepiej, a więc inaczej.",
+      name: "Jacek Konarski",
+      role: ""
+    }
+  ];
+
+  (function wyswietlOpinie() {
+    const idx = parseInt(localStorage.getItem('rk-opinia-idx') || '0');
+    const op = opinie[idx % opinie.length];
+    document.getElementById('reviewQuoteText').textContent = op.text;
+    document.getElementById('reviewQuoteName').textContent = op.name;
+    const roleEl = document.getElementById('reviewQuoteRole');
+    if (op.role) { roleEl.textContent = op.role; } else { roleEl.style.display = 'none'; }
+    localStorage.setItem('rk-opinia-idx', String((idx + 1) % opinie.length));
+  })();
 </script>
 </body>
 </html>
