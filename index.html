@@ -50,7 +50,6 @@
     --toggle-color: #F7F3EC;
     --btn-primary-bg: #1C1914;
     --btn-primary-color: #F7F3EC;
-    --zapiski-bg: #FDFAF5;
     --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   }
 
@@ -93,7 +92,6 @@
     --toggle-color: #161210;
     --btn-primary-bg: #C9A868;
     --btn-primary-color: #161210;
-    --zapiski-bg: #1A1612;
     --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   }
 
@@ -726,29 +724,6 @@
   /* ========================
      ZAPISKI Z CISZY
   ======================== */
-  .zapiski-section { background: var(--zapiski-bg); }
-  .zapiski-placeholder {
-    text-align: center; max-width: 520px;
-    margin: 3rem auto 0; padding: 3rem 0;
-  }
-  .zapiski-ornament {
-    width: 80px; height: 80px; border: 1px solid var(--mist);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 2rem; color: var(--gold-light);
-    transition: var(--theme-transition);
-  }
-  .zapiski-coming {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.3rem; font-style: italic; font-weight: 300;
-    color: var(--ink-light); line-height: 1.65;
-    transition: color 0.4s;
-  }
-  .zapiski-sub {
-    font-family: 'Jost', sans-serif; font-size: 0.7rem;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--mist); margin-top: 1rem; transition: color 0.4s;
-  }
-
   /* ========================
      MEDIA
   ======================== */
@@ -979,7 +954,6 @@
       <li><a href="#home">Strona główna</a></li>
       <li><a href="#o-mnie">O mnie</a></li>
       <li><a href="#droga-ciszy">Książki</a></li>
-      <li><a href="#zapiski">Zapiski z Ciszy</a></li>
       <li><a href="#media">Media</a></li>
       <li><a href="zakup_ksiazek.html">Zakup książek</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
@@ -1128,7 +1102,6 @@
           <span class="review-quote-role" id="reviewQuoteRole"></span>
         </footer>
       </blockquote>
-      <a href="cisza.html" class="reviews-more-link">Czytaj wszystkie opinie →</a>
     </div>
   </div>
 </section>
@@ -1309,24 +1282,6 @@
 </section>
 
 
-
-<!-- ZAPISKI Z CISZY -->
-<section class="zapiski-section" id="zapiski">
-  <div class="container">
-    <p class="section-label fade-in">Zapiski z Ciszy</p>
-    <h2 class="section-title fade-in">Sentencje<br>i <em>refleksje</em></h2>
-    <div class="zapiski-placeholder fade-in">
-      <div class="zapiski-ornament">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-          <path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
-      <p class="zapiski-coming">Ta przestrzeń wypełni się wkrótce sentencjami i krótkimi refleksjami z ksiąg Ryszarda Kleina.</p>
-      <p class="zapiski-sub">Treść w przygotowaniu</p>
-    </div>
-  </div>
-</section>
 
 <!-- MEDIA -->
 <section class="media-section" id="media">
