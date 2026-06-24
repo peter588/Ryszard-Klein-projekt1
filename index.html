@@ -659,6 +659,7 @@
   .book-es-text p:last-child { margin-bottom: 0; }
   .book-es-video { margin-top: 1.75rem; aspect-ratio: 16/9; }
   .book-es-video iframe { width: 100%; height: 100%; border: none; }
+  .book-es-baner { width: 100%; display: block; margin: 1.75rem 0; }
 
   /* ========================
      DROGA CISZY
@@ -1233,11 +1234,43 @@
           <p>Książka ma charakter refleksyjny i poetycki. Warto czytać ją powoli, zdanie po zdaniu, pozwalając, by zawarte w niej treści i afirmacje pracowały w nas stopniowo. Dodatkowym elementem książki są znaki runiczne, które otwierają wybrane słowa i nadają im głębszy, symboliczny wymiar.</p>
           <p><em>Jam jest</em> jest drugą częścią cyklu <em>Droga Ciszy</em>.</p>
         </div>
-        <p class="book-status"><span class="book-status-dot"></span>Dostępna</p>
-        <a href="jam-jest.html" class="book-cta-link">
-          Więcej
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <p class="book-status"><span class="book-status-dot"></span>Dostępność: u autora: e-booki PL/EN, druk: KOS.</p>
+        <div class="book-cta-row">
+          <a href="jam-jest.html" class="book-cta-link">
+            Więcej
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button class="book-es-btn" onclick="toggleJamJestEN()">Przekład angielski</button>
+          <button class="book-es-btn" onclick="toggleJamJestAudio()">Audiobook</button>
+        </div>
+        <div class="book-es-panel" id="esPanelJamJestEN">
+          <h4 class="book-es-heading">Maryla Ros i angielski przekład książki „Jam Jest"</h4>
+          <div class="book-es-text">
+            <p>W roku 2013 wydałem książkę z audiobookiem zatytułowaną „Jam Jest". Po wyczerpaniu nakładu, w roku 2015 ukazało się jej drugie, poprawione — zarówno w wersji drukowanej, jak i w postaci e-booka.</p>
+            <p>Szczególne znaczenie w pracy nad tym wydaniem miała Maryla Ros — psychoterapeutka, poetka, liderka InterPlay, mieszkająca na stałe w Australii. Dla mnie osobiście jest kimś więcej niż konsultantką czy tłumaczką. Jest duchową mentorką i Mistrzynią, osobą, z którą każde spotkanie wnosiło do mojego życia nowe światło, głębię i większe zrozumienie.</p>
+            <p>Praca nad drugim wydaniem trwała blisko rok i odbywała się regularnie przez Skype'a. Były to długie godziny rozmów, wspólnego namysłu, dopracowywania sensów, rytmu i duchowego przesłania książki. Z tego miejsca składam Maryli Ros głębokie podziękowanie za jej ogromną pracę i duchową obecność.</p>
+            <p>Po zakończeniu prac nad drugim wydaniem rozpoczął się kolejny etap — przekład książki na język angielski. Także ta praca trwała blisko rok i wymagała nie tylko biegłości językowej, lecz przede wszystkim głębokiego rozumienia duchowego, psychologicznego i medytacyjnego charakteru.</p>
+            <p>Angielska wersja książki ukazała się pod tytułem „I Am" i została wydana w formie e-booka.</p>
+            <p>„Jam Jest" dostępna jest bezpośrednio u autora w wersji drukowanej oraz jako e-book. Angielski przekład „I Am" dostępny jest w formie e-booka. Obie wersje mogą być także ciekawą propozycją do równoległej lektury po polsku i angielsku, zwłaszcza dla osób zainteresowanych językiem, przekładem i poetyckim rytmem tekstu.</p>
+          </div>
+          <div class="book-es-video">
+            <iframe src="https://www.youtube.com/embed/rj51IeUos_8" title="Jam Jest — przekład angielski" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="book-es-panel" id="esPanelJamJestAudio">
+          <h4 class="book-es-heading">Grażyna Klein — muzyczna przestrzeń audiobooka „Jam Jest"</h4>
+          <div class="book-es-text">
+            <p>Osobnym i bardzo ważnym etapem była praca nad muzyką do audiobooka. W tym miejscu z ogromną wdzięcznością dziękuję mojej córce, Grażynie Klein — muzykoterapeutce, która stworzyła wyjątkową, wielogłosową kompozycję towarzyszącą tekstowi.</p>
+            <p>Jej muzyka stała się dla tej książki czymś więcej niż tłem dźwiękowym. Była przestrzenią, w której słowo mogło głębiej wybrzmieć — muzycznym oddechem tekstu, jego wewnętrznym nurtem i subtelnym dopełnieniem.</p>
+            <p>Było dla mnie wielkim przeżyciem duchowym czytać „Jam Jest" do muzyki stworzonej przez Grażynę. Dziękuję jej nie tylko za tę kompozycję, lecz także za dziesiątki wspólnych przedsięwzięć artystycznych, koncertów i wykładów, które pozostają dla mnie ważną częścią naszej rodzinnej i twórczej historii.</p>
+            <p>W audiobooku ważną rolę odgrywa symbolika centrów energetycznych człowieka, nazywanych czakrami, oraz energia run. W książce runy przemówiły do mnie przede wszystkim w wymiarze psychologicznym i duchowym. Starałem się wydobyć z nich to, co najgłębsze: ich ukryty sens, archetypowy obraz i wewnętrzne przesłanie.</p>
+            <p>Muzyka Grażyny Klein została głęboko powiązana z tą przestrzenią — z energią czakr, symboliką run i medytacyjnym charakterem tekstu. Dzięki temu w roku 2013 powstał audiobook wydany na płycie kompaktowej. Dziś nagrania dostępne są również w serwisie YouTube.</p>
+          </div>
+          <img class="book-es-baner" src="images/silencio/baner.jpg" alt="Audiobook Jam Jest — baner">
+          <div class="book-es-video">
+            <iframe src="https://www.youtube.com/embed/XlprwN9aZ8U" title="Jam Jest — audiobook" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1567,8 +1600,13 @@
 
   // PRZEKŁAD HISZPAŃSKI — panel rozwijany
   function toggleEsPanel() {
-    const panel = document.getElementById('esPanelCisza');
-    panel.classList.toggle('is-open');
+    document.getElementById('esPanelCisza').classList.toggle('is-open');
+  }
+  function toggleJamJestEN() {
+    document.getElementById('esPanelJamJestEN').classList.toggle('is-open');
+  }
+  function toggleJamJestAudio() {
+    document.getElementById('esPanelJamJestAudio').classList.toggle('is-open');
   }
 
   // OPINIE CZYTELNIKÓW — sekwencyjne przy każdym wejściu/odświeżeniu
