@@ -277,26 +277,28 @@
   footer {
     background-color: #1b1612;
     background-image: url('images/footer-bg.svg');
-    background-size: cover; background-position: center; background-repeat: no-repeat;
-    padding: 3rem 0 2rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #F7F3EC;
+    padding: 2.5rem 0 1.5rem;
   }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; margin-bottom: 1.5rem; }
+  .footer-brand-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.08em; color: #F7F3EC; margin-bottom: 1rem; }
+  .footer-brand-desc { font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.05em; color: rgba(247,243,236,0.45); line-height: 1.7; max-width: 260px; }
+  .footer-heading { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.25rem; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-links a { font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.05em; color: rgba(247,243,236,0.55); text-decoration: none; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--gold-light); }
+  .footer-bottom { border-top: 1px solid rgba(247,243,236,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.05em; color: rgba(247,243,236,0.3); }
+  .footer-gold-line { width: 60px; height: 1px; background: var(--gold); opacity: 0.4; }
   [data-theme="dark"] footer { background-color: #211c16; }
-  .footer-bottom {
-    border-top: 1px solid rgba(247,243,236,0.1);
-    padding-top: 1.5rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  .footer-copy {
-    font-family: 'Jost', sans-serif; font-size: 0.68rem;
-    letter-spacing: 0.05em; color: rgba(247,243,236,0.3);
-  }
-  .footer-back-link {
-    font-family: 'Jost', sans-serif; font-size: 0.68rem;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(201,168,104,0.65); text-decoration: none; transition: color 0.3s;
-  }
-  .footer-back-link:hover { color: #C9A868; }
+  [data-theme="dark"] .footer-brand-name { color: #ffffff; }
+  [data-theme="dark"] .footer-brand-desc { color: rgba(247,245,240,0.75); }
+  [data-theme="dark"] .footer-links a { color: rgba(247,245,240,0.85); }
+  [data-theme="dark"] .footer-links a:hover { color: #a07b3b; }
 
   @media (max-width: 900px) {
     .nav-links { display: none !important; }
@@ -310,6 +312,8 @@
       gap: 1.25rem; z-index: 99;
     }
     .nav-hamburger { display: flex !important; }
+    .footer-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+    footer { padding: 2rem 0 1.25rem; }
   }
   @media (max-width: 700px) {
     .page-masthead { padding: 6rem 1.5rem 2.5rem; }
@@ -539,13 +543,27 @@
   </main>
 
   <footer>
-    <div class="container">
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Ryszard Klein. Wszelkie prawa zastrzeżone.</p>
-        <a href="index.html" class="footer-back-link">← Powrót do strony głównej</a>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand-name">Ryszard Klein</p>
+        <p class="footer-brand-desc">Pisarz, muzyk, refleksja nad człowiekiem, umysłem i drogą do wewnętrznej wolności. Cykl „Droga Ciszy”.</p>
+      </div>
+      <div>
+        <p class="footer-heading">Kontakt</p>
+        <ul class="footer-links">
+          <li><a href="tel:+48531615121">+48 531 615 121</a></li>
+          <li><a href="mailto:cisza.umyslu@gmail.com">cisza.umyslu@gmail.com</a></li>
+          <li><a href="https://www.youtube.com/channel/UCyKhOsT0hiH54MmWVQCuC6g" target="_blank">YouTube</a></li>
+        </ul>
       </div>
     </div>
-  </footer>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Ryszard Klein. Wszelkie prawa zastrzeżone.</p>
+      <div class="footer-gold-line"></div>
+    </div>
+  </div>
+</footer>
 
 <script>
   const html = document.documentElement;
