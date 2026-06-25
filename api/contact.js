@@ -17,8 +17,8 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Formularz kontaktowy <formularz@ryszardklein.pl>',
-        to: 'cisza.umyslu@gmail.com',
+        from: 'Formularz kontaktowy <onboarding@resend.dev>',
+        to: 'piotr.pawlak@days.net.pl',
         reply_to: email,
         subject: `Wiadomość od ${name}`,
         text: `Imię i nazwisko: ${name}\nE-mail: ${email}\n\n${message}`,
