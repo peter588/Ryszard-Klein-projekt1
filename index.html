@@ -1584,12 +1584,38 @@
   }
 
   // FORM
-  function handleFormSubmit() {
+  async function handleFormSubmit() {
     const name = document.getElementById('fname').value.trim();
     const email = document.getElementById('femail').value.trim();
     const msg = document.getElementById('fmsg').value.trim();
     if (!name || !email || !msg) { alert('Proszę wypełnić wszystkie pola formularza.'); return; }
-    window.location.href = `mailto:cisza.umyslu@gmail.com?subject=Wiadomość od ${encodeURIComponent(name)}&body=${encodeURIComponent(msg + '\n\nOdpowiedź na: ' + email)}`;
+
+    const btn = document.querySelector('.form-submit');
+    btn.disabled = true;
+    btn.textContent = 'Wysyłanie…';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message: msg }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        btn.textContent = 'Wysłano ✓';
+        document.getElementById('fname').value = '';
+        document.getElementById('femail').value = '';
+        document.getElementById('fmsg').value = '';
+      } else {
+        alert(data.error || 'Wystąpił błąd. Spróbuj ponownie.');
+        btn.disabled = false;
+        btn.textContent = 'Wyślij wiadomość';
+      }
+    } catch {
+      alert('Brak połączenia. Spróbuj ponownie.');
+      btn.disabled = false;
+      btn.textContent = 'Wyślij wiadomość';
+    }
   }
 
   // PRZEKŁAD HISZPAŃSKI — panel rozwijany
