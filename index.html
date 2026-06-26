@@ -1108,9 +1108,9 @@
 
   <div class="sentencja-block">
     <div class="container">
-      <p class="sentencja-label">Sentencja na dziś</p>
+      <p class="sentencja-label" id="sentencjaLabel">Sentencja na dziś</p>
       <p class="sentencja-text" id="sentencjaText"></p>
-      <p class="sentencja-attr">— Szczelina decyzji. Dojrzewanie umysłu do wolności</p>
+      <p class="sentencja-attr" id="sentencjaAttr">— Szczelina decyzji. Dojrzewanie umysłu do wolności</p>
       <button class="sentencja-btn" onclick="losujSentencje()">Losuj</button>
     </div>
   </div>
@@ -1608,7 +1608,7 @@
 </footer>
 
 <script>
-  // SENTENCJE
+  // SENTENCJE, REFLEKSJE I AFORYZMY
   const sentencje = [
     "Nie wybieramy źle.\nPo prostu często nie wiemy, co w nas wybiera.",
     "Decyzje rodzą się szybciej\nniż zastanowienie.",
@@ -1652,16 +1652,145 @@
     "Milczenie Boga\njest Jego cichą obecnością\nwspółdziałania i zaufania."
   ];
 
+  const refleksje = [
+    "Żadnego zjawiska nie da się zamknąć w analitycznych ramach racjonalnego myślenia.",
+    "Każde zjawisko posiada nieskończoną ilość poziomów jego postrzegania.",
+    "Pod osłoną wiedzy naukowej kryje się niewyobrażalna, fascynująca iskra trwania rzeczywistości.",
+    "Zasada niepoznawalności rzeczy dotyczy wszystkich dziedzin nauki, począwszy od nauk ścisłych, skończywszy na humanistycznych.",
+    "Nabycie umiejętności kierowania się zdrowym rozsądkiem jest w większym stopniu sprawą usuwania wewnętrznych barier niż wiedzy intelektualnej.",
+    "Rozpoznanie swojej prawdziwej Istoty, rozpoznanie Prawdy rzeczywistości, dokonuje się za sprawą wolnego umysłu.",
+    "Chcąc wejść w Istotę rzeczy, usłyszeć tętno Natury, konieczne jest zadziwienie i radość.",
+    "Radość jest wartością życia, miernikiem i symptomem Poznania.",
+    "Radość jest dzieckiem Poznania.",
+    "Poznanie i Radość wzajemnie się uzupełniają.",
+    "Popadając w rutynę i wszechobecne przyzwyczajenie, ulegamy złudnemu poczuciu stabilizacji i zrozumienia.",
+    "Przyzwyczajenie zaślepia na Piękno i Prawdę, a rutyna znieczula wrażliwość.",
+    "Powszechną iluzją jest postrzeganie rzeczywistości przez pryzmat swojego krótkiego życia i osobistego punktu widzenia.",
+    "Iluzją jest przeżywanie czasu jako czegoś realnego.",
+    "Kreatorem czasu są wewnętrzne napięcia, tworzone przez myśli i emocje.",
+    "Podobnie jak w źdźble trawy odnaleźć można potęgę kosmosu, tak chwila zwana teraz zamyka wszystko, co niesie z sobą czas i przemiana.",
+    "Najgłębszą sztuką życia jest umiejętność trwania w chwili obecnej, w niekończącym się teraz. W przestrzeni, w której gaśnie poczucie dualizmu.",
+    "Tajemnicą szczęścia jest umiejętność zachowania dystansu do wszelkich wydarzeń i okoliczności.",
+    "Podobnie jak Natura przez tysiąclecia kształtowała nasze fizyczne funkcje życiowe, tak sztafeta pokoleń kształtowała nasz indywidualny i zbiorowy umysł.",
+    "Krąg naszego ja wydaje nam się być wszystkim, podczas gdy w rzeczywistości jest tym, co przysłania nam Istotę esencji naszego bytu.",
+    "Jeżeli postrzegamy otoczenie przez pryzmat własnych emocji, to widziany przez nas świat nie jest rzeczywisty.",
+    "Jeżeli w kontaktach międzyludzkich kierujemy się emocjami, to nasze relacje nie są autentyczne, lecz spowite oczekiwaniami ego.",
+    "Cecha, którą cenimy w sobie najbardziej, jest w dużej mierze pochodną działania naszego systemu obronnego.",
+    "Pragnienie doskonałości, wyjątkowości lub przynajmniej odmienności, to desperacka walka ego, by zaistnieć jako ktoś. Często naginamy nawet Naturę do wyimaginowanej wizji siebie.",
+    "Emocji nie należy rozpatrywać w kategoriach: pozytywna czy negatywna.",
+    "Religia przesiąknięta emocjami bardziej łączy się z ego niż z Prawdą. Bóg w umyśle kierującym się nieświadomą wolą jest w dużym stopniu jedynie pojęciem. Pojęcia zaś to tylko słowa.",
+    "Największą krzywdą, jaką wyrządzamy sobie i innym, jest zaniedbywanie poznawania Istoty samego siebie. Każda inna krzywda jest jedynie tego konsekwencją.",
+    "Błędna samoocena rzutuje na ocenę innych ludzi.",
+    "Błędną samoocenę demaskuje postrzeganie innych jako złych.",
+    "Najbardziej grzeszy ten, kto patrzy na innych jak na grzeszników.",
+    "Bez wybaczenia sobie i bliźnim nie ma mowy o zdrowym rozwoju psychicznym.",
+    "Wszelkie oczekiwania i wymagania względem kogoś mają swoje korzenie w egoizmie.",
+    "Podstawą właściwie pojętej miłości jest zrozumienie drugiego człowieka, a tym samym brak jakichkolwiek oczekiwań względem niego.",
+    "Siła walki daje siłę przeciwnościom (A. de Mello). Własnych słabości nie należy negować, wystarczy je zrozumieć.",
+    "Autoobserwacja to podstawa rozwoju duchowego. Polega ona na utożsamianiu siebie z obserwatorem, a nie nastrojami i przeżyciami. Jej podstawą jest skupienie i uważność.",
+    "Głębia człowieczeństwa zbudowana jest na zrozumieniu, a nie na wzorcach. Systemy wartościowania i wzory zachowania istnieją na zewnątrz, podczas gdy wolność istnieje wewnątrz nas i to ona normuje jak i motywuje nasze działania.",
+    "Cisza jest nawet w cierpieniu. Znajduje się między moim cierpieniem a jego względnością. Względność cierpienia to przestrzeń między moim ego a prawdą cierpienia. Prawda cierpienia to często moje nieświadome ja. Ja tak dominujące, że aż boli.",
+    "Prawda o nas samych ujawnia się w sytuacjach skrajnych.",
+    "Szczęście jest autentyczne, jeśli nie posiada swojej przyczyny (A. de Mello).",
+    "Człowiek oświecony nie próbuje naprawiać świata, świat sam naprawia się przestrzenią jego wewnętrznej wolności.",
+    "Energia jest Boską, Stwórczą siłą wszechświata, napełniającą wszystko i poruszającą się siłą natychmiastowości. Moc naszej woli może przyspieszać przypływ energii poprzez entuzjazm, pragnienie dobra oraz zawierzenie.",
+    "Fundamentem świadomości jest samopoznanie.",
+    "Świadomość w kontekście samorozwoju polega na postrzeganiu swojej rzeczywistej sytuacji i konsekwencji, jakie z niej wynikają.",
+    "Gdy uczucia biorą górę nad świadomością, nigdy nie mamy pewności czy nasze przeżycia są zdrowe emocjonalnie, a tym samym czy wskazują Prawdę.",
+    "Najpierw świadomość, potem uczucia, w przeciwnym wypadku nigdy nie mamy pewności, czy nasze przeżycia są zdrowe emocjonalnie, a tym samym, czy wskazują Prawdę.",
+    "Najczęściej postrzegamy świat w kontekście swoich emocjonalnych przeżyć. Każdy z nas ma więc inny fundament tego, co uważa za prawdę, inne źródło wypływające ze zbioru osobistych uwarunkowań.",
+    "Spory o Prawdę nie mają sensu, gdyż Jej widzenie uzależnione jest od stanu osobistej duchowej przestrzeni.",
+    "Obiektywizm jest wypadkową subiektywnych ocen. To wspólna płaszczyzna porozumienia, polegająca na kompromisie. To jeszcze nie jest Prawda.",
+    "Prawdy się nie głosi, Prawdą się emanuje.",
+    "Stan życia, będący niewymiernie krótkim w porównaniu z Całością, jest nośnikiem wyzwolenia, a błyski przytomności przybliżają nas do rozpoznania naszej prawdziwej natury.",
+    "Odkrywanie Prawdy ma swoje korzenie w świadomości przemijania i śmierci oraz głębi, jaką one z sobą niosą.",
+    "Niczego nie można zachować na trwałe. To, co materialne ulegnie przemianie, a to co psychiczne, oczyści ogień Prawdy, gdy prysną iluzje.",
+    "Przyglądając się iluzoryczności, a zarazem prawdzie snów, można dostrzec iluzję a zarazem Prawdę życia.",
+    "Autentyczne współczucie wolne jest od litości i żalu.",
+    "Stan wyczekującej obecności jest jedynym stabilnym punktem odniesienia dla wszystkich stanów ludzkiej egzystencji.",
+    "Najgłębszą istotą naszego życia, nadającą mu sens i wyznaczającą kierunek, jest życie w świetle widzenia swojego ostatecznego stanu. Umiejętność życia w takim poglądzie można nazwać oświeceniem.",
+    "Oświecenie to umiejętność widzenia świata takim, jaki jest, bez zniekształceń związanych z przywiązaniami, oczekiwaniami, czyli całą sferą ludzkiej emocjonalności.",
+    "Życie człowieka oświeconego to trwanie w nieprzerwanej medytacji. Pojawiające się myśli są rozpuszczane niemalże w chwili, gdy się pojawiają.",
+    "Życie człowieka oświeconego jest życiem w pełni. Człowiek oświecony zawsze odnosi sukces, chociażby już tylko z tego powodu, że rozumie jego iluzoryczność."
+  ];
+
+  const aforyzmy = [
+    "Znaczenie słowa\nSŁOWO MOŻE BYĆ ODBICIEM PRAWDY,\nGDY KWESTIONUJEMY JEGO ZNACZENIE.\nPRAWDA ZNAJDUJE SIĘ POMIĘDZY WIERSZAMI SŁÓW.",
+    "Równowaga przeciwieństw ścieżką spełnionego życia\nMAŁY OSĄD JEST ZALĄŻKIEM WIELKIEGO PODZIAŁU.\nRÓWNOWAŻENIE PRZECIWIEŃSTW\nTO ZROZUMIENIE WŁASNYCH EMOCJI.",
+    "Natura Pustki\nPUSTKA TO OTWARTOŚĆ NA PRAWDĘ.",
+    "Bezstronne doświadczanie istnienia\nBĄDŹ BEZSTRONNY JAK NATURA,\nA JAKO WZROK NATURY\nSTAŃ SIĘ EMPATYCZNIE LUDZKI.",
+    "Potencjał subtelnej energii żeńskiej\nENERGIA ŻEŃSKA DAJE ŻYCIE.\nENERGIA MĘSKA BUDUJE PRZESTRZEŃ DLA ŻYCIA.\nNA NAJGŁĘBSZYM POZIOMIE OBYDWIE STAJĄ SIĘ JEDNOŚCIĄ.",
+    "Niczego nie pragnie, wszystko otrzymuje\nBOGACTWO NATURY WYNIKA Z JEJ OTWARTOŚCI NA ZMIANĘ.\nOTWARTOŚĆ UMYSŁU NA ZMIANĘ\nOTWIERA DROGĘ SPEŁNIENIA.",
+    "Płynie nurtem bez-celowości\nKRYSZTAŁOWO CZYSTY UMYSŁ\nPŁYNIE NURTEM BEZ-CELOWOŚCI.",
+    "Umiarkowanie\nZACHOWANIE UMIARU\nJEST LEKKOŚCIĄ ZAUFANIA DO ŻYCIA.",
+    "Kompletność na poziomie Ciała, Umysłu i Duszy\nKOMPLETNOŚĆ W ŻYCIU CODZIENNYM\nTO NIEUSTANNE SKUPIANIE UWAGO-ENERGII\nNA TU I TERAZ.",
+    "Ukryta Istota rzeczy\nISTOTA CZŁOWIECZEŃSTWA UKRYTA JEST\nW PUSTEJ PRZESTRZENI JEGO UMYSŁU.",
+    "Nadmiar pragnień\nPOŚRÓD NADMIARU WSZYSTKIEGO.\nTRUDNO ODNALEŹĆ SIEBIE",
+    "Pokochać siebie to zbliżyć się do świata\nWARTOŚĆ MIŁOŚCI KIEROWANEJ NA ZEWNĄTRZ\nMIERZY SIĘ GŁĘBIĄ MIŁOŚCI KIEROWANEJ WEWNĄTRZ\nKU SOBIE.",
+    "Ukryte Misterium\nW PRZESTRZENI SERCA\nJEST ISKRA TRWANIA RZECZYWISTOŚCI.",
+    "Droga życia\nSUBTELNOŚĆ OSOBOWOŚCI\nKSZTAŁTUJE ZAUFANIE I SPOKÓJ,\nBUDOWANY Z CHWILI NA CHWILĘ.",
+    "Prawo cykliczności\nGDY SPOCZNĘ W PUSTEJ PRZESTRZENI UMYSŁU,\nZNIKNIE NIEPOKÓJ ODDZIELENIA.",
+    "Autorytety\nBĄDŹ AUTORYTETEM DLA SIEBIE,\nA ŻYCIE OBJAWI CI PRAWDĘ.",
+    "Zasady, normy moralne i religie\nCOKOLWIEK POSZUKUJESZ NA ZEWNĄTRZ,\nNOSISZ W SOBIE.",
+    "Powrót do naturalności\nJEŻELI MASZ ŁĄCZNOŚĆ Z SAMYM SOBĄ,\nO NIC WIĘCEJ NIE MUSISZ ZABIEGAĆ.",
+    "Postawa mistrza a psychologia tłumu\nGDY USŁYSZYSZ W SERCU DŹWIĘK WOLNOŚCI,\nNIE BĘDZIESZ JUŻ NIGDY W ZGODZIE Z TŁUMEM.",
+    "Pomiędzy materią a energią\nDuch - Jest\nJAKO W TWOIM SERCU,\nTAK I NA ZIEMI TWOICH OCZEKIWAŃ.",
+    "Istota jedności\nZACHOWUJĄC ODRĘBNOŚĆ, MOGĘ JEDNOCZEŚNIE\nŁĄCZYĆ SIĘ Z CAŁOŚCIĄ,\nSTAWAĆ SIĘ CAŁOŚCIĄ\nI BYĆ CAŁOŚCIĄ.",
+    "Stajemy się tym, czym żyjemy\nJEŻELI NA CODZIEŃ SŁUCHAM GŁOSU SERCA\nTO POMIMO PRZEJŚCIOWYCH TRUDNOŚCI\nSTAJĘ SIĘ MOCĄ KREACJI.",
+    "Postawa i pewny krok\nPOSTAWA DUCHOWA KSZTAŁTUJE POSTAWĘ FIZYCZNĄ.\nPOSTAWA FIZYCZNA WPŁYWA NA POSTAWĘ DUCHOWĄ.",
+    "Spokój i wywarzenie\nCIĘŻAR MOŻE STAĆ SIĘ LEKKOŚCIĄ.\nBEZRUCH RÓWNOWAGI\nOBFITOŚCIĄ RUCHU.",
+    "Nauczyciel\nISTOTA LUDZKA SAMA W SOBIE\nJEST\nWIEDZĄ I POZNANIEM.",
+    "Zjednoczenie w prostocie\nGDY POZNAM NATURĘ PRZECIWIEŃSTW,\nGDY ZJEDNOCZĘ WEWNĘTRZNE ROZDARCIE,\nOBJAWI SIĘ ZROZUMIENIE PRZYNOSZĄCE MIŁOŚĆ.",
+    "Świętość świata\nNIE ZMIENIAM ŚWIATA.\nJESTEM JEGO ZMIANĄ.",
+    "Porażka przemocy\nNIE POSZUKUJ WROGA NA ZEWNĄTRZ.\nGŁÓWNYM WROGIEM JEST TWÓJ OPÓR I UŚPIONY UMYSŁ",
+    "Broń i zwycięstwo\nCZŁOWIEK ŚWIATŁY TRZYMA SIĘ OD BRONI Z DALEKA.",
+    "Nowy świat\nNIESZCZĘŚCIA ŚWIATA\nTO NIEMOC OCZU NA UWIĘZI PRZYZWYCZAJENIA.",
+    "Rozumieć siebie to rozumieć świat\nROZUMIEJĄC SIEBIE\nOTWIERAMY SIĘ NA INNYCH\nI ŁATWIEJ NAM ROZUMIEĆ ŚWIAT.",
+    "Nie-świadomy swojej wielkości\nCZŁOWIEK ŚWIADOMY BOGA W SOBIE\nJEST HARMONIĄ RZECZYWISTOŚCI.",
+    "Kontemplacja\nINTEGRACJA MATERII ZE ŚRODOWISKIEM DUCHA\nSTANOWI PEŁNIĘ ŻYCIA.",
+    "Pokorna duma\nDUCHOWE BOGACTWO, WIELKOŚĆ I MOC\nKRYJE SIĘ W BALANSOWANIU ICH PRZECIWIEŃSTW.",
+    "Prostota naturalności\nSZUKAJCIE JEDYNIE DROGI,\nA WSZYSTKO INNE BĘDZIE NA WŁAŚCIWYM MIEJSCU.",
+    "Moc niezłomnej postawy\nPRAWDZIWA MOC LUDZKICH POSTAW\nMIEŚCI SIĘ W CISZY SERCA.",
+    "Bieguny Jedności\nMOC W SŁABOŚCI SIĘ DOSKONALI,\nA SŁABI PRZEPASUJĄ SIĘ MOCĄ.",
+    "Świadomość refleksyjna\nPRAWDA NIE JEST KWESTIĄ INFORMACJI,\nPRAWDA JEST KWESTIĄ JEJ DOŚWIADCZENIA.",
+    "Zasada życia\nHARMONIA BIEGUNOWOŚCI\nPRZYNOSI UKOJENIE.",
+    "Doskonałość prostoty\nBĄDŹ LEKKI W MYŚLACH, MOWIE I UCZYNKACH.\nBEZ SŁÓW.\nBEZ DZIAŁANIA.",
+    "Gdzie skarb mój, tam i moje serce\nNAJWIĘKSZYM NASZYM SKARBEM\nJEST FAKT ISTNIENIA."
+  ];
+
+  const tresciDoLosowania = [
+    ...sentencje.map((text) => ({
+      kind: "Sentencja na dziś",
+      source: "— Szczelina decyzji. Dojrzewanie umysłu do wolności",
+      text
+    })),
+    ...refleksje.map((text) => ({
+      kind: "Refleksja",
+      source: "— Cisza. Esencja naszego umysłu",
+      text
+    })),
+    ...aforyzmy.map((text) => ({
+      kind: "Aforyzm",
+      source: "— Ścieżki spełnionego życia",
+      text
+    }))
+  ];
+
   let ostatniIndeks = -1;
 
   function losujSentencje() {
     const el = document.getElementById('sentencjaText');
+    const labelEl = document.getElementById('sentencjaLabel');
+    const attrEl = document.getElementById('sentencjaAttr');
     el.classList.add('fading');
     setTimeout(() => {
       let idx;
-      do { idx = Math.floor(Math.random() * sentencje.length); } while (idx === ostatniIndeks && sentencje.length > 1);
+      do { idx = Math.floor(Math.random() * tresciDoLosowania.length); } while (idx === ostatniIndeks && tresciDoLosowania.length > 1);
       ostatniIndeks = idx;
-      el.innerHTML = sentencje[idx].replace(/\n/g, '<br>');
+      const entry = tresciDoLosowania[idx];
+      labelEl.textContent = entry.kind;
+      attrEl.textContent = entry.source;
+      el.innerHTML = entry.text.replace(/\n/g, '<br>');
       el.classList.remove('fading');
     }, 300);
   }
