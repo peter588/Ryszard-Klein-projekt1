@@ -1,0 +1,10 @@
+# JetBrains / PyCharm / WebStorm
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Temporary/editor files
+*.swp
+*.swo

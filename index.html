@@ -530,14 +530,64 @@
      OPINIE CZYTELNIKÓW
   ======================== */
   .reviews-section { background: var(--cream); transition: var(--theme-transition); }
-  .reviews-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+  .reviews-inner { max-width: 860px; margin: 0 auto; text-align: center; }
   .reviews-eyebrow { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; transition: color 0.4s; }
+  .reviews-card {
+    padding: clamp(1.75rem, 4vw, 3rem);
+    background: rgba(247,243,236,0.92);
+    border: 1px solid rgba(160,123,58,0.18);
+    box-shadow: 0 18px 48px rgba(28,25,20,0.08);
+    transition: var(--theme-transition);
+  }
+  [data-theme="dark"] .reviews-card {
+    background: rgba(34,29,25,0.84);
+    border-color: rgba(201,168,104,0.2);
+    box-shadow: 0 22px 58px rgba(0,0,0,0.24);
+  }
   .review-quote-mark { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 5rem; line-height: 0.5; color: var(--gold); opacity: 0.45; margin-bottom: 1.5rem; display: block; }
-  .review-quote-text { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.35rem; font-style: italic; line-height: 1.85; color: var(--ink); margin-bottom: 1.75rem; transition: color 0.4s; }
-  .review-quote-name { display: block; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-style: normal; margin-bottom: 0.25rem; transition: color 0.4s; }
-  .review-quote-role { display: block; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.04em; color: var(--ink-light); transition: color 0.4s; }
-  .reviews-more-link { display: inline-block; margin-top: 2.25rem; font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; border-bottom: 1px solid var(--mist); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
-  .reviews-more-link:hover { color: var(--gold); border-color: var(--gold); }
+  .review-quote-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.18rem, 2vw, 1.45rem);
+    font-style: italic;
+    line-height: 1.95;
+    color: var(--ink);
+    margin-bottom: 2rem;
+    transition: color 0.4s, opacity 0.25s ease;
+    white-space: pre-line;
+  }
+  .review-quote-name {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+    margin-bottom: 2rem;
+    transition: color 0.4s, opacity 0.25s ease;
+  }
+  .reviews-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .reviews-next-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ink-light);
+    border: 1px solid var(--mist);
+    padding: 0.95rem 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+  }
+  .reviews-next-btn:hover {
+    color: var(--gold);
+    border-color: var(--gold-light);
+    background: rgba(201,168,104,0.06);
+  }
 
   /* ========================
      KSIĄŻKI
@@ -639,18 +689,81 @@
   .book-cta-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
   .book-cta-row { display: flex; align-items: stretch; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; }
   .book-cta-row .book-cta-link { margin-top: 0; }
-  .book-es-btn { display: flex; align-items: center; font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--mist); color: var(--ink-light); padding: 0 1.25rem; cursor: pointer; transition: border-color 0.3s, color 0.3s; }
+  .book-es-btn { display: flex; align-items: center; font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--mist); color: var(--ink-light); padding: 0 1.25rem; cursor: pointer; transition: border-color 0.3s, color 0.3s, background 0.3s; }
   .book-es-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .book-es-panel { display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--mist); }
-  .book-es-panel.is-open { display: block; }
-  .book-es-heading { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 400; color: var(--ink); line-height: 1.45; margin-bottom: 1.5rem; transition: color 0.4s; }
-  .book-es-covers { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: flex-end; }
-  .book-es-covers img { max-width: 130px; height: auto; display: block; box-shadow: 0 4px 16px rgba(28,25,20,0.12); }
+  .book-es-btn.is-active { border-color: rgba(160,123,58,0.45); color: var(--gold); background: rgba(201,168,104,0.08); }
+  .book-es-panel {
+    display: none;
+    margin-top: 2rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border: 1px solid rgba(160,123,58,0.18);
+    background:
+      linear-gradient(180deg, rgba(247,243,236,0.98), rgba(242,235,224,0.92)),
+      url("images/premium-line-pattern.svg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 18px 50px rgba(28,25,20,0.08);
+  }
+  [data-theme="dark"] .book-es-panel {
+    background:
+      linear-gradient(180deg, rgba(34,29,25,0.96), rgba(25,21,18,0.94)),
+      url("images/premium-line-pattern-dark.svg");
+    border-color: rgba(201,168,104,0.2);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+  }
+  .book-es-panel.is-open { display: block; animation: panelReveal 0.35s ease; }
+  @keyframes panelReveal {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .book-es-hero {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(160,123,58,0.18);
+  }
+  .book-es-overline {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.85rem;
+  }
+  .book-es-panel .book-title {
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    line-height: 0.95;
+    margin-bottom: 0.9rem;
+  }
+  .book-es-kicker {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin: 0;
+  }
+  .book-es-layout {
+    display: grid;
+    grid-template-columns: minmax(210px, 280px) 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .book-es-side {
+    display: grid;
+    gap: 1rem;
+  }
+  .book-es-covers { display: flex; gap: 1rem; margin-bottom: 0; flex-wrap: wrap; align-items: flex-end; }
+  .book-es-covers img { max-width: 132px; height: auto; display: block; box-shadow: 0 10px 24px rgba(28,25,20,0.16); border-radius: 2px; }
   .book-es-text p { font-family: 'Jost', sans-serif; font-size: 0.87rem; line-height: 1.78; color: var(--ink-light); margin-bottom: 0.9rem; transition: color 0.4s; }
   .book-es-text p:last-child { margin-bottom: 0; }
-  .book-es-video { margin-top: 1.75rem; aspect-ratio: 16/9; }
+  .book-es-video { margin-top: 1.75rem; aspect-ratio: 16/9; border-radius: 2px; overflow: hidden; box-shadow: 0 12px 30px rgba(28,25,20,0.14); }
   .book-es-video iframe { width: 100%; height: 100%; border: none; }
   .book-es-baner { width: 100%; display: block; margin: 1.75rem 0; }
+  @media (max-width: 840px) {
+    .book-es-layout { grid-template-columns: 1fr; }
+    .book-es-side { order: -1; }
+    .book-es-panel .book-title { font-size: clamp(1.7rem, 9vw, 2.45rem); }
+  }
 
   /* ========================
      DROGA CISZY
@@ -1036,7 +1149,7 @@
         </div>
         <div class="about-name-block">
           <p class="about-name">Ryszard Klein</p>
-          <p class="about-title">Pisarz · Muzyk · Refleksja nad człowiekiem</p>
+          <p class="about-title">pisarz · muzyk · autor refleksji o człowieku</p>
         </div>
       </div>
       <div class="about-right">
@@ -1095,23 +1208,6 @@
   </div>
 </section>
 
-<!-- OPINIE CZYTELNIKÓW -->
-<section class="reviews-section">
-  <div class="container">
-    <div class="reviews-inner fade-in">
-      <p class="reviews-eyebrow">Opinie czytelników</p>
-      <blockquote>
-        <span class="review-quote-mark">&ldquo;</span>
-        <p class="review-quote-text" id="reviewQuoteText"></p>
-        <footer>
-          <cite class="review-quote-name" id="reviewQuoteName"></cite>
-          <span class="review-quote-role" id="reviewQuoteRole"></span>
-        </footer>
-      </blockquote>
-    </div>
-  </div>
-</section>
-
 <!-- DROGA CISZY -->
 <section class="cycle-section" id="droga-ciszy">
   <div class="container">
@@ -1162,6 +1258,27 @@
   </div>
 </section>
 
+<!-- GŁOS CZYTELNIKÓW I SŁUCHACZY -->
+<section class="reviews-section">
+  <div class="container">
+    <div class="reviews-inner fade-in">
+      <p class="reviews-eyebrow">Głos czytelników i słuchaczy</p>
+      <div class="reviews-card">
+        <blockquote>
+          <span class="review-quote-mark">&ldquo;</span>
+          <p class="review-quote-text" id="reviewQuoteText"></p>
+          <footer>
+            <cite class="review-quote-name" id="reviewQuoteName"></cite>
+          </footer>
+        </blockquote>
+        <div class="reviews-actions">
+          <button class="reviews-next-btn" id="reviewsNextBtn" type="button">Następna</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- KSIĄŻKI -->
 <section class="books-section" id="ksiazki">
   <div class="container">
@@ -1192,23 +1309,33 @@
             Więcej
             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <button class="book-es-btn" onclick="toggleEsPanel()">Przekład hiszpański</button>
+          <button class="book-es-btn" id="btnEsPanelCisza" onclick="toggleEsPanel()">Przekład hiszpański</button>
         </div>
         <div class="book-es-panel" id="esPanelCisza">
-          <h4 class="book-es-heading">Irena Klein i Hiszpański przekład książki „Cisza. Esencja naszego umysłu"</h4>
-          <div class="book-es-covers">
-            <img src="images/silencio/El%20Silencio%20lo%20esencial%20de%20nuestra%20mente%20-%20druk-kopia.jpg" alt="Silencio — wydanie drukowane">
-            <img src="images/silencio/El%20Silencio%20lo%20esencial%20de%20nuestra%20mente%20epuap.-kopia.png" alt="Silencio — e-book">
+          <div class="book-es-hero">
+            <p class="book-es-overline">Przekład hiszpański</p>
+            <h3 class="book-title">Silencio.<br><em>Lo esencial de nuestra mente</em></h3>
+            <p class="book-es-kicker">Irena Klein i hiszpański przekład książki „Cisza. Esencja naszego umysłu”</p>
           </div>
-          <div class="book-es-text">
-            <p>Książka „Cisza. Esencja naszego umysłu" została przełożona na język hiszpański przez Irenę Klein — pisarkę, autorkę wielu książek, psychoterapeutkę mieszkającą na stałe w Argentynie, a prywatnie moją siostrę.</p>
-            <p>Praca nad przekładem trwała ponad rok i wymagała nie tylko biegłości językowej, lecz także wyjątkowej wrażliwości na duchowy, psychologiczny i refleksyjny charakter książki. Dzięki zaangażowaniu Ireny Klein argentyńskie wydanie ukazało się w roku 2014 pod tytułem „Silencio. Lo esencial de nuestra mente".</p>
-            <p>Po drugim polskim wydaniu książki, opublikowanym nakładem Wydawnictwa KOS, Irena Klein podjęła się ponownie pracy nad hiszpańską wersją tekstu. Również tym razem był to proces wymagający dużej pracy, za którą z tego miejsca serdecznie dziękuję.</p>
-            <p>Drugie wydanie hiszpańskie ukazało się w Argentynie w roku 2024 nakładem Editorial Guadalupe. Dzięki tej pracy „Cisza. Esencja naszego umysłu" doczekała się dwóch wydań w Polsce oraz dwóch wydań w Argentynie.</p>
-            <p>Osoby zainteresowane lekturą mogą nabyć książkę bezpośrednio u autora — w wersji drukowanej lub jako e-book. Polskie i hiszpańskie wydanie tworzą także wyjątkowo ciekawą propozycję dla lingwistów, tłumaczy oraz osób uczących się języka hiszpańskiego, pozwalając na równoległą lekturę oryginału i przekładu.</p>
-          </div>
-          <div class="book-es-video">
-            <iframe src="https://www.youtube.com/embed/VQC9zo89OXE" title="Silencio — przekład hiszpański" allowfullscreen loading="lazy"></iframe>
+          <div class="book-es-layout">
+            <div class="book-es-side">
+              <div class="book-es-covers">
+                <img src="images/silencio/El%20Silencio%20lo%20esencial%20de%20nuestra%20mente%20-%20druk-kopia.jpg" alt="Silencio — wydanie drukowane">
+                <img src="images/silencio/El%20Silencio%20lo%20esencial%20de%20nuestra%20mente%20epuap.-kopia.png" alt="Silencio — e-book">
+              </div>
+            </div>
+            <div class="book-es-main">
+              <div class="book-es-text">
+                <p>Książka „Cisza. Esencja naszego umysłu" została przełożona na język hiszpański przez Irenę Klein — pisarkę, autorkę wielu książek, psychoterapeutkę mieszkającą na stałe w Argentynie, a prywatnie moją siostrę.</p>
+                <p>Praca nad przekładem trwała ponad rok i wymagała nie tylko biegłości językowej, lecz także wyjątkowej wrażliwości na duchowy, psychologiczny i refleksyjny charakter książki. Dzięki zaangażowaniu Ireny Klein argentyńskie wydanie ukazało się w roku 2014 pod tytułem „Silencio. Lo esencial de nuestra mente".</p>
+                <p>Po drugim polskim wydaniu książki, opublikowanym nakładem Wydawnictwa KOS, Irena Klein podjęła się ponownie pracy nad hiszpańską wersją tekstu. Również tym razem był to proces wymagający dużej pracy, za którą z tego miejsca serdecznie dziękuję.</p>
+                <p>Drugie wydanie hiszpańskie ukazało się w Argentynie w roku 2024 nakładem Editorial Guadalupe. Dzięki tej pracy „Cisza. Esencja naszego umysłu" doczekała się dwóch wydań w Polsce oraz dwóch wydań w Argentynie.</p>
+                <p>Osoby zainteresowane lekturą mogą nabyć książkę bezpośrednio u autora — w wersji drukowanej lub jako e-book. Polskie i hiszpańskie wydanie tworzą także wyjątkowo ciekawą propozycję dla lingwistów, tłumaczy oraz osób uczących się języka hiszpańskiego, pozwalając na równoległą lekturę oryginału i przekładu.</p>
+              </div>
+              <div class="book-es-video">
+                <iframe src="https://www.youtube.com/embed/VQC9zo89OXE" title="Silencio — przekład hiszpański" allowfullscreen loading="lazy"></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1234,11 +1361,15 @@
             Więcej
             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <button class="book-es-btn" onclick="toggleJamJestEN()">Przekład angielski</button>
-          <button class="book-es-btn" onclick="toggleJamJestAudio()">Audiobook</button>
+          <button class="book-es-btn" id="btnEsPanelJamJestEN" onclick="toggleJamJestEN()">Przekład angielski</button>
+          <button class="book-es-btn" id="btnEsPanelJamJestAudio" onclick="toggleJamJestAudio()">Audiobook</button>
         </div>
         <div class="book-es-panel" id="esPanelJamJestEN">
-          <h4 class="book-es-heading">Maryla Ros i angielski przekład książki „Jam Jest"</h4>
+          <div class="book-es-hero">
+            <p class="book-es-overline">Przekład angielski</p>
+            <h3 class="book-title"><em>I Am</em></h3>
+            <p class="book-es-kicker">Maryla Ros i angielski przekład książki „Jam Jest”</p>
+          </div>
           <div class="book-es-text">
             <p>W roku 2013 wydałem książkę z audiobookiem zatytułowaną „Jam Jest". Po wyczerpaniu nakładu, w roku 2015 ukazało się jej drugie, poprawione — zarówno w wersji drukowanej, jak i w postaci e-booka.</p>
             <p>Szczególne znaczenie w pracy nad tym wydaniem miała Maryla Ros — psychoterapeutka, poetka, liderka InterPlay, mieszkająca na stałe w Australii. Dla mnie osobiście jest kimś więcej niż konsultantką czy tłumaczką. Jest duchową mentorką i Mistrzynią, osobą, z którą każde spotkanie wnosiło do mojego życia nowe światło, głębię i większe zrozumienie.</p>
@@ -1252,7 +1383,11 @@
           </div>
         </div>
         <div class="book-es-panel" id="esPanelJamJestAudio">
-          <h4 class="book-es-heading">Grażyna Klein — muzyczna przestrzeń audiobooka „Jam Jest"</h4>
+          <div class="book-es-hero">
+            <p class="book-es-overline">Audiobook</p>
+            <h3 class="book-title"><em>Jam Jest</em></h3>
+            <p class="book-es-kicker">Grażyna Klein — muzyczna przestrzeń audiobooka „Jam Jest”</p>
+          </div>
           <div class="book-es-text">
             <p>Osobnym i bardzo ważnym etapem była praca nad muzyką do audiobooka. W tym miejscu z ogromną wdzięcznością dziękuję mojej córce, Grażynie Klein — muzykoterapeutce, która stworzyła wyjątkową, wielogłosową kompozycję towarzyszącą tekstowi.</p>
             <p>Jej muzyka stała się dla tej książki czymś więcej niż tłem dźwiękowym. Była przestrzenią, w której słowo mogło głębiej wybrzmieć — muzycznym oddechem tekstu, jego wewnętrznym nurtem i subtelnym dopełnieniem.</p>
@@ -1619,8 +1754,14 @@
   }
 
   // PRZEKŁAD HISZPAŃSKI — panel rozwijany
+  function syncPanelButton(panelId, buttonId) {
+    const panel = document.getElementById(panelId);
+    const btn = document.getElementById(buttonId);
+    if (panel && btn) btn.classList.toggle('is-active', panel.classList.contains('is-open'));
+  }
   function toggleEsPanel() {
     document.getElementById('esPanelCisza').classList.toggle('is-open');
+    syncPanelButton('esPanelCisza', 'btnEsPanelCisza');
   }
   function toggleJamJestEN() {
     const en = document.getElementById('esPanelJamJestEN');
@@ -1628,6 +1769,8 @@
     const opening = !en.classList.contains('is-open');
     en.classList.toggle('is-open');
     if (opening) audio.classList.remove('is-open');
+    syncPanelButton('esPanelJamJestEN', 'btnEsPanelJamJestEN');
+    syncPanelButton('esPanelJamJestAudio', 'btnEsPanelJamJestAudio');
   }
   function toggleJamJestAudio() {
     const audio = document.getElementById('esPanelJamJestAudio');
@@ -1635,41 +1778,82 @@
     const opening = !audio.classList.contains('is-open');
     audio.classList.toggle('is-open');
     if (opening) en.classList.remove('is-open');
+    syncPanelButton('esPanelJamJestEN', 'btnEsPanelJamJestEN');
+    syncPanelButton('esPanelJamJestAudio', 'btnEsPanelJamJestAudio');
   }
 
-  // OPINIE CZYTELNIKÓW — sekwencyjne przy każdym wejściu/odświeżeniu
+  // OPINIE CZYTELNIKÓW I SŁUCHACZY
   const opinie = [
     {
-      text: "Trzymam w dłoniach nie poradnik pełen trywialnych porad czy sentencji nadających się wyłącznie do wpisania do pamiętnika. To raczej mapa naszego wewnętrznego świata oraz zbiór wskazówek, jak się poruszać po tej krainie, pełnej niespodzianek i przeszkód.",
-      name: "Justyna Gul",
-      role: "Dziennikarka, recenzent, nauczyciel akademicki"
+      text: "Panie Ryszardzie, czytam Pana książkę „Jam Jest” i stwierdzam, że tego szukałem. Podoba mi się forma, że nie ma tylu linijek tekstu, dzięki czemu można przeanalizować lepiej, czytelniej, jaśniej w sobie to, o czym Pan pisze. Kupiłem e-booka, ponieważ dzięki temu mogę poczytać w pracy, że niby w telefon patrzę. Super jest. Na pewno będę do niej wracał jako do źródła drogi, którą należy podążać w życiu.",
+      signature: "Kamil, 39 lat, fizjoterapeuta, Gdańsk"
     },
     {
-      text: "Tytułowa cisza prowokuje do stawiania pytań o sens własnego istnienia, o możliwość przyjęcia postawy kontemplacyjnej i rozwoju w przestrzeni duchowej.",
-      name: "dr Mariusz Wojewoda",
-      role: "Instytut Filozofii Uniwersytetu Śląskiego w Katowicach"
+      text: "Panie Ryszardzie, czytałem „Ciszę…” od deski do deski. Genialna książka. Zgadzam się z większością treści, najpewniej w najbliższym czasie sięgnę po „Jam Jest”.",
+      signature: "Adam"
     },
     {
-      text: "Jestem przekonana, że powstała książka wartościowa merytorycznie, dająca czytelnikowi wiele przeżyć i poruszeń emocjonalnych. Pokazująca, że jedną z najistotniejszych wartości życia człowieka jest umiejętność bycia ze sobą, dar wyciszenia się, posłuchania samego siebie.",
-      name: "Urszula Koszutska",
-      role: "Psycholog"
+      text: "Dzień dobry. Przeczytałam Pana obydwie książki. Jestem wdzięczna za mądrość, jaka z nich bije, poparta głębokim doświadczeniem. To się czuje. Dziękuję.",
+      signature: "Katarzyna"
     },
     {
-      text: "Po przeczytaniu książki mogę powiedzieć, że wszystko gra: nie można było tego napisać lepiej, a więc inaczej.",
-      name: "Jacek Konarski",
-      role: ""
+      text: "Witam. Nie ukrywam, że śledzę Pana twórczość i jestem pełna podziwu. Każde Pana wystąpienie jest pełne duchowości, spokoju, motywacji, pozytywnej energii, a zarazem prowadzi do burzy mózgów i analizy życia. Gratuluję stanu własnej świadomości, a przede wszystkim umiejętności dzielenia się nią.",
+      signature: "Agata"
+    },
+    {
+      text: "Książka, która budzi do refleksji i zastanowienia nad sobą i światem. Zaskakująco świeża, nie odnosi się wrażenia, że gdzieś już to było. Bardzo przemyślana. Podzielona na część egzystencjalną, psychologiczną i transcendentalną. Autor czerpie z religii chrześcijańskiej i z buddyzmu. Na końcu zamieszczono wiele medytacji. Ciekawa i wciągająca zachęta do uważnego życia polskiego autora. Polecam.",
+      signature: "Czytelnik"
+    },
+    {
+      text: "Witam serdecznie. Czytam Pana książkę „Cisza, esencja naszego umysłu” i bardzo mnie raduje czytanie Pana słów, są mi tak bliskie. Uwielbiam też wiersze tam zawarte. Dziękuję bardzo za tak piękną książkę. Na pewno sięgnę po następne.",
+      signature: "Asia"
+    },
+    {
+      text: "Witam. Jestem po Pana wykładzie w Katowicach. Jestem pod bardzo pozytywnym wrażeniem. Zakupiłem Pana książkę „Jam Jest” cztery dni temu i czytam ją codziennie. Jestem pod wrażeniem i wyrażam wdzięczność. Zamówiłem również „Ciszę”. Od poniedziałku czytam i poznaję siebie na nowo. Ciągła uwaga na tu i teraz.",
+      signature: "Wojtek"
+    },
+    {
+      text: "Dziękuję za link do programu, to była bardzo ciekawa rozmowa, dała mi wiele do przemyślenia. Dwie istoty, które rozmawiają z sobą jak człowiek z Bogiem. Przy okazji napiszę, że uwielbiam słuchać czasem Pana rozmowy z Marylą. To nagranie weszło do mojego kanonu poprawiaczy nastroju i przypominaczy o tym, co w życiu istotne.",
+      signature: "Zenon"
+    },
+    {
+      text: "Wysłuchałam. Zgadzam się z Panem. Tak, czemu się sprzeciwiasz, to wzmacniasz. Puszczając wolno sytuacje i problemy, jestem człowiekiem uwolnionym. Dziękuję za to, co Pan robi. Sama także pomagam poprzez metodę theta healing. Każda rzecz robiona z miłością działa dla dobra ludzi i świata.",
+      signature: "Lidia z Krakowa"
+    },
+    {
+      text: "Witam Panie Ryszardzie. Niezwykle mi miło. Czuję się zaszczycona. Piękny ten fragment Pańskiej książki. Rezonuje ze mną. Bardzo dziękuję. Oprócz tego kojący głos i pewność.",
+      signature: "Renata"
+    },
+    {
+      text: "Witam serdecznie. Jestem wdzięczna Bogu, że podarował mi Pana książkę „Jam Jest”. Czytam z zachwytem, celebrując każde słowo w niej zawarte. Pomyślałam, że wracam do domu, pokazał mi Pan Drogę, z której nie chcę zboczyć. Tęsknota w sercu przywołuje pamięć miłości.",
+      signature: "czytelniczka „Jam Jest”"
+    },
+    {
+      text: "Znalazłem Pana stronę niespodziewanie. Szukam kogoś, kto pomoże mi połączyć się z moim wewnętrznym dzieckiem i moją Duszą. Od wielu lat próbuję zmienić się i żyć spełnionym życiem. Pana strona internetowa i to, co Pan robi, bardzo mnie pozytywnie poruszyły.",
+      signature: "Piotr"
     }
   ];
 
-  (function wyswietlOpinie() {
-    const idx = parseInt(localStorage.getItem('rk-opinia-idx') || '0');
-    const op = opinie[idx % opinie.length];
-    document.getElementById('reviewQuoteText').textContent = op.text;
-    document.getElementById('reviewQuoteName').textContent = op.name;
-    const roleEl = document.getElementById('reviewQuoteRole');
-    if (op.role) { roleEl.textContent = op.role; } else { roleEl.style.display = 'none'; }
-    localStorage.setItem('rk-opinia-idx', String((idx + 1) % opinie.length));
-  })();
+  function losujOpinie() {
+    const previousIdx = parseInt(localStorage.getItem('rk-opinia-idx') || '-1');
+    let idx = Math.floor(Math.random() * opinie.length);
+    if (opinie.length > 1 && idx === previousIdx) idx = (idx + 1) % opinie.length;
+    const op = opinie[idx];
+    const textEl = document.getElementById('reviewQuoteText');
+    const nameEl = document.getElementById('reviewQuoteName');
+    textEl.style.opacity = '0';
+    nameEl.style.opacity = '0';
+    window.setTimeout(() => {
+      textEl.textContent = op.text;
+      nameEl.textContent = op.signature;
+      textEl.style.opacity = '1';
+      nameEl.style.opacity = '1';
+      localStorage.setItem('rk-opinia-idx', String(idx));
+    }, 140);
+  }
+
+  document.getElementById('reviewsNextBtn').addEventListener('click', losujOpinie);
+  losujOpinie();
 </script>
 </body>
 </html>
