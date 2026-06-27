@@ -5,6 +5,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ryszard Klein — Droga Ciszy</title>
+<meta name="description" content="Ryszard Klein — autorski cykl Droga Ciszy. Książki o człowieku, umyśle, ciszy i dojrzewaniu do wewnętrznej wolności.">
+<link rel="canonical" href="https://ryszard-klein-projekt1-pi.vercel.app/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ryszard Klein — Droga Ciszy">
+<meta property="og:description" content="Poznaj autorski cykl książek Ryszarda Kleina oraz sentencje, aforyzmy i refleksje o człowieku, ciszy i wolności wewnętrznej.">
+<meta property="og:url" content="https://ryszard-klein-projekt1-pi.vercel.app/index.html">
+<meta property="og:image" content="https://ryszard-klein-projekt1-pi.vercel.app/images/author/author.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ryszard Klein — Droga Ciszy">
+<meta name="twitter:description" content="Autorski cykl książek o człowieku, umyśle, ciszy i dojrzewaniu do wolności wewnętrznej.">
+<meta name="twitter:image" content="https://ryszard-klein-projekt1-pi.vercel.app/images/author/author.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -310,6 +321,90 @@
     border-color: var(--gold-light);
     color: #F7F3EC;
   }
+  .share-block {
+    margin-top: 1.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .share-heading {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+  .share-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+  .share-btn {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid rgba(160,123,58,0.24);
+    background: rgba(253,250,245,0.68);
+    color: var(--ink-mid);
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s, color 0.3s, box-shadow 0.3s;
+  }
+  .share-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(160,123,58,0.6);
+    background: rgba(201,168,104,0.08);
+    color: var(--gold);
+    box-shadow: 0 10px 22px rgba(28,25,20,0.08);
+  }
+  .share-btn svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .share-btn svg.is-filled {
+    fill: currentColor;
+    stroke: none;
+  }
+  .share-feedback {
+    min-height: 1em;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+  }
+  .share-block-dark .share-heading {
+    color: rgba(201,168,104,0.72);
+  }
+  .share-block-dark .share-btn {
+    background: rgba(247,243,236,0.06);
+    border-color: rgba(201,168,104,0.24);
+    color: rgba(247,243,236,0.76);
+  }
+  .share-block-dark .share-btn:hover {
+    background: rgba(201,168,104,0.12);
+    border-color: rgba(201,168,104,0.62);
+    color: #F7F3EC;
+    box-shadow: none;
+  }
+  .share-block-dark .share-feedback {
+    color: rgba(247,243,236,0.55);
+  }
+  .share-block-soft {
+    align-items: flex-start;
+  }
+  .share-block-soft .share-actions {
+    justify-content: flex-start;
+  }
 
   /* HOME INVITATION */
   .home-invitation {
@@ -437,6 +532,23 @@
   .about-poetic p {
     font-style: italic; color: var(--ink) !important;
     margin-bottom: 0.4rem !important;
+  }
+  .about-video-block {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--mist);
+    transition: border-color 0.4s;
+  }
+  .about-video-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.1rem;
+  }
+  .about-video-block .video-wrapper {
+    max-width: 780px;
   }
   /* VIDEO SECTION */
   .video-section {
@@ -617,11 +729,113 @@
      KSIĄŻKI
   ======================== */
   .books-section { background: var(--about-bg); isolation: isolate; }
-  .books-intro { max-width: 660px; margin-bottom: 5rem; }
-  .books-intro p { color: var(--ink-light); font-weight: 300; margin-top: 1.5rem; transition: color 0.4s; }
+  .books-intro { max-width: 1040px; margin-bottom: 5rem; }
+  .books-intro > .section-label,
+  .books-intro > .section-title,
+  .books-intro > p {
+    max-width: 660px;
+  }
+  .books-intro > p { color: var(--ink-light); font-weight: 300; margin-top: 1.5rem; transition: color 0.4s; }
+  .books-showcase {
+    margin-top: 2.6rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 980px;
+  }
+  .books-showcase-item {
+    text-decoration: none;
+    color: inherit;
+  }
+  .books-showcase-cover {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(160,123,58,0.18);
+    background:
+      linear-gradient(180deg, rgba(253,250,245,0.98), rgba(242,235,224,0.92)),
+      url("images/premium-line-pattern.svg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 18px 42px rgba(28,25,20,0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .books-showcase-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(-10px 10px 18px rgba(28,25,20,0.14));
+  }
+  .books-showcase-item:hover .books-showcase-cover {
+    transform: translateY(-7px);
+    border-color: rgba(160,123,58,0.42);
+    box-shadow: 0 24px 48px rgba(28,25,20,0.14);
+  }
+  [data-theme="dark"] .books-showcase-cover {
+    background:
+      linear-gradient(180deg, rgba(34,29,25,0.96), rgba(25,21,18,0.94)),
+      url("images/premium-line-pattern-dark.svg");
+    border-color: rgba(201,168,104,0.18);
+    box-shadow: 0 22px 50px rgba(0,0,0,0.24);
+  }
+  [data-theme="dark"] .books-showcase-cover img {
+    mix-blend-mode: normal;
+    filter: drop-shadow(-8px 8px 16px rgba(0,0,0,0.46));
+  }
+  .books-showcase-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    color: var(--ink-light);
+    text-align: center;
+  }
+  .books-showcase-placeholder svg {
+    width: 46px;
+    height: 46px;
+    stroke: currentColor;
+    opacity: 0.7;
+  }
+  .books-showcase-placeholder span {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .books-showcase-meta {
+    margin-top: 0.9rem;
+  }
+  .books-showcase-roman {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+  .books-showcase-title {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: var(--ink);
+    transition: color 0.35s ease;
+  }
+  .books-showcase-item:hover .books-showcase-title {
+    color: var(--gold);
+  }
   .book-item {
-    display: grid; grid-template-columns: 80px 160px 1fr;
-    gap: 2.5rem; padding: 2.5rem 0;
+    display: grid; grid-template-columns: 92px 186px 1fr;
+    gap: 3rem; padding: 2.7rem 0;
     border-top: 1px solid var(--mist); transition: border-color 0.4s;
     scroll-margin-top: 100px;
   }
@@ -631,12 +845,12 @@
   .book-cover img {
     width: 100%; display: block;
     mix-blend-mode: multiply;
-    filter: drop-shadow(-12px 8px 18px rgba(28,25,20,0.13));
+    filter: drop-shadow(-14px 12px 22px rgba(28,25,20,0.16));
     transition: transform 0.35s ease, filter 0.35s ease;
   }
   .book-item:hover .book-cover img {
-    transform: translateY(-8px) scale(1.03);
-    filter: drop-shadow(-14px 12px 22px rgba(28,25,20,0.17));
+    transform: translateY(-8px) scale(1.035);
+    filter: drop-shadow(-18px 14px 28px rgba(28,25,20,0.22));
   }
   [data-theme="dark"] .book-cover img {
     mix-blend-mode: normal;
@@ -653,7 +867,7 @@
   }
   .book-number {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 4rem; font-weight: 300;
+    font-size: 4.4rem; font-weight: 300;
     color: var(--book-num-color); line-height: 1;
     transition: color 0.3s; padding-top: 0.2rem;
   }
@@ -811,7 +1025,7 @@
     margin-top: 1.75rem; line-height: 1.85; font-size: 1.05rem;
     transition: color 0.4s;
   }
-  .cycle-bottom { max-width: 560px; }
+  .cycle-bottom { max-width: 640px; }
   .cycle-desc {
     max-width: 560px; margin-top: 3rem;
     border-top: 1px solid var(--mist);
@@ -827,7 +1041,7 @@
   .cycle-desc p:last-child { margin-bottom: 0; }
   .cycle-book-row {
     display: flex; align-items: center; gap: 1.5rem;
-    padding: 1.2rem 0; border-bottom: 1px solid var(--mist);
+    padding: 1.1rem 0; border-bottom: 1px solid var(--mist);
     transition: border-color 0.4s, opacity 0.3s;
     text-decoration: none;
   }
@@ -835,10 +1049,10 @@
   .cycle-book-row:hover { opacity: 0.75; }
   .cycle-roman {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.2rem; font-weight: 300; color: var(--gold); min-width: 36px;
+    font-size: 1.28rem; font-weight: 300; color: var(--gold); min-width: 36px;
   }
   .cycle-book-thumb {
-    width: 38px; flex-shrink: 0;
+    width: 52px; flex-shrink: 0;
   }
   .cycle-book-thumb img {
     width: 100%; display: block;
@@ -852,14 +1066,14 @@
   }
   .cycle-book-row:hover .cycle-book-thumb img { transform: translateY(-2px) scale(1.04); }
   .cycle-book-thumb-placeholder {
-    width: 38px; aspect-ratio: 2/3;
+    width: 52px; aspect-ratio: 2/3;
     flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     color: var(--mist);
   }
   .cycle-book-name {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem; font-weight: 300; color: var(--ink-mid);
+    font-size: 1.12rem; font-weight: 300; color: var(--ink-mid);
     font-style: italic; transition: color 0.4s;
   }
   .cycle-book-name.upcoming { color: var(--ink-light); }
@@ -947,6 +1161,30 @@
   .footer-links li { margin-bottom: 0.6rem; }
   .footer-links a { font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.05em; color: var(--footer-link); text-decoration: none; transition: color 0.3s; }
   .footer-links a:hover { color: var(--gold-light); }
+  .footer-share {
+    margin-top: 1.8rem;
+    align-items: flex-start;
+  }
+  .footer-share .share-actions {
+    justify-content: flex-start;
+  }
+  .footer-share .share-heading {
+    color: var(--gold-light);
+  }
+  .footer-share .share-btn {
+    background: rgba(247,243,236,0.05);
+    border-color: rgba(247,243,236,0.14);
+    color: rgba(247,243,236,0.78);
+  }
+  .footer-share .share-btn:hover {
+    background: rgba(201,168,104,0.12);
+    border-color: rgba(201,168,104,0.45);
+    color: #F7F3EC;
+    box-shadow: none;
+  }
+  .footer-share .share-feedback {
+    color: rgba(247,243,236,0.5);
+  }
   .footer-bottom { border-top: 1px solid rgba(247,243,236,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
   .footer-copy { font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.05em; color: var(--footer-copy); transition: color 0.4s; }
   .footer-gold-line { width: 60px; height: 1px; background: var(--gold); opacity: 0.4; }
@@ -999,7 +1237,8 @@
     .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
     .about-portrait-img { width: 100%; max-width: 300px; }
     .about-portrait-frame { width: fit-content; max-width: 100%; }
-    .book-item { grid-template-columns: 50px 110px 1fr; gap: 1.5rem; }
+    .books-showcase { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .book-item { grid-template-columns: 58px 132px 1fr; gap: 1.7rem; }
     .book-number { font-size: 2.5rem; }
 
     /* Droga Ciszy — pełna szerokość na mobilnych */
@@ -1019,14 +1258,18 @@
     .home-invitation { padding: 2.5rem 0; }
     .video-section { padding: 2rem 0; }
     .cycle-section { padding: 2.5rem 0; }
+    .share-block { align-items: flex-start; }
+    .share-actions { justify-content: flex-start; }
+    .books-showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 0.9rem; }
+    .books-showcase-title { font-size: 0.92rem; }
 
     /* Książki — czytelny układ mobilny, bez dużej cyfry */
     .book-item {
       display: grid;
-      grid-template-columns: minmax(128px, 148px) minmax(0, 1fr);
+      grid-template-columns: minmax(148px, 164px) minmax(0, 1fr);
       justify-content: start;
       align-items: start;
-      gap: 0.85rem 1.1rem;
+      gap: 0.9rem 1rem;
       padding: 2rem 0;
     }
     .book-number {
@@ -1034,7 +1277,7 @@
     }
     .book-cover {
       width: 100%;
-      max-width: 148px;
+      max-width: 164px;
       justify-self: start;
       align-self: start;
     }
@@ -1059,11 +1302,16 @@
     }
     .cycle-book-thumb,
     .cycle-book-thumb-placeholder {
-      width: 52px;
+      width: 60px;
     }
     .cycle-book-name {
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       line-height: 1.2;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 0.9rem;
+      align-items: flex-start;
     }
   }
 
@@ -1161,6 +1409,27 @@
       <p class="sentencja-text" id="sentencjaText"></p>
       <p class="sentencja-attr" id="sentencjaAttr">— Szczelina decyzji. Dojrzewanie umysłu do wolności</p>
       <button class="sentencja-btn" onclick="losujSentencje()">Losuj</button>
+      <div class="share-block share-block-dark" data-share-context="quote">
+        <p class="share-heading">Udostępnij myśl</p>
+        <div class="share-actions">
+          <button class="share-btn" type="button" data-share-channel="facebook" aria-label="Udostępnij sentencję na Facebooku">
+            <svg class="is-filled" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.64 21v-7.07h2.39l.36-2.76h-2.75V9.4c0-.8.22-1.35 1.36-1.35h1.45V5.58c-.25-.03-1.11-.1-2.11-.1-2.09 0-3.52 1.28-3.52 3.63v2.06H8.5v2.76h2.28V21z"/></svg>
+          </button>
+          <button class="share-btn" type="button" data-share-channel="messenger" aria-label="Udostępnij sentencję w Messengerze">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0-4.97-4.03-9-9-9s-9 4.03-9 9c0 2.83 1.31 5.36 3.36 7.01V22l3.36-1.86c.98.27 2.01.41 3.08.41 4.97 0 9-4.03 9-9.05Z"/><path d="m8 13.25 3.05-3.24 2.24 2.24L16 9.5l-3.05 3.24-2.24-2.24z"/></svg>
+          </button>
+          <button class="share-btn" type="button" data-share-channel="whatsapp" aria-label="Udostępnij sentencję na WhatsAppie">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.6A8.4 8.4 0 0 1 7.55 18.9L4 20l1.16-3.38A8.4 8.4 0 1 1 20 11.6Z"/><path d="M9.34 8.94c.2-.45.42-.46.62-.47h.53c.17 0 .44.07.66.54.22.46.75 1.6.82 1.72.07.12.11.27.02.43-.09.15-.14.25-.28.39-.14.14-.29.31-.41.41-.14.12-.28.25-.12.49.16.24.71 1.16 1.53 1.88 1.05.92 1.94 1.2 2.22 1.34.28.14.44.12.6-.07.17-.18.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.64.77 1.92.91.28.13.46.2.53.31.06.1.06.62-.15 1.22-.2.6-1.18 1.15-1.63 1.22-.42.06-.96.09-1.55-.11-.36-.12-.82-.27-1.4-.52-.6-.26-2-.96-3.46-2.3-1.14-1.04-1.92-2.32-2.14-2.71-.22-.4-.24-.85-.01-1.21.21-.33.48-.74.67-1.06Z"/></svg>
+          </button>
+          <button class="share-btn" type="button" data-share-channel="email" aria-label="Wyślij sentencję e-mailem">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+          </button>
+          <button class="share-btn" type="button" data-share-channel="copy" aria-label="Skopiuj link do sentencji">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="10" height="10" rx="2"/><path d="M7 15H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
+        <p class="share-feedback" aria-live="polite"></p>
+      </div>
     </div>
   </div>
 
@@ -1230,29 +1499,27 @@
           </div>
           <p>Napisałem pięć książek. Część z nich doczekała się kolejnych wydań, tłumaczeń na języki obce i ważnych dla mnie wyróżnień. Szczegółowe informacje o książkach zamieszczam w osobnej zakładce.</p>
           <p>Pisanie jest dla mnie przede wszystkim osobistą drogą refleksji. Piszę, bo sam tego potrzebuję. W pisaniu porządkuję myśli, pogłębiam świadomość, odzyskuję wewnętrzną równowagę i lepiej rozumiem siebie. Jest to dla mnie forma medytacji, uważności i cichej rozmowy z samym sobą.</p>
+          <div class="about-video-block">
+            <p class="about-video-label">Opowieść autobiograficzna</p>
+            <div class="video-wrapper">
+              <div class="video-frame">
+                <div class="video-iframe-container">
+                  <iframe
+                    src="https://www.youtube.com/embed/kRDSxLKf87k"
+                    title="Opowieść o życiu w siedemdziesiąte urodziny"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    loading="lazy">
+                  </iframe>
+                </div>
+              </div>
+              <h3 class="video-caption-title">Opowieść o życiu w siedemdziesiąte urodziny.</h3>
+              <p class="video-caption-date">Porąbka, dnia 18. II 2021 rok.</p>
+            </div>
+          </div>
           <button class="about-collapse-btn" onclick="toggleAbout()">↑ Zwiń</button>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- FILM -->
-<section class="video-section">
-  <div class="container">
-    <div class="video-wrapper fade-in">
-      <div class="video-frame">
-        <div class="video-iframe-container">
-          <iframe
-            src="https://www.youtube.com/embed/kRDSxLKf87k"
-            title="Opowieść o życiu w siedemdziesiąte urodziny"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
-      </div>
-      <h3 class="video-caption-title">Opowieść o życiu w siedemdziesiąte urodziny.</h3>
-      <p class="video-caption-date">Porąbka, dnia 18. II 2021 rok.</p>
     </div>
   </div>
 </section>
@@ -1335,8 +1602,79 @@
   <div class="container">
     <div class="books-intro fade-in">
       <p class="section-label">Droga Ciszy — cykl pięciu książek</p>
-      <!-- <h2 class="section-title">Zapiski<br><em>poszukiwań</em></h2> -->
-      <!-- <p>Pięć książek, które wyrastają z jednej potrzeby: lepiej zrozumieć człowieka, jego umysł, świadomość i drogę do wewnętrznej wolności.</p> -->
+      <h2 class="section-title">Pięć ksiąg<br><em>jednej drogi</em></h2>
+      <p>Cały cykl układa się w spokojną, konsekwentną opowieść o człowieku, świadomości i dojrzewaniu do wewnętrznej wolności. Każda książka ma własny ton, ale razem tworzą jedną autorską drogę.</p>
+      <div class="books-showcase">
+        <a href="#book-cisza" class="books-showcase-item" aria-label="Przejdź do książki Cisza. Esencja naszego umysłu">
+          <div class="books-showcase-cover">
+            <img src="images/books/cisza.webp" alt="Cisza. Esencja naszego umysłu">
+          </div>
+          <div class="books-showcase-meta">
+            <span class="books-showcase-roman">Księga I</span>
+            <span class="books-showcase-title">Cisza</span>
+          </div>
+        </a>
+        <a href="#book-jam-jest" class="books-showcase-item" aria-label="Przejdź do książki Jam Jest">
+          <div class="books-showcase-cover">
+            <img src="images/books/jam_jest.webp" alt="Jam Jest">
+          </div>
+          <div class="books-showcase-meta">
+            <span class="books-showcase-roman">Księga II</span>
+            <span class="books-showcase-title">Jam Jest</span>
+          </div>
+        </a>
+        <a href="#book-spojrzenie" class="books-showcase-item" aria-label="Przejdź do książki Spojrzenie Boga. Bliźniacze Dusze">
+          <div class="books-showcase-cover">
+            <img src="images/books/spojrzenie_boga.webp" alt="Spojrzenie Boga. Bliźniacze Dusze">
+          </div>
+          <div class="books-showcase-meta">
+            <span class="books-showcase-roman">Księga III</span>
+            <span class="books-showcase-title">Spojrzenie Boga</span>
+          </div>
+        </a>
+        <a href="#book-sciezki" class="books-showcase-item" aria-label="Przejdź do książki Ścieżki spełnionego życia">
+          <div class="books-showcase-cover">
+            <img src="images/books/sciezki_spelnionego_zycia.webp" alt="Ścieżki spełnionego życia">
+          </div>
+          <div class="books-showcase-meta">
+            <span class="books-showcase-roman">Księga IV</span>
+            <span class="books-showcase-title">Ścieżki spełnionego życia</span>
+          </div>
+        </a>
+        <a href="#book-szczelina" class="books-showcase-item" aria-label="Przejdź do książki Szczelina decyzji">
+          <div class="books-showcase-cover">
+            <div class="books-showcase-placeholder">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              <span>W przygotowaniu</span>
+            </div>
+          </div>
+          <div class="books-showcase-meta">
+            <span class="books-showcase-roman">Księga V</span>
+            <span class="books-showcase-title">Szczelina decyzji</span>
+          </div>
+        </a>
+      </div>
+      <div class="share-block share-block-soft" data-share-context="books">
+        <p class="share-heading">Udostępnij cykl książek</p>
+        <div class="share-actions">
+          <button class="share-btn" type="button" data-share-channel="facebook" aria-label="Udostępnij książki na Facebooku">
+            <svg class="is-filled" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.64 21v-7.07h2.39l.36-2.76h-2.75V9.4c0-.8.22-1.35 1.36-1.35h1.45V5.58c-.25-.03-1.11-.1-2.11-.1-2.09 0-3.52 1.28-3.52 3.63v2.06H8.5v2.76h2.28V21z"/></svg>
+          </button>
+          <button class="share-btn" type="button" data-share-channel="messenger" aria-label="Udostępnij książki w Messengerze">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0-4.97-4.03-9-9-9s-9 4.03-9 9c0 2.83 1.31 5.36 3.36 7.01V22l3.36-1.86c.98.27 2.01.41 3.08.41 4.97 0 9-4.03 9-9.05Z"/><path d="m8 13.25 3.05-3.24 2.24 2.24L16 9.5l-3.05 3.24-2.24-2.24z"/></svg>
+          </button>
+          <button class="share-btn" type="button" data-share-channel="whatsapp" aria-label="Udostępnij książki na WhatsAppie">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.6A8.4 8.4 0 0 1 7.55 18.9L4 20l1.16-3.38A8.4 8.4 0 1 1 20 11.6Z"/><path d="M9.34 8.94c.2-.45.42-.46.62-.47h.53c.17 0 .44.07.66.54.22.46.75 1.6.82 1.72.07.12.11.27.02.43-.09.15-.14.25-.28.39-.14.14-.29.31-.41.41-.14.12-.28.25-.12.49.16.24.71 1.16 1.53 1.88 1.05.92 1.94 1.2 2.22 1.34.28.14.44.12.6-.07.17-.18.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.64.77 1.92.91.28.13.46.2.53.31.06.1.06.62-.15 1.22-.2.6-1.18 1.15-1.63 1.22-.42.06-.96.09-1.55-.11-.36-.12-.82-.27-1.4-.52-.6-.26-2-.96-3.46-2.3-1.14-1.04-1.92-2.32-2.14-2.71-.22-.4-.24-.85-.01-1.21.21-.33.48-.74.67-1.06Z"/></svg>
+          </button>
+          <button class="share-btn" type="button" data-share-channel="email" aria-label="Wyślij książki e-mailem">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+          </button>
+          <button class="share-btn" type="button" data-share-channel="copy" aria-label="Skopiuj link do książek">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="10" height="10" rx="2"/><path d="M7 15H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
+        <p class="share-feedback" aria-live="polite"></p>
+      </div>
     </div>
 
     <div class="book-item fade-in" id="book-cisza">
@@ -1640,6 +1978,27 @@
       <div>
         <p class="footer-brand-name">Ryszard Klein</p>
         <p class="footer-brand-desc">Pisarz, muzyk, refleksja nad człowiekiem, umysłem i drogą do wewnętrznej wolności. Cykl „Droga Ciszy".</p>
+        <div class="share-block footer-share" data-share-context="page">
+          <p class="share-heading">Udostępnij stronę</p>
+          <div class="share-actions">
+            <button class="share-btn" type="button" data-share-channel="facebook" aria-label="Udostępnij stronę na Facebooku">
+              <svg class="is-filled" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.64 21v-7.07h2.39l.36-2.76h-2.75V9.4c0-.8.22-1.35 1.36-1.35h1.45V5.58c-.25-.03-1.11-.1-2.11-.1-2.09 0-3.52 1.28-3.52 3.63v2.06H8.5v2.76h2.28V21z"/></svg>
+            </button>
+            <button class="share-btn" type="button" data-share-channel="messenger" aria-label="Udostępnij stronę w Messengerze">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0-4.97-4.03-9-9-9s-9 4.03-9 9c0 2.83 1.31 5.36 3.36 7.01V22l3.36-1.86c.98.27 2.01.41 3.08.41 4.97 0 9-4.03 9-9.05Z"/><path d="m8 13.25 3.05-3.24 2.24 2.24L16 9.5l-3.05 3.24-2.24-2.24z"/></svg>
+            </button>
+            <button class="share-btn" type="button" data-share-channel="whatsapp" aria-label="Udostępnij stronę na WhatsAppie">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.6A8.4 8.4 0 0 1 7.55 18.9L4 20l1.16-3.38A8.4 8.4 0 1 1 20 11.6Z"/><path d="M9.34 8.94c.2-.45.42-.46.62-.47h.53c.17 0 .44.07.66.54.22.46.75 1.6.82 1.72.07.12.11.27.02.43-.09.15-.14.25-.28.39-.14.14-.29.31-.41.41-.14.12-.28.25-.12.49.16.24.71 1.16 1.53 1.88 1.05.92 1.94 1.2 2.22 1.34.28.14.44.12.6-.07.17-.18.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.64.77 1.92.91.28.13.46.2.53.31.06.1.06.62-.15 1.22-.2.6-1.18 1.15-1.63 1.22-.42.06-.96.09-1.55-.11-.36-.12-.82-.27-1.4-.52-.6-.26-2-.96-3.46-2.3-1.14-1.04-1.92-2.32-2.14-2.71-.22-.4-.24-.85-.01-1.21.21-.33.48-.74.67-1.06Z"/></svg>
+            </button>
+            <button class="share-btn" type="button" data-share-channel="email" aria-label="Wyślij stronę e-mailem">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+            </button>
+            <button class="share-btn" type="button" data-share-channel="copy" aria-label="Skopiuj link do strony">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="10" height="10" rx="2"/><path d="M7 15H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+          <p class="share-feedback" aria-live="polite"></p>
+        </div>
       </div>
       <div>
         <p class="footer-heading">Kontakt</p>
@@ -1808,25 +2167,75 @@
     "XLIV\nGdzie skarb mój, tam i moje serce\nNAJWIĘKSZYM NASZYM SKARBEM\nJEST FAKT ISTNIENIA."
   ];
 
-  const tresciDoLosowania = [
-    ...sentencje.map((text) => ({
+  const tresciKategorii = {
+    sentencja: sentencje.map((text) => ({
+      category: 'sentencja',
       kind: "Sentencja na dziś",
       source: "— Szczelina decyzji. Dojrzewanie umysłu do wolności",
       text
     })),
-    ...refleksje.map((text) => ({
+    refleksja: refleksje.map((text) => ({
+      category: 'refleksja',
       kind: "Refleksja na dziś",
       source: "— Cisza. Esencja naszego umysłu",
       text
     })),
-    ...aforyzmy.map((text) => ({
+    aforyzm: aforyzmy.map((text) => ({
+      category: 'aforyzm',
       kind: "Aforyzm na dziś",
       source: "— Ścieżki spełnionego życia",
       text
     }))
-  ];
+  };
 
-  let ostatniIndeks = -1;
+  const FALLBACK_SHARE_URL = 'https://ryszard-klein-projekt1-pi.vercel.app/index.html';
+  const MOBILE_MESSENGER_PATTERN = /Android|iPhone|iPad|iPod/i;
+  let currentFeaturedEntry = null;
+  let currentSentencjaSeriesTarget = getNextSentencjaSeriesTarget();
+  let currentSentencjaSeriesCount = 0;
+
+  function getNextSentencjaSeriesTarget() {
+    return Math.random() < 0.5 ? 3 : 4;
+  }
+
+  function pickRandomEntry(category) {
+    const pool = tresciKategorii[category] || [];
+    if (!pool.length) {
+      return null;
+    }
+
+    let candidate = pool[Math.floor(Math.random() * pool.length)];
+    if (pool.length > 1) {
+      while (currentFeaturedEntry && candidate.text === currentFeaturedEntry.text) {
+        candidate = pool[Math.floor(Math.random() * pool.length)];
+      }
+    }
+    return candidate;
+  }
+
+  function pickNextCategory() {
+    const hasSentencje = tresciKategorii.sentencja.length > 0;
+    const sideCategories = ['aforyzm', 'refleksja'].filter((category) => (tresciKategorii[category] || []).length > 0);
+
+    if (!hasSentencje && sideCategories.length === 0) {
+      return null;
+    }
+    if (!hasSentencje) {
+      return sideCategories[Math.floor(Math.random() * sideCategories.length)];
+    }
+    if (sideCategories.length === 0) {
+      currentSentencjaSeriesCount += 1;
+      return 'sentencja';
+    }
+    if (currentSentencjaSeriesCount >= currentSentencjaSeriesTarget) {
+      currentSentencjaSeriesCount = 0;
+      currentSentencjaSeriesTarget = getNextSentencjaSeriesTarget();
+      return sideCategories[Math.floor(Math.random() * sideCategories.length)];
+    }
+
+    currentSentencjaSeriesCount += 1;
+    return 'sentencja';
+  }
 
   function losujSentencje() {
     const el = document.getElementById('sentencjaText');
@@ -1834,10 +2243,13 @@
     const attrEl = document.getElementById('sentencjaAttr');
     el.classList.add('fading');
     setTimeout(() => {
-      let idx;
-      do { idx = Math.floor(Math.random() * tresciDoLosowania.length); } while (idx === ostatniIndeks && tresciDoLosowania.length > 1);
-      ostatniIndeks = idx;
-      const entry = tresciDoLosowania[idx];
+      const nextCategory = pickNextCategory();
+      const entry = nextCategory ? pickRandomEntry(nextCategory) : null;
+      if (!entry) {
+        el.classList.remove('fading');
+        return;
+      }
+      currentFeaturedEntry = entry;
       labelEl.textContent = entry.kind;
       attrEl.textContent = entry.source;
       el.innerHTML = entry.text.replace(/\n/g, '<br>');
@@ -1846,6 +2258,140 @@
   }
 
   losujSentencje();
+
+  function getBaseShareUrl() {
+    if (window.location.protocol.startsWith('http')) {
+      return `${window.location.origin}${window.location.pathname}`;
+    }
+    return FALLBACK_SHARE_URL;
+  }
+
+  function buildSharePayload(context) {
+    const baseUrl = getBaseShareUrl();
+    const payloads = {
+      quote: {
+        title: currentFeaturedEntry ? currentFeaturedEntry.kind : 'Ryszard Klein — Sentencja na dziś',
+        text: currentFeaturedEntry ? `${currentFeaturedEntry.text.replace(/\n/g, ' ')} ${currentFeaturedEntry.source}` : 'Zapraszam na stronę Ryszarda Kleina.',
+        url: `${baseUrl}#home`
+      },
+      books: {
+        title: 'Droga Ciszy — cykl pięciu książek',
+        text: 'Pięć książek Ryszarda Kleina tworzących jedną spokojną, autorską drogę przez ciszę, świadomość i dojrzewanie do wolności.',
+        url: `${baseUrl}#ksiazki`
+      },
+      page: {
+        title: 'Ryszard Klein — Droga Ciszy',
+        text: 'Strona autorska Ryszarda Kleina: książki, sentencje, aforyzmy i refleksje o człowieku, ciszy i wewnętrznej wolności.',
+        url: baseUrl
+      }
+    };
+
+    const payload = payloads[context] || payloads.page;
+    return {
+      ...payload,
+      copyText: `${payload.title}\n${payload.text}\n${payload.url}`.trim()
+    };
+  }
+
+  function setShareFeedback(block, message) {
+    const feedback = block.querySelector('.share-feedback');
+    if (!feedback) {
+      return;
+    }
+    feedback.textContent = message;
+    window.clearTimeout(block._shareFeedbackTimer);
+    if (message) {
+      block._shareFeedbackTimer = window.setTimeout(() => {
+        feedback.textContent = '';
+      }, 2800);
+    }
+  }
+
+  async function copyTextToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+
+    const helper = document.createElement('textarea');
+    helper.value = text;
+    helper.setAttribute('readonly', '');
+    helper.style.position = 'absolute';
+    helper.style.left = '-9999px';
+    document.body.appendChild(helper);
+    helper.select();
+    const copied = document.execCommand('copy');
+    document.body.removeChild(helper);
+    return copied;
+  }
+
+  function openSharePopup(url) {
+    window.open(url, '_blank', 'noopener,noreferrer,width=720,height=640');
+  }
+
+  async function handleShareAction(button) {
+    const block = button.closest('[data-share-context]');
+    if (!block) {
+      return;
+    }
+
+    const channel = button.dataset.shareChannel;
+    const context = block.dataset.shareContext;
+    const payload = buildSharePayload(context);
+
+    if (channel === 'facebook') {
+      const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(payload.url)}&quote=${encodeURIComponent(payload.text)}`;
+      openSharePopup(url);
+      setShareFeedback(block, 'Otwarto okno udostępniania.');
+      return;
+    }
+
+    if (channel === 'messenger') {
+      if (MOBILE_MESSENGER_PATTERN.test(navigator.userAgent || '')) {
+        window.location.href = `fb-messenger://share/?link=${encodeURIComponent(payload.url)}`;
+        setShareFeedback(block, 'Próba otwarcia Messengera…');
+        return;
+      }
+
+      try {
+        await copyTextToClipboard(payload.copyText);
+        setShareFeedback(block, 'Messenger na komputerze zwykle wymaga aplikacji. Link został skopiowany.');
+      } catch (error) {
+        setShareFeedback(block, 'Nie udało się skopiować linku do Messengera.');
+      }
+      return;
+    }
+
+    if (channel === 'whatsapp') {
+      const url = `https://wa.me/?text=${encodeURIComponent(payload.copyText)}`;
+      openSharePopup(url);
+      setShareFeedback(block, 'Otwarto WhatsApp.');
+      return;
+    }
+
+    if (channel === 'email') {
+      const subject = encodeURIComponent(payload.title);
+      const body = encodeURIComponent(`${payload.text}\n\n${payload.url}`);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+      setShareFeedback(block, 'Przygotowano wiadomość e-mail.');
+      return;
+    }
+
+    if (channel === 'copy') {
+      try {
+        await copyTextToClipboard(payload.copyText);
+        setShareFeedback(block, 'Skopiowano link do schowka.');
+      } catch (error) {
+        setShareFeedback(block, 'Nie udało się skopiować linku.');
+      }
+    }
+  }
+
+  document.querySelectorAll('.share-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+      handleShareAction(button);
+    });
+  });
 
   // THEME
   const html = document.documentElement;
