@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
 
   :root, [data-theme="light"] {
     --cream: #F7F3EC; --cream-dark: #EDE6D8;
@@ -17,8 +18,10 @@
     --gold: #A07B3A; --gold-light: #C9A868; --gold-pale: #F0E4C8;
     --mist: #D4CDBF; --white: #FDFAF5;
     --nav-bg: rgba(247,243,236,0.93);
-    --about-bg: #FDFAF5;
+    --card-bg: #FDFAF5;
+    --form-bg: #EDE6D8;
     --toggle-bg: #3D3830; --toggle-color: #F7F3EC;
+    --btn-bg: #1C1914; --btn-color: #F7F3EC;
     --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   }
   [data-theme="dark"] {
@@ -27,8 +30,10 @@
     --gold: #C9A868; --gold-light: #A07B3A; --gold-pale: #2A2218;
     --mist: #3A332A; --white: #1A1612;
     --nav-bg: rgba(22,18,16,0.95);
-    --about-bg: #1A1612;
+    --card-bg: #1C1812;
+    --form-bg: #1E1A16;
     --toggle-bg: #C9A868; --toggle-color: #161210;
+    --btn-bg: #C9A868; --btn-color: #161210;
     --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   }
 
@@ -40,7 +45,7 @@
     transition: var(--theme-transition);
   }
 
-  /* THEME TOGGLE */
+  /* ── NAV ── */
   .theme-toggle {
     width: 36px; height: 36px; background: var(--toggle-bg);
     border: none; cursor: pointer;
@@ -57,7 +62,6 @@
   [data-theme="dark"] .icon-moon { display: none; }
   [data-theme="dark"] .icon-sun  { display: block; }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; width: 100%; z-index: 100;
     padding: 1.1rem 3rem;
@@ -82,7 +86,8 @@
     color: var(--ink-light); text-decoration: none;
     transition: color 0.3s; white-space: nowrap;
   }
-  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover,
+  .nav-links a.is-current { color: var(--gold); }
   .nav-hamburger {
     display: none; background: none; border: none;
     cursor: pointer; flex-direction: column; gap: 5px;
@@ -92,10 +97,10 @@
     background: var(--ink); transition: all 0.3s;
   }
 
-  /* PAGE MASTHEAD */
+  /* ── MASTHEAD ── */
   .page-masthead {
-    min-height: 38vh; display: flex; align-items: flex-end;
-    padding: 9rem 4rem 4rem; position: relative; overflow: hidden;
+    min-height: 40vh; display: flex; align-items: flex-end;
+    padding: 9rem 4rem 4.5rem; position: relative; overflow: hidden;
     background: var(--cream); transition: var(--theme-transition);
   }
   .page-masthead::before {
@@ -126,140 +131,592 @@
   }
   .page-title em { font-style: italic; color: var(--gold); }
 
-  /* PURCHASE SECTION */
-  .purchase-section {
-    background: var(--about-bg); padding: 6rem 0;
+  /* ── SHARED ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.63rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: ''; height: 1px; width: 40px; background: var(--gold-light);
+  }
+
+  /* ── CATALOG ── */
+  .catalog-section {
+    background: var(--white); padding: 6rem 0 5rem;
     transition: var(--theme-transition);
   }
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
-  .purchase-layout {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: start;
-  }
-
-  /* Steps */
-  .steps-title {
+  .catalog-heading {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.7rem; font-weight: 300; color: var(--ink);
-    margin-bottom: 2.5rem; transition: color 0.4s;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.2; color: var(--ink);
+    margin-bottom: 0.5rem; transition: color 0.4s;
   }
-  .steps-title em { font-style: italic; color: var(--gold); }
-
-  .step {
-    display: flex; gap: 1.5rem; margin-bottom: 2rem;
-    padding-bottom: 2rem; border-bottom: 1px solid var(--mist);
+  .catalog-heading em { font-style: italic; color: var(--gold); }
+  .catalog-intro {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem; color: var(--ink-light);
+    line-height: 1.7; margin-bottom: 3.5rem; max-width: 620px;
+    transition: color 0.4s;
+  }
+  .catalog-list {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .catalog-item {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 2.5rem;
+    padding: 2.75rem 0;
+    border-top: 1px solid var(--mist);
+    align-items: start;
     transition: border-color 0.4s;
   }
-  .step:last-of-type { border-bottom: none; margin-bottom: 0; }
-  .step-number {
+  .catalog-item:last-child { border-bottom: 1px solid var(--mist); }
+
+  .catalog-cover {
+    position: relative; align-self: start;
+    padding-top: 0.15rem;
+  }
+  .catalog-cover img {
+    width: 100%; display: block;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(-10px 10px 20px rgba(28,25,20,0.14));
+    transition: transform 0.35s ease, filter 0.35s ease;
+  }
+  .catalog-item:hover .catalog-cover img {
+    transform: translateY(-6px) scale(1.02);
+    filter: drop-shadow(-12px 14px 24px rgba(28,25,20,0.18));
+  }
+  [data-theme="dark"] .catalog-cover img {
+    mix-blend-mode: normal;
+    filter: drop-shadow(-8px 8px 20px rgba(0,0,0,0.5));
+  }
+  [data-theme="dark"] .catalog-item:hover .catalog-cover img {
+    filter: drop-shadow(-10px 12px 26px rgba(0,0,0,0.65));
+  }
+
+  .catalog-body { display: flex; flex-direction: column; gap: 0; }
+  .catalog-badge {
+    display: inline-block;
+    font-family: 'Jost', sans-serif; font-size: 0.58rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(160,123,58,0.3);
+    padding: 0.2rem 0.65rem; margin-bottom: 0.75rem;
+    width: fit-content;
+  }
+  .catalog-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 2.4rem; font-weight: 300; line-height: 1;
-    color: var(--mist); flex-shrink: 0; width: 2.5rem;
+    font-size: 1.7rem; font-weight: 400; line-height: 1.2;
+    color: var(--ink); margin-bottom: 1.5rem;
     transition: color 0.4s;
+  }
+  .catalog-title em { font-style: italic; color: var(--gold); }
+
+  /* Format picker */
+  .format-picker {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .format-btn {
+    display: flex; flex-direction: column; align-items: flex-start;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--mist);
+    background: transparent; cursor: pointer;
+    transition: border-color 0.25s, background 0.25s, color 0.25s;
+    min-width: 96px;
+  }
+  .format-btn-top {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.66rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light);
+    transition: color 0.25s;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .format-btn-top svg {
+    width: 12px; height: 12px;
+    stroke: currentColor; fill: none;
+    stroke-width: 1.5; flex-shrink: 0;
+  }
+  .format-btn-price {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem; font-weight: 400;
+    color: var(--ink); margin-top: 0.2rem;
+    transition: color 0.25s;
+  }
+  .format-btn:hover {
+    border-color: rgba(160,123,58,0.4);
+    background: rgba(201,168,104,0.05);
+  }
+  .format-btn:hover .format-btn-top { color: var(--gold); }
+  .format-btn.is-active {
+    border-color: var(--gold-light);
+    background: rgba(201,168,104,0.08);
+  }
+  .format-btn.is-active .format-btn-top { color: var(--gold); }
+  .format-btn.is-active .format-btn-price { color: var(--gold); }
+
+  /* Add row */
+  .catalog-add-row {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .qty-stepper {
+    display: inline-flex; align-items: center;
+    border: 1px solid var(--mist);
+    transition: border-color 0.3s;
+  }
+  .qty-stepper button {
+    width: 40px; height: 40px;
+    border: none; background: transparent;
+    color: var(--ink-light); font-size: 1.1rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: color 0.2s, background 0.2s;
+    font-family: 'Jost', sans-serif;
+  }
+  .qty-stepper button:hover { color: var(--gold); background: rgba(201,168,104,0.07); }
+  .qty-stepper-value {
+    min-width: 40px; text-align: center;
+    font-family: 'Jost', sans-serif; font-size: 0.88rem;
+    color: var(--ink); border-left: 1px solid var(--mist); border-right: 1px solid var(--mist);
+    line-height: 40px; transition: color 0.4s, border-color 0.4s;
+  }
+  .add-btn {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    background: var(--btn-bg); color: var(--btn-color);
+    border: none; padding: 0 1.75rem; height: 40px;
+    cursor: pointer; display: flex; align-items: center; gap: 0.6rem;
+    transition: background 0.25s, color 0.25s, opacity 0.25s;
+  }
+  .add-btn:hover { opacity: 0.82; }
+  .add-btn svg {
+    width: 12px; height: 12px;
+    stroke: currentColor; fill: none; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .add-btn.is-added {
+    background: rgba(160,123,58,0.15);
+    color: var(--gold);
+  }
+  [data-theme="dark"] .add-btn.is-added { background: rgba(201,168,104,0.18); }
+  .format-delivery-note {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    color: var(--ink-light); margin-top: 0.9rem;
+    display: flex; align-items: center; gap: 0.45rem;
+    transition: color 0.4s;
+  }
+  .format-delivery-note svg {
+    width: 12px; height: 12px; stroke: currentColor;
+    fill: none; stroke-width: 1.5; flex-shrink: 0;
+  }
+
+  /* ── CHECKOUT ── */
+  .checkout-section {
+    background: var(--cream); padding: 5rem 0 6rem;
+    transition: var(--theme-transition);
+  }
+  .checkout-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
+  }
+
+  /* Cart */
+  .cart-panel {
+    position: sticky; top: 96px;
+  }
+  /* Cart panel card */
+  .cart-card {
+    background: var(--white);
+    border: 1px solid var(--mist);
+    padding: 1.75rem;
+    transition: var(--theme-transition);
+  }
+  .cart-card-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 1rem; margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem; border-bottom: 1px solid var(--mist);
+    transition: border-color 0.4s;
+  }
+  .cart-card-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.55rem; font-weight: 300; color: var(--ink);
+    transition: color 0.4s;
+  }
+  .cart-count-badge {
+    font-family: 'Jost', sans-serif; font-size: 0.64rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .cart-count-badge.is-visible { opacity: 1; }
+
+  .cart-empty-msg {
+    padding: 1.5rem 0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.75rem; text-align: center;
+  }
+  .cart-empty-icon {
+    width: 44px; height: 44px; border: 1px solid var(--mist);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--mist); transition: border-color 0.4s, color 0.4s;
+  }
+  .cart-empty-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  .cart-empty-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--ink-light); transition: color 0.4s;
+  }
+
+  .cart-list { display: flex; flex-direction: column; }
+  .cart-row {
+    display: grid; grid-template-columns: 52px 1fr auto;
+    gap: 1rem; padding: 1.1rem 0;
+    border-bottom: 1px solid var(--mist);
+    align-items: start; transition: border-color 0.4s;
+  }
+  .cart-row:first-child { padding-top: 0; }
+  .cart-row-cover {
+    width: 52px; flex-shrink: 0; align-self: start;
+    padding-top: 0.1rem;
+  }
+  .cart-row-cover img {
+    width: 100%; display: block;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(-4px 5px 10px rgba(28,25,20,0.14));
+    transition: filter 0.3s;
+  }
+  [data-theme="dark"] .cart-row-cover img {
+    mix-blend-mode: normal;
+    filter: drop-shadow(-3px 4px 10px rgba(0,0,0,0.45));
+  }
+  .cart-row-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem; line-height: 1.25; color: var(--ink); transition: color 0.4s;
+  }
+  .cart-row-variant {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-top: 0.3rem; transition: color 0.4s;
+  }
+  .cart-row-controls {
+    display: flex; align-items: center; gap: 0.45rem; margin-top: 0.7rem;
+  }
+  .cart-qty-btn {
+    width: 26px; height: 26px; border: 1px solid var(--mist);
+    background: transparent; color: var(--ink-light);
+    font-family: 'Jost', sans-serif; font-size: 0.9rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .cart-qty-btn:hover { color: var(--gold); border-color: var(--gold-light); }
+  .cart-qty-val {
+    font-family: 'Jost', sans-serif; font-size: 0.8rem;
+    color: var(--ink); min-width: 18px; text-align: center;
+    transition: color 0.4s;
+  }
+  .cart-remove-btn {
+    font-family: 'Jost', sans-serif; font-size: 0.62rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-light); background: transparent; border: none;
+    cursor: pointer; margin-left: 0.2rem;
+    transition: color 0.2s;
+  }
+  .cart-remove-btn:hover { color: #8e3b2f; }
+  .cart-row-pricing { text-align: right; }
+  .cart-row-price {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.15rem; color: var(--ink);
+    white-space: nowrap; transition: color 0.4s;
+  }
+  .cart-row-unit {
+    font-family: 'Jost', sans-serif; font-size: 0.64rem;
+    color: var(--ink-light); margin-top: 0.2rem;
+    transition: color 0.4s;
+  }
+
+  .cart-summary {
+    padding-top: 1.1rem; margin-top: 0.15rem;
+    border-top: 1px solid var(--mist); transition: border-color 0.4s;
+  }
+  .cart-summary-row {
+    display: flex; justify-content: space-between; gap: 1rem;
+    font-family: 'Jost', sans-serif; font-size: 0.78rem;
+    color: var(--ink-light); padding: 0.4rem 0;
+    transition: color 0.4s;
+  }
+  .cart-summary-row.is-shipping svg {
+    width: 11px; height: 11px; stroke: currentColor; fill: none;
+    stroke-width: 1.5; display: inline; vertical-align: middle;
+    margin-right: 0.3em;
+  }
+  .cart-summary-row.is-total {
+    border-top: 1px solid var(--mist);
+    margin-top: 0.6rem; padding-top: 1rem; padding-bottom: 0.1rem;
+    color: var(--ink); transition: border-color 0.4s, color 0.4s;
+  }
+  .cart-summary-row.is-total .total-label {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-light); transition: color 0.4s;
+  }
+  .cart-summary-row.is-total strong {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.75rem; font-weight: 400; color: var(--gold);
+    line-height: 1;
+  }
+  .cart-kos-note {
+    margin-top: 1.25rem; padding: 0.9rem 1rem;
+    border-left: 2px solid rgba(160,123,58,0.3);
+    background: rgba(240,228,200,0.15);
+    transition: background 0.4s;
+  }
+  [data-theme="dark"] .cart-kos-note { background: rgba(201,168,104,0.05); }
+  .cart-kos-note p {
+    font-family: 'Jost', sans-serif; font-size: 0.74rem;
+    line-height: 1.65; color: var(--ink-light); transition: color 0.4s;
+  }
+  .cart-kos-note a { color: var(--gold); text-decoration: none; }
+  .cart-kos-note a:hover { color: var(--ink); }
+
+  /* Order form */
+  .form-section-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.75rem; font-weight: 300; color: var(--ink);
+    margin-bottom: 1.75rem; transition: color 0.4s;
+  }
+  .form-section-title em { font-style: italic; color: var(--gold); }
+
+  .form-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+  }
+  .form-group { display: flex; flex-direction: column; }
+  .form-group.span-2 { grid-column: span 2; }
+  .form-group label {
+    font-family: 'Jost', sans-serif; font-size: 0.63rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 0.5rem;
+    transition: color 0.4s;
+  }
+  .form-input, .form-select, .form-textarea {
+    background: var(--form-bg); border: 1px solid var(--mist);
+    padding: 0.85rem 1rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem; color: var(--ink);
+    outline: none; width: 100%;
+    transition: var(--theme-transition), border-color 0.25s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--gold-light);
+    box-shadow: 0 0 0 2px rgba(201,168,104,0.1);
+  }
+  .form-textarea { min-height: 100px; resize: vertical; }
+  .form-select { cursor: pointer; }
+
+  .form-divider {
+    grid-column: span 2; height: 1px; background: var(--mist);
+    transition: background 0.4s;
+  }
+
+  .checkbox-list { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.25rem; }
+  .checkbox-row {
+    display: grid; grid-template-columns: 18px 1fr; gap: 0.75rem; align-items: start;
+  }
+  .checkbox-row input { margin-top: 0.22rem; accent-color: var(--gold); }
+  .checkbox-row span {
+    font-family: 'Jost', sans-serif; font-size: 0.78rem; line-height: 1.6;
+    color: var(--ink-mid); transition: color 0.4s;
+  }
+
+  .form-error {
+    display: none; margin-top: 1.25rem;
+    padding: 0.85rem 1rem;
+    border-left: 2px solid rgba(142,59,47,0.7);
+    background: rgba(142,59,47,0.07);
+    font-family: 'Jost', sans-serif; font-size: 0.8rem;
+    color: #7e2c21;
+  }
+  .form-error.is-visible { display: block; }
+
+  .form-submit-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-top: 1.75rem; flex-wrap: wrap;
+  }
+  .form-submit-note {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    color: var(--ink-light); max-width: 260px; line-height: 1.6;
+    transition: color 0.4s;
+  }
+  .submit-btn {
+    font-family: 'Jost', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--btn-bg); color: var(--btn-color);
+    border: none; padding: 1rem 2rem;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 0.6rem;
+    transition: opacity 0.25s;
+    white-space: nowrap;
+  }
+  .submit-btn:hover { opacity: 0.82; }
+  .submit-btn[disabled] { opacity: 0.55; cursor: wait; }
+  .submit-btn svg {
+    width: 12px; height: 12px; stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  .form-privacy {
+    margin-top: 1.5rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--mist); transition: border-color 0.4s;
+  }
+  .form-privacy p {
+    font-family: 'Jost', sans-serif; font-size: 0.73rem;
+    line-height: 1.65; color: var(--ink-light);
+    margin-bottom: 0.4rem; transition: color 0.4s;
+  }
+  .form-privacy p:last-child { margin-bottom: 0; }
+  .form-privacy a { color: var(--gold); text-decoration: none; }
+  .form-privacy a:hover { color: var(--ink); }
+
+  /* Fallback */
+  .fallback-panel {
+    display: none; margin-top: 1.5rem;
+    padding: 1.35rem 1.5rem;
+    border-left: 2px solid var(--gold);
+    background: rgba(160,123,58,0.07);
+  }
+  .fallback-panel.is-visible { display: block; }
+  .fallback-panel p {
+    font-family: 'Jost', sans-serif; font-size: 0.82rem;
+    line-height: 1.7; color: var(--ink-mid); margin-bottom: 0.85rem; transition: color 0.4s;
+  }
+  .fallback-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.75rem; }
+  .fallback-btn {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    border: 1px solid var(--gold-light); background: transparent;
+    color: var(--gold); padding: 0.75rem 1.25rem;
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center;
+    transition: background 0.25s, color 0.25s;
+  }
+  .fallback-btn:hover { background: var(--gold); color: #1C1914; }
+  .fallback-preview {
+    margin-top: 1rem; padding: 1rem;
+    border: 1px solid rgba(160,123,58,0.14);
+    background: rgba(247,243,236,0.74);
+    font-family: 'Jost', sans-serif; font-size: 0.73rem;
+    line-height: 1.65; color: var(--ink-mid);
+    white-space: pre-wrap; word-break: break-word;
+    transition: var(--theme-transition);
+  }
+  [data-theme="dark"] .fallback-preview { background: rgba(30,26,22,0.9); }
+
+  /* Success */
+  .success-panel {
+    display: none; padding: 2.5rem;
+    border: 1px solid rgba(160,123,58,0.2);
+    background: linear-gradient(180deg, rgba(240,228,200,0.15), rgba(253,250,245,0.9));
+    margin-top: 2rem; transition: var(--theme-transition);
+  }
+  [data-theme="dark"] .success-panel {
+    background: linear-gradient(180deg, rgba(201,168,104,0.07), rgba(26,22,18,0.9));
+    border-color: rgba(201,168,104,0.22);
+  }
+  .success-panel.is-visible { display: block; }
+  .success-icon {
+    width: 48px; height: 48px; border: 1px solid rgba(160,123,58,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem; color: var(--gold);
+  }
+  .success-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  .success-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.2rem; font-weight: 300; color: var(--ink);
+    margin-bottom: 0.75rem; transition: color 0.4s;
+  }
+  .success-copy {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem; color: var(--ink-mid);
+    line-height: 1.75; margin-bottom: 2rem; transition: color 0.4s;
+  }
+  .success-details {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;
+  }
+  .success-detail {
+    padding: 1rem 1.25rem; border: 1px solid var(--mist);
+    background: rgba(247,243,236,0.6); transition: var(--theme-transition);
+  }
+  [data-theme="dark"] .success-detail { background: rgba(30,26,22,0.85); }
+  .success-detail-label {
+    font-family: 'Jost', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 0.3rem; transition: color 0.4s;
+  }
+  .success-detail-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.2rem; color: var(--ink);
+    word-break: break-word; transition: color 0.4s;
+  }
+  .success-reset-btn {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    border: 1px solid var(--mist); background: transparent;
+    color: var(--ink-light); padding: 0.85rem 1.5rem;
+    cursor: pointer; transition: color 0.25s, border-color 0.25s;
+  }
+  .success-reset-btn:hover { color: var(--gold); border-color: var(--gold-light); }
+
+  /* ── PROCESS STEPS ── */
+  .steps-section {
+    background: var(--cream-dark); padding: 5rem 0;
+    transition: var(--theme-transition);
+  }
+  [data-theme="dark"] .steps-section { background: #1E1A16; }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3rem; margin-top: 3rem;
+  }
+  .step-item { display: flex; flex-direction: column; gap: 1rem; }
+  .step-num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3.5rem; font-weight: 300; line-height: 1;
+    color: var(--mist); transition: color 0.4s;
   }
   .step-heading {
     font-family: 'Jost', sans-serif; font-size: 0.65rem;
     letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.6rem;
+    color: var(--gold);
   }
   .step-text {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1rem; font-weight: 300; color: var(--ink-mid);
     line-height: 1.75; transition: color 0.4s;
   }
-  .step-detail {
-    margin-top: 0.75rem;
-    font-family: 'Jost', sans-serif; font-size: 0.85rem;
-    color: var(--ink); transition: color 0.4s;
-  }
-  .step-detail a { color: var(--gold); text-decoration: none; transition: color 0.3s; }
-  .step-detail a:hover { color: var(--ink); }
-
+  .step-text a { color: var(--gold); text-decoration: none; transition: color 0.25s; }
+  .step-text a:hover { color: var(--ink); }
   .account-block {
     display: inline-block; margin-top: 0.85rem;
-    padding: 1rem 1.4rem; border: 1px solid var(--mist);
+    padding: 0.85rem 1.1rem; border: 1px solid var(--mist);
     transition: border-color 0.4s;
   }
   .account-label {
     font-family: 'Jost', sans-serif; font-size: 0.58rem;
-    letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--ink-light); margin-bottom: 0.3rem; transition: color 0.4s;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 0.25rem; transition: color 0.4s;
   }
   .account-number {
-    font-family: 'Jost', sans-serif; font-size: 0.95rem;
-    letter-spacing: 0.06em; color: var(--ink); font-weight: 400;
+    font-family: 'Jost', sans-serif; font-size: 0.9rem;
+    letter-spacing: 0.05em; color: var(--ink); font-weight: 400;
     transition: color 0.4s;
   }
 
-  .purchase-note {
-    margin-top: 3rem; padding: 1.75rem 2rem;
-    border-left: 2px solid var(--gold-light);
-    background: var(--cream); transition: background 0.4s, border-color 0.4s;
-  }
-  .purchase-note p {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem; font-style: italic; font-weight: 300;
-    color: var(--ink-mid); line-height: 1.7; transition: color 0.4s;
-  }
-  .purchase-note a { color: var(--gold); text-decoration: none; transition: color 0.3s; }
-  .purchase-note a:hover { color: var(--ink); }
-
-  /* Books aside */
-  .books-aside-title {
-    font-family: 'Jost', sans-serif; font-size: 0.63rem;
-    letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold);
-    margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .books-aside-title::after {
-    content: ''; height: 1px; flex: 1; background: var(--mist);
-    transition: background 0.4s;
-  }
-
-  .book-item {
-    display: flex; gap: 1.25rem; align-items: flex-start;
-    padding: 1.25rem 0; border-bottom: 1px solid var(--mist);
-    transition: border-color 0.4s;
-  }
-  .book-item:last-child { border-bottom: none; }
-  .book-cover {
-    width: 58px; flex-shrink: 0;
-  }
-  .book-cover img {
-    width: 100%; display: block;
-    mix-blend-mode: multiply;
-    filter: drop-shadow(-5px 4px 8px rgba(28,25,20,0.13));
-    transition: filter 0.4s;
-  }
-  [data-theme="dark"] .book-cover img {
-    mix-blend-mode: normal;
-    filter: drop-shadow(-4px 3px 8px rgba(0,0,0,0.45));
-  }
-  .book-series {
-    font-family: 'Jost', sans-serif; font-size: 0.58rem;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink-light); margin-bottom: 0.2rem; transition: color 0.4s;
-  }
-  .book-title-text {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.05rem; font-weight: 400; color: var(--ink);
-    transition: color 0.4s;
-  }
-  .book-title-text a { color: inherit; text-decoration: none; transition: color 0.3s; }
-  .book-title-text a:hover { color: var(--gold); }
-  .book-avail { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.04em; color: var(--ink-light); margin-top: 0.35rem; line-height: 1.5; transition: color 0.4s; }
-  .kos-link-block { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--mist); }
-  .kos-link-block a { font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
-  .kos-link-block a:hover { color: var(--ink); }
-
-  /* FOOTER */
+  /* ── FOOTER ── */
   footer {
     background-color: #1b1612;
     background-image: url('images/footer-bg.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #F7F3EC;
-    padding: 2.5rem 0 1.5rem;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    color: #F7F3EC; padding: 2.5rem 0 1.5rem;
   }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; margin-bottom: 1.5rem; }
   .footer-brand-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.08em; color: #F7F3EC; margin-bottom: 1rem; }
@@ -278,20 +735,29 @@
   [data-theme="dark"] .footer-links a { color: rgba(247,245,240,0.85); }
   [data-theme="dark"] .footer-links a:hover { color: #a07b3b; }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .checkout-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .cart-panel { position: static; }
+    .steps-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (max-width: 760px) {
     nav { padding: 1rem 1.5rem; }
-    .page-masthead { padding: 7rem 2rem 3rem; }
     .container { padding: 0 1.5rem; }
-    .purchase-layout { grid-template-columns: 1fr; gap: 4rem; }
-    .purchase-section { padding: 4rem 0; }
+    .page-masthead { padding: 7rem 1.5rem 3rem; }
+    .catalog-section { padding: 4rem 0 3rem; }
+    .checkout-section { padding: 3.5rem 0 4rem; }
+    .steps-section { padding: 3.5rem 0; }
+    .catalog-item { grid-template-columns: 90px 1fr; gap: 1.5rem; padding: 2rem 0; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.span-2 { grid-column: span 1; }
+    .form-divider { grid-column: span 1; }
+    .success-details { grid-template-columns: 1fr; }
     .nav-links { display: none !important; }
     .nav-links.is-open {
-      display: flex !important;
-      flex-direction: column; position: absolute;
-      top: 62px; left: 0; right: 0;
-      background: var(--nav-bg);
-      padding: 1.5rem 2rem;
+      display: flex !important; flex-direction: column;
+      position: absolute; top: 62px; left: 0; right: 0;
+      background: var(--nav-bg); padding: 1.5rem 2rem;
       border-bottom: 1px solid var(--mist);
       gap: 1.25rem; z-index: 99;
     }
@@ -300,7 +766,12 @@
     footer { padding: 2rem 0 1.25rem; }
   }
   @media (max-width: 480px) {
-    .page-title { font-size: 2.4rem; }
+    .format-picker { gap: 0.45rem; }
+    .format-btn { min-width: 82px; padding: 0.55rem 0.8rem; }
+    .form-submit-row { flex-direction: column; align-items: stretch; }
+    .submit-btn { width: 100%; justify-content: center; }
+    .fallback-actions { flex-direction: column; }
+    .fallback-btn { width: 100%; justify-content: center; }
   }
 </style>
 </head>
@@ -314,7 +785,7 @@
       <li><a href="index.html#o-mnie">O mnie</a></li>
       <li><a href="index.html#droga-ciszy">Książki</a></li>
       <li><a href="index.html#media">Media</a></li>
-      <li><a href="zakup_ksiazek.html">Zakup książek</a></li>
+      <li><a href="zakup_ksiazek.html" class="is-current">Zakup książek</a></li>
       <li><a href="index.html#kontakt">Kontakt</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Zmień motyw">
@@ -331,99 +802,181 @@
   </div>
 </nav>
 
+<!-- MASTHEAD -->
 <div class="page-masthead">
   <div class="page-masthead-inner">
     <p class="page-eyebrow">Zamówienia</p>
-    <h1 class="page-title">Zakup <em>książek</em></h1>
+    <h1 class="page-title">Zamów <em>książki</em><br>bezpośrednio u autora</h1>
   </div>
 </div>
 
-<section class="purchase-section">
+<!-- CATALOG -->
+<section class="catalog-section">
   <div class="container">
-    <div class="purchase-layout">
+    <p class="section-label">Dostępne tytuły</p>
+    <h2 class="catalog-heading">Wybierz <em>tytuł i format</em></h2>
+    <p class="catalog-intro">Wybierz książkę, zaznacz preferowany format i język, dodaj do koszyka — a następnie wypełnij dane zamówienia poniżej.</p>
 
-      <div>
-        <h2 class="steps-title">Jak <em>zamówić?</em></h2>
+    <div class="catalog-list" id="catalogList"></div>
+  </div>
+</section>
 
-        <div class="step">
-          <div class="step-number">01</div>
-          <div>
-            <p class="step-heading">Napisz e-mail</p>
-            <p class="step-text">Wyślij wiadomość podając tytuł lub tytuły, które chcesz zamówić, swoje imię i nazwisko oraz pełny adres wysyłkowy.</p>
-            <p class="step-detail"><a href="mailto:cisza.umyslu@gmail.com">cisza.umyslu@gmail.com</a></p>
+<!-- CHECKOUT -->
+<section class="checkout-section" id="checkoutSection">
+  <div class="container">
+    <div class="checkout-grid">
+
+      <!-- CART -->
+      <div class="cart-panel">
+        <p class="section-label">Twoje zamówienie</p>
+
+        <div class="cart-card">
+          <div class="cart-card-header">
+            <h2 class="cart-card-title">Koszyk</h2>
+            <span class="cart-count-badge" id="cartCountBadge"></span>
           </div>
-        </div>
 
-        <div class="step">
-          <div class="step-number">02</div>
-          <div>
-            <p class="step-heading">Dokonaj przelewu</p>
-            <p class="step-text">Przelej należność na poniższe konto. W tytule przelewu podaj swoje imię oraz tytuł zamawianej książki.</p>
-            <div class="account-block">
-              <p class="account-label">Numer konta bankowego</p>
-              <p class="account-number">51 1140 2004 0000 3902 5119 5054</p>
+          <div id="cartEmpty" class="cart-empty-msg">
+            <div class="cart-empty-icon">
+              <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </div>
+            <p class="cart-empty-text">Koszyk jest pusty.<br>Wybierz tytuły z katalogu powyżej.</p>
+          </div>
+
+          <div id="cartFilled" hidden>
+            <div class="cart-list" id="cartItems"></div>
+            <div class="cart-summary">
+              <div class="cart-summary-row">
+                <span>Produkty</span>
+                <strong id="cartSubtotal">0 zł</strong>
+              </div>
+              <div class="cart-summary-row is-shipping">
+                <span><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Wysyłka</span>
+                <strong id="cartShipping">0 zł</strong>
+              </div>
+              <div class="cart-summary-row is-total">
+                <span class="total-label">Do zapłaty</span>
+                <strong id="cartTotal">0 zł</strong>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="step">
-          <div class="step-number">03</div>
-          <div>
-            <p class="step-heading">Wysyłka</p>
-            <p class="step-text">Po zaksięgowaniu płatności książka zostaje wysłana na wskazany adres. Wszelkie pytania chętnie wyjaśnię w odpowiedzi na Twojego maila.</p>
-          </div>
-        </div>
-
-        <div class="purchase-note">
-          <p>Masz pytania przed zamówieniem? Pisz na <a href="mailto:cisza.umyslu@gmail.com">cisza.umyslu@gmail.com</a> — chętnie pomogę dobrać lekturę.</p>
+        <div class="cart-kos-note">
+          <p>Nie wszystkie tytuły dostępne są bezpośrednio u autora. <em>Spojrzenie Boga. Bliźniacze Dusze</em> dostępne jest wyłącznie przez <a href="https://www.kos.com.pl/pl/searchquery/Ryszard+Klein/1/phot/5?" target="_blank">Wydawnictwo KOS →</a></p>
         </div>
       </div>
 
+      <!-- FORM -->
       <div>
-        <p class="books-aside-title">Dostępne tytuły</p>
+        <p class="section-label">Dane kontaktowe</p>
+        <h2 class="form-section-title">Formularz <em>zamówienia</em></h2>
 
-        <div class="book-item">
-          <div class="book-cover">
-            <img src="images/books/cisza.webp" alt="Cisza">
+        <form id="orderForm" novalidate>
+          <div class="form-grid">
+            <div class="form-group span-2">
+              <label for="orderName">Imię i nazwisko</label>
+              <input class="form-input" id="orderName" name="orderName" type="text" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="orderEmail">E-mail</label>
+              <input class="form-input" id="orderEmail" name="orderEmail" type="email" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="orderPhone">Telefon <span style="font-size:0.8em;opacity:0.7">(opcjonalnie)</span></label>
+              <input class="form-input" id="orderPhone" name="orderPhone" type="tel" autocomplete="tel">
+            </div>
+            <div class="form-divider"></div>
+            <div class="form-group span-2">
+              <label for="orderStreet">Ulica i numer</label>
+              <input class="form-input" id="orderStreet" name="orderStreet" type="text" autocomplete="address-line1">
+            </div>
+            <div class="form-group">
+              <label for="orderPostal">Kod pocztowy</label>
+              <input class="form-input" id="orderPostal" name="orderPostal" type="text" autocomplete="postal-code">
+            </div>
+            <div class="form-group">
+              <label for="orderCity">Miejscowość</label>
+              <input class="form-input" id="orderCity" name="orderCity" type="text" autocomplete="address-level2">
+            </div>
+            <div class="form-group span-2">
+              <label for="orderCountry">Kraj</label>
+              <select class="form-select" id="orderCountry" name="orderCountry" autocomplete="country-name">
+                <option value="Polska">Polska</option>
+                <option value="Niemcy">Niemcy</option>
+                <option value="Czechy">Czechy</option>
+                <option value="Słowacja">Słowacja</option>
+                <option value="Austria">Austria</option>
+                <option value="Inny">Inny</option>
+              </select>
+            </div>
+            <div class="form-group span-2">
+              <label for="orderNote">Uwagi do zamówienia <span style="font-size:0.8em;opacity:0.7">(opcjonalne)</span></label>
+              <textarea class="form-textarea" id="orderNote" name="orderNote"></textarea>
+            </div>
           </div>
-          <div class="book-meta">
-            <p class="book-title-text"><a href="cisza.html">Cisza. Esencja naszego umysłu</a></p>
-            <p class="book-avail">Dostępność: u autora: druk PL/ES, oraz e-booki PL/ES.</p>
+
+          <div class="checkbox-list">
+            <label class="checkbox-row">
+              <input type="checkbox" id="acceptTransfer">
+              <span>Akceptuję, że zamówienie zostanie zrealizowane po zaksięgowaniu przelewu na konto autora.</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" id="acceptPrivacy">
+              <span>Wyrażam zgodę na przetwarzanie danych osobowych podanych w formularzu wyłącznie w celu realizacji zamówienia.</span>
+            </label>
           </div>
+
+          <div class="form-error" id="formError"></div>
+
+          <div class="form-submit-row">
+            <p class="form-submit-note">Numer konta do przelewu pojawi się po wysłaniu zamówienia i zostanie przesłany na podany e-mail.</p>
+            <button class="submit-btn" id="submitBtn" type="submit">
+              Wyślij zamówienie
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+          <div class="form-privacy">
+            <p>Dane podane w formularzu są używane wyłącznie do realizacji zamówienia i nie są przekazywane osobom trzecim.</p>
+            <p>W sprawach zwrotów i reklamacji: <a href="mailto:cisza.umyslu@gmail.com">cisza.umyslu@gmail.com</a></p>
+          </div>
+        </form>
+
+        <div class="fallback-panel" id="fallbackPanel">
+          <p id="fallbackMessage">Automatyczna wysyłka jest chwilowo niedostępna. Przygotowaliśmy gotową wiadomość e-mail z zamówieniem, którą możesz od razu wysłać do autora.</p>
+          <div class="fallback-actions">
+            <a class="fallback-btn" id="fallbackMailLink" href="mailto:cisza.umyslu@gmail.com">Otwórz e-mail z zamówieniem</a>
+            <button class="fallback-btn" id="copyFallbackBtn" type="button">Skopiuj treść</button>
+          </div>
+          <div class="fallback-preview" id="fallbackPreview"></div>
         </div>
 
-        <div class="book-item">
-          <div class="book-cover">
-            <img src="images/books/jam_jest.webp" alt="Jam jest">
+        <div class="success-panel" id="successPanel">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <div class="book-meta">
-            <p class="book-title-text"><a href="jam-jest.html">Jam Jest</a></p>
-            <p class="book-avail">Dostępność: u autora: e-booki PL/EN, druk: KOS.</p>
+          <h3 class="success-title">Dziękujemy za zamówienie</h3>
+          <p class="success-copy">Potwierdzenie oraz dane do przelewu zostały przesłane na podany adres e-mail. Po zaksięgowaniu płatności przygotujemy realizację.</p>
+          <div class="success-details">
+            <div class="success-detail">
+              <p class="success-detail-label">Numer zamówienia</p>
+              <p class="success-detail-value" id="successOrderId">—</p>
+            </div>
+            <div class="success-detail">
+              <p class="success-detail-label">Kwota do zapłaty</p>
+              <p class="success-detail-value" id="successAmount">—</p>
+            </div>
+            <div class="success-detail">
+              <p class="success-detail-label">Numer konta</p>
+              <p class="success-detail-value" id="successBank">—</p>
+            </div>
+            <div class="success-detail">
+              <p class="success-detail-label">Tytuł przelewu</p>
+              <p class="success-detail-value" id="successRef">—</p>
+            </div>
           </div>
-        </div>
-
-        <div class="book-item">
-          <div class="book-cover">
-            <img src="images/books/spojrzenie_boga.webp" alt="Spojrzenie Boga">
-          </div>
-          <div class="book-meta">
-            <p class="book-title-text"><a href="spojrzenie-boga.html">Spojrzenie Boga. Bliźniacze Dusze</a></p>
-            <p class="book-avail">Dostępność: druk: Wydawnictwo KOS.</p>
-          </div>
-        </div>
-
-        <div class="book-item">
-          <div class="book-cover">
-            <img src="images/books/sciezki_spelnionego_zycia.webp" alt="Ścieżki spełnionego życia">
-          </div>
-          <div class="book-meta">
-            <p class="book-title-text"><a href="sciezki.html">Ścieżki spełnionego życia</a></p>
-            <p class="book-avail">Dostępność: u autora: książka drukowana oraz e-book.</p>
-          </div>
-        </div>
-
-        <div class="kos-link-block">
-          <a href="https://www.kos.com.pl/pl/searchquery/Ryszard+Klein/1/phot/5?" target="_blank">Wydawnictwo KOS — tytuły online →</a>
+          <button class="success-reset-btn" id="successResetBtn" type="button">Złóż kolejne zamówienie</button>
         </div>
       </div>
 
@@ -431,12 +984,41 @@
   </div>
 </section>
 
+<!-- PROCESS STEPS -->
+<section class="steps-section">
+  <div class="container">
+    <p class="section-label">Jak to działa</p>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <p class="step-heading">Wyślij zamówienie</p>
+        <p class="step-text">Wybierz tytuły, zaznacz format, uzupełnij dane kontaktowe i adres wysyłkowy, a następnie prześlij formularz.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <p class="step-heading">Dokonaj przelewu</p>
+        <p class="step-text">Po wysłaniu zamówienia otrzymasz dane do płatności. Przelew na numer konta:</p>
+        <div class="account-block">
+          <p class="account-label">Numer konta</p>
+          <p class="account-number" id="accountNumberInline">51 1140 2004 0000 3902 5119 5054</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <p class="step-heading">Wysyłka i kontakt</p>
+        <p class="step-text">Po zaksięgowaniu płatności zamówienie zostaje przygotowane do realizacji. W razie pytań: <a href="mailto:cisza.umyslu@gmail.com">cisza.umyslu@gmail.com</a> lub <a href="tel:+48531615121">+48 531 615 121</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div>
         <p class="footer-brand-name">Ryszard Klein</p>
-        <p class="footer-brand-desc">Pisarz, muzyk, refleksja nad człowiekiem, umysłem i drogą do wewnętrznej wolności. Cykl „Droga Ciszy”.</p>
+        <p class="footer-brand-desc">Pisarz, muzyk, refleksja nad człowiekiem, umysłem i drogą do wewnętrznej wolności. Cykl „Droga Ciszy".</p>
       </div>
       <div>
         <p class="footer-heading">Kontakt</p>
@@ -455,26 +1037,424 @@
 </footer>
 
 <script>
-  const html = document.documentElement;
-  const toggleBtn = document.getElementById('themeToggle');
-  toggleBtn.addEventListener('click', () => {
-    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
+  /* ── CONSTANTS ── */
+  const BANK = '51 1140 2004 0000 3902 5119 5054';
+  const CART_KEY = 'rk-order-cart';
+  const PRICE_PRINT = 50;
+  const PRICE_EBOOK = 30;
+  const PRICE_SHIP  = 20;
+
+  const PRODUCTS = [
+    {
+      slug: 'cisza',
+      badge: 'Część I cyklu · Droga Ciszy',
+      title: 'Cisza.',
+      subtitle: 'Esencja naszego umysłu',
+      cover: 'images/books/cisza.webp',
+      variants: [
+        { id: 'cisza-druk-pl',  label: 'Druk',   lang: 'PL', price: PRICE_PRINT, format: 'druk'  },
+        { id: 'cisza-druk-es',  label: 'Druk',   lang: 'ES', price: PRICE_PRINT, format: 'druk'  },
+        { id: 'cisza-ebook-pl', label: 'E-book', lang: 'PL', price: PRICE_EBOOK, format: 'ebook' },
+        { id: 'cisza-ebook-es', label: 'E-book', lang: 'ES', price: PRICE_EBOOK, format: 'ebook' },
+      ],
+    },
+    {
+      slug: 'jam-jest',
+      badge: 'Część II cyklu · Droga Ciszy',
+      title: 'Jam Jest',
+      subtitle: null,
+      cover: 'images/books/jam_jest.webp',
+      variants: [
+        { id: 'jamjest-ebook-pl', label: 'E-book', lang: 'PL', price: PRICE_EBOOK, format: 'ebook' },
+        { id: 'jamjest-ebook-en', label: 'E-book', lang: 'EN', price: PRICE_EBOOK, format: 'ebook' },
+      ],
+    },
+    {
+      slug: 'sciezki',
+      badge: 'Część IV cyklu · Droga Ciszy',
+      title: 'Ścieżki spełnionego życia.',
+      subtitle: 'Współczesność a starożytna mądrość duchowa',
+      cover: 'images/books/sciezki_spelnionego_zycia.webp',
+      variants: [
+        { id: 'sciezki-druk-pl',  label: 'Druk',   lang: 'PL', price: PRICE_PRINT, format: 'druk'  },
+        { id: 'sciezki-ebook-pl', label: 'E-book', lang: 'PL', price: PRICE_EBOOK, format: 'ebook' },
+      ],
+    },
+  ];
+
+  /* ── SVG ICONS ── */
+  const ICON_BOOK   = `<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`;
+  const ICON_TABLET = `<svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`;
+
+  /* ── THEME ── */
+  const htmlEl = document.documentElement;
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    htmlEl.setAttribute('data-theme', next);
     localStorage.setItem('rk-theme', next);
   });
 
-  // HAMBURGER
+  /* ── HAMBURGER ── */
   const hamburger = document.querySelector('.nav-hamburger');
-  const navLinks = document.querySelector('.nav-links');
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('is-open');
+  const navLinks  = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('is-open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('is-open')));
+  window.addEventListener('resize', () => { if (window.innerWidth > 760) navLinks.classList.remove('is-open'); });
+
+  /* ── CART ── */
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function fmt(n) { return `${n.toFixed(2).replace('.', ',')} zł`; }
+
+  function loadCart() {
+    try {
+      const p = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      return Array.isArray(p) ? p.filter(i => i && typeof i.id === 'string' && Number.isInteger(i.qty) && i.qty > 0) : [];
+    } catch { return []; }
+  }
+  function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+
+  let cart = loadCart();
+
+  function allVariants() {
+    return PRODUCTS.flatMap(p => p.variants.map(v => ({
+      ...v,
+      bookTitle: p.title + (p.subtitle ? ' ' + p.subtitle : ''),
+      cover: p.cover,
+    })));
+  }
+  function findVariant(id) { return allVariants().find(v => v.id === id); }
+
+  function cartSummary() {
+    const items = cart.map(ci => {
+      const v = findVariant(ci.id); if (!v) return null;
+      return { ...v, qty: ci.qty, lineTotal: v.price * ci.qty };
+    }).filter(Boolean);
+    const subtotal = items.reduce((s, i) => s + i.lineTotal, 0);
+    const hasPrint = items.some(i => i.format === 'druk');
+    const shipping  = hasPrint ? PRICE_SHIP : 0;
+    return { items, subtotal, shipping, total: subtotal + shipping };
+  }
+
+  function renderCart() {
+    const s = cartSummary();
+    const emptyEl    = document.getElementById('cartEmpty');
+    const filledEl   = document.getElementById('cartFilled');
+    const itemsEl    = document.getElementById('cartItems');
+    const subtotalEl = document.getElementById('cartSubtotal');
+    const shippingEl = document.getElementById('cartShipping');
+    const totalEl    = document.getElementById('cartTotal');
+    const badgeEl    = document.getElementById('cartCountBadge');
+
+    const totalQty = s.items.reduce((n, i) => n + i.qty, 0);
+    badgeEl.textContent = totalQty ? `${totalQty} ${totalQty === 1 ? 'pozycja' : totalQty < 5 ? 'pozycje' : 'pozycji'}` : '';
+    badgeEl.classList.toggle('is-visible', totalQty > 0);
+
+    if (!s.items.length) {
+      emptyEl.hidden = false; filledEl.hidden = true;
+    } else {
+      emptyEl.hidden = true; filledEl.hidden = false;
+      itemsEl.innerHTML = s.items.map(item => `
+        <article class="cart-row">
+          <div class="cart-row-cover">
+            <img src="${escHtml(item.cover)}" alt="${escHtml(item.bookTitle)}">
+          </div>
+          <div class="cart-row-info">
+            <p class="cart-row-title">${escHtml(item.bookTitle)}</p>
+            <p class="cart-row-variant">${escHtml(item.label)} · ${escHtml(item.lang)}</p>
+            <div class="cart-row-controls">
+              <button class="cart-qty-btn" type="button" data-id="${item.id}" data-action="dec">−</button>
+              <span class="cart-qty-val">${item.qty}</span>
+              <button class="cart-qty-btn" type="button" data-id="${item.id}" data-action="inc">+</button>
+              <button class="cart-remove-btn" type="button" data-id="${item.id}" data-action="remove">usuń</button>
+            </div>
+          </div>
+          <div class="cart-row-pricing">
+            <p class="cart-row-price">${fmt(item.lineTotal)}</p>
+            <p class="cart-row-unit">${item.qty} × ${fmt(item.price)}</p>
+          </div>
+        </article>
+      `).join('');
+      itemsEl.querySelectorAll('[data-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const action = btn.getAttribute('data-action');
+          const ci = cart.find(e => e.id === id);
+          if (!ci) return;
+          if (action === 'inc')    { ci.qty = Math.min(ci.qty + 1, 99); }
+          if (action === 'dec')    { ci.qty = Math.max(ci.qty - 1, 0); }
+          if (action === 'remove') { ci.qty = 0; }
+          cart = cart.filter(e => e.qty > 0);
+          saveCart(); renderCart();
+        });
+      });
+    }
+    subtotalEl.textContent = fmt(s.subtotal);
+    shippingEl.textContent = s.shipping > 0 ? fmt(s.shipping) : 'bezpłatna';
+    totalEl.textContent    = fmt(s.total);
+  }
+
+  function addToCart(variantId, qty) {
+    const existing = cart.find(i => i.id === variantId);
+    if (existing) existing.qty = Math.min(existing.qty + qty, 99);
+    else cart.push({ id: variantId, qty: Math.min(qty, 99) });
+    saveCart(); renderCart();
+  }
+
+  /* ── CATALOG RENDER ── */
+  const selections = Object.fromEntries(PRODUCTS.map(p => [p.slug, { variantId: p.variants[0].id, qty: 1 }]));
+
+  function renderCatalog() {
+    const listEl = document.getElementById('catalogList');
+    listEl.innerHTML = PRODUCTS.map(p => {
+      const sel = selections[p.slug];
+      const activeV = p.variants.find(v => v.id === sel.variantId) || p.variants[0];
+      const isEbook = activeV.format === 'ebook';
+      const deliveryNote = isEbook
+        ? `<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.82-.82a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.49 16z"/></svg> Dostawa elektroniczna — bez kosztu wysyłki`
+        : `<svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Wysyłka pocztowa po zaksięgowaniu płatności`;
+
+      return `
+        <article class="catalog-item" data-slug="${p.slug}">
+          <div class="catalog-cover">
+            <img src="${escHtml(p.cover)}" alt="${escHtml(p.title)}${p.subtitle ? ' ' + p.subtitle : ''}">
+          </div>
+          <div class="catalog-body">
+            <span class="catalog-badge">${escHtml(p.badge)}</span>
+            <h3 class="catalog-title">${escHtml(p.title)}${p.subtitle ? '<br><em>' + escHtml(p.subtitle) + '</em>' : ''}</h3>
+
+            <div class="format-picker">
+              ${p.variants.map(v => `
+                <button class="format-btn${v.id === sel.variantId ? ' is-active' : ''}"
+                  type="button" data-slug="${p.slug}" data-variant="${v.id}">
+                  <span class="format-btn-top">
+                    ${v.format === 'druk' ? ICON_BOOK : ICON_TABLET}
+                    ${escHtml(v.label)} · ${escHtml(v.lang)}
+                  </span>
+                  <span class="format-btn-price">${fmt(v.price)}</span>
+                </button>
+              `).join('')}
+            </div>
+
+            <div class="catalog-add-row">
+              <div class="qty-stepper">
+                <button type="button" data-slug="${p.slug}" data-delta="-1">−</button>
+                <span class="qty-stepper-value">${sel.qty}</span>
+                <button type="button" data-slug="${p.slug}" data-delta="1">+</button>
+              </div>
+              <button class="add-btn${sel.justAdded ? ' is-added' : ''}" type="button" data-slug="${p.slug}">
+                ${sel.justAdded
+                  ? 'Dodano ✓'
+                  : `Do koszyka <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`}
+              </button>
+            </div>
+            <p class="format-delivery-note">${deliveryNote}</p>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    /* variant select */
+    listEl.querySelectorAll('[data-variant]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const slug = btn.getAttribute('data-slug');
+        selections[slug].variantId = btn.getAttribute('data-variant');
+        renderCatalog();
+      });
+    });
+
+    /* qty steppers */
+    listEl.querySelectorAll('[data-delta]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const slug = btn.getAttribute('data-slug');
+        const delta = Number(btn.getAttribute('data-delta'));
+        selections[slug].qty = Math.max(1, Math.min(selections[slug].qty + delta, 9));
+        renderCatalog();
+      });
+    });
+
+    /* add to cart */
+    listEl.querySelectorAll('.add-btn[data-slug]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const slug = btn.getAttribute('data-slug');
+        const sel  = selections[slug];
+        addToCart(sel.variantId, sel.qty);
+        sel.qty = 1;
+        sel.justAdded = true;
+        renderCatalog();
+        setTimeout(() => { selections[slug].justAdded = false; renderCatalog(); }, 1400);
+      });
+    });
+  }
+
+  /* ── ORDER FORM ── */
+  const orderForm    = document.getElementById('orderForm');
+  const formErrorEl  = document.getElementById('formError');
+  const submitBtn    = document.getElementById('submitBtn');
+  const fallbackPanel = document.getElementById('fallbackPanel');
+  const fallbackMsg   = document.getElementById('fallbackMessage');
+  const fallbackLink  = document.getElementById('fallbackMailLink');
+  const fallbackPrev  = document.getElementById('fallbackPreview');
+  const copyBtn       = document.getElementById('copyFallbackBtn');
+  const successPanel  = document.getElementById('successPanel');
+
+  function showError(msg) { formErrorEl.textContent = msg; formErrorEl.classList.add('is-visible'); }
+  function hideError()    { formErrorEl.textContent = ''; formErrorEl.classList.remove('is-visible'); }
+
+  function getFormData() {
+    return {
+      fullName:  document.getElementById('orderName').value.trim(),
+      email:     document.getElementById('orderEmail').value.trim(),
+      phone:     document.getElementById('orderPhone').value.trim(),
+      street:    document.getElementById('orderStreet').value.trim(),
+      postal:    document.getElementById('orderPostal').value.trim(),
+      city:      document.getElementById('orderCity').value.trim(),
+      country:   document.getElementById('orderCountry').value.trim(),
+      note:      document.getElementById('orderNote').value.trim(),
+      chkTransfer: document.getElementById('acceptTransfer').checked,
+      chkPrivacy:  document.getElementById('acceptPrivacy').checked,
+    };
+  }
+
+  function validate(d) {
+    if (!cart.length)          return 'Koszyk jest pusty — wybierz książki powyżej.';
+    if (!d.fullName)           return 'Podaj imię i nazwisko.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return 'Podaj poprawny adres e-mail.';
+    if (!d.street || !d.postal || !d.city) return 'Uzupełnij pełny adres wysyłkowy.';
+    if (!d.chkTransfer)        return 'Potwierdź realizację po zaksięgowaniu przelewu.';
+    if (!d.chkPrivacy)         return 'Potwierdź zgodę na przetwarzanie danych.';
+    return null;
+  }
+
+  function genOrderId() {
+    const n = new Date();
+    const d = `${n.getFullYear()}${String(n.getMonth()+1).padStart(2,'0')}${String(n.getDate()).padStart(2,'0')}`;
+    const t = `${String(n.getHours()).padStart(2,'0')}${String(n.getMinutes()).padStart(2,'0')}`;
+    return `RK-${d}-${t}-${Math.floor(1000+Math.random()*9000)}`;
+  }
+
+  function buildEmailBody(fd, s, orderId) {
+    const ref = `${orderId} ${fd.fullName}`;
+    return [
+      'Dzień dobry,',
+      '',
+      'przesyłam zamówienie książek.',
+      '',
+      `Numer zamówienia: ${orderId}`,
+      '',
+      `Imię i nazwisko: ${fd.fullName}`,
+      `E-mail: ${fd.email}`,
+      `Telefon: ${fd.phone || '—'}`,
+      '',
+      'Adres wysyłki:',
+      fd.street,
+      `${fd.postal} ${fd.city}`,
+      fd.country,
+      '',
+      'Pozycje:',
+      ...s.items.map(i => `- ${i.bookTitle} / ${i.label} ${i.lang} / ${i.qty} szt. / ${fmt(i.lineTotal)}`),
+      '',
+      `Suma: ${fmt(s.subtotal)}`,
+      `Wysyłka: ${fmt(s.shipping)}`,
+      `Łącznie: ${fmt(s.total)}`,
+      '',
+      `Uwagi: ${fd.note || '—'}`,
+      '',
+      `Konto: ${BANK}`,
+      `Tytuł przelewu: ${ref}`,
+      '',
+      'Pozdrawiam',
+      fd.fullName,
+    ].join('\n');
+  }
+
+  function showSuccess(orderId, fd, s, mode) {
+    document.getElementById('successOrderId').textContent = orderId;
+    document.getElementById('successAmount').textContent  = fmt(s.total);
+    document.getElementById('successBank').textContent    = BANK;
+    document.getElementById('successRef').textContent     = `${orderId} ${fd.fullName}`;
+    const copyEl = successPanel.querySelector('.success-copy');
+    copyEl.textContent = mode === 'fallback'
+      ? 'Automatyczna wysyłka była niedostępna. Otworzył się gotowy e-mail z zamówieniem — wyślij go bezpośrednio do autora.'
+      : 'Potwierdzenie zostało przesłane na podany adres e-mail. Poniżej znajdziesz dane do przelewu.';
+    successPanel.classList.add('is-visible');
+    successPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function clearAfterSuccess() {
+    cart = []; saveCart(); renderCart();
+    orderForm.reset();
+    document.getElementById('orderCountry').value = 'Polska';
+  }
+
+  orderForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideError();
+    fallbackPanel.classList.remove('is-visible');
+    successPanel.classList.remove('is-visible');
+
+    const fd = getFormData();
+    const err = validate(fd);
+    if (err) { showError(err); return; }
+
+    const s = cartSummary();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wysyłanie…';
+
+    try {
+      const res = await fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customer: { fullName: fd.fullName, email: fd.email, phone: fd.phone },
+          shipping: { street: fd.street, postalCode: fd.postal, city: fd.city, country: fd.country },
+          items: cart.map(i => ({ id: i.id, quantity: i.qty })),
+          totals: { subtotal: s.subtotal, shipping: s.shipping, total: s.total },
+          consent: { acceptTransfer: fd.chkTransfer, acceptPrivacy: fd.chkPrivacy },
+          note: fd.note,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) throw new Error(data.error || 'Błąd wysyłki zamówienia.');
+      showSuccess(data.orderId, fd, s, 'api');
+      clearAfterSuccess();
+    } catch (err) {
+      const orderId = genOrderId();
+      const body    = buildEmailBody(fd, s, orderId);
+      fallbackLink.href = `mailto:cisza.umyslu@gmail.com?subject=${encodeURIComponent('Zamówienie książek — ' + orderId)}&body=${encodeURIComponent(body)}`;
+      fallbackPrev.textContent = body;
+      fallbackMsg.textContent = 'Automatyczna wysyłka nie zadziałała. Otwórz gotowy e-mail poniżej lub skopiuj treść zamówienia i wyślij ją ręcznie na cisza.umyslu@gmail.com.';
+      fallbackPanel.classList.add('is-visible');
+      showSuccess(orderId, fd, s, 'fallback');
+      window.location.href = fallbackLink.href;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Wyślij zamówienie <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    }
   });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navLinks.classList.remove('is-open');
-  }));
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) navLinks.classList.remove('is-open');
+
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(fallbackPrev.textContent.trim());
+      copyBtn.textContent = 'Skopiowano ✓';
+    } catch {
+      copyBtn.textContent = 'Skopiuj ręcznie';
+    }
+    setTimeout(() => { copyBtn.textContent = 'Skopiuj treść'; }, 2000);
   });
+
+  document.getElementById('successResetBtn').addEventListener('click', () => {
+    successPanel.classList.remove('is-visible');
+    fallbackPanel.classList.remove('is-visible');
+    document.getElementById('catalogList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('accountNumberInline').textContent = BANK;
+
+  /* ── INIT ── */
+  renderCatalog();
+  renderCart();
 </script>
 </body>
 </html>

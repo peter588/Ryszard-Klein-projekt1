@@ -10,6 +10,8 @@ export default async function handler(req, res) {
   }
 
   try {
+    const contactRecipient = process.env.CONTACT_NOTIFICATION_EMAIL || 'cisza.umyslu@gmail.com';
+    // TODO: skonfigurować zweryfikowaną domenę nadawcy w Resend zamiast onboarding@resend.dev.
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -18,7 +20,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'Formularz kontaktowy <onboarding@resend.dev>',
-        to: 'piotr.pawlak@days.net.pl',
+        to: contactRecipient,
         reply_to: email,
         subject: `Wiadomość od ${name}`,
         text: `Imię i nazwisko: ${name}\nE-mail: ${email}\n\n${message}`,

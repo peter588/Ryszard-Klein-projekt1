@@ -8,3 +8,10 @@
 # Temporary/editor files
 *.swp
 *.swo
+
+# Dependencies
+node_modules/
+
+# Local environment
+.env
+.env.local
