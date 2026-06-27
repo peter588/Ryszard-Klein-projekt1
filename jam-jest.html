@@ -316,10 +316,14 @@
     cursor: default;
   }
   .video-iframe-label {
+    display: inline-block;
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1rem; font-weight: 400;
     color: var(--ink); line-height: 1.3;
+    text-decoration: none;
+    transition: color 0.3s;
   }
+  .video-iframe-label:hover { color: var(--gold); }
   @media (max-width: 600px) {
     .video-iframe-grid { grid-template-columns: 1fr; }
   }
@@ -478,13 +482,13 @@
           <p class="review-sig">Marta Kaczmarczyk<br>psycholog i psychoterapeuta</p>
           <div class="collapsible-fade"></div>
         </div>
-        <button class="collapsible-toggle" onclick="toggleCollapsible('wprowadzenie', this)">Czytaj całość ↓</button>
+        <button class="collapsible-toggle" onclick="toggleCollapsible('wprowadzenie', this)">Więcej</button>
       </article>
 
       <!-- WYWIADY I NAGRANIA -->
       <article class="card">
         <span class="card-accent">Wywiady i nagrania</span>
-        <h2 class="card-title">Rozmowy z mediami i produkcje</h2>
+        <h2 class="card-title">Rozmowy z mediami i nagrania</h2>
         <div class="video-iframe-grid" id="videoGrid"></div>
       </article>
 
@@ -534,7 +538,7 @@
     const body = document.getElementById(id);
     const isCollapsed = body.classList.contains('collapsible-collapsed');
     body.classList.toggle('collapsible-collapsed', !isCollapsed);
-    btn.textContent = isCollapsed ? 'Zwiń ↑' : 'Czytaj całość ↓';
+    btn.textContent = isCollapsed ? 'Mniej' : 'Więcej';
     if (!isCollapsed) {
       btn.closest('article').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -544,8 +548,7 @@
   // Po zmianie domeny na ryszardklein.pl: zastąp watchUrl przez embedUrl
   // i odkomentuj blok IFRAME MODE w funkcji buildVideoGrid poniżej
   (function () {
-    var PLAY_ICON = '<div class=”video-play-overlay”><div class=”video-play-btn”><svg viewBox=”0 0 24 24”><polygon points=”5,3 19,12 5,21”/></svg></div></div>';
-    var PLAYLIST = 'PLVPGj9p2vxclANJYY7l4BRSgkAp2PzKA1';
+    var PLAY_ICON = '<div class="video-play-overlay"><div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>';
 
     function buildVideoGrid(gridId, videos) {
       var grid = document.getElementById(gridId);
@@ -590,9 +593,12 @@
         });
         */
 
-        var label = document.createElement('p');
+        var label = document.createElement('a');
         label.className = 'video-iframe-label';
         label.textContent = v.title;
+        label.href = watchUrl;
+        label.target = '_blank';
+        label.rel = 'noopener noreferrer';
 
         item.appendChild(link);
         item.appendChild(label);
@@ -602,20 +608,20 @@
 
     buildVideoGrid('videoGrid', [
       {
-        id: 'g2g-8_bA1Sg', title: 'TVS Express Silesia',
-        href: 'https://www.youtube.com/watch?v=g2g-8_bA1Sg&list=' + PLAYLIST + '&index=5'
+        id: 'C3_kfw7sZ54', title: 'TVS',
+        href: 'https://www.youtube.com/watch?v=C3_kfw7sZ54&t'
       },
       {
-        id: 'z64q_87fR_s', title: 'Radio Katowice — „Skacząc po półkach”',
-        href: 'https://www.youtube.com/watch?v=z64q_87fR_s&list=' + PLAYLIST + '&index=6'
+        id: '36OA0M_G7Gg', title: 'Express Silesia',
+        href: 'https://www.youtube.com/watch?v=36OA0M_G7Gg&t'
       },
       {
-        id: '5N37mBvH8O8', title: 'Psychologia czakr',
-        href: 'https://www.youtube.com/watch?v=5N37mBvH8O8&list=' + PLAYLIST + '&index=7'
+        id: '-D2pD0gg1CM', title: 'Radio Katowice — „Z książką po półkach”',
+        href: 'https://www.youtube.com/watch?v=-D2pD0gg1CM&t'
       },
       {
-        id: 'WbWfIOnA6D8', title: 'Medytacja stworzenia',
-        href: 'https://www.youtube.com/watch?v=WbWfIOnA6D8&list=' + PLAYLIST + '&index=8'
+        id: 'UdRNXoAMJ_0', title: 'Psychologia czakr i Medytacja stworzenia',
+        href: 'https://www.youtube.com/watch?v=UdRNXoAMJ_0&t'
       }
     ]);
 
