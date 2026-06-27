@@ -496,15 +496,28 @@
     margin-bottom: 1.5rem; transition: color 0.4s;
   }
   .about-read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.78rem 1.45rem;
     font-family: 'Jost', sans-serif;
-    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--gold); background: none; border: none;
-    border-bottom: 1px solid var(--gold-light);
-    cursor: pointer; padding-bottom: 2px;
-    transition: color 0.3s, border-color 0.3s;
-    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    background: transparent;
+    border: 1px solid rgba(160,123,58,0.3);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, background 0.3s, transform 0.3s;
   }
-  .about-read-more-btn:hover { color: var(--ink); border-color: var(--ink); }
+  .about-read-more-btn:hover {
+    color: var(--gold);
+    border-color: rgba(160,123,58,0.56);
+    background: rgba(201,168,104,0.07);
+    transform: translateY(-1px);
+  }
   .about-btns-row {
     display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
   }
@@ -641,63 +654,57 @@
   /* ========================
      OPINIE CZYTELNIKÓW
   ======================== */
-  .reviews-section { background: var(--cream); transition: var(--theme-transition); }
+  .reviews-section { background: var(--about-bg); transition: var(--theme-transition); }
   .reviews-inner { max-width: 860px; margin: 0 auto; text-align: center; }
-  .reviews-eyebrow { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; transition: color 0.4s; }
+  .reviews-eyebrow { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; transition: color 0.4s; }
   .reviews-card {
-    padding: clamp(1.75rem, 4vw, 3rem);
-    background: rgba(247,243,236,0.92);
-    border: 1px solid rgba(160,123,58,0.18);
-    box-shadow: 0 18px 48px rgba(28,25,20,0.08);
+    max-width: 780px;
+    margin: 0 auto;
+    padding: clamp(1.2rem, 3vw, 2rem) 0 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
     transition: var(--theme-transition);
   }
-  [data-theme="dark"] .reviews-card {
-    background: rgba(34,29,25,0.84);
-    border-color: rgba(201,168,104,0.2);
-    box-shadow: 0 22px 58px rgba(0,0,0,0.24);
+  .review-quote-mark {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 4.4rem;
+    line-height: 0.5;
+    color: var(--gold);
+    opacity: 0.4;
+    margin-bottom: 1rem;
+    display: block;
   }
-  .review-quote-mark { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 5rem; line-height: 0.5; color: var(--gold); opacity: 0.45; margin-bottom: 1.5rem; display: block; }
   .review-quote-text {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(1.18rem, 2vw, 1.45rem);
+    font-size: clamp(1.22rem, 2vw, 1.52rem);
     font-style: italic;
-    line-height: 1.95;
+    line-height: 1.88;
     color: var(--ink);
-    margin-bottom: 2rem;
+    margin: 0 auto 1.35rem;
+    max-width: 760px;
     transition: color 0.4s, opacity 0.25s ease;
     white-space: pre-line;
   }
   .review-signature {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1.8rem;
     max-width: fit-content;
-    padding: 0.9rem 1.35rem;
-    border: 1px solid rgba(160,123,58,0.16);
-    background: linear-gradient(180deg, rgba(240,228,200,0.22), rgba(247,243,236,0.65));
+    padding: 0;
+    border: none;
+    background: transparent;
     transition: var(--theme-transition);
-  }
-  [data-theme="dark"] .review-signature {
-    background: linear-gradient(180deg, rgba(201,168,104,0.08), rgba(34,29,25,0.3));
-    border-color: rgba(201,168,104,0.18);
   }
   .review-signature::before,
   .review-signature::after {
-    content: '';
-    width: 26px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-    flex-shrink: 0;
+    content: none;
   }
   .review-quote-name {
     display: block;
     font-family: 'Jost', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.16em;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--ink-light);
     font-style: normal;
     margin-bottom: 0;
     transition: color 0.4s, opacity 0.25s ease;
@@ -705,24 +712,29 @@
   .reviews-actions {
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 0;
   }
   .reviews-next-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.78rem 1.65rem;
     font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     background: transparent;
     color: var(--ink-light);
-    border: 1px solid var(--mist);
-    padding: 0.95rem 1.5rem;
+    border: 1px solid rgba(160,123,58,0.3);
     cursor: pointer;
-    transition: color 0.3s, border-color 0.3s, background 0.3s;
+    transition: color 0.3s, border-color 0.3s, background 0.3s, transform 0.3s;
   }
   .reviews-next-btn:hover {
     color: var(--gold);
-    border-color: var(--gold-light);
+    border-color: rgba(160,123,58,0.56);
     background: rgba(201,168,104,0.06);
+    transform: translateY(-1px);
   }
 
   /* ========================
@@ -914,22 +926,54 @@
   .book-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-light); }
   .book-status-dot.upcoming { background: var(--mist); }
   .book-cta-link {
-    display: flex; width: fit-content; align-items: center; gap: 0.65rem;
+    display: inline-flex; width: fit-content; align-items: center; gap: 0.65rem;
+    justify-content: center;
     margin-top: 1.25rem;
-    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    min-height: 44px;
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
     letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--btn-primary-color); text-decoration: none;
-    background: var(--btn-primary-bg);
-    padding: 0.8rem 1.75rem;
-    transition: background 0.3s, color 0.3s;
+    color: var(--ink-mid); text-decoration: none;
+    background: transparent;
+    border: 1px solid rgba(160,123,58,0.3);
+    padding: 0.78rem 1.45rem;
+    transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
   }
-  .book-cta-link:hover { background: var(--gold); color: #1C1914; }
+  .book-cta-link:hover {
+    background: rgba(201,168,104,0.07);
+    color: var(--gold);
+    border-color: rgba(160,123,58,0.56);
+    transform: translateY(-1px);
+  }
   .book-cta-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
   .book-cta-row { display: flex; align-items: stretch; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; }
   .book-cta-row .book-cta-link { margin-top: 0; }
-  .book-es-btn { display: flex; align-items: center; font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; background: none; border: 1px solid var(--mist); color: var(--ink-light); padding: 0 1.25rem; cursor: pointer; transition: border-color 0.3s, color 0.3s, background 0.3s; }
-  .book-es-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .book-es-btn.is-active { border-color: rgba(160,123,58,0.45); color: var(--gold); background: rgba(201,168,104,0.08); }
+  .book-es-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: rgba(201,168,104,0.09);
+    border: 1px solid rgba(160,123,58,0.28);
+    color: var(--gold);
+    padding: 0.78rem 1.45rem;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s, background 0.3s, transform 0.3s;
+  }
+  .book-es-btn:hover {
+    border-color: rgba(160,123,58,0.56);
+    color: var(--gold);
+    background: rgba(201,168,104,0.15);
+    transform: translateY(-1px);
+  }
+  .book-es-btn.is-active {
+    border-color: rgba(160,123,58,0.62);
+    color: var(--gold);
+    background: rgba(201,168,104,0.2);
+  }
   .book-es-panel {
     display: none;
     margin-top: 2rem;
@@ -1477,8 +1521,8 @@
         <p class="fade-in fade-in-delay-1">Moje doświadczenie życiowe zrodziło we mnie potrzebę pisania. Z zawodu jestem muzykiem, ale najbardziej fascynuje mnie ludzki umysł, świadomość i droga człowieka ku większej wolności wewnętrznej. Patrząc szerzej na historię i współczesny świat, widać, jak mocno naszymi wyborami kierują uwarunkowania, lęki, pragnienia i zbiorowe scenariusze. Właśnie dlatego tak bardzo interesuje mnie droga od nieświadomego działania ku bardziej świadomemu wyborowi.</p>
         <p class="fade-in fade-in-delay-2">Moje książki są zapisem tych poszukiwań. Powstały z życia, z doświadczeń, z pracy z ludźmi, z muzyki, z ciszy i z pytań, które przez wiele lat prowadziły mnie w głąb siebie.</p>
         <div class="about-btns-row">
-          <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Czytaj więcej →</button>
-          <a href="pasje.html" class="about-read-more-btn">Moje pasje →</a>
+          <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Więcej</button>
+          <a href="pasje.html" class="about-read-more-btn">Moje pasje</a>
         </div>
         <div class="about-full" id="aboutFull">
           <div class="about-divider">
@@ -1578,7 +1622,7 @@
 <section class="reviews-section">
   <div class="container">
     <div class="reviews-inner fade-in">
-      <p class="reviews-eyebrow">Głos czytelników i słuchaczy</p>
+      <p class="section-label">Głos czytelników i słuchaczy</p>
       <div class="reviews-card">
         <blockquote>
           <span class="review-quote-mark">&ldquo;</span>
@@ -1590,7 +1634,7 @@
           </footer>
         </blockquote>
         <div class="reviews-actions">
-          <button class="reviews-next-btn" id="reviewsNextBtn" type="button">Następna</button>
+          <button class="reviews-next-btn" id="reviewsNextBtn" type="button">Losuj</button>
         </div>
       </div>
     </div>
