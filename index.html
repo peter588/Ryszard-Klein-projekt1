@@ -518,6 +518,16 @@
     background: rgba(201,168,104,0.07);
     transform: translateY(-1px);
   }
+  .about-read-more-btn.is-emphasis {
+    background: rgba(201,168,104,0.09);
+    border-color: rgba(160,123,58,0.28);
+    color: var(--gold);
+  }
+  .about-read-more-btn.is-emphasis:hover {
+    background: rgba(201,168,104,0.15);
+    border-color: rgba(160,123,58,0.56);
+    color: var(--gold);
+  }
   .about-btns-row {
     display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
   }
@@ -654,25 +664,55 @@
   /* ========================
      OPINIE CZYTELNIKÓW
   ======================== */
-  .reviews-section { background: var(--about-bg); transition: var(--theme-transition); }
-  .reviews-inner { max-width: 860px; margin: 0 auto; text-align: center; }
-  .reviews-eyebrow { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; transition: color 0.4s; }
-  .reviews-card {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: clamp(1.2rem, 3vw, 2rem) 0 0;
-    background: transparent;
-    border: none;
-    box-shadow: none;
+  .reviews-section {
+    background: var(--about-bg);
     transition: var(--theme-transition);
+  }
+  .reviews-inner {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .reviews-card {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: clamp(2.2rem, 4vw, 3.6rem) clamp(1.8rem, 4vw, 4rem);
+    background: var(--sentencja-bg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: var(--theme-transition);
+  }
+  .reviews-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='100%25' height='100%25' viewBox='0 0 1440 560' preserveAspectRatio='none'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1000%26quot%3b)' fill='none'%3e%3cg stroke='%23543d1a' stroke-width='2.5' transform='translate(0, 1.5)'%3e%3cpath d='M307.62 612.23C437.44 586.15 489.09 257.34 696.53 252.7 903.97 248.06 890.99 322.7 1085.45 322.7 1279.9 322.7 1375.57 252.98 1474.36 252.7'/%3e%3cpath d='M563.2 580.57C672.57 559.34 614.21 296.2 893.02 280.84 1171.82 265.48 1378.96 65.25 1552.65 62.44'/%3e%3cpath d='M289.9 647.25C436.25 614.86 488.15 236.06 720.03 229.57 951.9 223.08 935.09 299.57 1150.15 299.57 1365.22 299.57 1471.33 229.8 1580.28 229.57'/%3e%3cpath d='M772.84 607.27C879.79 570.29 804.53 277.76 1056.75 254.71 1308.97 231.66 1474.41 61.44 1624.56 58.71'/%3e%3cpath d='M439.05 666.03C542.39 664.79 636.83 548.32 835.33 548.3 1033.83 548.28 1033.48 618.3 1231.62 618.3 1429.76 618.3 1527.3 548.57 1627.9 548.3'/%3e%3c/g%3e%3cg stroke='%23a07b3b' stroke-width='2.5'%3e%3cpath d='M307.62 612.23C437.44 586.15 489.09 257.34 696.53 252.7 903.97 248.06 890.99 322.7 1085.45 322.7 1279.9 322.7 1375.57 252.98 1474.36 252.7'/%3e%3cpath d='M563.2 580.57C672.57 559.34 614.21 296.2 893.02 280.84 1171.82 265.48 1378.96 65.25 1552.65 62.44'/%3e%3cpath d='M289.9 647.25C436.25 614.86 488.15 236.06 720.03 229.57 951.9 223.08 935.09 299.57 1150.15 299.57 1365.22 299.57 1471.33 229.8 1580.28 229.57'/%3e%3cpath d='M772.84 607.27C879.79 570.29 804.53 277.76 1056.75 254.71 1308.97 231.66 1474.41 61.44 1624.56 58.71'/%3e%3cpath d='M439.05 666.03C542.39 664.79 636.83 548.32 835.33 548.3 1033.83 548.28 1033.48 618.3 1231.62 618.3 1429.76 618.3 1527.3 548.57 1627.9 548.3'/%3e%3c/g%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1000'%3e%3crect width='100%25' height='100%25' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .reviews-card blockquote,
+  .reviews-actions {
+    position: relative;
+    z-index: 1;
+  }
+  .reviews-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.25rem;
   }
   .review-quote-mark {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 4.4rem;
+    font-size: 4rem;
     line-height: 0.5;
-    color: var(--gold);
-    opacity: 0.4;
-    margin-bottom: 1rem;
+    color: rgba(201,168,104,0.5);
+    opacity: 1;
+    margin-bottom: 0.8rem;
     display: block;
   }
   .review-quote-text {
@@ -680,7 +720,7 @@
     font-size: clamp(1.22rem, 2vw, 1.52rem);
     font-style: italic;
     line-height: 1.88;
-    color: var(--ink);
+    color: var(--cream);
     margin: 0 auto 1.35rem;
     max-width: 760px;
     transition: color 0.4s, opacity 0.25s ease;
@@ -704,7 +744,7 @@
     font-size: 0.7rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--ink-light);
+    color: rgba(201,168,104,0.66);
     font-style: normal;
     margin-bottom: 0;
     transition: color 0.4s, opacity 0.25s ease;
@@ -712,29 +752,23 @@
   .reviews-actions {
     display: flex;
     justify-content: center;
-    margin-top: 0;
+    margin-top: 0.25rem;
   }
   .reviews-next-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    padding: 0.78rem 1.65rem;
     font-family: 'Jost', sans-serif;
     font-size: 0.68rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     background: transparent;
-    color: var(--ink-light);
-    border: 1px solid rgba(160,123,58,0.3);
+    color: rgba(201,168,104,0.75);
+    border: 1px solid rgba(160,123,58,0.38);
+    padding: 0.6rem 1.9rem;
     cursor: pointer;
-    transition: color 0.3s, border-color 0.3s, background 0.3s, transform 0.3s;
+    transition: border-color 0.3s, color 0.3s;
   }
   .reviews-next-btn:hover {
-    color: var(--gold);
-    border-color: rgba(160,123,58,0.56);
-    background: rgba(201,168,104,0.06);
-    transform: translateY(-1px);
+    border-color: var(--gold-light);
+    color: #F7F3EC;
   }
 
   /* ========================
@@ -1643,7 +1677,7 @@
         <p class="fade-in fade-in-delay-2">Moje książki są zapisem tych poszukiwań. Powstały z życia, z doświadczeń, z pracy z ludźmi, z muzyki, z ciszy i z pytań, które przez wiele lat prowadziły mnie w głąb siebie.</p>
         <div class="about-btns-row">
           <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Więcej</button>
-          <a href="pasje.html" class="about-read-more-btn">Moje pasje</a>
+          <a href="pasje.html" class="about-read-more-btn is-emphasis">Moje pasje</a>
         </div>
         <div class="about-full" id="aboutFull">
           <div class="about-divider">
@@ -1743,9 +1777,9 @@
 <section class="reviews-section">
   <div class="container">
     <div class="reviews-inner fade-in">
-      <p class="section-label">Głos czytelników i słuchaczy</p>
       <div class="reviews-card">
         <blockquote>
+          <p class="reviews-label">Głos czytelników i słuchaczy</p>
           <span class="review-quote-mark">&ldquo;</span>
           <p class="review-quote-text" id="reviewQuoteText"></p>
           <footer>

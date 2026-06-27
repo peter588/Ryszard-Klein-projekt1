@@ -158,8 +158,26 @@
   .catalog-intro {
     font-family: 'Jost', sans-serif;
     font-size: 0.88rem; color: var(--ink-light);
-    line-height: 1.7; margin-bottom: 3.5rem; max-width: 620px;
+    line-height: 1.7; margin-bottom: 1rem; max-width: 620px;
     transition: color 0.4s;
+  }
+  .catalog-note {
+    max-width: 700px;
+    margin-bottom: 3rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--ink-mid);
+  }
+  .catalog-note a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(160,123,58,0.26);
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .catalog-note a:hover {
+    color: var(--ink);
+    border-color: rgba(160,123,58,0.56);
   }
   .catalog-list {
     display: flex; flex-direction: column; gap: 0;
@@ -816,6 +834,7 @@
     <p class="section-label">Dostępne tytuły</p>
     <h2 class="catalog-heading">Wybierz <em>tytuł i format</em></h2>
     <p class="catalog-intro">Wybierz książkę, format i język przekładu, a potem dodaj ją do koszyka. Jeśli wolisz prostszy kontakt, zadzwoń lub wyślij SMS — porozmawiamy i ustalimy szczegóły.</p>
+    <p class="catalog-note">Książki »Spojrzenie Boga« oraz »Bliźniacze Dusze« dostępne są jedynie przez <a href="https://www.kos.com.pl/pl/searchquery/Ryszard+Klein/1/phot/5?" target="_blank" rel="noopener">Wydawnictwo KOS</a>.</p>
 
     <div class="catalog-list" id="catalogList"></div>
   </div>
@@ -862,9 +881,6 @@
           </div>
         </div>
 
-        <div class="cart-kos-note">
-          <p>Nie wszystkie tytuły dostępne są bezpośrednio u autora. <em>Spojrzenie Boga. Bliźniacze Dusze</em> dostępne jest wyłącznie przez <a href="https://www.kos.com.pl/pl/searchquery/Ryszard+Klein/1/phot/5?" target="_blank">Wydawnictwo KOS →</a></p>
-        </div>
       </div>
 
       <!-- FORM -->
@@ -1042,6 +1058,8 @@
   const CART_KEY = 'rk-order-cart';
   const PRICE_PRINT = 50;
   const PRICE_EBOOK = 30;
+  const PRICE_CISZA_ES_PRINT = 95;
+  const PRICE_CISZA_ES_EBOOK = 60;
   const PRICE_SHIP  = 20;
 
   const PRODUCTS = [
@@ -1053,9 +1071,9 @@
       cover: 'images/books/cisza.webp',
       variants: [
         { id: 'cisza-druk-pl',  label: 'Druk',   lang: 'PL', price: PRICE_PRINT, format: 'druk'  },
-        { id: 'cisza-druk-es',  label: 'Druk',   lang: 'ES', price: PRICE_PRINT, format: 'druk'  },
+        { id: 'cisza-druk-es',  label: 'Druk',   lang: 'ES', price: PRICE_CISZA_ES_PRINT, format: 'druk'  },
         { id: 'cisza-ebook-pl', label: 'E-book', lang: 'PL', price: PRICE_EBOOK, format: 'ebook' },
-        { id: 'cisza-ebook-es', label: 'E-book', lang: 'ES', price: PRICE_EBOOK, format: 'ebook' },
+        { id: 'cisza-ebook-es', label: 'E-book', lang: 'ES', price: PRICE_CISZA_ES_EBOOK, format: 'ebook' },
       ],
     },
     {
