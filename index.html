@@ -974,6 +974,127 @@
     color: var(--gold);
     background: rgba(201,168,104,0.2);
   }
+  .book-thought-panel {
+    display: none;
+    margin-top: 2rem;
+    padding: clamp(1.45rem, 3vw, 2.35rem);
+    border: 1px solid rgba(160,123,58,0.18);
+    background:
+      linear-gradient(180deg, rgba(253,250,245,0.98), rgba(242,235,224,0.92)),
+      url("images/premium-line-pattern.svg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 18px 50px rgba(28,25,20,0.08);
+  }
+  .book-thought-panel.is-open {
+    display: block;
+    animation: panelReveal 0.35s ease;
+  }
+  [data-theme="dark"] .book-thought-panel {
+    background:
+      linear-gradient(180deg, rgba(34,29,25,0.96), rgba(25,21,18,0.94)),
+      url("images/premium-line-pattern-dark.svg");
+    border-color: rgba(201,168,104,0.2);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+  }
+  .book-thought-overline {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .book-thought-kicker {
+    max-width: 720px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--ink-light);
+    margin: 1rem 0 1.4rem;
+  }
+  .book-thought-card {
+    border-top: 1px solid rgba(160,123,58,0.16);
+    padding-top: 1.45rem;
+  }
+  [data-theme="dark"] .book-thought-card {
+    border-top-color: rgba(201,168,104,0.16);
+  }
+  .book-thought-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.2rem, 1.9vw, 1.45rem);
+    line-height: 1.82;
+    color: var(--ink);
+    font-style: italic;
+    max-width: 760px;
+  }
+  .book-thought-text br + br {
+    display: block;
+    content: "";
+    margin-top: 0.4rem;
+  }
+  .book-thought-source {
+    margin-top: 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+  .book-thought-actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1.45rem;
+  }
+  .book-thought-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0.72rem 1.45rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    background: transparent;
+    border: 1px solid rgba(160,123,58,0.28);
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, background 0.3s, transform 0.3s;
+  }
+  .book-thought-btn:hover {
+    color: var(--gold);
+    border-color: rgba(160,123,58,0.56);
+    background: rgba(201,168,104,0.06);
+    transform: translateY(-1px);
+  }
+  .book-aforyzm-num {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.45rem;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 0.55rem;
+  }
+  .book-aforyzm-title {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.08rem;
+    line-height: 1.45;
+    color: var(--ink-mid);
+    margin-bottom: 1rem;
+  }
+  .book-aforyzm-lines {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.16rem, 1.85vw, 1.34rem);
+    line-height: 1.72;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+  .book-aforyzm-lines span {
+    display: block;
+  }
   .book-es-panel {
     display: none;
     margin-top: 2rem;
@@ -1743,6 +1864,7 @@
             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <button class="book-es-btn" id="btnEsPanelCisza" onclick="toggleEsPanel()">Przekład hiszpański</button>
+          <button class="book-es-btn" id="btnReflectionsCisza" onclick="toggleCiszaReflections()">Refleksje</button>
         </div>
         <div class="book-es-panel" id="esPanelCisza">
           <div class="book-es-hero">
@@ -1768,6 +1890,18 @@
                 <iframe src="https://www.youtube.com/embed/VQC9zo89OXE" title="Silencio — przekład hiszpański" allowfullscreen loading="lazy"></iframe>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="book-thought-panel" id="reflectionsPanelCisza">
+          <p class="book-thought-overline">Refleksje</p>
+          <h3 class="book-title">Cisza.<br><em>Refleksje z książki</em></h3>
+          <p class="book-thought-kicker">Wybrane refleksje z książki „Cisza. Esencja naszego umysłu” można czytać osobno, spokojnie i bez pośpiechu. Każda z nich wyrasta z tej samej drogi uważności, obserwacji i wewnętrznego porządkowania myśli.</p>
+          <div class="book-thought-card">
+            <p class="book-thought-text" id="ciszaReflectionText"></p>
+            <p class="book-thought-source">— Cisza. Esencja naszego umysłu</p>
+          </div>
+          <div class="book-thought-actions">
+            <button class="book-thought-btn" type="button" onclick="drawCiszaReflection()">Losuj</button>
           </div>
         </div>
       </div>
@@ -1875,10 +2009,25 @@
           <p><em>Ścieżki spełnionego życia</em> są czwartą częscią cyklu <em>Droga Ciszy</em>.</p>
         </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępność: u autora: książka drukowana oraz e-book.</p>
-        <a href="sciezki.html" class="book-cta-link">
-          Więcej
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <div class="book-cta-row">
+          <a href="sciezki.html" class="book-cta-link">
+            Więcej
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button class="book-es-btn" id="btnAforyzmySciezki" onclick="toggleSciezkiAforyzmy()">Aforyzmy</button>
+        </div>
+        <div class="book-thought-panel" id="aforyzmyPanelSciezki">
+          <p class="book-thought-overline">Aforyzmy</p>
+          <h3 class="book-title">Ścieżki spełnionego życia.<br><em>Myśli z ksiąg</em></h3>
+          <p class="book-thought-kicker">Aforyzmy są integralną częścią książki „Ścieżki spełnionego życia”. Zwięzłe, rytmiczne i osadzone w numerowanych księgach, można do nich wracać osobno, jak do krótkich zatrzymań na drodze lektury.</p>
+          <div class="book-thought-card">
+            <div id="sciezkiAforyzmText"></div>
+            <p class="book-thought-source">— Ścieżki spełnionego życia</p>
+          </div>
+          <div class="book-thought-actions">
+            <button class="book-thought-btn" type="button" onclick="drawSciezkiAforyzm()">Losuj</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2232,11 +2381,19 @@
     }))
   };
 
+  const refleksjeCiszy = [...refleksje];
+  const aforyzmySciezek = aforyzmy.map((entry) => {
+    const [num = '', title = '', ...lines] = entry.split('\n');
+    return { num, title, lines };
+  });
+
   const FALLBACK_SHARE_URL = 'https://ryszard-klein-projekt1-pi.vercel.app/index.html';
   const MOBILE_MESSENGER_PATTERN = /Android|iPhone|iPad|iPod/i;
   let currentFeaturedEntry = null;
   let currentSentencjaSeriesTarget = getNextSentencjaSeriesTarget();
   let currentSentencjaSeriesCount = 0;
+  let lastCiszaReflectionIdx = -1;
+  let lastSciezkiAforyzmIdx = -1;
 
   function getNextSentencjaSeriesTarget() {
     return Math.random() < 0.5 ? 3 : 4;
@@ -2528,10 +2685,6 @@
     const btn = document.getElementById(buttonId);
     if (panel && btn) btn.classList.toggle('is-active', panel.classList.contains('is-open'));
   }
-  function toggleEsPanel() {
-    document.getElementById('esPanelCisza').classList.toggle('is-open');
-    syncPanelButton('esPanelCisza', 'btnEsPanelCisza');
-  }
   function toggleJamJestEN() {
     const en = document.getElementById('esPanelJamJestEN');
     const audio = document.getElementById('esPanelJamJestAudio');
@@ -2549,6 +2702,96 @@
     if (opening) en.classList.remove('is-open');
     syncPanelButton('esPanelJamJestEN', 'btnEsPanelJamJestEN');
     syncPanelButton('esPanelJamJestAudio', 'btnEsPanelJamJestAudio');
+  }
+
+  function toggleExclusivePanels(activePanelId, activeButtonId, pairs) {
+    const activePanel = document.getElementById(activePanelId);
+    const shouldOpen = !activePanel.classList.contains('is-open');
+
+    pairs.forEach(({ panelId, buttonId }) => {
+      const panel = document.getElementById(panelId);
+      if (!panel) {
+        return;
+      }
+      panel.classList.toggle('is-open', shouldOpen && panelId === activePanelId);
+      if (buttonId) {
+        syncPanelButton(panelId, buttonId);
+      }
+    });
+
+    if (shouldOpen && activePanelId === 'reflectionsPanelCisza') {
+      drawCiszaReflection();
+    }
+    if (shouldOpen && activePanelId === 'aforyzmyPanelSciezki') {
+      drawSciezkiAforyzm();
+    }
+  }
+
+  function toggleEsPanel() {
+    toggleExclusivePanels('esPanelCisza', 'btnEsPanelCisza', [
+      { panelId: 'esPanelCisza', buttonId: 'btnEsPanelCisza' },
+      { panelId: 'reflectionsPanelCisza', buttonId: 'btnReflectionsCisza' }
+    ]);
+  }
+
+  function toggleCiszaReflections() {
+    toggleExclusivePanels('reflectionsPanelCisza', 'btnReflectionsCisza', [
+      { panelId: 'esPanelCisza', buttonId: 'btnEsPanelCisza' },
+      { panelId: 'reflectionsPanelCisza', buttonId: 'btnReflectionsCisza' }
+    ]);
+  }
+
+  function toggleSciezkiAforyzmy() {
+    toggleExclusivePanels('aforyzmyPanelSciezki', 'btnAforyzmySciezki', [
+      { panelId: 'aforyzmyPanelSciezki', buttonId: 'btnAforyzmySciezki' }
+    ]);
+  }
+
+  function pickRandomFromList(list, lastIdx) {
+    if (!list.length) {
+      return { idx: -1, item: null };
+    }
+
+    let idx = Math.floor(Math.random() * list.length);
+    if (list.length > 1 && idx === lastIdx) {
+      idx = (idx + 1) % list.length;
+    }
+
+    return { idx, item: list[idx] };
+  }
+
+  function drawCiszaReflection() {
+    const target = document.getElementById('ciszaReflectionText');
+    if (!target) {
+      return;
+    }
+
+    const { idx, item } = pickRandomFromList(refleksjeCiszy, lastCiszaReflectionIdx);
+    if (!item) {
+      return;
+    }
+
+    lastCiszaReflectionIdx = idx;
+    target.innerHTML = item.replace(/\n/g, '<br>');
+  }
+
+  function drawSciezkiAforyzm() {
+    const target = document.getElementById('sciezkiAforyzmText');
+    if (!target) {
+      return;
+    }
+
+    const { idx, item } = pickRandomFromList(aforyzmySciezek, lastSciezkiAforyzmIdx);
+    if (!item) {
+      return;
+    }
+
+    lastSciezkiAforyzmIdx = idx;
+    target.innerHTML = `
+      <span class="book-aforyzm-num">${item.num}</span>
+      <span class="book-aforyzm-title">${item.title}</span>
+      <div class="book-aforyzm-lines">${item.lines.map((line) => `<span>${line}</span>`).join('')}</div>
+    `;
   }
 
   // OPINIE CZYTELNIKÓW I SŁUCHACZY
