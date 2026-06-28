@@ -157,7 +157,7 @@
   .nav-links { display: flex; gap: 1.5rem; list-style: none; }
   .nav-links a {
     font-family: 'Jost', sans-serif;
-    font-size: 0.67rem; font-weight: 400;
+    font-size: 0.71rem; font-weight: 400;
     letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--ink-light); text-decoration: none;
     transition: color 0.3s; white-space: nowrap;
@@ -173,7 +173,9 @@
   }
 
   /* SHARED */
-  section { padding: 7rem 0; transition: var(--theme-transition); }
+  section { padding: 7rem 0; transition: var(--theme-transition); position: relative; }
+  section + section { border-top: 1px solid rgba(160,123,58,0.12); }
+  [data-theme="dark"] section + section { border-top-color: rgba(201,168,104,0.12); }
   .container { max-width: 1180px; margin: 0 auto; padding: 0 4rem; }
   .section-label {
     font-family: 'Jost', sans-serif;
@@ -488,7 +490,7 @@
   }
   .about-title {
     font-family: 'Jost', sans-serif;
-    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    font-size: 0.74rem; letter-spacing: 0.08em;
     color: var(--ink-light); margin-top: 0.3rem; transition: color 0.4s;
   }
   .about-right p {
@@ -710,19 +712,19 @@
     font-size: clamp(1.22rem, 2vw, 1.52rem);
     font-style: italic;
     line-height: 1.88;
-    color: var(--cream);
+    color: #F7F3EC;
     margin: 0 auto 1.35rem;
     max-width: 760px;
     transition: color 0.4s, opacity 0.25s ease;
     white-space: pre-line;
   }
+  [data-theme="dark"] .review-quote-text { color: #D5CBBA; }
   .review-signature {
-    margin: 0 auto 1.8rem;
-    max-width: fit-content;
+    margin: 0 auto 1.55rem;
+    max-width: 100%;
     padding: 0;
     border: none;
     background: transparent;
-    transition: var(--theme-transition);
   }
   .review-signature::before,
   .review-signature::after {
@@ -731,14 +733,15 @@
   .review-quote-name {
     display: block;
     font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(201,168,104,0.66);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: none;
+    color: rgba(247,243,236,0.72);
     font-style: normal;
     margin-bottom: 0;
     transition: color 0.4s, opacity 0.25s ease;
   }
+  [data-theme="dark"] .review-quote-name { color: rgba(213,203,186,0.82); }
   .reviews-actions {
     display: flex;
     justify-content: center;
@@ -760,6 +763,7 @@
     border-color: var(--gold-light);
     color: #F7F3EC;
   }
+  [data-theme="dark"] .reviews-next-btn:hover { color: #D5CBBA; }
 
   /* ========================
      KSIĄŻKI
@@ -774,7 +778,7 @@
   .books-subtitle {
     margin-top: 0.9rem;
     font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--gold);
@@ -948,6 +952,11 @@
   }
   .book-title em { font-style: italic; color: var(--gold); }
   .book-desc { font-weight: 300; color: var(--ink-mid); max-width: 680px; line-height: 1.75; font-size: 0.95rem; transition: color 0.4s; }
+  .book-desc,
+  .book-es-text p,
+  .book-thought-kicker,
+  .catalog-intro,
+  .catalog-note { letter-spacing: 0.002em; }
   .book-desc p { margin-bottom: 1rem; }
   .book-desc p:last-child { margin-bottom: 0; }
   .book-status {
@@ -1103,8 +1112,11 @@
   }
   .book-aforyzm-num {
     display: block;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.45rem;
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 0.9rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     line-height: 1;
     color: var(--gold);
     margin-bottom: 0.55rem;
@@ -1278,7 +1290,7 @@
   }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; margin-bottom: 1.5rem; }
   .footer-brand-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.08em; color: var(--cream); margin-bottom: 1rem; transition: color 0.4s; }
-  .footer-brand-desc { font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.05em; color: var(--footer-text); line-height: 1.7; max-width: 260px; transition: color 0.4s; }
+  .footer-brand-desc { font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.03em; color: var(--footer-text); line-height: 1.72; max-width: 320px; transition: color 0.4s; }
   .footer-heading { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.25rem; }
   .footer-links { list-style: none; }
   .footer-links li { margin-bottom: 0.6rem; }
@@ -1330,13 +1342,39 @@
   }
 
 
+  .sentencja-aforyzm-num {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-style: normal;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .sentencja-aforyzm-title {
+    display: block;
+    margin-bottom: 0.85rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.16rem;
+    font-style: normal;
+    color: #F7F3EC;
+  }
+  [data-theme="dark"] .sentencja-aforyzm-title { color: #F0EAE0; }
+  .sentencja-aforyzm-lines {
+    display: block;
+  }
+  .sentencja-aforyzm-lines span {
+    display: block;
+  }
+
   /* ========================
      RESPONSIVE
   ======================== */
   @media (max-width: 1100px) {
     nav { padding: 1.1rem 2rem; }
     .nav-links { gap: 1.1rem; }
-    .nav-links a { font-size: 0.62rem; letter-spacing: 0.07em; }
+    .nav-links a { font-size: 0.66rem; letter-spacing: 0.07em; }
   }
   @media (max-width: 900px) {
     .nav-links { display: none !important; }
@@ -1562,8 +1600,8 @@
 <section class="books-section" id="droga-ciszy">
   <div class="container">
     <div class="books-intro fade-in">
-      <h2 class="section-title">Droga<br><em>Ciszy</em></h2>
-      <p class="books-subtitle">Pięć ksiąg jednej drogi</p>
+      <h2 class="section-title">Pięć książek<br><em>jednej drogi</em></h2>
+      <p class="books-subtitle">Droga Ciszy</p>
       <div class="books-showcase">
         <a href="#book-cisza" class="books-showcase-item" aria-label="Przejdź do książki Cisza. Esencja naszego umysłu">
           <div class="books-showcase-cover">
@@ -1884,7 +1922,7 @@
         </div>
         <div class="about-name-block">
           <p class="about-name">Ryszard Klein</p>
-          <p class="about-title">pisarz · muzyk · autor refleksji o człowieku</p>
+          <p class="about-title">Nauczyciel. Artysta. Autor cyklu książek o ludzkim umyśle i drodze do wolności.</p>
         </div>
       </div>
       <div class="about-right">
@@ -2053,7 +2091,7 @@
     <div class="footer-grid">
       <div>
         <p class="footer-brand-name">Ryszard Klein</p>
-        <p class="footer-brand-desc">Pisarz, muzyk, refleksja nad człowiekiem, umysłem i drogą do wewnętrznej wolności. Cykl „Droga Ciszy".</p>
+        <p class="footer-brand-desc">Nauczyciel. Artysta. Autor cyklu książek o ludzkim umyśle i drodze do wolności.</p>
         <div class="share-block footer-share" data-share-context="page">
           <p class="share-heading">Udostępnij stronę</p>
           <div class="share-actions">
@@ -2336,9 +2374,21 @@
       currentFeaturedEntry = entry;
       labelEl.textContent = entry.kind;
       attrEl.textContent = entry.source;
-      el.innerHTML = entry.text.replace(/\n/g, '<br>');
+      el.innerHTML = renderFeaturedEntry(entry);
       el.classList.remove('fading');
     }, 300);
+  }
+
+  function renderFeaturedEntry(entry) {
+    if (entry.category === 'aforyzm') {
+      const [num = '', title = '', ...lines] = entry.text.split('\n');
+      return `
+        <span class="sentencja-aforyzm-num">${num}</span>
+        <span class="sentencja-aforyzm-title">${title}</span>
+        <span class="sentencja-aforyzm-lines">${lines.map((line) => `<span>${line}</span>`).join('')}</span>
+      `;
+    }
+    return entry.text.replace(/\n/g, '<br>');
   }
 
   losujSentencje();

@@ -81,7 +81,7 @@
   .nav-links { display: flex; gap: 1.5rem; list-style: none; }
   .nav-links a {
     font-family: 'Jost', sans-serif;
-    font-size: 0.67rem; font-weight: 400;
+    font-size: 0.71rem; font-weight: 400;
     letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--ink-light); text-decoration: none;
     transition: color 0.3s; white-space: nowrap;
@@ -143,6 +143,10 @@
     content: ''; height: 1px; width: 40px; background: var(--gold-light);
   }
 
+  section { position: relative; }
+  section + section { border-top: 1px solid rgba(160,123,58,0.12); }
+  [data-theme="dark"] section + section { border-top-color: rgba(201,168,104,0.12); }
+
   /* ── CATALOG ── */
   .catalog-section {
     background: var(--white); padding: 6rem 0 5rem;
@@ -157,7 +161,7 @@
   .catalog-heading em { font-style: italic; color: var(--gold); }
   .catalog-intro {
     font-family: 'Jost', sans-serif;
-    font-size: 0.88rem; color: var(--ink-light);
+    font-size: 0.92rem; color: var(--ink-light);
     line-height: 1.7; margin-bottom: 1rem; max-width: 620px;
     transition: color 0.4s;
   }
@@ -165,7 +169,7 @@
     max-width: 700px;
     margin-bottom: 3rem;
     font-family: 'Jost', sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.86rem;
     line-height: 1.7;
     color: var(--ink-mid);
   }
@@ -738,7 +742,7 @@
   }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; margin-bottom: 1.5rem; }
   .footer-brand-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.08em; color: #F7F3EC; margin-bottom: 1rem; }
-  .footer-brand-desc { font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.05em; color: rgba(247,243,236,0.45); line-height: 1.7; max-width: 260px; }
+  .footer-brand-desc { font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.03em; color: rgba(247,243,236,0.52); line-height: 1.72; max-width: 320px; }
   .footer-heading { font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 1.25rem; }
   .footer-links { list-style: none; }
   .footer-links li { margin-bottom: 0.6rem; }
@@ -834,7 +838,7 @@
     <p class="section-label">Dostępne tytuły</p>
     <h2 class="catalog-heading">Wybierz <em>tytuł i format</em></h2>
     <p class="catalog-intro">Wybierz książkę, format i język przekładu, a potem dodaj ją do koszyka. Jeśli wolisz prostszy kontakt, zadzwoń lub wyślij SMS — porozmawiamy i ustalimy szczegóły.</p>
-    <p class="catalog-note">Książki »Spojrzenie Boga« oraz »Bliźniacze Dusze« dostępne są jedynie przez <a href="https://www.kos.com.pl/pl/searchquery/Ryszard+Klein/1/phot/5?" target="_blank" rel="noopener">Wydawnictwo KOS</a>.</p>
+    <p class="catalog-note">Książki »Jam jest« oraz »Spojrzenie Boga« dostępne są jedynie w <a href="https://www.kos.com.pl/pl/searchquery/Ryszard+Klein/1/phot/5?" target="_blank" rel="noopener">Wydawnictwie KOS</a>.</p>
 
     <div class="catalog-list" id="catalogList"></div>
   </div>
@@ -1034,7 +1038,7 @@
     <div class="footer-grid">
       <div>
         <p class="footer-brand-name">Ryszard Klein</p>
-        <p class="footer-brand-desc">Pisarz, muzyk, refleksja nad człowiekiem, umysłem i drogą do wewnętrznej wolności. Cykl „Droga Ciszy".</p>
+        <p class="footer-brand-desc">Nauczyciel. Artysta. Autor cyklu książek o ludzkim umyśle i drodze do wolności.</p>
       </div>
       <div>
         <p class="footer-heading">Kontakt</p>
