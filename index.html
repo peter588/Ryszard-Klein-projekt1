@@ -883,14 +883,42 @@
     color: var(--gold);
   }
   .book-item {
-    display: grid; grid-template-columns: 92px 186px 1fr;
-    gap: 3rem; padding: 2.7rem 0;
-    border-top: 1px solid var(--mist); transition: border-color 0.4s;
+    position: relative;
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 2.4rem;
+    max-width: 980px;
+    margin: 0 auto 2rem;
+    padding: 2.35rem;
+    border: 1px solid rgba(160,123,58,0.16);
+    background:
+      linear-gradient(180deg, rgba(253,250,245,0.98), rgba(247,243,236,0.94)),
+      url("images/premium-line-pattern.svg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 18px 42px rgba(28,25,20,0.06);
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease, background 0.4s ease;
     scroll-margin-top: 100px;
   }
-  .book-item:last-child { border-bottom: 1px solid var(--mist); }
-  .book-item:hover .book-number { color: var(--gold); }
-  .book-cover { align-self: start; position: relative; }
+  .book-item:last-child { margin-bottom: 0; }
+  .book-item:hover {
+    border-color: rgba(160,123,58,0.28);
+    box-shadow: 0 24px 52px rgba(28,25,20,0.1);
+    transform: translateY(-3px);
+  }
+  [data-theme="dark"] .book-item {
+    background:
+      linear-gradient(180deg, rgba(34,29,25,0.96), rgba(25,21,18,0.94)),
+      url("images/premium-line-pattern-dark.svg");
+    border-color: rgba(201,168,104,0.16);
+    box-shadow: 0 24px 56px rgba(0,0,0,0.2);
+  }
+  [data-theme="dark"] .book-item:hover {
+    border-color: rgba(201,168,104,0.28);
+    box-shadow: 0 28px 64px rgba(0,0,0,0.28);
+  }
+  .book-item:hover .book-number { color: var(--gold); opacity: 0.88; }
+  .book-cover { align-self: start; position: relative; grid-column: 1; }
   .book-cover img {
     width: 100%; display: block;
     mix-blend-mode: multiply;
@@ -915,10 +943,25 @@
     color: var(--mist);
   }
   .book-number {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 4.4rem; font-weight: 300;
-    color: var(--book-num-color); line-height: 1;
-    transition: color 0.3s; padding-top: 0.2rem;
+    position: absolute;
+    top: 1.55rem;
+    right: 1.7rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.55;
+    line-height: 1;
+    transition: color 0.3s, opacity 0.3s;
+  }
+  .book-content {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
   }
   .book-cycle-badge {
     display: inline-block; font-family: 'Jost', sans-serif;
@@ -947,11 +990,20 @@
   }
   .book-title {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.7rem; font-weight: 400; color: var(--ink);
-    line-height: 1.25; margin-bottom: 1rem; transition: color 0.4s;
+    font-size: clamp(1.95rem, 3vw, 2.35rem); font-weight: 400; color: var(--ink);
+    line-height: 1.16; margin-bottom: 1rem; transition: color 0.4s;
   }
   .book-title em { font-style: italic; color: var(--gold); }
-  .book-desc { font-weight: 300; color: var(--ink-mid); max-width: 680px; line-height: 1.75; font-size: 0.95rem; transition: color 0.4s; }
+  .book-desc {
+    width: 100%;
+    max-width: 720px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.82;
+    font-size: 0.98rem;
+    text-align: left;
+    transition: color 0.4s;
+  }
   .book-desc,
   .book-es-text p,
   .book-thought-kicker,
@@ -1019,6 +1071,8 @@
   .book-thought-panel {
     display: none;
     margin-top: 2rem;
+    width: 100%;
+    max-width: 100%;
     padding: clamp(1.45rem, 3vw, 2.35rem);
     border: 1px solid rgba(160,123,58,0.18);
     background:
@@ -1048,16 +1102,18 @@
     margin-bottom: 0.8rem;
   }
   .book-thought-kicker {
-    max-width: 720px;
+    max-width: 760px;
     font-family: 'Jost', sans-serif;
     font-size: 0.82rem;
     line-height: 1.8;
     color: var(--ink-light);
     margin: 1rem 0 1.4rem;
+    text-align: left;
   }
   .book-thought-card {
     border-top: 1px solid rgba(160,123,58,0.16);
     padding-top: 1.45rem;
+    width: 100%;
   }
   [data-theme="dark"] .book-thought-card {
     border-top-color: rgba(201,168,104,0.16);
@@ -1069,6 +1125,7 @@
     color: var(--ink);
     font-style: italic;
     max-width: 760px;
+    text-align: left;
   }
   .book-thought-text br + br {
     display: block;
@@ -1082,6 +1139,7 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-light);
+    text-align: left;
   }
   .book-thought-actions {
     display: flex;
@@ -1143,6 +1201,8 @@
   .book-es-panel {
     display: none;
     margin-top: 2rem;
+    width: 100%;
+    max-width: 100%;
     padding: clamp(1.5rem, 3vw, 2.5rem);
     border: 1px solid rgba(160,123,58,0.18);
     background:
@@ -1168,6 +1228,7 @@
     margin-bottom: 1.75rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid rgba(160,123,58,0.18);
+    text-align: left;
   }
   .book-es-overline {
     font-family: 'Jost', sans-serif;
@@ -1178,8 +1239,8 @@
     margin-bottom: 0.85rem;
   }
   .book-es-panel .book-title {
-    font-size: clamp(2rem, 3.8vw, 3rem);
-    line-height: 0.95;
+    font-size: clamp(1.9rem, 3.3vw, 2.55rem);
+    line-height: 1.04;
     margin-bottom: 0.9rem;
   }
   .book-es-kicker {
@@ -1192,24 +1253,36 @@
   }
   .book-es-layout {
     display: grid;
-    grid-template-columns: minmax(220px, 280px) 1fr;
-    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
     align-items: start;
   }
   .book-es-side {
     display: grid;
     gap: 1rem;
+    justify-items: start;
   }
   .book-es-covers { display: flex; gap: 1rem; margin-bottom: 0; flex-wrap: wrap; align-items: flex-start; }
   .book-es-covers img { max-width: 100%; width: 260px; height: auto; display: block; filter: drop-shadow(-8px 12px 24px rgba(28,25,20,0.22)); }
-  .book-es-text p { font-family: 'Jost', sans-serif; font-size: 0.87rem; line-height: 1.78; color: var(--ink-light); margin-bottom: 0.9rem; transition: color 0.4s; }
+  .book-es-main {
+    width: 100%;
+    max-width: 760px;
+  }
+  .book-es-text p {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--ink-light);
+    margin-bottom: 0.9rem;
+    text-align: left;
+    transition: color 0.4s;
+  }
   .book-es-text p:last-child { margin-bottom: 0; }
-  .book-es-video { margin-top: 1.75rem; aspect-ratio: 16/9; border-radius: 2px; overflow: hidden; box-shadow: 0 12px 30px rgba(28,25,20,0.14); }
+  .book-es-video { margin-top: 1.75rem; width: 100%; aspect-ratio: 16/9; border-radius: 2px; overflow: hidden; box-shadow: 0 12px 30px rgba(28,25,20,0.14); }
   .book-es-video iframe { width: 100%; height: 100%; border: none; }
-  .book-es-baner { width: 100%; display: block; margin: 1.75rem 0; }
+  .book-es-baner { width: 100%; max-width: 760px; display: block; margin: 1.75rem 0; }
   @media (max-width: 840px) {
     .book-es-layout { grid-template-columns: 1fr; }
-    .book-es-side { order: -1; }
     .book-es-panel .book-title { font-size: clamp(1.7rem, 9vw, 2.45rem); }
   }
 
@@ -1398,8 +1471,16 @@
     .about-portrait-img { width: 100%; max-width: 300px; }
     .about-portrait-frame { width: fit-content; max-width: 100%; }
     .books-showcase { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .book-item { grid-template-columns: 58px 132px 1fr; gap: 1.7rem; }
-    .book-number { font-size: 2.5rem; }
+    .book-item {
+      grid-template-columns: 148px minmax(0, 1fr);
+      gap: 1.6rem;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .book-number {
+      top: 1.25rem;
+      right: 1.35rem;
+    }
 
     .media-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 1.25rem; }
@@ -1420,17 +1501,16 @@
 
     /* Książki — czytelny układ mobilny, bez dużej cyfry */
     .book-item {
-      display: grid;
-      grid-template-columns: minmax(148px, 164px) minmax(0, 1fr);
-      justify-content: start;
-      align-items: start;
-      gap: 0.9rem 1rem;
-      padding: 2rem 0;
+      grid-template-columns: 1fr;
+      gap: 1.35rem;
+      padding: 1.55rem;
+      margin-bottom: 1.15rem;
     }
     .book-number {
       display: none;
     }
     .book-cover {
+      grid-column: auto;
       width: 100%;
       max-width: 164px;
       justify-self: start;
@@ -1438,7 +1518,8 @@
     }
     .book-cover img { width: 100%; }
     .book-content {
-      width: auto;
+      grid-column: auto;
+      width: 100%;
       min-width: 0;
     }
     .book-cta-link {
