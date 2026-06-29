@@ -100,9 +100,20 @@
     .nav-hamburger { display: flex !important; }
   }
   @media(max-width: 520px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
-</style>
+ </style>
+<link rel="stylesheet" href="site-overrides.css">
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  if (window.location.hostname && !/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
+    const analyticsScript = document.createElement('script');
+    analyticsScript.defer = true;
+    analyticsScript.src = '/_vercel/insights/script.js';
+    document.head.appendChild(analyticsScript);
+  }
+</script>
+<script src="site-nav.js" defer></script>
 </head>
-<body>
+<body data-nav-section="ksiazki">
   <nav>
     <a href="index.html" class="nav-logo">Ryszard Klein</a>
     <div class="nav-right">

@@ -1,0 +1,255 @@
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-size: 19px !important;
+  line-height: 1.82 !important;
+}
+
+:root,
+[data-theme="light"] {
+  --ink-mid: #312b24 !important;
+  --ink-light: #584f43 !important;
+  --footer-text: rgba(247, 243, 236, 0.62) !important;
+  --footer-link: rgba(247, 243, 236, 0.78) !important;
+  --footer-copy: rgba(247, 243, 236, 0.48) !important;
+}
+
+[data-theme="dark"] {
+  --ink-mid: #e2d8c9 !important;
+  --ink-light: #bbb09f !important;
+  --footer-text: rgba(247, 245, 240, 0.82) !important;
+  --footer-link: rgba(247, 245, 240, 0.9) !important;
+  --footer-copy: rgba(247, 245, 240, 0.62) !important;
+}
+
+.nav-links a {
+  font-size: 0.73rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  position: relative;
+  padding-bottom: 0.18rem;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.08rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.68;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.24s ease, opacity 0.24s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.is-current::after,
+.nav-links a.is-active::after {
+  transform: scaleX(1);
+}
+
+.nav-links a.is-current,
+.nav-links a.is-active {
+  color: var(--gold) !important;
+}
+
+.page-eyebrow,
+.section-label,
+.sentencja-label,
+.reviews-label,
+.books-subtitle,
+.book-cycle-badge,
+.book-status,
+.book-thought-overline,
+.book-es-overline,
+.catalog-badge,
+.page-eyebrow,
+.contact-label,
+.footer-heading {
+  font-weight: 500 !important;
+}
+
+.section-title,
+.page-title,
+.catalog-heading,
+.catalog-title,
+.book-title,
+.cart-card-title,
+.form-section-title {
+  font-weight: 400 !important;
+  letter-spacing: 0.01em;
+}
+
+.home-tagline,
+.about-title,
+.footer-brand-desc,
+.catalog-intro,
+.catalog-note,
+.book-desc,
+.book-es-text p,
+.book-thought-kicker,
+.book-thought-source,
+.intro-text,
+.collapsible-body,
+.bio-prose p,
+.contact-text p,
+.home-invitation-inner p,
+.media-card-desc,
+.partner-desc,
+.cart-empty-text,
+.cart-row-title,
+.cart-row-variant,
+.form-helper,
+.contact-value,
+.form-input,
+.form-textarea,
+.form-select {
+  color: var(--ink-mid) !important;
+}
+
+.home-invitation-inner p,
+.about-right p,
+.book-desc,
+.book-es-text p,
+.book-thought-kicker,
+.catalog-intro,
+.catalog-note,
+.collapsible-body,
+.bio-prose p,
+.contact-text p,
+.media-card-desc,
+.partner-desc,
+.form-input,
+.form-textarea,
+.form-select {
+  font-size: clamp(1rem, 0.18vw + 0.97rem, 1.06rem) !important;
+  line-height: 1.84 !important;
+}
+
+.sentencja-text,
+.review-quote-text {
+  font-size: clamp(1.4rem, 2vw, 1.7rem) !important;
+  line-height: 1.72 !important;
+}
+
+.sentencja-attr,
+.review-quote-name,
+.book-thought-source,
+.book-es-kicker,
+.catalog-note,
+.format-delivery-note,
+.footer-copy {
+  font-size: 0.76rem !important;
+}
+
+.book-title {
+  font-size: clamp(2rem, 3vw, 2.45rem) !important;
+}
+
+.book-es-panel .book-title,
+.book-thought-panel .book-title {
+  font-size: clamp(1.95rem, 3vw, 2.5rem) !important;
+}
+
+.book-aforyzm-title,
+.sentencja-aforyzm-title {
+  font-size: 1.2rem !important;
+}
+
+.book-aforyzm-lines,
+.book-thought-text {
+  font-size: clamp(1.22rem, 1.9vw, 1.42rem) !important;
+  line-height: 1.78 !important;
+}
+
+.reviews-card,
+.sentencja-block {
+  box-shadow: 0 18px 44px rgba(28, 25, 20, 0.08);
+}
+
+.review-quote-name {
+  color: rgba(247, 243, 236, 0.82) !important;
+}
+
+[data-theme="dark"] .review-quote-name {
+  color: rgba(240, 234, 224, 0.86) !important;
+}
+
+.reviews-next-btn,
+.sentencja-btn,
+.book-cta-link,
+.book-es-btn,
+.book-thought-btn,
+.about-read-more-btn,
+.collapsible-toggle,
+.add-btn,
+.submit-btn,
+.fallback-btn,
+.form-submit {
+  font-weight: 500 !important;
+}
+
+.footer-brand-desc,
+.footer-links a,
+.footer-copy {
+  color: var(--footer-text) !important;
+}
+
+.footer-links a {
+  font-size: 0.82rem !important;
+}
+
+.footer-copy {
+  font-size: 0.72rem !important;
+}
+
+@media (max-width: 1100px) {
+  .nav-links a {
+    font-size: 0.68rem !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 18px !important;
+    line-height: 1.78 !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .section-title,
+  .page-title,
+  .catalog-heading,
+  .book-title {
+    letter-spacing: 0;
+  }
+
+  .sentencja-text,
+  .review-quote-text {
+    font-size: 1.34rem !important;
+  }
+
+  .home-invitation-inner p,
+  .about-right p,
+  .book-desc,
+  .book-es-text p,
+  .book-thought-kicker,
+  .catalog-intro,
+  .catalog-note,
+  .collapsible-body,
+  .bio-prose p,
+  .contact-text p,
+  .media-card-desc,
+  .partner-desc,
+  .form-input,
+  .form-textarea,
+  .form-select {
+    font-size: 0.98rem !important;
+  }
+}
