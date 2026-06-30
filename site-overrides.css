@@ -5,22 +5,27 @@ html {
 }
 
 body {
-  font-size: 19px !important;
-  line-height: 1.82 !important;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif !important;
+  font-size: 20px !important;
+  line-height: 1.84 !important;
+  font-weight: 400 !important;
+  color: var(--ink) !important;
 }
 
 :root,
 [data-theme="light"] {
+  --ink: #18130e !important;
   --ink-mid: #312b24 !important;
-  --ink-light: #584f43 !important;
+  --ink-light: #4f463b !important;
   --footer-text: rgba(247, 243, 236, 0.62) !important;
   --footer-link: rgba(247, 243, 236, 0.78) !important;
   --footer-copy: rgba(247, 243, 236, 0.48) !important;
 }
 
 [data-theme="dark"] {
+  --ink: #f2ebdf !important;
   --ink-mid: #e2d8c9 !important;
-  --ink-light: #bbb09f !important;
+  --ink-light: #c6bcad !important;
   --footer-text: rgba(247, 245, 240, 0.82) !important;
   --footer-link: rgba(247, 245, 240, 0.9) !important;
   --footer-copy: rgba(247, 245, 240, 0.62) !important;
@@ -86,6 +91,25 @@ body {
   letter-spacing: 0.01em;
 }
 
+.books-overline {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.26em !important;
+  text-transform: none !important;
+  color: var(--gold) !important;
+  margin: 0 0 1rem !important;
+}
+
+.books-title {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(2.85rem, 5vw, 4.35rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0.01em !important;
+  color: var(--ink) !important;
+  margin: 0 !important;
+}
+
 .home-tagline,
 .about-title,
 .footer-brand-desc,
@@ -110,7 +134,9 @@ body {
 .form-input,
 .form-textarea,
 .form-select {
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif !important;
   color: var(--ink-mid) !important;
+  font-weight: 400 !important;
 }
 
 .home-invitation-inner p,
@@ -128,14 +154,24 @@ body {
 .form-input,
 .form-textarea,
 .form-select {
-  font-size: clamp(1rem, 0.18vw + 0.97rem, 1.06rem) !important;
-  line-height: 1.84 !important;
+  font-size: clamp(1.04rem, 0.26vw + 1rem, 1.14rem) !important;
+  line-height: 1.9 !important;
+}
+
+.books-intro > p,
+.book-desc p,
+.book-es-text p,
+.collapsible-body p,
+.bio-prose p,
+.contact-text p {
+  max-width: 68ch;
 }
 
 .sentencja-text,
 .review-quote-text {
-  font-size: clamp(1.4rem, 2vw, 1.7rem) !important;
-  line-height: 1.72 !important;
+  font-size: clamp(1.46rem, 2vw, 1.78rem) !important;
+  line-height: 1.74 !important;
+  font-weight: 400 !important;
 }
 
 .sentencja-attr,
@@ -168,17 +204,37 @@ body {
   line-height: 1.78 !important;
 }
 
+.reviews-card blockquote {
+  margin: 0;
+}
+
+.review-signature {
+  width: min(100%, 640px) !important;
+  margin: 0.9rem auto 0.55rem !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  text-align: right !important;
+}
+
 .reviews-card,
 .sentencja-block {
   box-shadow: 0 18px 44px rgba(28, 25, 20, 0.08);
 }
 
 .review-quote-name {
-  color: rgba(247, 243, 236, 0.82) !important;
+  display: inline-block !important;
+  color: rgba(247, 243, 236, 0.84) !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.1em !important;
+  padding-right: clamp(0rem, 1.2vw, 0.5rem);
 }
 
 [data-theme="dark"] .review-quote-name {
   color: rgba(240, 234, 224, 0.86) !important;
+}
+
+.reviews-actions {
+  margin-top: 0 !important;
 }
 
 .reviews-next-btn,
@@ -220,6 +276,20 @@ body {
     font-size: 18px !important;
     line-height: 1.78 !important;
   }
+
+  .books-title {
+    font-size: clamp(2.25rem, 8vw, 3rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  .books-overline {
+    font-size: 0.74rem !important;
+    letter-spacing: 0.22em !important;
+  }
+
+  .review-signature {
+    width: min(100%, 520px) !important;
+  }
 }
 
 @media (max-width: 580px) {
@@ -228,6 +298,29 @@ body {
   .catalog-heading,
   .book-title {
     letter-spacing: 0;
+  }
+
+  .sentencja-block .share-block {
+    align-items: center !important;
+  }
+
+  .sentencja-block .share-heading {
+    width: 100%;
+    text-align: center !important;
+  }
+
+  .sentencja-block .share-actions {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 40px));
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .sentencja-block .share-btn {
+    width: 40px !important;
+    height: 40px !important;
   }
 
   .sentencja-text,
@@ -250,6 +343,29 @@ body {
   .form-input,
   .form-textarea,
   .form-select {
-    font-size: 0.98rem !important;
+    font-size: 1rem !important;
+  }
+
+  .review-signature {
+    width: min(100%, 100%) !important;
+    margin-top: 0.8rem !important;
+    justify-content: flex-end !important;
+  }
+
+  .review-quote-name {
+    font-size: 0.76rem !important;
+    letter-spacing: 0.08em !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .sentencja-block .share-actions {
+    grid-template-columns: repeat(5, minmax(0, 38px));
+    gap: 0.38rem !important;
+  }
+
+  .sentencja-block .share-btn {
+    width: 38px !important;
+    height: 38px !important;
   }
 }
