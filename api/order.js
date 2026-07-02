@@ -1,8 +1,8 @@
 const ORDER_PRODUCT_CATALOG = {
   'cisza-druk-pl': { title: 'Cisza. Esencja naszego umysłu', variant: 'druk PL', price: 50, format: 'druk' },
-  'cisza-druk-es': { title: 'Cisza. Esencja naszego umysłu', variant: 'druk ES', price: 50, format: 'druk' },
+  'cisza-druk-es': { title: 'Cisza. Esencja naszego umysłu', variant: 'druk ES', price: 95, format: 'druk' },
   'cisza-ebook-pl': { title: 'Cisza. Esencja naszego umysłu', variant: 'e-book PL', price: 30, format: 'ebook' },
-  'cisza-ebook-es': { title: 'Cisza. Esencja naszego umysłu', variant: 'e-book ES', price: 30, format: 'ebook' },
+  'cisza-ebook-es': { title: 'Cisza. Esencja naszego umysłu', variant: 'e-book ES', price: 60, format: 'ebook' },
   'jamjest-ebook-pl': { title: 'Jam Jest', variant: 'e-book PL', price: 30, format: 'ebook' },
   'jamjest-ebook-en': { title: 'Jam Jest', variant: 'e-book EN', price: 30, format: 'ebook' },
   'sciezki-druk-pl': { title: 'Ścieżki spełnionego życia', variant: 'druk PL', price: 50, format: 'druk' },

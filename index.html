@@ -2021,7 +2021,40 @@
         <p class="fade-in fade-in-delay-2">Moje książki są zapisem tych poszukiwań. Powstały z życia, z doświadczeń, z pracy z ludźmi, z muzyki, z ciszy i z pytań, które przez wiele lat prowadziły mnie w głąb siebie.</p>
         <div class="about-btns-row">
           <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Więcej</button>
-          <a href="pasje.html" class="about-read-more-btn is-emphasis">Moje pasje</a>
+          <button type="button" class="about-read-more-btn is-emphasis" id="aboutPassionsBtn" data-label="Moje pasje" onclick="togglePasje()">Moje pasje</button>
+        </div>
+        <div class="about-inline-panel" id="aboutPassionsPanel">
+          <div class="about-divider">
+            <div class="about-divider-line"></div>
+            <span class="about-divider-ornament">◆</span>
+            <div class="about-divider-line"></div>
+          </div>
+          <div class="about-passions-grid">
+            <a href="pasje.html#malarstwo" class="about-passion-tile">
+              <img src="https://img.youtube.com/vi/8g50Tgd_IjE/hqdefault.jpg" alt="Moje pasje — malarstwo">
+              <span class="about-passion-overlay">
+                <span class="about-passion-kicker">Moje pasje</span>
+                <span class="about-passion-heading">Malarstwo</span>
+              </span>
+            </a>
+            <a href="pasje.html#muzyka" class="about-passion-tile">
+              <img src="https://img.youtube.com/vi/QMvWk9hQFHg/hqdefault.jpg" alt="Moje pasje — muzyka">
+              <span class="about-passion-overlay">
+                <span class="about-passion-kicker">Moje pasje</span>
+                <span class="about-passion-heading">Muzyka</span>
+              </span>
+            </a>
+            <a href="pasje.html#turystyka" class="about-passion-tile">
+              <img src="images/turystyka/IMG_1093.jpeg" alt="Moje pasje — filmy YouTube">
+              <span class="about-passion-overlay">
+                <span class="about-passion-kicker">Moje pasje</span>
+                <span class="about-passion-heading">Filmy YouTube</span>
+              </span>
+            </a>
+          </div>
+          <div class="about-inline-actions">
+            <button class="book-thought-btn" type="button" onclick="togglePasje()">Mniej</button>
+          </div>
         </div>
         <div class="about-full" id="aboutFull">
           <div class="about-divider">
@@ -2663,6 +2696,22 @@
     btn.textContent = full.classList.contains('expanded') ? 'Mniej' : 'Więcej';
     if (wasExpanded) {
       document.getElementById('o-mnie').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function togglePasje() {
+    const panel = document.getElementById('aboutPassionsPanel');
+    const btn = document.getElementById('aboutPassionsBtn');
+    if (!panel || !btn) {
+      return;
+    }
+
+    const isOpen = panel.classList.toggle('is-open');
+    btn.classList.toggle('is-active', isOpen);
+    btn.textContent = isOpen ? 'Mniej' : (btn.dataset.label || 'Moje pasje');
+
+    if (!isOpen) {
+      document.getElementById('o-mnie').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 

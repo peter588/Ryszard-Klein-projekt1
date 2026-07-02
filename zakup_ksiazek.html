@@ -279,6 +279,10 @@
   }
   .format-btn.is-active .format-btn-top { color: var(--gold); }
   .format-btn.is-active .format-btn-price { color: var(--gold); }
+  .format-btn[disabled] {
+    cursor: default;
+    opacity: 1;
+  }
 
   /* Add row */
   .catalog-add-row {
@@ -313,6 +317,7 @@
     transition: background 0.25s, color 0.25s, opacity 0.25s;
   }
   .add-btn:hover { opacity: 0.82; }
+  .add-btn-link { text-decoration: none; }
   .add-btn svg {
     width: 12px; height: 12px;
     stroke: currentColor; fill: none; stroke-width: 2;
@@ -1076,6 +1081,7 @@
   const PRICE_CISZA_ES_PRINT = 95;
   const PRICE_CISZA_ES_EBOOK = 60;
   const PRICE_SHIP  = 20;
+  const KOS_URL = 'https://www.kos.com.pl/pl/searchquery/Ryszard+Klein/1/phot/5?';
 
   const PRODUCTS = [
     {
@@ -1100,6 +1106,18 @@
       variants: [
         { id: 'jamjest-ebook-pl', label: 'E-book', lang: 'PL', price: PRICE_EBOOK, format: 'ebook' },
         { id: 'jamjest-ebook-en', label: 'E-book', lang: 'EN', price: PRICE_EBOOK, format: 'ebook' },
+      ],
+    },
+    {
+      slug: 'spojrzenie',
+      badge: 'Część III cyklu · Droga Ciszy',
+      title: 'Spojrzenie Boga.',
+      subtitle: 'Bliźniacze Dusze',
+      cover: 'images/books/spojrzenie_boga.webp',
+      externalUrl: KOS_URL,
+      externalLabel: 'Kup w Wydawnictwie KOS',
+      variants: [
+        { id: 'spojrzenie-druk-pl', label: 'Druk', lang: 'PL', price: PRICE_PRINT, format: 'druk' },
       ],
     },
     {
@@ -1243,8 +1261,11 @@
     listEl.innerHTML = PRODUCTS.map(p => {
       const sel = selections[p.slug];
       const activeV = p.variants.find(v => v.id === sel.variantId) || p.variants[0];
+      const isExternal = Boolean(p.externalUrl);
       const isEbook = activeV.format === 'ebook';
-      const deliveryNote = isEbook
+      const deliveryNote = isExternal
+        ? `<svg viewBox="0 0 24 24"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14.5a3.5 3.5 0 0 1 0 7H6"/></svg> Tytuł dostępny wyłącznie przez Wydawnictwo KOS`
+        : isEbook
         ? `<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.82-.82a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.49 16z"/></svg> Dostawa elektroniczna — bez kosztu wysyłki`
         : `<svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Wysyłka pocztowa po zaksięgowaniu płatności`;
 
@@ -1260,7 +1281,7 @@
             <div class="format-picker">
               ${p.variants.map(v => `
                 <button class="format-btn${v.id === sel.variantId ? ' is-active' : ''}"
-                  type="button" data-slug="${p.slug}" data-variant="${v.id}">
+                  type="button" data-slug="${p.slug}" data-variant="${v.id}"${isExternal ? ' disabled' : ''}>
                   <span class="format-btn-top">
                     ${v.format === 'druk' ? ICON_BOOK : ICON_TABLET}
                     ${escHtml(v.label)} · ${escHtml(v.lang)}
@@ -1271,16 +1292,23 @@
             </div>
 
             <div class="catalog-add-row">
-              <div class="qty-stepper">
-                <button type="button" data-slug="${p.slug}" data-delta="-1">−</button>
-                <span class="qty-stepper-value">${sel.qty}</span>
-                <button type="button" data-slug="${p.slug}" data-delta="1">+</button>
-              </div>
-              <button class="add-btn${sel.justAdded ? ' is-added' : ''}" type="button" data-slug="${p.slug}">
-                ${sel.justAdded
-                  ? 'Dodano ✓'
-                  : `Do koszyka <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`}
-              </button>
+              ${isExternal ? `
+                <a class="add-btn add-btn-link" href="${escHtml(p.externalUrl)}" target="_blank" rel="noopener">
+                  ${escHtml(p.externalLabel)}
+                  <svg viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>
+                </a>
+              ` : `
+                <div class="qty-stepper">
+                  <button type="button" data-slug="${p.slug}" data-delta="-1">−</button>
+                  <span class="qty-stepper-value">${sel.qty}</span>
+                  <button type="button" data-slug="${p.slug}" data-delta="1">+</button>
+                </div>
+                <button class="add-btn${sel.justAdded ? ' is-added' : ''}" type="button" data-slug="${p.slug}">
+                  ${sel.justAdded
+                    ? 'Dodano ✓'
+                    : `Do koszyka <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`}
+                </button>
+              `}
             </div>
             <p class="format-delivery-note">${deliveryNote}</p>
           </div>
@@ -1289,7 +1317,7 @@
     }).join('');
 
     /* variant select */
-    listEl.querySelectorAll('[data-variant]').forEach(btn => {
+    listEl.querySelectorAll('[data-variant]:not([disabled])').forEach(btn => {
       btn.addEventListener('click', () => {
         const slug = btn.getAttribute('data-slug');
         selections[slug].variantId = btn.getAttribute('data-variant');
