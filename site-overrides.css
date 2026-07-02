@@ -320,169 +320,9 @@ body {
   font-size: 0.72rem !important;
 }
 
-.book-thought-btn {
-  background: rgba(201, 168, 104, 0.16) !important;
-  color: var(--gold) !important;
-  border-color: rgba(160, 123, 58, 0.48) !important;
-}
-
-.book-thought-btn:hover {
-  background: rgba(201, 168, 104, 0.24) !important;
-  color: var(--gold) !important;
-  border-color: rgba(160, 123, 58, 0.64) !important;
-}
-
-.book-more-panel .book-es-kicker {
-  max-width: 62ch;
-  text-transform: none !important;
-  letter-spacing: 0.04em !important;
-  line-height: 1.75 !important;
-}
-
-.book-inline-section + .book-inline-section {
-  margin-top: 1.8rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(160, 123, 58, 0.14);
-}
-
-[data-theme="dark"] .book-inline-section + .book-inline-section {
-  border-top-color: rgba(201, 168, 104, 0.16);
-}
-
-.book-inline-title {
-  font-family: 'Jost', sans-serif !important;
-  font-size: 0.72rem !important;
-  letter-spacing: 0.22em !important;
-  text-transform: uppercase !important;
-  color: var(--gold) !important;
-  margin: 0 0 1rem !important;
-}
-
-.book-inline-poem {
-  display: flex;
-  flex-direction: column;
-  gap: 0.28rem;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.06rem, 1.8vw, 1.22rem);
-  line-height: 1.76;
-  color: var(--ink);
-  font-style: italic;
-}
-
-.book-inline-poem strong {
-  font-weight: 500;
-  color: var(--ink);
-}
-
-.book-inline-signature {
-  margin-top: 1rem !important;
-  font-family: 'Jost', sans-serif !important;
-  font-size: 0.72rem !important;
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase !important;
-  color: var(--ink-light) !important;
-}
-
-.book-inline-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.book-inline-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  padding: 0.7rem 1.05rem;
-  border: 1px solid rgba(160, 123, 58, 0.26);
-  background: rgba(201, 168, 104, 0.07);
-  color: var(--ink-mid);
-  text-decoration: none;
-  font-family: 'Jost', sans-serif;
-  font-size: 0.66rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  transition: border-color 0.24s ease, background 0.24s ease, color 0.24s ease, transform 0.24s ease;
-}
-
-.book-inline-link:hover {
-  color: var(--gold);
-  background: rgba(201, 168, 104, 0.14);
-  border-color: rgba(160, 123, 58, 0.56);
-  transform: translateY(-1px);
-}
-
-.book-inline-actions {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 2rem;
-  padding-top: 1.35rem;
-  border-top: 1px solid rgba(160, 123, 58, 0.16);
-}
-
-[data-theme="dark"] .book-inline-actions {
-  border-top-color: rgba(201, 168, 104, 0.18);
-}
-
-.about-read-more-btn.is-active {
-  background: rgba(201, 168, 104, 0.16) !important;
-  border-color: rgba(160, 123, 58, 0.56) !important;
-  color: var(--gold) !important;
-}
-
-.about-inline-panel {
-  display: none;
-  margin-top: 1.6rem;
-  padding-top: 2.4rem;
-  border-top: 1px solid var(--mist);
-}
-
-.about-inline-panel.is-open {
-  display: block;
-}
-
-.about-passions-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.2rem;
-}
-
-.about-passion-card {
-  padding: 1.25rem;
-  border: 1px solid rgba(160, 123, 58, 0.14);
-  background: rgba(253, 250, 245, 0.68);
-}
-
-[data-theme="dark"] .about-passion-card {
-  background: rgba(34, 29, 25, 0.54);
-  border-color: rgba(201, 168, 104, 0.16);
-}
-
-.about-passion-label {
-  font-family: 'Jost', sans-serif !important;
-  font-size: 0.62rem !important;
-  letter-spacing: 0.22em !important;
-  text-transform: uppercase !important;
-  color: var(--gold) !important;
-  margin: 0 0 0.6rem !important;
-}
-
-.about-passion-title {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: clamp(1.35rem, 2vw, 1.65rem) !important;
-  line-height: 1.2 !important;
-  color: var(--ink) !important;
-  margin: 0 0 1rem !important;
-}
-
 @media (max-width: 1100px) {
   .nav-links a {
     font-size: 0.76rem !important;
-  }
-
-  .about-passions-grid {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -509,10 +349,6 @@ body {
   .books-overline {
     font-size: 0.74rem !important;
     letter-spacing: 0.22em !important;
-  }
-
-  .book-inline-links {
-    gap: 0.6rem;
   }
 
   .review-signature {
@@ -549,11 +385,6 @@ body {
   .sentencja-block .share-btn {
     width: 40px !important;
     height: 40px !important;
-  }
-
-  .book-inline-link {
-    width: 100%;
-    justify-content: flex-start;
   }
 
   .sentencja-text,
