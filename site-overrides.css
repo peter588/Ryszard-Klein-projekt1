@@ -343,6 +343,15 @@ body {
   margin-top: 1.65rem;
 }
 
+.about-passions-frame {
+  display: block;
+  width: 100%;
+  min-height: 900px;
+  height: 900px;
+  border: 0;
+  background: transparent;
+}
+
 .about-passions-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -2029,29 +2029,13 @@
             <span class="about-divider-ornament">◆</span>
             <div class="about-divider-line"></div>
           </div>
-          <div class="about-passions-grid">
-            <a href="pasje.html#malarstwo" class="about-passion-tile">
-              <img src="https://img.youtube.com/vi/8g50Tgd_IjE/hqdefault.jpg" alt="Moje pasje — malarstwo">
-              <span class="about-passion-overlay">
-                <span class="about-passion-kicker">Moje pasje</span>
-                <span class="about-passion-heading">Malarstwo</span>
-              </span>
-            </a>
-            <a href="pasje.html#muzyka" class="about-passion-tile">
-              <img src="https://img.youtube.com/vi/QMvWk9hQFHg/hqdefault.jpg" alt="Moje pasje — muzyka">
-              <span class="about-passion-overlay">
-                <span class="about-passion-kicker">Moje pasje</span>
-                <span class="about-passion-heading">Muzyka</span>
-              </span>
-            </a>
-            <a href="pasje.html#turystyka" class="about-passion-tile">
-              <img src="images/turystyka/IMG_1093.jpeg" alt="Moje pasje — filmy YouTube">
-              <span class="about-passion-overlay">
-                <span class="about-passion-kicker">Moje pasje</span>
-                <span class="about-passion-heading">Filmy YouTube</span>
-              </span>
-            </a>
-          </div>
+          <iframe
+            class="about-passions-frame"
+            id="aboutPassionsFrame"
+            title="Moje pasje"
+            loading="lazy"
+            data-src="pasje.html">
+          </iframe>
           <div class="about-inline-actions">
             <button class="book-thought-btn" type="button" onclick="togglePasje()">Mniej</button>
           </div>
@@ -2710,8 +2694,102 @@
     btn.classList.toggle('is-active', isOpen);
     btn.textContent = isOpen ? 'Mniej' : (btn.dataset.label || 'Moje pasje');
 
+    if (isOpen) {
+      ensurePassionsFrameLoaded();
+    }
+
     if (!isOpen) {
       document.getElementById('o-mnie').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function styleEmbeddedPassionsFrame(frame) {
+    if (!frame || !frame.contentDocument) {
+      return;
+    }
+
+    const doc = frame.contentDocument;
+    if (!doc.head || !doc.body || doc.getElementById('rkEmbeddedPassionsStyle')) {
+      return;
+    }
+
+    const style = doc.createElement('style');
+    style.id = 'rkEmbeddedPassionsStyle';
+    style.textContent = `
+      html, body {
+        background: transparent !important;
+      }
+      body {
+        min-height: auto !important;
+        overflow: visible !important;
+      }
+      nav,
+      .page-masthead,
+      footer,
+      #ogrod {
+        display: none !important;
+      }
+      .container {
+        max-width: none !important;
+        padding: 0 !important;
+      }
+      .passion-section {
+        padding: 0 0 3.5rem !important;
+      }
+      .passion-section:last-of-type {
+        padding-bottom: 0 !important;
+      }
+    `;
+    doc.head.appendChild(style);
+  }
+
+  function syncPassionsFrameHeight() {
+    const frame = document.getElementById('aboutPassionsFrame');
+    if (!frame || !frame.contentDocument) {
+      return;
+    }
+
+    const doc = frame.contentDocument;
+    const nextHeight = Math.max(720, Math.ceil(doc.documentElement.scrollHeight || doc.body.scrollHeight || 0));
+    frame.style.height = `${nextHeight}px`;
+  }
+
+  function ensurePassionsFrameLoaded() {
+    const frame = document.getElementById('aboutPassionsFrame');
+    if (!frame) {
+      return;
+    }
+
+    if (frame.dataset.bound !== 'true') {
+      frame.dataset.bound = 'true';
+      frame.addEventListener('load', () => {
+        try {
+          styleEmbeddedPassionsFrame(frame);
+          syncPassionsFrameHeight();
+
+          if (!frame._rkResizeObserver && window.ResizeObserver && frame.contentDocument && frame.contentDocument.body) {
+            frame._rkResizeObserver = new ResizeObserver(() => syncPassionsFrameHeight());
+            frame._rkResizeObserver.observe(frame.contentDocument.body);
+          }
+
+          setTimeout(syncPassionsFrameHeight, 120);
+          setTimeout(syncPassionsFrameHeight, 500);
+        } catch (error) {
+          frame.style.height = '900px';
+        }
+      });
+    }
+
+    if (!frame.getAttribute('src')) {
+      frame.setAttribute('src', frame.dataset.src || 'pasje.html');
+      return;
+    }
+
+    try {
+      styleEmbeddedPassionsFrame(frame);
+      syncPassionsFrameHeight();
+    } catch (error) {
+      frame.style.height = '900px';
     }
   }
 
