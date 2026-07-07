@@ -1029,6 +1029,7 @@
     color: var(--ink-mid); text-decoration: none;
     background: transparent;
     border: 1px solid rgba(160,123,58,0.3);
+    cursor: pointer;
     padding: 0.78rem 1.45rem;
     transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
   }
@@ -1220,6 +1221,14 @@
     box-shadow: 0 24px 60px rgba(0,0,0,0.22);
   }
   .book-es-panel.is-open { display: block; animation: panelReveal 0.35s ease; }
+  .book-more-frame {
+    display: block;
+    width: 100%;
+    min-height: 360px;
+    height: 360px;
+    border: 0;
+    background: transparent;
+  }
   @keyframes panelReveal {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1804,12 +1813,24 @@
         </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępność: u autora: druk PL/ES, oraz e-booki PL/ES.</p>
         <div class="book-cta-row">
-          <a href="cisza.html" class="book-cta-link">
+          <button type="button" class="book-cta-link" id="btnMoreCisza" data-label="Więcej" onclick="toggleCiszaMore()">
             Więcej
             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          </button>
           <button class="book-es-btn" id="btnEsPanelCisza" data-label="Przekład hiszpański" onclick="toggleEsPanel()">Przekład hiszpański</button>
           <button class="book-es-btn" id="btnReflectionsCisza" data-label="Refleksje" onclick="toggleCiszaReflections()">Refleksje</button>
+        </div>
+        <div class="book-es-panel book-more-panel" id="morePanelCisza">
+          <iframe
+            class="book-more-frame"
+            id="frameMoreCisza"
+            title="Cisza. Esencja naszego umysłu — rozwinięty opis"
+            loading="lazy"
+            data-src="cisza.html">
+          </iframe>
+          <div class="book-thought-actions">
+            <button class="book-thought-btn" type="button" onclick="toggleCiszaMore()">Mniej</button>
+          </div>
         </div>
         <div class="book-es-panel" id="esPanelCisza">
           <div class="book-es-hero">
@@ -1867,12 +1888,24 @@
         </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępność: u autora: e-booki PL/EN, druk: KOS.</p>
         <div class="book-cta-row">
-          <a href="jam-jest.html" class="book-cta-link">
+          <button type="button" class="book-cta-link" id="btnMoreJamJest" data-label="Więcej" onclick="toggleJamJestMore()">
             Więcej
             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          </button>
           <button class="book-es-btn" id="btnEsPanelJamJestEN" data-label="Przekład angielski" onclick="toggleJamJestEN()">Przekład angielski</button>
           <button class="book-es-btn" id="btnEsPanelJamJestAudio" data-label="Audiobook" onclick="toggleJamJestAudio()">Audiobook</button>
+        </div>
+        <div class="book-es-panel book-more-panel" id="morePanelJamJest">
+          <iframe
+            class="book-more-frame"
+            id="frameMoreJamJest"
+            title="Jam Jest — rozwinięty opis"
+            loading="lazy"
+            data-src="jam-jest.html">
+          </iframe>
+          <div class="book-thought-actions">
+            <button class="book-thought-btn" type="button" onclick="toggleJamJestMore()">Mniej</button>
+          </div>
         </div>
         <div class="book-es-panel" id="esPanelJamJestEN">
           <div class="book-es-hero">
@@ -1930,10 +1963,24 @@
 
         </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępność: druk: Wydawnictwo KOS.</p>
-        <a href="spojrzenie-boga.html" class="book-cta-link">
-          Więcej
-          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <div class="book-cta-row">
+          <button type="button" class="book-cta-link" id="btnMoreSpojrzenie" data-label="Więcej" onclick="toggleSpojrzenieMore()">
+            Więcej
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <div class="book-es-panel book-more-panel" id="morePanelSpojrzenie">
+          <iframe
+            class="book-more-frame"
+            id="frameMoreSpojrzenie"
+            title="Spojrzenie Boga. Bliźniacze Dusze — rozwinięty opis"
+            loading="lazy"
+            data-src="spojrzenie-boga.html">
+          </iframe>
+          <div class="book-thought-actions">
+            <button class="book-thought-btn" type="button" onclick="toggleSpojrzenieMore()">Mniej</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1954,11 +2001,23 @@
         </div>
         <p class="book-status"><span class="book-status-dot"></span>Dostępność: u autora: książka drukowana oraz e-book.</p>
         <div class="book-cta-row">
-          <a href="sciezki.html" class="book-cta-link">
+          <button type="button" class="book-cta-link" id="btnMoreSciezki" data-label="Więcej" onclick="toggleSciezkiMore()">
             Więcej
             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          </button>
           <button class="book-es-btn" id="btnAforyzmySciezki" data-label="Aforyzmy" onclick="toggleSciezkiAforyzmy()">Aforyzmy</button>
+        </div>
+        <div class="book-es-panel book-more-panel" id="morePanelSciezki">
+          <iframe
+            class="book-more-frame"
+            id="frameMoreSciezki"
+            title="Ścieżki spełnionego życia — rozwinięty opis"
+            loading="lazy"
+            data-src="sciezki.html">
+          </iframe>
+          <div class="book-thought-actions">
+            <button class="book-thought-btn" type="button" onclick="toggleSciezkiMore()">Mniej</button>
+          </div>
         </div>
         <div class="book-thought-panel" id="aforyzmyPanelSciezki">
           <p class="book-thought-overline">Aforyzmy</p>
@@ -2760,23 +2819,139 @@
       btn.textContent = isOpen ? 'Mniej' : (btn.dataset.label || btn.textContent);
     }
   }
+
+  function styleEmbeddedBookFrame(frame) {
+    if (!frame || !frame.contentDocument) {
+      return;
+    }
+
+    const doc = frame.contentDocument;
+    if (!doc.head || !doc.body) {
+      return;
+    }
+
+    if (!doc.getElementById('rkEmbeddedBookStyle')) {
+      const style = doc.createElement('style');
+      style.id = 'rkEmbeddedBookStyle';
+      style.textContent = `
+        html, body {
+          background: transparent !important;
+        }
+        body {
+          min-height: auto !important;
+          overflow: visible !important;
+        }
+        nav,
+        .page-masthead,
+        .theme-toggle,
+        .nav-hamburger {
+          display: none !important;
+        }
+        .container {
+          max-width: none !important;
+          padding: 0 !important;
+        }
+        .page-shell {
+          padding: 0 0 1rem !important;
+        }
+        .cards-stack {
+          gap: 1.5rem !important;
+        }
+        .card {
+          background: transparent !important;
+          border: 0 !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          padding: 0 0 1.5rem !important;
+          transform: none !important;
+        }
+        .card:hover {
+          transform: none !important;
+          box-shadow: none !important;
+        }
+        .card-link {
+          display: none !important;
+        }
+      `;
+      doc.head.appendChild(style);
+    }
+
+    doc.querySelectorAll('a[href]').forEach((link) => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener');
+    });
+  }
+
+  function syncEmbeddedBookFrame(frame) {
+    if (!frame || !frame.contentDocument) {
+      return;
+    }
+
+    const doc = frame.contentDocument;
+    const nextHeight = Math.max(360, Math.ceil(doc.documentElement.scrollHeight || doc.body.scrollHeight || 0));
+    if (nextHeight) {
+      frame.style.height = `${nextHeight}px`;
+    }
+  }
+
+  function prepareBookFrame(frameId) {
+    const frame = document.getElementById(frameId);
+    if (!frame || frame.dataset.bound === 'true') {
+      return frame;
+    }
+
+    frame.dataset.bound = 'true';
+    frame.addEventListener('load', () => {
+      try {
+        styleEmbeddedBookFrame(frame);
+        syncEmbeddedBookFrame(frame);
+
+        if (!frame._rkResizeObserver && window.ResizeObserver && frame.contentDocument && frame.contentDocument.body) {
+          frame._rkResizeObserver = new ResizeObserver(() => syncEmbeddedBookFrame(frame));
+          frame._rkResizeObserver.observe(frame.contentDocument.body);
+        }
+
+        setTimeout(() => syncEmbeddedBookFrame(frame), 120);
+        setTimeout(() => syncEmbeddedBookFrame(frame), 500);
+      } catch (error) {
+        frame.style.height = '420px';
+      }
+    });
+
+    return frame;
+  }
+
+  function ensureBookFrameLoaded(frameId) {
+    const frame = prepareBookFrame(frameId);
+    if (!frame) {
+      return;
+    }
+
+    if (!frame.getAttribute('src')) {
+      frame.setAttribute('src', frame.dataset.src);
+    } else {
+      try {
+        styleEmbeddedBookFrame(frame);
+        syncEmbeddedBookFrame(frame);
+      } catch (error) {
+        // Ignore same-origin access issues and keep the iframe visible.
+      }
+    }
+  }
+
   function toggleJamJestEN() {
-    const en = document.getElementById('esPanelJamJestEN');
-    const audio = document.getElementById('esPanelJamJestAudio');
-    const opening = !en.classList.contains('is-open');
-    en.classList.toggle('is-open');
-    if (opening) audio.classList.remove('is-open');
-    syncPanelButton('esPanelJamJestEN', 'btnEsPanelJamJestEN');
-    syncPanelButton('esPanelJamJestAudio', 'btnEsPanelJamJestAudio');
+    toggleExclusivePanels('esPanelJamJestEN', 'btnEsPanelJamJestEN', [
+      { panelId: 'morePanelJamJest', buttonId: 'btnMoreJamJest' },
+      { panelId: 'esPanelJamJestEN', buttonId: 'btnEsPanelJamJestEN' },
+      { panelId: 'esPanelJamJestAudio', buttonId: 'btnEsPanelJamJestAudio' }
+    ]);
   }
   function toggleJamJestAudio() {
-    const audio = document.getElementById('esPanelJamJestAudio');
-    const en = document.getElementById('esPanelJamJestEN');
-    const opening = !audio.classList.contains('is-open');
-    audio.classList.toggle('is-open');
-    if (opening) en.classList.remove('is-open');
-    syncPanelButton('esPanelJamJestEN', 'btnEsPanelJamJestEN');
-    syncPanelButton('esPanelJamJestAudio', 'btnEsPanelJamJestAudio');
+    toggleExclusivePanels('esPanelJamJestAudio', 'btnEsPanelJamJestAudio', [
+      { panelId: 'morePanelJamJest', buttonId: 'btnMoreJamJest' },
+      { panelId: 'esPanelJamJestEN', buttonId: 'btnEsPanelJamJestEN' },
+      { panelId: 'esPanelJamJestAudio', buttonId: 'btnEsPanelJamJestAudio' }
+    ]);
   }
 
   function toggleExclusivePanels(activePanelId, activeButtonId, pairs) {
@@ -2804,6 +2979,7 @@
 
   function toggleEsPanel() {
     toggleExclusivePanels('esPanelCisza', 'btnEsPanelCisza', [
+      { panelId: 'morePanelCisza', buttonId: 'btnMoreCisza' },
       { panelId: 'esPanelCisza', buttonId: 'btnEsPanelCisza' },
       { panelId: 'reflectionsPanelCisza', buttonId: 'btnReflectionsCisza' }
     ]);
@@ -2811,13 +2987,48 @@
 
   function toggleCiszaReflections() {
     toggleExclusivePanels('reflectionsPanelCisza', 'btnReflectionsCisza', [
+      { panelId: 'morePanelCisza', buttonId: 'btnMoreCisza' },
       { panelId: 'esPanelCisza', buttonId: 'btnEsPanelCisza' },
       { panelId: 'reflectionsPanelCisza', buttonId: 'btnReflectionsCisza' }
     ]);
   }
 
+  function toggleCiszaMore() {
+    ensureBookFrameLoaded('frameMoreCisza');
+    toggleExclusivePanels('morePanelCisza', 'btnMoreCisza', [
+      { panelId: 'morePanelCisza', buttonId: 'btnMoreCisza' },
+      { panelId: 'esPanelCisza', buttonId: 'btnEsPanelCisza' },
+      { panelId: 'reflectionsPanelCisza', buttonId: 'btnReflectionsCisza' }
+    ]);
+  }
+
+  function toggleJamJestMore() {
+    ensureBookFrameLoaded('frameMoreJamJest');
+    toggleExclusivePanels('morePanelJamJest', 'btnMoreJamJest', [
+      { panelId: 'morePanelJamJest', buttonId: 'btnMoreJamJest' },
+      { panelId: 'esPanelJamJestEN', buttonId: 'btnEsPanelJamJestEN' },
+      { panelId: 'esPanelJamJestAudio', buttonId: 'btnEsPanelJamJestAudio' }
+    ]);
+  }
+
+  function toggleSpojrzenieMore() {
+    ensureBookFrameLoaded('frameMoreSpojrzenie');
+    toggleExclusivePanels('morePanelSpojrzenie', 'btnMoreSpojrzenie', [
+      { panelId: 'morePanelSpojrzenie', buttonId: 'btnMoreSpojrzenie' }
+    ]);
+  }
+
+  function toggleSciezkiMore() {
+    ensureBookFrameLoaded('frameMoreSciezki');
+    toggleExclusivePanels('morePanelSciezki', 'btnMoreSciezki', [
+      { panelId: 'morePanelSciezki', buttonId: 'btnMoreSciezki' },
+      { panelId: 'aforyzmyPanelSciezki', buttonId: 'btnAforyzmySciezki' }
+    ]);
+  }
+
   function toggleSciezkiAforyzmy() {
     toggleExclusivePanels('aforyzmyPanelSciezki', 'btnAforyzmySciezki', [
+      { panelId: 'morePanelSciezki', buttonId: 'btnMoreSciezki' },
       { panelId: 'aforyzmyPanelSciezki', buttonId: 'btnAforyzmySciezki' }
     ]);
   }
