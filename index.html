@@ -2023,23 +2023,6 @@
           <button class="about-read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Więcej</button>
           <button type="button" class="about-read-more-btn is-emphasis" id="aboutPassionsBtn" data-label="Moje pasje" onclick="togglePasje()">Moje pasje</button>
         </div>
-        <div class="about-inline-panel" id="aboutPassionsPanel">
-          <div class="about-divider">
-            <div class="about-divider-line"></div>
-            <span class="about-divider-ornament">◆</span>
-            <div class="about-divider-line"></div>
-          </div>
-          <iframe
-            class="about-passions-frame"
-            id="aboutPassionsFrame"
-            title="Moje pasje"
-            loading="lazy"
-            data-src="pasje.html">
-          </iframe>
-          <div class="about-inline-actions">
-            <button class="book-thought-btn" type="button" onclick="togglePasje()">Mniej</button>
-          </div>
-        </div>
         <div class="about-full" id="aboutFull">
           <div class="about-divider">
             <div class="about-divider-line"></div>
@@ -2077,6 +2060,23 @@
               <p class="video-caption-date">Porąbka, dnia 18. II 2021 rok.</p>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="about-inline-panel" id="aboutPassionsPanel">
+        <div class="about-divider">
+          <div class="about-divider-line"></div>
+          <span class="about-divider-ornament">◆</span>
+          <div class="about-divider-line"></div>
+        </div>
+        <iframe
+          class="about-passions-frame"
+          id="aboutPassionsFrame"
+          title="Moje pasje"
+          loading="lazy"
+          data-src="pasje.html">
+        </iframe>
+        <div class="about-inline-actions">
+          <button class="book-thought-btn" type="button" onclick="togglePasje()">Mniej</button>
         </div>
       </div>
     </div>
@@ -2723,6 +2723,11 @@
         min-height: auto !important;
         overflow: visible !important;
       }
+      #malarstwo,
+      #muzyka,
+      #turystyka {
+        width: 100% !important;
+      }
       nav,
       .page-masthead,
       footer,
@@ -2738,6 +2743,9 @@
       }
       .passion-section:last-of-type {
         padding-bottom: 0 !important;
+      }
+      #turystyka .photos-grid-2 {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
       }
     `;
     doc.head.appendChild(style);

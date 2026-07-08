@@ -331,6 +331,7 @@ body {
   margin-top: 1.65rem;
   padding-top: 2.35rem;
   border-top: 1px solid var(--mist);
+  grid-column: 1 / -1;
 }
 
 .about-inline-panel.is-open {
