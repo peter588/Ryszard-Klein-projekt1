@@ -2725,13 +2725,13 @@
       }
       #malarstwo,
       #muzyka,
-      #turystyka {
+      #turystyka,
+      #ogrod {
         width: 100% !important;
       }
       nav,
       .page-masthead,
-      footer,
-      #ogrod {
+      footer {
         display: none !important;
       }
       .container {
@@ -2747,9 +2747,106 @@
       #turystyka .photos-grid-2 {
         grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
       }
+      #ogrod .photos-grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+      #ogrod .photos-grid figure {
+        cursor: zoom-in;
+      }
+      #ogrod .photos-grid figure:focus-within {
+        outline: 2px solid var(--gold);
+        outline-offset: 4px;
+      }
+      @media (max-width: 900px) {
+        #ogrod .photos-grid-3 {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+      }
+      @media (max-width: 480px) {
+        #ogrod .photos-grid-3 {
+          grid-template-columns: 1fr !important;
+        }
+      }
     `;
     doc.head.appendChild(style);
   }
+
+  function closePassionsImageLightbox() {
+    const lightbox = document.getElementById('passionsImageLightbox');
+    if (!lightbox || lightbox.hidden) {
+      return;
+    }
+
+    lightbox.hidden = true;
+    document.body.classList.remove('passions-lightbox-open');
+    if (lightbox._rkTrigger) {
+      lightbox._rkTrigger.focus();
+      lightbox._rkTrigger = null;
+    }
+  }
+
+  function openPassionsImageLightbox(src, alt, trigger) {
+    let lightbox = document.getElementById('passionsImageLightbox');
+    if (!lightbox) {
+      lightbox = document.createElement('div');
+      lightbox.id = 'passionsImageLightbox';
+      lightbox.className = 'passions-lightbox';
+      lightbox.hidden = true;
+      lightbox.setAttribute('role', 'dialog');
+      lightbox.setAttribute('aria-modal', 'true');
+      lightbox.setAttribute('aria-label', 'Powiększony podgląd zdjęcia');
+      lightbox.innerHTML = `
+        <button class="passions-lightbox-close" type="button" aria-label="Zamknij podgląd">&times;</button>
+        <img class="passions-lightbox-image" alt="">
+      `;
+      lightbox.querySelector('.passions-lightbox-close').addEventListener('click', closePassionsImageLightbox);
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) {
+          closePassionsImageLightbox();
+        }
+      });
+      document.body.appendChild(lightbox);
+    }
+
+    const preview = lightbox.querySelector('.passions-lightbox-image');
+    preview.src = src;
+    preview.alt = alt || 'Zdjęcie ogrodu';
+    lightbox._rkTrigger = trigger;
+    lightbox.hidden = false;
+    document.body.classList.add('passions-lightbox-open');
+    lightbox.querySelector('.passions-lightbox-close').focus();
+  }
+
+  function initializePassionsImageLightbox(frame) {
+    if (!frame || !frame.contentDocument) {
+      return;
+    }
+
+    frame.contentDocument.querySelectorAll('#ogrod .photos-grid img').forEach((photo) => {
+      if (photo.dataset.lightboxReady === 'true') {
+        return;
+      }
+
+      photo.dataset.lightboxReady = 'true';
+      photo.tabIndex = 0;
+      photo.setAttribute('role', 'button');
+      photo.setAttribute('aria-label', `Powiększ zdjęcie: ${photo.alt || 'Ogród'}`);
+      const openPreview = () => openPassionsImageLightbox(photo.src, photo.alt, photo);
+      photo.addEventListener('click', openPreview);
+      photo.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openPreview();
+        }
+      });
+    });
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closePassionsImageLightbox();
+    }
+  });
 
   function syncPassionsFrameHeight() {
     const frame = document.getElementById('aboutPassionsFrame');
@@ -2773,6 +2870,7 @@
       frame.addEventListener('load', () => {
         try {
           styleEmbeddedPassionsFrame(frame);
+          initializePassionsImageLightbox(frame);
           syncPassionsFrameHeight();
 
           if (!frame._rkResizeObserver && window.ResizeObserver && frame.contentDocument && frame.contentDocument.body) {
@@ -2795,6 +2893,7 @@
 
     try {
       styleEmbeddedPassionsFrame(frame);
+      initializePassionsImageLightbox(frame);
       syncPassionsFrameHeight();
     } catch (error) {
       frame.style.height = '900px';
