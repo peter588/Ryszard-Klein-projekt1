@@ -1090,6 +1090,8 @@
       title: 'Cisza.',
       subtitle: 'Esencja naszego umysłu',
       cover: 'images/books/cisza.webp',
+      secondaryCover: 'images/silencio/silencio-3d-zakup.png',
+      secondaryCoverAlt: 'Silencio. Lo esencial de nuestra mente',
       variants: [
         { id: 'cisza-druk-pl',  label: 'Druk',   lang: 'PL', price: PRICE_PRINT, format: 'druk'  },
         { id: 'cisza-druk-es',  label: 'Druk',   lang: 'ES', price: PRICE_CISZA_ES_PRINT, format: 'druk'  },
@@ -1103,6 +1105,7 @@
       title: 'Jam Jest',
       subtitle: null,
       cover: 'images/books/jam_jest.webp',
+      printAtKos: true,
       variants: [
         { id: 'jamjest-ebook-pl', label: 'E-book', lang: 'PL', price: PRICE_EBOOK, format: 'ebook' },
         { id: 'jamjest-ebook-en', label: 'E-book', lang: 'EN', price: PRICE_EBOOK, format: 'ebook' },
@@ -1273,13 +1276,16 @@
         <article class="catalog-item" data-slug="${p.slug}">
           <div class="catalog-cover">
             <img src="${escHtml(p.cover)}" alt="${escHtml(p.title)}${p.subtitle ? ' ' + p.subtitle : ''}">
+            ${p.secondaryCover ? `<img src="${escHtml(p.secondaryCover)}" alt="${escHtml(p.secondaryCoverAlt)}">` : ''}
           </div>
           <div class="catalog-body">
             <span class="catalog-badge">${escHtml(p.badge)}</span>
             <h3 class="catalog-title">${escHtml(p.title)}${p.subtitle ? '<br><em>' + escHtml(p.subtitle) + '</em>' : ''}</h3>
 
             <div class="format-picker">
-              ${p.variants.map(v => `
+              ${isExternal ? `
+                <a class="format-delivery-note" href="${escHtml(p.externalUrl)}" target="_blank" rel="noopener">Druk dostępny w Wydawnictwie KOS</a>
+              ` : p.variants.map(v => `
                 <button class="format-btn${v.id === sel.variantId ? ' is-active' : ''}"
                   type="button" data-slug="${p.slug}" data-variant="${v.id}"${isExternal ? ' disabled' : ''}>
                   <span class="format-btn-top">
@@ -1310,7 +1316,9 @@
                 </button>
               `}
             </div>
-            <p class="format-delivery-note">${deliveryNote}</p>
+            ${p.printAtKos
+              ? `<a class="format-delivery-note" href="${escHtml(KOS_URL)}" target="_blank" rel="noopener">Druk dostępny w Wydawnictwie KOS</a>`
+              : `<p class="format-delivery-note">${deliveryNote}</p>`}
           </div>
         </article>
       `;
