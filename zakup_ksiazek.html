@@ -207,6 +207,12 @@
     filter: drop-shadow(-10px 10px 20px rgba(28,25,20,0.14));
     transition: transform 0.35s ease, filter 0.35s ease;
   }
+  .catalog-cover-secondary {
+    aspect-ratio: 304 / 300;
+    object-fit: contain;
+    object-position: center;
+    margin-top: 1rem;
+  }
   .catalog-item:hover .catalog-cover img {
     transform: translateY(-6px) scale(1.02);
     filter: drop-shadow(-12px 14px 24px rgba(28,25,20,0.18));
@@ -337,6 +343,16 @@
   .format-delivery-note svg {
     width: 12px; height: 12px; stroke: currentColor;
     fill: none; stroke-width: 1.5; flex-shrink: 0;
+  }
+  .kos-text-link {
+    color: var(--gold);
+    text-decoration: underline;
+    text-decoration-color: rgba(160,123,58,0.48);
+    text-underline-offset: 0.22em;
+  }
+  .kos-text-link:hover {
+    color: var(--ink);
+    text-decoration-color: currentColor;
   }
 
   /* ── CHECKOUT ── */
@@ -1119,6 +1135,7 @@
       cover: 'images/books/spojrzenie_boga.webp',
       externalUrl: KOS_URL,
       externalLabel: 'Kup w Wydawnictwie KOS',
+      printAtKos: true,
       variants: [
         { id: 'spojrzenie-druk-pl', label: 'Druk', lang: 'PL', price: PRICE_PRINT, format: 'druk' },
       ],
@@ -1276,7 +1293,7 @@
         <article class="catalog-item" data-slug="${p.slug}">
           <div class="catalog-cover">
             <img src="${escHtml(p.cover)}" alt="${escHtml(p.title)}${p.subtitle ? ' ' + p.subtitle : ''}">
-            ${p.secondaryCover ? `<img src="${escHtml(p.secondaryCover)}" alt="${escHtml(p.secondaryCoverAlt)}">` : ''}
+            ${p.secondaryCover ? `<img class="catalog-cover-secondary" src="${escHtml(p.secondaryCover)}" alt="${escHtml(p.secondaryCoverAlt)}">` : ''}
           </div>
           <div class="catalog-body">
             <span class="catalog-badge">${escHtml(p.badge)}</span>
@@ -1284,7 +1301,7 @@
 
             <div class="format-picker">
               ${isExternal ? `
-                <a class="format-delivery-note" href="${escHtml(p.externalUrl)}" target="_blank" rel="noopener">Druk dostępny w Wydawnictwie KOS</a>
+                <a class="format-delivery-note kos-text-link" href="${escHtml(p.externalUrl)}" target="_blank" rel="noopener">Druk dostępny w Wydawnictwie KOS</a>
               ` : p.variants.map(v => `
                 <button class="format-btn${v.id === sel.variantId ? ' is-active' : ''}"
                   type="button" data-slug="${p.slug}" data-variant="${v.id}"${isExternal ? ' disabled' : ''}>
@@ -1298,12 +1315,7 @@
             </div>
 
             <div class="catalog-add-row">
-              ${isExternal ? `
-                <a class="add-btn add-btn-link" href="${escHtml(p.externalUrl)}" target="_blank" rel="noopener">
-                  ${escHtml(p.externalLabel)}
-                  <svg viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg>
-                </a>
-              ` : `
+              ${isExternal ? '' : `
                 <div class="qty-stepper">
                   <button type="button" data-slug="${p.slug}" data-delta="-1">−</button>
                   <span class="qty-stepper-value">${sel.qty}</span>
@@ -1317,7 +1329,7 @@
               `}
             </div>
             ${p.printAtKos
-              ? `<a class="format-delivery-note" href="${escHtml(KOS_URL)}" target="_blank" rel="noopener">Druk dostępny w Wydawnictwie KOS</a>`
+              ? `<a class="format-delivery-note kos-text-link" href="${escHtml(KOS_URL)}" target="_blank" rel="noopener">Druk dostępny w Wydawnictwie KOS</a>`
               : `<p class="format-delivery-note">${deliveryNote}</p>`}
           </div>
         </article>
