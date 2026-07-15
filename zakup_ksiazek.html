@@ -317,7 +317,7 @@
   .add-btn {
     font-family: 'Jost', sans-serif; font-size: 0.68rem;
     letter-spacing: 0.18em; text-transform: uppercase;
-    background: var(--btn-bg); color: var(--btn-color);
+    background: var(--gold-pale); color: var(--ink);
     border: none; padding: 0 1.75rem; height: 40px;
     cursor: pointer; display: flex; align-items: center; gap: 0.6rem;
     transition: background 0.25s, color 0.25s, opacity 0.25s;
@@ -1300,9 +1300,7 @@
             <h3 class="catalog-title">${escHtml(p.title)}${p.subtitle ? '<br><em>' + escHtml(p.subtitle) + '</em>' : ''}</h3>
 
             <div class="format-picker">
-              ${isExternal ? `
-                <a class="format-delivery-note kos-text-link" href="${escHtml(p.externalUrl)}" target="_blank" rel="noopener">Druk dostępny w Wydawnictwie KOS</a>
-              ` : p.variants.map(v => `
+              ${isExternal ? '' : p.variants.map(v => `
                 <button class="format-btn${v.id === sel.variantId ? ' is-active' : ''}"
                   type="button" data-slug="${p.slug}" data-variant="${v.id}"${isExternal ? ' disabled' : ''}>
                   <span class="format-btn-top">
