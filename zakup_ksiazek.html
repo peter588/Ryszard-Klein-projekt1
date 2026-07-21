@@ -230,12 +230,6 @@
     filter: drop-shadow(-10px 10px 20px rgba(28,25,20,0.14));
     transition: transform 0.35s ease, filter 0.35s ease;
   }
-  .catalog-cover-secondary {
-    aspect-ratio: 304 / 300;
-    object-fit: contain;
-    object-position: center;
-    margin-top: 1rem;
-  }
   .catalog-item:hover .catalog-cover img {
     transform: translateY(-6px) scale(1.02);
     filter: drop-shadow(-12px 14px 24px rgba(28,25,20,0.18));
@@ -264,6 +258,63 @@
     transition: color 0.4s;
   }
   .catalog-title em { font-style: italic; color: var(--gold); }
+
+  /* Two language editions of "Cisza" share one ordered catalog entry. */
+  .catalog-item--editions {
+    display: block;
+  }
+  .catalog-editions-header {
+    margin-bottom: 0.25rem;
+  }
+  .catalog-item--editions .catalog-title {
+    margin-bottom: 0;
+  }
+  .catalog-edition-row {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--mist);
+  }
+  .catalog-edition-cover {
+    width: 130px;
+    align-self: center;
+  }
+  .catalog-edition-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(-10px 10px 20px rgba(28,25,20,0.14));
+  }
+  .catalog-edition-body {
+    min-width: 0;
+  }
+  [data-theme="dark"] .catalog-edition-cover img {
+    mix-blend-mode: normal;
+    filter: drop-shadow(-8px 8px 20px rgba(0,0,0,0.5));
+  }
+  .catalog-edition-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .catalog-edition-title {
+    margin-bottom: 1.1rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .catalog-edition-row .format-picker {
+    margin-bottom: 1rem;
+  }
 
   /* Format picker */
   .format-picker {
@@ -815,6 +866,12 @@
     .checkout-section { padding: 3.5rem 0 4rem; }
     .steps-section { padding: 3.5rem 0; }
     .catalog-item { grid-template-columns: 90px 1fr; gap: 1.5rem; padding: 2rem 0; }
+    .catalog-edition-row {
+      grid-template-columns: 90px minmax(0, 1fr);
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+    }
+    .catalog-edition-cover { width: 90px; }
     .form-grid { grid-template-columns: 1fr; }
     .form-group.span-2 { grid-column: span 1; }
     .form-divider { grid-column: span 1; }
@@ -1117,7 +1174,7 @@
   const CART_KEY = 'rk-order-cart';
   const PRICE_PRINT = 50;
   const PRICE_EBOOK = 30;
-  const PRICE_CISZA_ES_PRINT = 95;
+  const PRICE_CISZA_ES_PRINT = 90;
   const PRICE_CISZA_ES_EBOOK = 60;
   const PRICE_SHIP  = 20;
   const KOS_URL = 'https://www.kos.com.pl/pl/searchquery/Ryszard+Klein/1/phot/5?';
@@ -1133,9 +1190,9 @@
       secondaryCoverAlt: 'Silencio. Lo esencial de nuestra mente',
       variants: [
         { id: 'cisza-druk-pl',  label: 'Druk',   lang: 'PL', price: PRICE_PRINT, format: 'druk'  },
-        { id: 'cisza-druk-es',  label: 'Druk',   lang: 'ES', price: PRICE_CISZA_ES_PRINT, format: 'druk'  },
+        { id: 'cisza-druk-es',  label: 'Druk',   lang: 'ES', price: PRICE_CISZA_ES_PRINT, format: 'druk', bookTitle: 'Silencio. Lo esencial de nuestra mente', cover: 'images/silencio/silencio-3d-zakup.png' },
         { id: 'cisza-ebook-pl', label: 'E-book', lang: 'PL', price: PRICE_EBOOK, format: 'ebook' },
-        { id: 'cisza-ebook-es', label: 'E-book', lang: 'ES', price: PRICE_CISZA_ES_EBOOK, format: 'ebook' },
+        { id: 'cisza-ebook-es', label: 'E-book', lang: 'ES', price: PRICE_CISZA_ES_EBOOK, format: 'ebook', bookTitle: 'Silencio. Lo esencial de nuestra mente', cover: 'images/silencio/silencio-3d-zakup.png' },
       ],
     },
     {
@@ -1214,8 +1271,8 @@
   function allVariants() {
     return PRODUCTS.flatMap(p => p.variants.map(v => ({
       ...v,
-      bookTitle: p.title + (p.subtitle ? ' ' + p.subtitle : ''),
-      cover: p.cover,
+      bookTitle: v.bookTitle || p.title + (p.subtitle ? ' ' + p.subtitle : ''),
+      cover: v.cover || p.cover,
     })));
   }
   function findVariant(id) { return allVariants().find(v => v.id === id); }
@@ -1297,11 +1354,98 @@
   }
 
   /* ── CATALOG RENDER ── */
-  const selections = Object.fromEntries(PRODUCTS.map(p => [p.slug, { variantId: p.variants[0].id, qty: 1 }]));
+  const selections = {
+    ...Object.fromEntries(PRODUCTS.map(p => [p.slug, { variantId: p.variants[0].id, qty: 1 }])),
+    'cisza-pl': { variantId: 'cisza-druk-pl', qty: 1 },
+    'cisza-es': { variantId: 'cisza-druk-es', qty: 1 },
+  };
+
+  function deliveryNoteFor(variant) {
+    return variant.format === 'ebook'
+      ? `<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.82-.82a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.49 16z"/></svg> Dostawa elektroniczna — bez kosztu wysyłki`
+      : `<svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Wysyłka pocztowa po zaksięgowaniu płatności`;
+  }
+
+  function renderCiszaEdition(p, { selectionKey, lang, label, title, cover, alt }) {
+    const sel = selections[selectionKey];
+    const variants = p.variants.filter(v => v.lang === lang);
+    const activeV = variants.find(v => v.id === sel.variantId) || variants[0];
+
+    return `
+      <section class="catalog-edition-row" aria-label="${escHtml(label)}">
+        <div class="catalog-edition-cover">
+          <img src="${escHtml(cover)}" alt="${escHtml(alt)}">
+        </div>
+        <div class="catalog-edition-body">
+          <span class="catalog-edition-label">${escHtml(label)}</span>
+          <h4 class="catalog-edition-title">${escHtml(title)}</h4>
+          <div class="format-picker">
+            ${variants.map(v => {
+              const formatLabel = v.format === 'druk'
+                ? 'Druk'
+                : lang === 'ES' ? 'E-book español' : 'E-book PL';
+              return `
+                <button class="format-btn${v.id === sel.variantId ? ' is-active' : ''}"
+                  type="button" data-selection="${selectionKey}" data-variant="${v.id}">
+                  <span class="format-btn-top">
+                    ${v.format === 'druk' ? ICON_BOOK : ICON_TABLET}
+                    ${formatLabel}
+                  </span>
+                  <span class="format-btn-price">${fmt(v.price)}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+          <div class="catalog-add-row">
+            <div class="qty-stepper">
+              <button type="button" data-selection="${selectionKey}" data-delta="-1">−</button>
+              <span class="qty-stepper-value">${sel.qty}</span>
+              <button type="button" data-selection="${selectionKey}" data-delta="1">+</button>
+            </div>
+            <button class="add-btn${sel.justAdded ? ' is-added' : ''}" type="button" data-selection="${selectionKey}">
+              ${sel.justAdded
+                ? 'Dodano ✓'
+                : `Do koszyka <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`}
+            </button>
+          </div>
+          <p class="format-delivery-note">${deliveryNoteFor(activeV)}</p>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCiszaProduct(p) {
+    return `
+      <article class="catalog-item catalog-item--editions" data-slug="${p.slug}">
+        <header class="catalog-editions-header">
+          <span class="catalog-badge">${escHtml(p.badge)}</span>
+          <h3 class="catalog-title">${escHtml(p.title)} <em>${escHtml(p.subtitle)}</em></h3>
+        </header>
+        ${renderCiszaEdition(p, {
+          selectionKey: 'cisza-pl',
+          lang: 'PL',
+          label: 'Wersja polska',
+          title: 'Cisza. Esencja naszego umysłu',
+          cover: p.cover,
+          alt: 'Cisza. Esencja naszego umysłu',
+        })}
+        ${renderCiszaEdition(p, {
+          selectionKey: 'cisza-es',
+          lang: 'ES',
+          label: 'Wersja hiszpańska',
+          title: 'Silencio. Lo esencial de nuestra mente',
+          cover: p.secondaryCover,
+          alt: p.secondaryCoverAlt,
+        })}
+      </article>
+    `;
+  }
 
   function renderCatalog() {
     const listEl = document.getElementById('catalogList');
     listEl.innerHTML = PRODUCTS.map(p => {
+      if (p.slug === 'cisza') return renderCiszaProduct(p);
+
       const sel = selections[p.slug];
       const activeV = p.variants.find(v => v.id === sel.variantId) || p.variants[0];
       const isExternal = Boolean(p.externalUrl);
@@ -1316,7 +1460,6 @@
         <article class="catalog-item" data-slug="${p.slug}">
           <div class="catalog-cover">
             <img src="${escHtml(p.cover)}" alt="${escHtml(p.title)}${p.subtitle ? ' ' + p.subtitle : ''}">
-            ${p.secondaryCover ? `<img class="catalog-cover-secondary" src="${escHtml(p.secondaryCover)}" alt="${escHtml(p.secondaryCoverAlt)}">` : ''}
           </div>
           <div class="catalog-body">
             <span class="catalog-badge">${escHtml(p.badge)}</span>
@@ -1360,8 +1503,8 @@
     /* variant select */
     listEl.querySelectorAll('[data-variant]:not([disabled])').forEach(btn => {
       btn.addEventListener('click', () => {
-        const slug = btn.getAttribute('data-slug');
-        selections[slug].variantId = btn.getAttribute('data-variant');
+        const selectionKey = btn.getAttribute('data-selection') || btn.getAttribute('data-slug');
+        selections[selectionKey].variantId = btn.getAttribute('data-variant');
         renderCatalog();
       });
     });
@@ -1369,23 +1512,23 @@
     /* qty steppers */
     listEl.querySelectorAll('[data-delta]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const slug = btn.getAttribute('data-slug');
+        const selectionKey = btn.getAttribute('data-selection') || btn.getAttribute('data-slug');
         const delta = Number(btn.getAttribute('data-delta'));
-        selections[slug].qty = Math.max(1, Math.min(selections[slug].qty + delta, 9));
+        selections[selectionKey].qty = Math.max(1, Math.min(selections[selectionKey].qty + delta, 9));
         renderCatalog();
       });
     });
 
     /* add to cart */
-    listEl.querySelectorAll('.add-btn[data-slug]').forEach(btn => {
+    listEl.querySelectorAll('.add-btn[data-slug], .add-btn[data-selection]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const slug = btn.getAttribute('data-slug');
-        const sel  = selections[slug];
+        const selectionKey = btn.getAttribute('data-selection') || btn.getAttribute('data-slug');
+        const sel = selections[selectionKey];
         addToCart(sel.variantId, sel.qty);
         sel.qty = 1;
         sel.justAdded = true;
         renderCatalog();
-        setTimeout(() => { selections[slug].justAdded = false; renderCatalog(); }, 1400);
+        setTimeout(() => { selections[selectionKey].justAdded = false; renderCatalog(); }, 1400);
       });
     });
   }
